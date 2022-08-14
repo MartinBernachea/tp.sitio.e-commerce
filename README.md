@@ -35,3 +35,7 @@ Al publico el cual apuntamos son aquellas personas las cuales les gusta hacer de
 
 https://github.com/MartinBernachea/tp.sitio.e-commerce
 
+https://arsitta.atlassian.net/jira/software/projects/TX/boards/2
+
+
+
