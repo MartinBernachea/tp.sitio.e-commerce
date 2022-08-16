@@ -29,13 +29,22 @@ Al publico el cual apuntamos son aquellas personas las cuales les gusta hacer de
 
 ## Listado del grupo con una breve descripción de cada uno
 
+ - Batto Pedro Nicolas:
+ 
+ - Bernachea Martin:
+Trabajo como soporte tecnico en ESPN, tengo conocimientos previos de HTML, CSS. Estoy muy contento con haber empezado este curso y entusiasmado de seguir aprendiendo
+ 
+ - Gondolo Tobias:
+Estudio ingenieria civil en la UBA y actualmente hago el curso de full stack desarollador web con ganas de expandir conocimientos
 
+ - Martinez Sebastian: 
+Soy ingeniero mecatronico actualmente estoy trabajando como técnico en instrumentación y control, soy de colombia 🇨🇴 y estoy muy animado de pertenecer a este curso!
+
+ - Sitta Ariel:
+ 
 
 ## Link del tablero de trabajo en donde se encuentran trabajando
 
-https://github.com/MartinBernachea/tp.sitio.e-commerce
+ - https://github.com/MartinBernachea/tp.sitio.e-commerce
 
-https://arsitta.atlassian.net/jira/software/projects/TX/boards/2
-
-
-
+ - https://arsitta.atlassian.net/jira/software/projects/TX/boards/2
