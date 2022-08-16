@@ -39,9 +39,10 @@ Trabajo como soporte tecnico en ESPN, tengo conocimientos previos de HTML, CSS. 
 Estudio ingenieria civil en la UBA y actualmente hago el curso de full stack desarollador web con ganas de expandir conocimientos
 
  - Martinez Sebastian: 
-Soy ingeniero mecatronico actualmente estoy trabajando como técnico en instrumentación y control, soy de colombia 🇨🇴 y estoy muy animado de pertenecer a este curso!
+Soy ingeniero mecatronico actualmente estoy trabajando como técnico en instrumentación y control, soy de colombia y estoy muy animado de pertenecer a este curso!
 
- - Sitta Ariel:
+ - Sitta Ariel: 
+Estudiante de ingenieria en sistemas en la UTN, desarrollador frontend y aficionado a la impresion 3D
  
 
 ## Link del tablero de trabajo en donde se encuentran trabajando
