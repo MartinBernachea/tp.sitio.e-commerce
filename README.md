@@ -30,7 +30,8 @@ Al publico el cual apuntamos son aquellas personas las cuales les gusta hacer de
 ## Listado del grupo con una breve descripción de cada uno
 
  - Batto Pedro Nicolas:
- 
+Tengo 21 años, llegue al curso por medio de un amigo que lo hizo y me lo recomendó. Es mi primer contacto con la programación y la informática , aunque trabajo en ventas con un programa que tiene bases de programación.
+
  - Bernachea Martin:
 Trabajo como soporte tecnico en ESPN, tengo conocimientos previos de HTML, CSS. Estoy muy contento con haber empezado este curso y entusiasmado de seguir aprendiendo
  
