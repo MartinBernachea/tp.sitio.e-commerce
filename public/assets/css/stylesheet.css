@@ -10,8 +10,16 @@ a {
     text-decoration: none;
 }
 
-a:hover, i:hover {
-    color: red;
+a:hover,
+a i:hover {
+    color: #C70039;
+}
+
+/* INFO PROMO */
+
+.info-promo {
+    background-color: #666;
+    text-align: center;
 }
 
 /* HEADER */
@@ -111,4 +119,159 @@ a:hover, i:hover {
     align-items: center;
     height: 30px;
     width: 30px;
+}
+
+/* FORM REGISTER CSS  */
+
+.form-h1 {
+    text-align: center;
+    margin: 30px 0px 30px 0px;
+}
+
+.form {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-box {
+    width: 50%;
+    background-color: #D9D9D9;
+    border: 0;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 70%;
+    height: 80%;
+    /* margin: 50px; */
+    text-align: center;
+}
+
+.fields {
+    text-align: center;
+    margin: 25px;
+}
+
+.label {
+    display: none;
+}
+
+.user-field,
+.pass-field {
+    width: 70%;
+    margin: 35px;
+    padding: 5px 0px 5px 20px;
+    background: transparent;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: solid 2px #000;
+    outline: none;
+    font-size: 20px;
+}
+
+.config-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.login-button-div {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.login-button {
+    height: 50px;
+    width: 65%;
+    background-color: #000;
+    color: #fff;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    border-radius: 10px;
+}
+
+.login-button:hover {
+    color: #000;
+    background-color: #C70039;
+    transition: .3s;
+}
+
+.iniciar-con {
+    font-weight: bold;
+    margin: 10px 10px 10px 10px;
+}
+
+.iniciar-con-item {
+    margin: 0px 20px 0px 20px;
+}
+
+.redir-cc {
+    margin-top: 50px;
+}
+
+.redir-crear-cuenta {
+    font-weight: bold;
+}
+
+/* FOOTER */
+
+.footer {
+    width: 100%;
+    height: auto;
+    background-color: #333;
+    text-align: center;
+    padding: 30px 30px 8px 30px;
+    margin-top: 50px;
+}
+
+.footer-nav-items {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.footer-ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    list-style: none;
+    width: 60%;
+}
+
+.footer-list-item {
+    color: #fff;
+    font-size: 20px;
+}
+
+.copyright {
+    color: #fff;
+    font-size: 15px;
+    margin: 10px 0px;
+}
+
+.footer-icons {
+    font-size: 50px;
+    margin: 20px;
+}
+
+.icon-footer {
+    margin: 0px 25px 0px 25px;
+}
+
+.footer-ul li {
+    color: #fff;
+    font-size: 20px;
+    cursor: default; 
 }
