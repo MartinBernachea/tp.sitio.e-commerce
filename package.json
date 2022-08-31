@@ -1,11 +1,19 @@
 {
   "name": "sprint-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Batto Pedro Nicolas, Bernachea Martin, Gondolo Tobias, Martinez Sebastian, Sitta Ariel",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MartinBernachea/tp.sitio.e-commerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MartinBernachea/tp.sitio.e-commerce/issues"
+  },
+  "homepage": "https://github.com/MartinBernachea/tp.sitio.e-commerce#readme"
 }
