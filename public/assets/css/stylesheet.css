@@ -10,7 +10,7 @@ body{
     background-color: #FFF;
 }
 
-
+/* main del home */
 .img-producto{
     width: 255px;
     height: 255px;
@@ -309,3 +309,96 @@ a:hover, i:hover {
 .foot-banner-arrow {
     font-size: 30px;
 }
+
+/* CARRITO */
+
+.subcaja-1-titulo{
+    margin: 70px;
+}
+
+.total{
+    padding: 20px 0px 20px 0px;
+}
+
+.subcaja-2-3-4{
+    border: solid #000  1px;
+    width: 40%;
+    height: 60%;
+    margin:90px 0px 90px 90px ;
+    display: flex;
+}
+
+.subcaja-2-3-4-1{
+    display: flex;
+    width: 30%;
+    height: 100%;
+}
+
+.subcaja-2-3-4-2{
+    display: flexbox;
+    width: 70%;
+    height: 100%;
+}
+
+
+.subcaja-2-3-4-3{
+    display: flexbox;
+    width: 70%;
+}
+
+.img-producto-carrito{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.line-item{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.talle-producto-carrito{
+    padding: 10px 0px 0px 10px;
+}
+
+.descripcion-producto-carrito{
+    padding: 0px 0px 0px 10px;
+}
+
+.boton1{
+    background-color: #000;
+    color: #FFF;
+    padding: 10px 0px 0px 20px;
+    margin-left: 125px
+}
+
+.boton2{
+    background-color: #000;
+    color: #FFF;
+    padding: 10px 0px 0px 20px;
+    position: relative;
+    left: 1250px;
+    bottom: 850px;
+}
+
+.fa-arrow-right-long{
+    color: #FFF;
+    width: 100px;
+    height: 30px;
+}
+
+.subcaja-6{
+    border: #000 solid 1px;
+    width: 10%;
+    display: flexbox;
+    
+}
+
+
