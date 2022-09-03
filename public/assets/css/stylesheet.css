@@ -243,7 +243,6 @@ a i:hover {
     justify-content: center;
     margin: 20px;
 }
-
 .footer-ul {
     display: flex;
     justify-content: space-evenly;
@@ -251,18 +250,15 @@ a i:hover {
     list-style: none;
     width: 60%;
 }
-
 .footer-list-item {
     color: #fff;
     font-size: 20px;
 }
-
 .copyright {
     color: #fff;
     font-size: 15px;
     margin: 10px 0px;
 }
-
 .footer-icons {
     font-size: 50px;
     margin: 20px;
