@@ -11,6 +11,19 @@ var publicPath = path.join(__dirname, '/public'); //path.join(__dirname, 'public
 // Para que los archivos estaticos queden disponibles.
 app.use(express.static(publicPath));
 
+app.get('/login', function (req, res) {
+    res.sendFile(__dirname + '/views/pages/formLogin.html');
+});
+
+app.get('/register', function (req, res) {
+    res.sendFile(__dirname + '/views/pages/formRegister.html');
+});
+
+app.get('/producto', function (req, res) {
+    res.sendFile(__dirname + '/views/pages/detalleProducto.html');
+});
+
+
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
