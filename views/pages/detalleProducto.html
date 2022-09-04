@@ -1,215 +1,465 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/b9fc4b5630.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/b9fc4b5630.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../public/assets/css/stylesheet.css" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/b9fc4b5630.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/assets/css/stylesheet.css">
+    <title>Detalle del producto</title>
+  </head>
 
-    <title> Detalle del producto </title>
-</head>
+  <body>
+    <div class="info-promo">
+      <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A
+      $20.000
+    </div>
 
-<body>
     <!-- HEADER -->
     <header class="header">
+      <nav class="header-nav">
+        <!-- LOGO -->
+        <div class="header-logo">
+          <a href="../index.html"
+            ><img src="../../public/assets/img/H&M-Logo.png" alt="G&X-logo"
+          /></a>
+        </div>
+        <!-- NAV -->
 
-        <nav class="header-nav">
+        <div class="header-nav-items fulled-menu">
+          <ul class="header-ul">
+            <li class="li-item">
+              <a href=""> NUEVO 🔥 </a>
+            </li>
+            <li class="li-item">
+              <a href=""> HOMBRE </a>
+            </li>
+            <li class="li-item">
+              <a href=""> MUJER </a>
+            </li>
+            <li class="li-item">
+              <a href=""> NIÑO </a>
+            </li>
+            <li class="li-item">
+              <a href=""> DEPORTE </a>
+            </li>
+            <li class="li-item">
+              <a href=""> MARCA </a>
+            </li>
+          </ul>
+        </div>
 
-            <!-- LOGO -->
-            <div class="header-logo">
-                <a href="../index.html"><img src="/public/assets/img/H&M-Logo.png" alt="G&X-logo"></a>
-            </div>
+        <div class="header-nav-items collapsed-menu">
+          <ul class="header-ul">
+            <li class="li-item">
+              <a href=""> NUEVO 🔥 </a>
+            </li>
+            <li class="li-item">
+              <a href=""> CATEGORIAS </a>
+            </li>
+            <li class="li-item">
+              <a href=""> MARCA </a>
+            </li>
+          </ul>
+        </div>
 
-            <!-- NAV -->
-            <div class="header-nav-items">
-                <ul class="header-ul">
-                    <li class="li-item">
-                        <a href=""> NUEVO 🔥 </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> HOMBRE </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> MUJER </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> NIÑO </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> DEPORTE </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> MARCA </a>
-                    </li>
-                </ul>
-            </div>
+        <div class="header-nav-items ham-menu">
+          <ul class="header-ul">
+            <li class="li-item">
+              <a href=""> <i class="fa-solid fa-bars fa-lg"></i> </a>
+            </li>
+          </ul>
+        </div>
 
-            <!-- SEARCHBAR -->
-            <div class="header-searchbar">
-                <form action="" method="" class="searchbar">
-                    <input type="text" placeholder="Buscar" class="input-searchbar">
-                    <button class="search-button"> <i class="fa fa-search"></i> </button>
-                </form>
-            </div>
-
-            <!--  HEADER ICONOS -->
-            <div class="header-icons">
-                <a href=""><i class="fa-regular fa-user icon-header"></i></a>
-                <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
-                <a href=""><i class="fa-solid fa-basket-shopping icon-header"></i></a>
-            </div>
-        </nav>
+        <div class="header-right">
+          <!-- SEARCHBAR -->
+          <div class="header-searchbar">
+            <form action="" method="" class="searchbar">
+              <input type="text" placeholder="Buscar" class="input-searchbar" />
+              <button class="search-button">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+          </div>
+          <!--  HEADER ICONOS -->
+          <div class="header-icons">
+            <a href=""><i class="fa-regular fa-user icon-header"></i></a>
+            <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
+            <a href=""
+              ><i class="fa-solid fa-basket-shopping icon-header"></i
+            ></a>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <main>
+      <section class="caja-grande pd-container">
+        <div class="pd-big-photo">
+          <h4>
+            <ul class="pd-path">
+              <li><a href=""> Inicio </a></li>
+              <li>/</li>
+              <li><a href=""> Nike </a></li>
+              <li>/</li>
+              <li><a href=""> Calzado </a></li>
+            </ul>
+          </h4>
+          <img
+            src="../../public/assets/img/products/1A.jpg"
+            alt="jordan gris"
+            class="pd-bphoto"
+          />
+        </div>
 
-        <h2 class="pd-title"> Inicio / Nike / Calzado </h2>
+        <div class="pd-small-photo">
+          <a href="#">
+            <img
+              src="../../public/assets/img/products/1B.jpg"
+              alt="jordan gris"
+              class="pd-sphoto photo-hover"
+            />
+          </a>
+          <a href="#">
+            <img
+              src="../../public/assets/img/products/1C.jpg"
+              alt="jordan gris"
+              class="pd-sphoto photo-hover"
+            />
+          </a>
+          <a href="#">
+            <img
+              src="../../public/assets/img/products/1D.jpg"
+              alt="jordan gris"
+              class="pd-sphoto photo-hover"
+            />
+          </a>
+          <a href="#">
+            <img
+              src="../../public/assets/img/products/1E.jpg"
+              alt="jordan gris"
+              class="pd-sphoto photo-hover"
+            />
+          </a>
+        </div>
 
-        <section class="pd-container">
+        <div class="pd-items">
+          <h1>Air Jordan</h1>
+          <p>Zapatos</p>
+          <span class="pd-price"> $26.999 </span>
 
-            <div class="pd-big-photo">
-                <img src="/public/assets/img/jordan.jpg" alt="jordan gris" class="pd-bphoto">
-            </div>
+          <div class="pd-color">
+            <h3>Color</h3>
+            <button class="pd-color-button b1">&nbsp;</button>
+            <button class="pd-color-button b2">&nbsp;</button>
+            <button class="pd-color-button b3">&nbsp;</button>
+            <button class="pd-color-button b4">&nbsp;</button>
+          </div>
 
-            <div class="pd-small-photo">
-                <img src="/public/assets/img/jordan.jpg" alt="jordan gris" class="pd-sphoto ph1">
-                <img src="/public/assets/img/jordan.jpg" alt="jordan gris" class="pd-sphoto ph2">
-                <img src="/public/assets/img/jordan.jpg" alt="jordan gris" class="pd-sphoto ph3">
-                <img src="/public/assets/img/jordan.jpg" alt="jordan gris" class="pd-sphoto ph4">
-            </div>
+          <div class="pd-size">
+            <h3>Guia de talles y ajustes</h3>
 
-            <div class="pd-items">
-                <div class="pd-name">
-                    <h3> Air Jordan </h3>
-                    <p> Zapatos </p>
+            <select name="" id="" class="pd-size-select">
+              <option value="">38</option>
+              <option value="">39</option>
+              <option value="">40</option>
+              <option value="">41</option>
+              <option value="">42</option>
+            </select>
+          </div>
+
+          <button class="btn-secondary">
+            Agregar al carrito <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <img
+            src="/public/assets/img/medio-de-pago.jpg"
+            alt="formas de pago"
+            class="pd-img"
+          />
+        </div>
+      </section>
+      <section class="caja-grande">
+        <!-- COMPLETA TU LOOK -->
+        <section class="caja-chica">
+          <div class="caja-chica-titulo">
+            <h2 class="titulares">COMPLETA TU LOOK</h2>
+            <a href="" class="titular-secundario">Ver Todos</a>
+          </div>
+          <div class="caja-chica-destacados">
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/Boca-titular.png"
+                    alt="producto-1-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$16.999</p>
                 </div>
-
-                <span class="pd-price"> $26.999 </span>
-
-                <div class="pd-color">
-                    <h3> Color </h3>
-                    <button class="pd-color-button b1"> &nbsp; </button>
-                    <button class="pd-color-button b2"> &nbsp; </button>
-                    <button class="pd-color-button b3"> &nbsp; </button>
-                    <button class="pd-color-button b4"> &nbsp; </button>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">
+                    Camiseta titular oficial Boca Juniors
+                  </p>
+                  <p class="categoria-producto">Hombre Futbol</p>
                 </div>
-
-                <div class="pd-size">
-                    <h3 class="pd-size-header"> Guia de talles y ajustes </h3>
-
-
-                    <select name="" id="" class="pd-size-select">
-                        <option value=""> 38 </option>
-                        <option value=""> 39 </option>
-                        <option value=""> 40 </option>
-                        <option value=""> 41 </option>
-                        <option value=""> 42 </option>
-                    </select>
-                </div>
-
-                <button class="pd-add-button"> Agregar al carrito <i class="fa-solid fa-arrow-right"></i> </button>
-
+              </a>
             </div>
-
-            <img src="/public/assets/img/medio-de-pago.jpg" alt="formas de pago" class="pd-img">
-
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/River-titular.png"
+                    alt="producto-2-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$16.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">
+                    Camiseta titular oficial River Plate
+                  </p>
+                  <p class="categoria-producto">Hombre Futbol</p>
+                </div>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/buzo-ninos.png"
+                    alt="producto-3-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$9.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">
+                    Buzo estampado algodón orgánico
+                  </p>
+                  <p class="categoria-producto">Niño Originals</p>
+                </div>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/zapatillas-ozweego.png"
+                    alt="producto-4-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$35.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">Zapatillas Ozweego</p>
+                  <p class="categoria-producto">Originals</p>
+                </div>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/zapatillas-ozweego.png"
+                    alt="producto-4-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$35.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">Zapatillas Ozweego</p>
+                  <p class="categoria-producto">Originals</p>
+                </div>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/camiseta-barcelona.png"
+                    alt="producto-5-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$10.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">
+                    Camiseta titular oficial FC Barcelona
+                  </p>
+                  <p class="categoria-producto">Hombre Futbol</p>
+                </div>
+              </a>
+            </div>
+          </div>
         </section>
-        <section>
-            <!-- COMPLETA TU LOOK -->
-            <section class="caja-chica">
-                <div class="caja-chica-titulo">
-                    <h2 class="titulares"> COMPLETA TU LOOK </h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
+
+        <!-- PRODUCTOS QUE PODRIAN INTERESARTE -->
+        <section class="caja-chica">
+          <div class="caja-chica-titulo">
+            <h2 class="titulares">PRODUCTOS QUE PODRIAN INTERESARTE</h2>
+            <a href="" class="titular-secundario">Ver Todos</a>
+          </div>
+          <div class="caja-chica-destacados">
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/Boca-titular.png"
+                    alt="producto-1-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$16.999</p>
                 </div>
-                <div class="caja-chica-productos">
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="/public/assets/img/buzo-nike.jpg" alt="producto-1-seccion-3" class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$16.999</div>
-                            <div class="descripcion-producto"> Buzo Nike Future Famme </div>
-                            <div class="categoria-producto">Hombre - Urbano</div>
-                        </div>
-                    </div>
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="/public/assets/img/medias-nike.jpg" alt="producto-2-seccion-3"
-                                class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$2.499</div>
-                            <div class="descripcion-producto"> MEDIAS NIKE CUSHION </div>
-                            <div class="categoria-producto"> Unisex </div>
-                        </div>
-                    </div>
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="/public/assets/img/buzo-ninos.png" alt="producto-3-seccion-3"
-                                class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$9.999</div>
-                            <div class="descripcion-producto">Buzo estampado algodón orgánico</div>
-                            <div class="categoria-producto">Niño Originals</div>
-                        </div>
-                    </div>
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="/public/assets/img/zapatillas-ozweego.png" alt="producto-4-seccion-3"
-                                class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$35.999</div>
-                            <div class="descripcion-producto">Zapatillas Ozweego</div>
-                            <div class="categoria-producto">Originals</div>
-                        </div>
-                    </div>
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="/public/assets/img/jogger.jpg" alt="producto-5-seccion-3" class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$15.999</div>
-                            <div class="descripcion-producto"> Pantalones Cargotech </div>
-                            <div class="categoria-producto"> Hombre Urbano </div>
-                        </div>
-                    </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">
+                    Camiseta titular oficial Boca Juniors
+                  </p>
+                  <p class="categoria-producto">Hombre Futbol</p>
                 </div>
-            </section>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/River-titular.png"
+                    alt="producto-2-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$16.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">
+                    Camiseta titular oficial River Plate
+                  </p>
+                  <p class="categoria-producto">Hombre Futbol</p>
+                </div>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/buzo-ninos.png"
+                    alt="producto-3-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$9.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">
+                    Buzo estampado algodón orgánico
+                  </p>
+                  <p class="categoria-producto">Niño Originals</p>
+                </div>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/zapatillas-ozweego.png"
+                    alt="producto-4-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$35.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">Zapatillas Ozweego</p>
+                  <p class="categoria-producto">Originals</p>
+                </div>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/zapatillas-ozweego.png"
+                    alt="producto-4-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$35.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">Zapatillas Ozweego</p>
+                  <p class="categoria-producto">Originals</p>
+                </div>
+              </a>
+            </div>
+            <div class="product-card">
+              <a href="#">
+                <div>
+                  <img
+                    class="product-image"
+                    src="../../public/assets/img/camiseta-barcelona.png"
+                    alt="producto-5-seccion-3"
+                    class="img-producto"
+                  />
+                  <p class="info-precio">$10.999</p>
+                </div>
+                <div class="product-data-container">
+                  <p class="descripcion-producto">
+                    Camiseta titular oficial FC Barcelona
+                  </p>
+                  <p class="categoria-producto">Hombre Futbol</p>
+                </div>
+              </a>
+            </div>
+          </div>
         </section>
+      </section>
     </main>
 
     <!-- FOOTER -->
     <footer class="footer">
-        <nav class="footer-nav">
-            <div class="footer-nav-items">
-                <ul class="footer-ul">
-                    <li><a href="" class="footer-list-item"> Aviso de privacidad </a></li>
-                    <li> | </li>
-                    <li><a href="" class="footer-list-item"> Terminos y condiciones </a></li>
-                    <li> | </li>
-                    <li><a href="" class="footer-list-item"> Nuestros datos </a></li>
-                </ul>
-            </div>
-            <div class="copyright">
-                © 2022 G&X Argentina
-            </div>
-            <div class="footer-icons">
-                <a href=""><i class="fa-brands fa-facebook icon-footer"></i></a>
-                <a href=""><i class="fa-brands fa-square-twitter icon-footer"></i></a>
-                <a href=""><i class="fa-brands fa-google icon-footer"></i></a>
-                <a href=""><i class="fa-brands fa-instagram icon-footer"></i></a>
-                <a href=""><i class="fa-brands fa-tiktok icon-footer"></i></a>
-            </div>
-        </nav>
+      <nav class="footer-nav">
+        <div class="footer-nav-items">
+          <ul class="footer-ul">
+            <li>
+              <a href="" class="footer-list-item"> Aviso de privacidad </a>
+            </li>
+            <li>|</li>
+            <li>
+              <a href="" class="footer-list-item"> Terminos y condiciones </a>
+            </li>
+            <li>|</li>
+            <li><a href="" class="footer-list-item"> Nuestros datos </a></li>
+          </ul>
+        </div>
+        <div class="copyright">© 2022 G&X Argentina</div>
+        <div class="footer-icons">
+          <a href=""><i class="fa-brands fa-facebook icon-footer"></i></a>
+          <a href=""><i class="fa-brands fa-square-twitter icon-footer"></i></a>
+          <a href=""><i class="fa-brands fa-google icon-footer"></i></a>
+          <a href=""><i class="fa-brands fa-instagram icon-footer"></i></a>
+          <a href=""><i class="fa-brands fa-tiktok icon-footer"></i></a>
+        </div>
+      </nav>
     </footer>
-
-</body>
-
+  </body>
 </html>
