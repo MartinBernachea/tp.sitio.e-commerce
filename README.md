@@ -2,7 +2,7 @@
 
 ## Autores
 
-Batto Pedro Nicolas, Bernachea Martin, Gondolo Tobias, Martinez Sebastian, Sitta Ariel
+Bernachea Martin, Gondolo Tobias, Martinez Sebastian, Sitta Ariel
 
 ## Descripcion
 
@@ -24,9 +24,6 @@ Al publico el cual apuntamos son aquellas personas las cuales les gusta hacer de
 - https://sportline.com.co/?utm_source=google&utm_medium=cpa&utm_campaign=Sportline&gclid=CjwKCAjw0dKXBhBPEiwA2bmObTbQIQ9u-15REUYoMzprWrMHgwEDQVdQK8Zobj8pdK_QOKKOpDR72BoCASYQAvD_BwE
 
 ## Listado del grupo con una breve descripción de cada uno
-
-- Batto Pedro Nicolas:
-  Tengo 21 años, llegue al curso por medio de un amigo que lo hizo y me lo recomendó. Es mi primer contacto con la programación y la informática , aunque trabajo en ventas con un programa que tiene bases de programación.
 
 - Bernachea Martin:
   Trabajo como soporte tecnico en ESPN, tengo conocimientos previos de HTML, CSS. Estoy muy contento con haber empezado este curso y entusiasmado de seguir aprendiendo
