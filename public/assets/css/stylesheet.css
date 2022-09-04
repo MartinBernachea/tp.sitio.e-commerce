@@ -12,6 +12,12 @@
 
 /* GENERAL */
 
+body {
+  display:flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 h1 {
   font-size: 1.4rem;
 }
@@ -243,9 +249,15 @@ a i:hover {
 /* FOOTER */
 
 .footer {
+  flex-grow: 10;
+  display: flex;
+  align-items: flex-end;
+}
+
+.footer-container{
+  background-color: #333;
   width: 100%;
   height: auto;
-  background-color: #333;
   text-align: center;
   padding: 30px 30px 8px 30px;
 }
