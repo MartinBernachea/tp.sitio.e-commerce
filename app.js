@@ -1,14 +1,36 @@
-const express = require('express');
-const path = require('path');
+// Se cargan los modulos necesarios.
+var express = require('express');
+var path = require('path');
 
-const app = express();
+// Crea una Express app.
+var app = express();
 
-app.get('/', (req,res) =>{
-    res.sendFile(path.resolve(__dirname, './views/index.html'));
+// obtiene la ruta del directorio publico donde se encuentran los elementos estaticos (css, js).
+var publicPath = path.join(__dirname, '/public'); //path.join(__dirname, 'public'); también puede ser una opción
+
+// Para que los archivos estaticos queden disponibles.
+app.use(express.static(publicPath));
+
+app.get('/login', function (req, res) {
+    res.sendFile(__dirname + '/views/pages/formLogin.html');
 });
 
-app.use(express.static(path.resolve(__dirname, './public')));
+app.get('/register', function (req, res) {
+    res.sendFile(__dirname + '/views/pages/formRegister.html');
+});
 
+app.get('/producto', function (req, res) {
+    res.sendFile(__dirname + '/views/pages/detalleProducto.html');
+});
+
+
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/views/index.html');
+});
+
+app.get('/css', function (req, res) {
+    res.sendFile(__dirname + '/public/assets/css/stylesheet.css');
+});
 
 app.listen(3002, () => {
     console.log("Servidor corriendo");

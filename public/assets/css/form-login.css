@@ -1,0 +1,94 @@
+/* FORM REGISTER CSS  */
+
+.form-h1 {
+  text-align: center;
+  margin: 30px 0px 30px 0px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto 60px auto;
+}
+
+.form h1 {
+  margin-bottom: 10px;
+}
+
+.form-box {
+  width: 80%;
+  max-width: 600px;
+  border: 0;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-log-form {
+  background-color: #d9d9d9;
+}
+.container {
+  width: 70%;
+  max-width: 400px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.fields {
+  text-align: center;
+}
+
+.label {
+  display: none;
+}
+
+.input-text {
+  width: 100%;
+  padding: 4px 12px;
+  margin-bottom: 20px;
+  background: transparent;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: solid 2px #000;
+  outline: none;
+  font-size: 16px;
+}
+
+.config-field {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.config-field label {
+  margin: 0 20px 0 0;
+}
+.login-button-div {
+  margin: 20px 0;
+}
+
+.iniciar-con {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.iniciar-con-item {
+  margin: 0px 20px 0px 20px;
+}
+
+.redir-cc {
+  margin-top: 30px;
+}
+
+.redir-crear-cuenta {
+  font-weight: bold;
+}
