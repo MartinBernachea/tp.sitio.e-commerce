@@ -43,31 +43,41 @@ a i:hover {
 }
 
 .header-nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: 4fr 1fr 4fr;
+    grid-template-areas: "nav header-logo right";
+    justify-items: center;
     height: 100px;
-    width: 100%;
 }
 
 /* LOGO */
 
 .header-logo {
+    grid-area: header-logo;
     height: 100%;
-    width: 205px;
-    margin: 0px 20px;
+    max-width: 205px;
+    margin: 0px 40px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.header-right {
+    grid-area: right;
+    display: flex;
+    width: min-content;
+}
+
 /* NAV */
 
 .header-nav-items {
-    width: 700px;
+    max-width: 700px;
     display: flex;
-    margin: 20px 200px 20px 300px;
+    margin: 20px 0 20px 0px;
 }
 
 .header-ul {
+    grid-area: nav;
     display: flex;
     justify-content: space-evenly;
     align-items: flex-end;
@@ -77,19 +87,32 @@ a i:hover {
 
 .li-item {
     font-weight: bold;
+    margin: 0 10px;
 }
+
+.fulled-menu,
+.collapsed-menu {
+    display: none;
+}
+
+.ham-menu {
+    display: flex;
+}
+
+
 
 /* SEARCHBAR */
 
 .header-searchbar {
-    width: 350px;
-    display: flex;
+    display: none;
     align-items: flex-end;
     margin: 20px;
 }
 
 .searchbar {
-    width: 300px;
+    width: 15vw;
+    max-width: 300px;
+    min-width: 180px;
     display: flex;
     justify-content: space-evenly;
     align-items: flex-end;
@@ -98,7 +121,7 @@ a i:hover {
 }
 
 .input-searchbar {
-    width: 250px;
+    width: 90%;
     height: 30px;
     background-color: #ebebeb;
     border: 0;
@@ -116,14 +139,15 @@ a i:hover {
     cursor: pointer;
 }
 
+
 /* ICONS */
 
 .header-icons {
-    width: 250px;
+    min-width: 130px;
     display: flex;
     justify-content: space-evenly;
     align-items: flex-end;
-    margin: 20px;
+    margin: 20px 0;
 }
 
 .icon-header {
@@ -241,6 +265,39 @@ a i:hover {
     font-weight: bold;
 }
 
+
+@media(min-width:860px) {
+
+    .header-searchbar {
+        display: flex;
+    }
+
+    .header-nav {
+        grid-template-areas: "header-logo nav right";
+        grid-template-columns: 1fr 4fr 1fr;
+    }
+
+    .fulled-menu,
+    .ham-menu {
+        display: none;
+    }
+
+    .collapsed-menu {
+        display: flex;
+    }
+}
+
+@media(min-width:1050px) {
+    .fulled-menu {
+        display: flex;
+    }
+
+    .ham-menu,
+    .collapsed-menu {
+        display: none;
+    }
+}
+
 /* FOOTER */
 
 .footer {
@@ -347,15 +404,10 @@ a i:hover {
     }
 }
 
-
-
-
 .spacing {
     display: flex;
     justify-content: space-evenly;
 }
-
-
 
 .home-banner {
     width: 100%;
