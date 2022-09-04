@@ -1,0 +1,39 @@
+/* FORM REGISTER */
+
+.register-promo {
+  text-align: center;
+  background-color: #999;
+  font-size: 30px;
+  padding-top: 2px;
+  margin: 30px 0px;
+}
+
+.register-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0px;
+}
+
+.form-fieldset {
+  text-align: center;
+  padding: 20px 10%;
+}
+
+.form-title {
+  margin: 40px 40px 25px 40px;
+  font-size: 30px;
+}
+
+.field {
+  width: 70%;
+  margin: 25px;
+  padding: 5px 0px 5px 20px;
+  background: transparent;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: solid 2px #000;
+  outline: none;
+  font-size: 20px;
+}

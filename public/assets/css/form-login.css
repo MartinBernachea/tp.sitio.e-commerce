@@ -14,20 +14,23 @@
 }
 
 .form h1 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .form-box {
   width: 80%;
   max-width: 600px;
-  background-color: #d9d9d9;
   border: 0;
   border-radius: 25px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.background-log-form {
+  background-color: #d9d9d9;
+}
 .container {
   width: 70%;
   max-width: 400px;
@@ -43,8 +46,7 @@
   display: none;
 }
 
-.user-field,
-.pass-field {
+.input-text {
   width: 100%;
   padding: 4px 12px;
   margin-bottom: 20px;
