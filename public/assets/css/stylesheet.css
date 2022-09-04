@@ -1,4 +1,5 @@
 @import url(./product-detail.css);
+@import url(./form-login.css);
 
 * {
   font-family: "Hind Vadodara", sans-serif;
@@ -9,6 +10,10 @@
 }
 
 /* GENERAL */
+
+h1{
+  font-size: 1.4rem;
+}
 
 a {
   text-decoration: none;
@@ -45,14 +50,29 @@ a i:hover {
   padding: 12px 24px;
 }
 
-.btn-secondary:hover {
-  opacity: 0.7;
-}
-
 .btn-secondary i {
   color: #fff;
   font-size: 18px;
   padding-left: 15px;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-secondary:hover {
+  /*   .login-button:hover,
+  .register-button:hover,
+  .pd-add-button:hover { */
+  color: #000;
+  background-color: #c70039;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover i {
+  transition: 0.3s;
+  color: #000;
 }
 
 /* INFO PROMO */
@@ -186,112 +206,6 @@ a i:hover {
   align-items: center;
   height: 30px;
   width: 30px;
-}
-
-/* FORM REGISTER CSS  */
-
-.form-h1 {
-  text-align: center;
-  margin: 30px 0px 30px 0px;
-}
-
-.form {
-  width: 100%;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-}
-
-.form-box {
-  width: 50%;
-  background-color: #d9d9d9;
-  border: 0;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.container {
-  width: 70%;
-  height: 80%;
-  /* margin: 50px; */
-  text-align: center;
-}
-
-.fields {
-  text-align: center;
-  margin: 25px;
-}
-
-.label {
-  display: none;
-}
-
-.user-field,
-.pass-field {
-  width: 70%;
-  margin: 35px;
-  padding: 5px 0px 5px 20px;
-  background: transparent;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  border-bottom: solid 2px #000;
-  outline: none;
-  font-size: 20px;
-}
-
-.config-field {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.login-button-div {
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
-}
-
-.login-button {
-  height: 50px;
-  width: 65%;
-  background-color: #000;
-  color: #fff;
-  font-size: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0;
-  border-radius: 10px;
-}
-
-.login-button:hover,
-.register-button:hover,
-.pd-add-button:hover {
-  color: #000;
-  background-color: #c70039;
-  transition: 0.3s;
-}
-
-.iniciar-con {
-  font-weight: bold;
-  margin: 10px 10px 10px 10px;
-}
-
-.iniciar-con-item {
-  margin: 0px 20px 0px 20px;
-}
-
-.redir-cc {
-  margin-top: 50px;
-}
-
-.redir-crear-cuenta {
-  font-weight: bold;
 }
 
 @media (min-width: 860px) {
