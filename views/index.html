@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/assets/css/stylesheet.css">
+    <link rel="stylesheet" href="../public/assets/css/stylesheet.css">
 
     <title> G&X </title>
 </head>
@@ -17,126 +17,96 @@
 <body>
     <div class="info-promo"> <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A $20.000 </div>
 
-    <!-- HEADER -->
-    <header class="header">
-        <nav class="header-nav">
-            <!-- LOGO -->
-            <div class="header-logo">
-                <a href=""><img src="../public/assets/img/H&M-Logo.png" alt="G&X-logo"></a>
-            </div>
-            <!-- NAV -->
-            <div class="header-nav-items">
-                <ul class="header-ul">
-                    <li class="li-item">
-                        <a href=""> NUEVO 🔥 </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> HOMBRE </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> MUJER </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> NIÑO </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> DEPORTE </a>
-                    </li>
-                    <li class="li-item">
-                        <a href=""> MARCA </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- SEARCHBAR -->
-            <div class="header-searchbar">
-                <form action="" method="" class="searchbar">
-                    <input type="text" placeholder="Buscar" class="input-searchbar">
-                    <button class="search-button"> <i class="fa fa-search"></i> </button>
-                </form>
-            </div>
-            <!--  HEADER ICONOS -->
-            <div class="header-icons">
-                <a href=""><i class="fa-regular fa-user icon-header"></i></a>
-                <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
-                <a href=""><i class="fa-solid fa-basket-shopping icon-header"></i></a>
-            </div>
-        </nav>
-    </header>
-
     <!-- MAIN -->
     <main>
-        <!--BANNER-->
+        <!--BANNER
         <img src="../public/assets/img/FOTO-BANNER.png" alt="img-home-banner" class="home-banner">
+        -->
         <!--SECTIONS-->
         <section class="caja-grande">
             <!--NUEVOS LANZAMIENTOS-->
-            <section class="caja-chica">
+            <section>
                 <div class="caja-chica-titulo">
                     <h2 class="titulares">NUEVOS LANZAMIENTOS</h2>
                     <a href="" class="titular-secundario">Ver Todos</a>
                 </div>
                 <div class="caja-chica-productos">
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="../public/assets/img/adidas-botas-futbol-x-speedportal.1-fg.jpg"
-                                alt="botines-speedoportal" class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$62.999</div>
-                            <div class="descripcion-producto">X SPEEDPORTAL.1 FG</div>
-                            <div class="categoria-producto">Futbol Terreno Firme</div>
-                        </div>
+                    <div class="product-card">
+                        <a href="#">
+                            <div>
+                                <img src="../public/assets/img/adidas-botas-futbol-x-speedportal.1-fg.jpg"
+                                    alt="botines-speedoportal">
+                                <p class="info-precio">$62.999</p>
+                            </div>
+                            <div class="product-data-container">
+                                <p class="descripcion-producto">X SPEEDPORTAL.1 FG</p>
+                                <p class="categoria-producto">Futbol Terreno Firme</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="../public/assets/img/air-jordan-1.png" alt="air-jordan-1" class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$49.000</div>
-                            <div class="descripcion-producto">AIR JORDAN 1</div>
-                            <div class="categoria-producto">Urbano Zapatilla</div>
-                        </div>
+                    <div class="product-card">
+                        <a href="#">
+                            <div>
+                                <img src="../public/assets/img/air-jordan-1.png" alt="air-jordan-1">
+                                <p class="info-precio">$49.000</p>
+                            </div>
+                            <div class="product-data-container">
+                                <p class="descripcion-producto">AIR JORDAN 1</p>
+                                <p class="categoria-producto">Urbano Zapatilla</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="../public/assets/img/camiseta-titular-argentina.png" alt="camiseta-titular-messi"
-                                class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$17.000</div>
-                            <div class="descripcion-producto">CAMISETA TITULAR SELECCION ARGENTINA</div>
-                            <div class="categoria-producto">Hombre Futbol</div>
-                        </div>
+                    <div class="product-card">
+                        <a href="#">
+                            <div>
+                                <img src="../public/assets/img/camiseta-titular-argentina.png"
+                                    alt="camiseta-titular-messi">
+                                <p class="info-precio">$17.000</p>
+                            </div>
+                            <div class="product-data-container">
+                                <p class="descripcion-producto">CAMISETA TITULAR SELECCION ARGENTINA</p>
+                                <p class="categoria-producto">Hombre Futbol</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="productos-por-separado">
-                        <div>
-                            <img src="../public/assets/img/botas-para-mujer-puma-X-DUA-LIPA.png" alt=""
-                                class="img-producto">
-                        </div>
-                        <div>
-                            <div class="info-precio">$24.000</div>
-                            <div class="descripcion-producto">BOTAS PARA MUJER PUMA x DUA LIPA MAYZE</div>
-                            <div class="categoria-producto">Calzado Mujer</div>
-                        </div>
+                    <div class="product-card">
+                        <a href="#">
+                            <div>
+                                <img src="../public/assets/img/botas-para-mujer-puma-X-DUA-LIPA.png" alt=""
+                                    class="img-producto">
+                                <p class="info-precio">$24.000</p>
+                            </div>
+                            <div class="product-data-container">
+                                <p class="descripcion-producto">BOTAS PARA MUJER PUMA x DUA LIPA MAYZE</p>
+                                <p class="categoria-producto">Calzado Mujer</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </section>
+
             <!--¿PARA QUIEN COMPRAS?-->
-            <section class="caja-chica">
+            <section>
                 <h2 class="titulares">¿PARA QUIÉN COMPRAS?</h2>
                 <div class="caja-chica-modelos">
-                    <div class="modelos-por-separado mujer">
-                        <a class="centrado-texto">MUJER</a>
-                    </div>
-                    <div class="modelos-por-separado hombre">
-                        <a class="centrado-texto">HOMBRE</a>
-                    </div>
-                    <div class="modelos-por-separado ninos">
-                        <a class="centrado-texto">NIÑOS</a>
-                    </div>
+                    <a href="#">
+                        <div class="modelos-por-separado mujer">
+                            <p class="centrado-texto">MUJER</p>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="modelos-por-separado hombre">
+                            <p class="centrado-texto">HOMBRE</p>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="modelos-por-separado ninos">
+                            <p class="centrado-texto">NIÑOS</p>
+                        </div>
+                    </a>
                 </div>
             </section>
-            <!--PRODUCTOS DESTACADOS-->
+            <!--PRODUCTOS DESTACADOS
             <section class="caja-chica">
                 <div class="caja-chica-titulo">
                     <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
@@ -200,9 +170,10 @@
                     </div>
                 </div>
             </section>
+        -->
         </section>
 
-        <!-- FOOT BANNER -->
+        <!-- FOOT BANNER 
         <section class="foot-banner">
             <div class="foot-banner-titulo"> Buscalo por Marca </div>
             <ul class="foot-banner-ul">
@@ -225,6 +196,7 @@
                 <li class="foot-banner-li foot-banner-arrow"> <i class="fa-solid fa-angle-right"></i> </li>
             </ul>
         </section>
+        -->
     </main>
 
     <!-- FOOTER -->

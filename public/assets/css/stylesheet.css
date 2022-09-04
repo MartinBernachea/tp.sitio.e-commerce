@@ -6,6 +6,8 @@
     color: #000;
 }
 
+/* GENERAL */
+
 a {
     text-decoration: none;
 }
@@ -13,6 +15,17 @@ a {
 a:hover,
 a i:hover {
     color: #C70039;
+}
+
+.titulares {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 10px 10px 4%;
+}
+
+.titular-secundario {
+    display: flex;
+    justify-content: flex-end;
 }
 
 /* INFO PROMO */
@@ -278,54 +291,92 @@ a i:hover {
     cursor: default;
 }
 
-.img-producto {
-    width: 255px;
-    height: 255px;
-
-}
-
 .caja-grande {
-    margin: 25px 50px;
+    margin: 20px 20px;
 }
 
-.caja-chica-productos {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px;
-}
+/* NUEVOS LANZAMIENTOS */
 
 .caja-chica-producto {
     display: inline-block;
     padding: 10px;
 }
 
+.caja-chica-productos {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    margin: 20px;
+    justify-items: center;
+}
+
+.caja-chica-productos img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+.product-card {
+    max-width: 300px;
+    transition: all 500ms ease-out;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    transition: all 300ms ease-out;
+    border: 1px solid black;
+}
+
+.product-card:hover .info-precio {
+    transform: translateY(-10px);
+    transition: transform 200ms ease-out;
+}
+
+.product-data-container {
+    padding: 10px;
+}
+
+
+@media (min-width: 480px) {
+    .caja-grande {
+        margin: 25px 50px;
+    }
+
+    .caja-chica-productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 820px) {
+    .caja-chica-productos {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+
+
 .spacing {
     display: flex;
     justify-content: space-evenly;
 }
 
-.titulares {
-    display: flex;
-    justify-content: flex-start;
-    padding: 10px 10px 10px 4%;
-}
 
-.titular-secundario {
-    display: flex;
-    justify-content: flex-end;
-}
 
 .home-banner {
     width: 100%;
 }
 
+/* PARA QUIEN COMPRAS */
 .modelos {
+    /* se usa? */
     width: 400px;
     height: 380px;
 }
 
 .caja-chica-modelos {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     padding: 20px;
 }
@@ -334,14 +385,17 @@ a i:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    width: 100%;
+    min-width: 200px;
+    aspect-ratio: 280/200;
 }
 
-.mujer {
-    background-image: url("/public/assets/img/MUJER.png");
-    height: 300px;
-    width: 350px;
-    background-size: cover;
+.modelos-por-separado:hover p {
+    color: #C70039;
+}
+
+.caja-chica-modelos a:not(:last-child) {
+    margin: 0 0 10px 0;
 }
 
 .centrado-texto {
@@ -355,30 +409,50 @@ a i:hover {
     cursor: pointer;
 }
 
-.hombre {
-    background-image: url("/public/assets/img/HOMBRE.png");
-    height: 300px;
-    width: 350px;
-    background-size: cover;
-}
-
 .descripcion-producto {
     font-weight: bold;
 }
 
-.ninos {
-    background-image: url("/public/assets/img/ninos.png");
-    height: 300px;
-    width: 350px;
+.mujer {
+    background-image: url("../img/MUJER.png");
     background-size: cover;
 }
+
+.hombre {
+    background-image: url("../img/HOMBRE.png");
+    background-size: cover;
+}
+
+.ninos {
+    background-image: url("../img/ninos.png");
+    background-size: cover;
+}
+
+@media (min-width:620px) {
+    .caja-chica-modelos {
+        flex-direction: row;
+    }
+
+    .modelos-por-separado {
+        width: 25vw;
+        aspect-ratio: 350/300;
+        min-width: 200px;
+    }
+
+    .caja-chica-modelos a:not(:last-child) {
+        margin: 0 10px 0 0;
+    }
+}
+
+/* PRODUCTOS */
 
 .info-precio {
     background-color: white;
     width: 60px;
     position: relative;
     bottom: 30px;
-
+    transition: transform 600ms ease-out;
+    padding: 0 4px;
 }
 
 .descripcion-producto {
