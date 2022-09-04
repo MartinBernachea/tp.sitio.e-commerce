@@ -6,7 +6,7 @@ var path = require('path');
 var app = express();
 
 // obtiene la ruta del directorio publico donde se encuentran los elementos estaticos (css, js).
-var publicPath = path.resolve(__dirname, '/public'); //path.join(__dirname, 'public'); también puede ser una opción
+var publicPath = path.join(__dirname, '/public'); //path.join(__dirname, 'public'); también puede ser una opción
 
 // Para que los archivos estaticos queden disponibles.
 app.use(express.static(publicPath));
