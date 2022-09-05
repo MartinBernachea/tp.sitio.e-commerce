@@ -2,6 +2,7 @@
 @import url(./form-login.css);
 @import url(./form-reg.css);
 @import url(./carrito.css);
+@import url(./coming-soon.css);
 
 * {
   font-family: "Hind Vadodara", sans-serif;
@@ -78,11 +79,6 @@ a i:hover {
 .btn-secondary:hover i {
   transition: 0.3s;
   color: #000;
-}
-
-.coming-soon {
-  text-align: center;
-  margin: 5%;
 }
 
 /* INFO PROMO */

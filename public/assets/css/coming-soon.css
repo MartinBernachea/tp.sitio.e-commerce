@@ -1,0 +1,45 @@
+.coming-soon {
+    text-align: center;
+    width: 90%;
+    margin: 5%;
+}
+
+.coming-soon img {
+    width: 40%;
+}
+
+@media (max-width: 400px) {
+    .coming-soon {
+        text-align: center;
+        width: 90%;
+        margin: 5%;
+    }
+
+    .coming-soon img {
+        width: 40%;
+    }
+}
+
+@media (max-width: 860px) {
+    .coming-soon {
+        text-align: center;
+        width: 90%;
+        margin: 5%;
+    }
+
+    .coming-soon img {
+        height: 60%;
+    }
+}
+
+@media (max-width: 1050px) {
+    .coming-soon {
+        text-align: center;
+        width: 90%;
+        margin: 5%;
+    }
+
+    .coming-soon img {
+        height: 100%;
+    }
+}
