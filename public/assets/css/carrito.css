@@ -125,6 +125,10 @@
     font-weight: bold;
 }
 
+.container-cupon-pago {
+    width: auto;
+}
+
 .cupon-container {
     width: 60%;
     margin: 20px auto;
@@ -153,7 +157,11 @@
 
 .imagenes-opciones-pago {
     text-align: center;
-    height: 100%;
+    width: 100%;
+}
+
+.opciones-pago img {
+    width: 100px;
 }
 
 .product-detail {
@@ -189,7 +197,7 @@
 
 .product-detail-container {
     height: 250px;
-    width: 800px;
+    width: 70%;
     border: solid #000 1px;
     display: flex;
     margin: 15px;
@@ -223,6 +231,39 @@
     padding: 5px;
 }
 
-.talle-producto-carrito {}
+@media (max-width: 400px) {
 
-.descripcion-producto-carrito {}
+}
+
+@media (max-width: 860px) {
+
+}
+
+@media (max-width: 1280px) {
+    .boton1 {
+        height: 50%;
+        width: 50%;
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0;
+        border-radius: 10px;
+        margin: auto auto;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .product-detail-container {
+        height: 250px;
+        width: 90%;
+        border: solid #000 1px;
+        display: flex;
+        margin: 15px;
+    }
+
+    .opciones-pago img {
+        width: 70%;
+    }
+}
