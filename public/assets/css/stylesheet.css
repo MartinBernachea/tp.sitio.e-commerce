@@ -320,6 +320,16 @@ a i:hover {
   justify-items: center;
 }
 
+
+.productos-por-separado {
+  width: 300px;
+  height: 300px;
+}
+
+.img-producto {
+  width: 100%;
+}
+
 .product-card {
   max-width: 300px;
   transition: all 500ms ease-out;

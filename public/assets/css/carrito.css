@@ -24,9 +24,35 @@
     width: 100%;
 }
 
+.shop-card-1 {
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.shop-card-2 {
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+
+.shop-card-3 {
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 4/5;
+}
+
+.subcaja-6-boton {
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 5/6;
+    width: 80%;
+    height: 140px;
+}
+
 .boton1 {
     height: 50%;
-    width: 70%;
+    width: 50%;
     background-color: #000;
     color: #fff;
     display: flex;
@@ -37,8 +63,85 @@
     margin: auto auto;
 }
 
-.total {
-    padding: 20px 0px 20px 0px;
+.boton1 .fa-arrow-right-long::before {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.resumen-container {
+    border: #000 solid 1px;
+    background-color: #ebebeb;
+    text-align: center;
+    display: grid;
+    grid-column: 2/3;
+    grid-row: 2/4;  
+    width: 60%;
+    height: 90%;
+    margin: auto auto;
+}
+
+.resumen-titulo {
+    font-size: 20px;
+}
+
+.resumen-titulo h3 {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resumen-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.resumen-item p {
+    margin: 15px 30px;
+}
+
+.resumen-total {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.cupon-container {
+    width: 60%;
+    margin: 20px auto;
+}
+
+.cupon-input {
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.opciones-pago-container {
+    display: grid;
+    grid-column: 2/3;
+    grid-row: 5/6;  
+    width: 60%;
+    height: 60%;
+    margin: auto auto;
+}
+
+.titulo-opciones-pago {
+    width: 80%;
+    height: 20%;
+    margin: 10px 0px 0px 10px;
+}
+
+.imagenes-opciones-pago {
+    text-align: center;
+    height: 100%;
 }
 
 .product-detail {
@@ -52,10 +155,6 @@
     flex: 1;
     justify-content: space-between;
 }
-
-
-
-
 
 .boton2 {
     background-color: #000;
