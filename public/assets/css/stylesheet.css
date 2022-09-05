@@ -80,6 +80,11 @@ a i:hover {
   color: #000;
 }
 
+.coming-soon {
+  text-align: center;
+  margin: 5%;
+}
+
 /* INFO PROMO */
 
 .info-promo {
