@@ -9,22 +9,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara&family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/assets/css/stylesheet.css">
+    <link rel="stylesheet" href="/assets/css/stylesheet.css">
     <title>Carrito</title>
 </head>
 
 
 
 <body class="body">
+
+    <div class="info-promo">
+        <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A
+        $20.000
+    </div>
+
     <!-- HEADER -->
     <header class="header">
         <nav class="header-nav">
             <!-- LOGO -->
             <div class="header-logo">
-                <a href=""><img src="/public/assets/img/H&M-Logo.png" alt="G&X-logo"></a>
+                <a href="/"><img src="/assets/img/H&M-Logo.png" alt="G&X-logo" /></a>
             </div>
             <!-- NAV -->
-            <div class="header-nav-items">
+
+            <div class="header-nav-items fulled-menu">
                 <ul class="header-ul">
                     <li class="li-item">
                         <a href=""> NUEVO 🔥 </a>
@@ -46,25 +53,52 @@
                     </li>
                 </ul>
             </div>
-            <!-- SEARCHBAR -->
-            <div class="header-searchbar">
-                <form action="" method="" class="searchbar">
-                    <input type="text" placeholder="Buscar" class="input-searchbar">
-                    <button class="search-button"> <i class="fa fa-search"></i> </button>
-                </form>
+
+            <div class="header-nav-items collapsed-menu">
+                <ul class="header-ul">
+                    <li class="li-item">
+                        <a href=""> NUEVO 🔥 </a>
+                    </li>
+                    <li class="li-item">
+                        <a href=""> CATEGORIAS </a>
+                    </li>
+                    <li class="li-item">
+                        <a href=""> MARCA </a>
+                    </li>
+                </ul>
             </div>
-            <!--  HEADER ICONOS -->
-            <div class="header-icons">
-                <a href=""><i class="fa-regular fa-user icon-header"></i></a>
-                <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
-                <a href=""><i class="fa-solid fa-basket-shopping icon-header"></i></a>
+
+            <div class="header-nav-items ham-menu">
+                <ul class="header-ul">
+                    <li class="li-item">
+                        <a href=""> <i class="fa-solid fa-bars fa-lg"></i> </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="header-right">
+                <!-- SEARCHBAR -->
+                <div class="header-searchbar">
+                    <form action="" method="" class="searchbar">
+                        <input type="text" placeholder="Buscar" class="input-searchbar" />
+                        <button class="search-button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <!--  HEADER ICONOS -->
+                <div class="header-icons">
+                    <a href="/login"><i class="fa-regular fa-user icon-header"></i></a>
+                    <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
+                    <a href=""><i class="fa-solid fa-basket-shopping icon-header"></i></a>
+                </div>
             </div>
         </nav>
     </header>
 
     <main>
         <!--SECTIONS-->
-        <section class="caja-grande2">
+        <section class="caja-grande caja-grande2">
             <!--TU CARRITO-->
             <section class="subcaja-1">
                 <div class="subcaja-1-titulo">
@@ -72,11 +106,12 @@
                     <p class="total">TOTAL</p>
                 </div>
             </section>
-            <section class="subcaja-2-3-4">
-                <div class="subcaja-2-3-4-1">
-                    <img src="/public/assets/img/camiseta-titular-argentina.png" alt="img-producto-1"
+            <!-- <section class="subcaja-2-3-4"> -->
+            <section class="product-detail-container">
+
+                <img src="/assets/img/camiseta-titular-argentina.png" alt="img-producto-1"
                         class="img-producto-carrito">
-                </div>
+                
                 <div class="subcaja-2-3-4-2">
                     <div class="row">
                         <div class="line-item">
@@ -104,7 +139,7 @@
             </section>
             <section class="subcaja-2-3-4">
                 <div class="subcaja-2-3-4-1">
-                    <img src="/public/assets/img/River-titular.png" alt="img-producto-1" class="img-producto-carrito">
+                    <img src="/assets/img/River-titular.png" alt="img-producto-1" class="img-producto-carrito">
                 </div>
                 <div class="subcaja-2-3-4-2">
                     <div class="row">
@@ -133,7 +168,7 @@
             </section>
             <section class="subcaja-2-3-4">
                 <div class="subcaja-2-3-4-1">
-                    <img src="/public/assets/img/adidas-botas-futbol-x-speedportal.1-fg.jpg" alt="img-producto-1"
+                    <img src="/assets/img/adidas-botas-futbol-x-speedportal.1-fg.jpg" alt="img-producto-1"
                         class="img-producto-carrito">
                 </div>
                 <div class="subcaja-2-3-4-2">
@@ -188,7 +223,7 @@
                     <h4>OPCIONES DE PAGO</h4>
                 </div>
                 <div class="imagenes-opciones-pago">
-                    <img src="/public/assets/img/Opciones-pago.jpg" alt="opciones-pago" class="opciones-pago">
+                    <img src="/assets/img/Opciones-pago.jpg" alt="opciones-pago" class="opciones-pago">
                 </div>
             </section>
         </section>
@@ -201,7 +236,7 @@
             <div class="recomendaciones-productos caja-chica-productos">
                 <div class="productos-por-separado">
                     <div>
-                        <img src="/public/assets/img/Boca-titular.png" alt="producto-1-seccion-3" class="img-producto">
+                        <img src="/assets/img/Boca-titular.png" alt="producto-1-seccion-3" class="img-producto">
                     </div>
                     <div>
                         <div class="info-precio">$16.999</div>
@@ -211,7 +246,7 @@
                 </div>
                 <div class="productos-por-separado">
                     <div>
-                        <img src="/public/assets/img/River-titular.png" alt="producto-2-seccion-3" class="img-producto">
+                        <img src="/assets/img/River-titular.png" alt="producto-2-seccion-3" class="img-producto">
                     </div>
                     <div>
                         <div class="info-precio">$16.999</div>
@@ -221,7 +256,7 @@
                 </div>
                 <div class="productos-por-separado">
                     <div>
-                        <img src="/public/assets/img/buzo-ninos.png" alt="producto-3-seccion-3" class="img-producto">
+                        <img src="/assets/img/buzo-ninos.png" alt="producto-3-seccion-3" class="img-producto">
                     </div>
                     <div>
                         <div class="info-precio">$9.999</div>
@@ -231,7 +266,7 @@
                 </div>
                 <div class="productos-por-separado">
                     <div>
-                        <img src="/public/assets/img/zapatillas-ozweego.png" alt="producto-4-seccion-3"
+                        <img src="/assets/img/zapatillas-ozweego.png" alt="producto-4-seccion-3"
                             class="img-producto">
                     </div>
                     <div>
@@ -242,7 +277,7 @@
                 </div>
                 <div class="productos-por-separado">
                     <div>
-                        <img src="/public/assets/img/camiseta-barcelona.png" alt="producto-5-seccion-3"
+                        <img src="/assets/img/camiseta-barcelona.png" alt="producto-5-seccion-3"
                             class="img-producto">
                     </div>
                     <div>
@@ -280,27 +315,31 @@
     </main>
     <!-- FOOTER -->
     <footer class="footer">
-        <nav class="footer-nav">
-            <div class="footer-nav-items">
-                <ul class="footer-ul">
-                    <li><a href="" class="footer-list-item"> Aviso de privacidad </a></li>
-                    <li> | </li>
-                    <li><a href="" class="footer-list-item"> Terminos y condiciones </a></li>
-                    <li> | </li>
-                    <li><a href="" class="footer-list-item"> Nuestros datos </a></li>
-                </ul>
-            </div>
-            <div class="copyright">
-                © 2022 G&X Argentina
-            </div>
-            <div class="footer-icons">
-                <a href=""><i class="fa-brands fa-facebook icon-footer"></i></a>
-                <a href=""><i class="fa-brands fa-square-twitter icon-footer"></i></a>
-                <a href=""><i class="fa-brands fa-google icon-footer"></i></a>
-                <a href=""><i class="fa-brands fa-instagram icon-footer"></i></a>
-                <a href=""><i class="fa-brands fa-tiktok icon-footer"></i></a>
-            </div>
-        </nav>
+        <div class="footer-container">
+            <nav class="footer-nav">
+                <div class="footer-nav-items">
+                    <ul class="footer-ul">
+                        <li>
+                            <a href="" class="footer-list-item"> Aviso de privacidad </a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="" class="footer-list-item"> Terminos y condiciones </a>
+                        </li>
+                        <li>|</li>
+                        <li><a href="" class="footer-list-item"> Nuestros datos </a></li>
+                    </ul>
+                </div>
+                <div class="copyright">© 2022 G&X Argentina</div>
+                <div class="footer-icons">
+                    <a href=""><i class="fa-brands fa-facebook icon-footer"></i></a>
+                    <a href=""><i class="fa-brands fa-square-twitter icon-footer"></i></a>
+                    <a href=""><i class="fa-brands fa-google icon-footer"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram icon-footer"></i></a>
+                    <a href=""><i class="fa-brands fa-tiktok icon-footer"></i></a>
+                </div>
+            </nav>
+        </div>
     </footer>
 </body>
 

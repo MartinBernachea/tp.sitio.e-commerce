@@ -23,6 +23,9 @@ app.get('/producto', function (req, res) {
     res.sendFile(__dirname + '/views/pages/detalleProducto.html');
 });
 
+app.get('/carrito', function (req, res) {
+    res.sendFile(__dirname + '/views/pages/carrito.html');
+});
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/views/index.html');
