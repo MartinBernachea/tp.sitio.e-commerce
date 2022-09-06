@@ -39,6 +39,6 @@ app.get('/css', function (req, res) {
     res.sendFile(__dirname + '/public/assets/css/stylesheet.css');
 });
 
-app.listen(3002, () => {
+app.listen(process.env.PORT || 3000, function() {
     console.log("Servidor corriendo");
-});
+})

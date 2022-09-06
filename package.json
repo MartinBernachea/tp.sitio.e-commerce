@@ -4,7 +4,9 @@
   "description": "Batto Pedro Nicolas, Bernachea Martin, Gondolo Tobias, Martinez Sebastian, Sitta Ariel",
   "main": "app.js",
   "scripts": {
+    "start": "node ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "author": "",
   "license": "ISC",
