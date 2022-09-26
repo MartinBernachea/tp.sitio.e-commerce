@@ -1,7 +1,7 @@
 {
   "name": "sprint-2",
   "version": "1.0.0",
-  "description": "Batto Pedro Nicolas, Bernachea Martin, Gondolo Tobias, Martinez Sebastian, Sitta Ariel",
+  "description": "Bernachea Martin, Gondolo Tobias, Sitta Ariel",
   "main": "app.js",
   "scripts": {
     "start": "nodemon ./src/app.js",
