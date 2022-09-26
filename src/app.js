@@ -1,6 +1,7 @@
 // Se cargan los modulos necesarios.
 var express = require('express');
 var path = require('path');
+const { mainModule } = require('process');
 
 // Crea una Express app.
 var app = express();
@@ -44,5 +45,16 @@ app.listen(process.env.PORT || 3000, function() {
 })
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
 
-app.set('views', './views');
+const mainRouter = require('./routes/main');
+const productsRouter = require('./routes/products');
+const chartRouter = require('./routes/chart');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
+
+app.use('/', mainRouter);
+app.use('/', productsRouter);
+app.use('/', chartRouter);
+app.use('/', loginRouter);
+app.use('/', registerRouter);
