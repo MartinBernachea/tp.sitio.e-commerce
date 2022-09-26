@@ -42,3 +42,7 @@ app.get('/css', function (req, res) {
 app.listen(process.env.PORT || 3000, function() {
     console.log("Servidor corriendo");
 })
+
+app.set('view engine', 'ejs');
+
+app.set('views', './views');
