@@ -2,7 +2,7 @@
 
 ## Autores
 
-Bernachea Martin, Gondolo Tobias, Martinez Sebastian, Sitta Ariel
+Bernachea Martin, Gondolo Tobias, Sitta Ariel
 
 ## Descripcion
 
@@ -30,9 +30,6 @@ Al publico el cual apuntamos son aquellas personas las cuales les gusta hacer de
 
 - Gondolo Tobias:
   Estudio ingenieria civil en la UBA y actualmente hago el curso de full stack desarollador web con ganas de expandir conocimientos
-
-- Martinez Sebastian:
-  Soy ingeniero mecatronico actualmente estoy trabajando como técnico en instrumentación y control, soy de colombia y estoy muy animado de pertenecer a este curso!
 
 - Sitta Ariel:
   Estudiante de ingenieria en sistemas en la UTN, desarrollador frontend y aficionado a la impresion 3D
