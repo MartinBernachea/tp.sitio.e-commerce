@@ -2,14 +2,20 @@
 <html lang="es">
 
 <!-- head -->
-<%- include('partials/head', {title: 'Coming-soon'}) %>
+
+<head>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+
+    <title> G&X - Coming-Soon </title>
+</head>
 <!-- /head -->
 
 <body>
     <div class="info-promo"> <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A $20.000 </div>
-	<!-- Header -->
-	<%- include('partials/headerNav') %>
-	<!-- /Header -->
+    <!-- Header -->
+    <%- include('partials/headerNav') %>
+    <!-- /Header -->
 
     <main>
         <div class="coming-soon">
@@ -17,9 +23,9 @@
         </div>
     </main>
 
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
+    <!-- footer -->
+    <%- include('partials/footer') %>
+    <!-- /footer -->
 </body>
 
 </html>

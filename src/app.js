@@ -1,6 +1,6 @@
 // Se cargan los modulos necesarios.
-var express = require('express');
-var path = require('path');
+const express = require('express');
+const path = require('path');
 
 const variableNueva = require('./routes/index.routes')
 

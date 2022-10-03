@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<!-- Include Head -->
-<%- include('partials/head', {title: 'Register'}) %>
+<!-- head -->
+
+<head>
+  <%- include('partials/head') %>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+
+  <title> G&X - Register </title>
+</head>
+<!-- /head -->
 
 <body>
   <div class="info-promo"> <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A $20.000 </div>
 
-	<!-- Header -->
-	<%- include('partials/headerNav') %>
-	<!-- /Header -->
+  <!-- Header -->
+  <%- include('partials/headerNav') %>
+  <!-- /Header -->
 
   <!-- MAIN -->
   <main>
-    <div class="register-promo">
-      Registrate y obten un cupon del 15% de descuento!
-    </div>
 
     <section class="form ">
       <form class="form-box">
@@ -56,9 +60,9 @@
     </section>
   </main>
 
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
+  <!-- footer -->
+  <%- include('partials/footer') %>
+  <!-- /footer -->
 </body>
 
 </html>
