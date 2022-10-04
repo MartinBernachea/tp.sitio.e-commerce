@@ -10,6 +10,12 @@ const controller = {
     },
     comingSoon: (req, res) => {
         res.render('./pages/coming-soon')
+    },
+    edit: (req, res) => {
+        res.render('./pages/productEditForm')
+    },
+    create: (req, res) => {
+        res.render('./pages/productCreateForm')
     }
 };
 
