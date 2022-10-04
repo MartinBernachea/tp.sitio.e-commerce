@@ -132,6 +132,52 @@
   margin: 20px 0;
 }
 
+.edit-delete-container{
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.btn-edit{
+height: 50px;
+  width: 60%;
+  background-color: #2C73D2;
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 12px 24px;
+}
+
+.btn-delete{
+  height: 50px;
+  width: auto;
+  background-color: #f00;
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 12px 24px;
+}
+
+.btn-edit:hover{
+  background-color: #57AAFF;
+  transition: .7s;
+}
+
+.btn-delete:hover{
+  background-color: #760000;
+  transition: .7s;
+}
+
 @media (min-width: 860px) {
   .pd-sphoto {
     display: flex;
@@ -161,3 +207,4 @@
     margin-top: 30px;
   }
 }
+

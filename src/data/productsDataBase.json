@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "name": "X SPEEDPORTAL1",
+        "price": 62999,
+        "category": "nuevo",
+        "image": "adidas-botas-futbol-x-speedportal.1-fg.jpg"
+    },
+    {
+        "id": 2,
+        "name": "AIR JORDAN 1",
+        "price": 49000,
+        "category": "nuevo",
+        "image": "air-jordan-1"
+    },
+    {
+        "id": 3,
+        "name": "CAMISETA TITULAR SELECCION ARGENTINA",
+        "price": 17000,
+        "category": "nuevo",
+        "image": "camiseta-titular-argentina.png"
+    },
+    {
+        "id": 4,
+        "name": "BOTAS PARA MUJER PUMA x DUA LIPA",
+        "price": 24000,
+        "category": "nuevo",
+        "image": "botas-para-mujer-puma-X-DUA-LIPA.png"
+    },
+    {
+        "id": 5,
+        "name": "CAMISETA TITULAR BOCA JUNIORS",
+        "price": 16999,
+        "category": "destacados",
+        "image": "Boca-titular.png"
+    },
+    {
+        "id": 6,
+        "name": "CAMISETA TITULAR RIVER PLATE",
+        "price": 16999,
+        "category": "destacados",
+        "image": "River-titular.png"
+    },
+    {
+        "id": 7,
+        "name": "BUZO ESTAMPADO ALGODON",
+        "price": 9999,
+        "category": "destacados",
+        "image": "buzo-ninos.png"
+    },
+    {
+        "id": 8,
+        "name": "ZAPATILLAS OZWEEGO",
+        "price": 35999,
+        "category": "destacados",
+        "image": "zapatillas-ozweego.png"
+    },
+    {
+        "id": 9,
+        "name": "BUZO NIKE",
+        "price": 14999,
+        "category": "destacados",
+        "image": "buzo-nike.jpg"
+    },
+    {
+        "id": 10,
+        "name": "CAMIETA TITULAR FC BARCELONA ",
+        "price": 16999,
+        "category": "destacados",
+        "image": "camiseta-barcelona.png"
+    }
+]
