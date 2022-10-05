@@ -3,8 +3,7 @@
 @import url(./form-reg.css);
 @import url(./carrito.css);
 @import url(./coming-soon.css);
-@import url(./product-edit.css);
-@import url(./product-create.css);
+@import url(./product-form.css);
 
 * {
   font-family: "Hind Vadodara", sans-serif;

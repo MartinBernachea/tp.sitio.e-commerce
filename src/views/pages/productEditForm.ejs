@@ -26,11 +26,11 @@
 			<form action="/products/edit/<%=productos.id%>?_method=PUT" method="POST"  enctype="multipart/form-data">
 				<div class="pe-container">
 					<div class="product-container">
-						<label for="name" class="form-label">Nombre del productos:</label>
+						<label for="name" class="form-label">Nombre del producto:</label>
 						<input type="text" id="name" name="name" value="<%=productos.name%>" placeholder="Ej: Buzo Adidas " class="form-input">
 					</div>
 					<div class="product-container">
-						<label for="price" class="form-label">Precio del productos:</label>
+						<label for="price" class="form-label">Precio del producto:</label>
 						<input type="text" id="price" name="price"  value="<%=productos.price%>" placeholder="Ej: 13500" class="form-input">
 					</div>
 					<div class="product-container">
@@ -68,7 +68,6 @@
 		</div>
 
 	</div>
-	<!-- /todos los productos -->
 
 	<!-- footer -->
 	<%- include('partials/footer') %>
