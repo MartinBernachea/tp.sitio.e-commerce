@@ -34,7 +34,7 @@
                 <div class="caja-chica-productos">
                     <% for(let p of productos) { %>
                     <div class="product-card">
-                        <a href="/producto">
+                        <a href="/producto/:id">
                             <div>
                                 <img class="product-image" src="./img/<%= p.image %>"
                                     alt="img-producto">
@@ -82,7 +82,7 @@
                 <div class="caja-chica-destacados">
                     <% for(let p of productos) { %>
                         <div class="product-card">
-                            <a href="/producto">
+                            <a href="/producto/:id">
                                 <div>
                                     <img class="product-image" src="./img/<%= p.image %>"
                                         alt="img-producto">

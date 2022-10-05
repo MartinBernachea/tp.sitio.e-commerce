@@ -132,14 +132,15 @@
   margin: 20px 0;
 }
 
-.edit-delete-container{
+.edit-delete-container {
   display: flex;
   width: 70%;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.btn-edit{
-height: 50px;
+
+.btn-edit {
+  height: 50px;
   width: 60%;
   background-color: #2C73D2;
   color: #fff;
@@ -153,7 +154,11 @@ height: 50px;
   padding: 12px 24px;
 }
 
-.btn-delete{
+.edit-delete-container a:hover {
+  color: #fff;
+}
+
+.btn-delete {
   height: 50px;
   width: auto;
   background-color: #f00;
@@ -168,12 +173,12 @@ height: 50px;
   padding: 12px 24px;
 }
 
-.btn-edit:hover{
+.btn-edit:hover {
   background-color: #57AAFF;
   transition: .7s;
 }
 
-.btn-delete:hover{
+.btn-delete:hover {
   background-color: #760000;
   transition: .7s;
 }
@@ -186,12 +191,12 @@ height: 50px;
   .pd-big-photo {
     grid-column: 1/2;
   }
-  
+
   .pd-sphoto {
     display: flex;
     width: 100%;
   }
-  
+
   .pd-items {
     height: min-content;
     width: 70%;
@@ -207,4 +212,3 @@ height: 50px;
     margin-top: 30px;
   }
 }
-

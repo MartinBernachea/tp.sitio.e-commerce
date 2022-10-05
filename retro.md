@@ -8,3 +8,5 @@ Del sprint 1 aprendimos, juntarnos mas seguido pero menos carga horaria, asi no 
 ## SPRINT 2
 Del sprint 2 aprendimos que la organizacion grupal es clave para el proyecto, asignarnos tareas y completarlas para luego juntar todo es lo mas practico. Cada uno tiene su tiempo para hacerlo, pero al final queda todo terminado.
 
+## SPRINT 3
+Del sprint 3 aprendimos que la clave es empezar con tiempo y no dejarnos llevar por 'es facil lo hacemos en un toque' y hacer las cosas con tiempo.
