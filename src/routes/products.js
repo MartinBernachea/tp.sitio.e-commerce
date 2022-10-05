@@ -9,5 +9,6 @@ router.get('/carrito', productsController.chart);
 router.get('/coming-soon', productsController.comingSoon);
 router.get('/edit', productsController.edit);
 router.get('/create', productsController.create);
+router.post('/create',productsController.store);
 
 module.exports = router;

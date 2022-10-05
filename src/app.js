@@ -6,8 +6,11 @@ const path = require('path');
 // ************ express() - (don't touch) ************
 var app = express();
 
-// Para que los archivos estaticos queden disponibles.
-app.use(express.static('public'));
+
+// ************ Middlewares - (don't touch) ************
+app.use(express.static('public'));   // Para que los archivos estaticos queden disponibles.
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.listen(process.env.PORT || 3000, function() {
     console.log("Servidor corriendo");
@@ -25,3 +28,4 @@ const productsRouter = require('./routes/products'); // Rutas /products
 
 app.use('/user', userRouter);
 app.use('/', productsRouter);
+

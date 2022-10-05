@@ -23,6 +23,12 @@ const controller = {
     },
     create: (req, res) => {
         res.render('./pages/productCreateForm')
+    },
+    store: (req, res) => {
+        let datos = req.body;
+        products.push(datos);
+        fs.writeFileSync(productsFilePath,JSON.stringify(products,''),'utf-8');
+        res.redirect ('/');
     }
 };
 
