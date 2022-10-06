@@ -14,7 +14,7 @@ const controller = {
         res.render('./pages/detalleProducto', { productos: products })
     },
     chart: (req, res) => {
-        res.render('./pages/carrito');
+        res.render('./pages/carrito' , { productos: products });
     },
     comingSoon: (req, res) => {
         res.render('./pages/coming-soon')
@@ -42,17 +42,22 @@ const controller = {
         res.redirect ('/');
     },
     detail: (req, res) => {
+
         let idProducto = req.params.id;
-        let productoBuscado;
+
+        let productoBuscado=null;
+
         for(let m of products){
             if  (m.id == idProducto){
                 productoBuscado = m;
                 break;
             }
         }
-        if(productoBuscado.length > 0){
+
+        if(productoBuscado!=null){
             res.render('./pages/detalleProducto', {producto : productoBuscado});
         }
+        
         res.send("Error, producto no encontrado");
         
     }

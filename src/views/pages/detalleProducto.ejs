@@ -33,28 +33,28 @@
                         <li><a href=""> Calzado </a></li>
                     </ul>
                 </h4>
-                <img src="/img/products/1A.jpg" alt="jordan gris" class="pd-bphoto" />
+                <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-bphoto" />
             </div>
 
             <div class="pd-small-photo">
-                <a href="/producto/:id">
-                    <img src="/img/products/1B.jpg" alt="jordan gris" class="pd-sphoto photo-hover" />
+                <a href="/producto/<%= producto.id %>">
+                    <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-sphoto photo-hover" />
                 </a>
-                <a href="/producto/:id">
-                    <img src="/img/products/1C.jpg" alt="jordan gris" class="pd-sphoto photo-hover" />
+                <a href="/producto/<%= producto.id %>">
+                    <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-sphoto photo-hover" />
                 </a>
-                <a href="/producto/:id">
-                    <img src="/img/products/1D.jpg" alt="jordan gris" class="pd-sphoto photo-hover" />
+                <a href="/producto/<%= producto.id %>">
+                    <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-sphoto photo-hover" />
                 </a>
-                <a href="/producto/:id">
-                    <img src="/img/products/1E.jpg" alt="jordan gris" class="pd-sphoto photo-hover" />
+                <a href="/producto/<%= producto.id %>">
+                    <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-sphoto photo-hover" />
                 </a>
             </div>
 
             <div class="pd-items">
-                <h1> Botines Adidas Nemeziz </h1>
-                <p> Botines </p>
-                <span class="pd-price"> $46.999 </span>
+                <h1> <%= producto.name %> </h1>
+                <p> <%= producto.category %> </p>
+                <span class="pd-price"> $<%= producto.price %> </span>
 
                 <div class="pd-color">
                     <h3>Color</h3>
@@ -85,9 +85,11 @@
                     <a class="btn-edit" href="/edit">
                         Editar
                     </a>
-                    <button class="btn-delete">
+                    <form action="/product/delete" method="POST">
+                        <button type="submit" class="btn-delete">
                         Eliminar
-                    </button>
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
