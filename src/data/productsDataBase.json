@@ -1,72 +1,72 @@
 [
-    {
-    "id": 1,
-    "name": "X SPEEDPORTAL1",
-    "price": 62999,
-    "category": "NUEVO",
-    "image": "adidas-botas-futbol-x-speedportal.1-fg.jpg"
-    }, 
-    {
-    "id": 2,
-    "name": "AIR JORDAN 1",
-    "price": 30000,
-    "category": "NUEVO",
-    "image": "air-jordan-1.png"
-    }, 
-    {
-    "id": 3,
-    "name": "CAMISETA TITULAR ARGENTINA",
-    "price": 16000,
-    "category": "NUEVO",
-    "image": "camiseta-titular-argentina.png"
-    }, 
-    {
-    "id": 4,
-    "name": "BOTAS PUMA X DUA LIPA",
-    "price": 35000,
-    "category": "NUEVO",
-    "image": "botas-para-mujer-puma-X-DUA-LIPA.png"
-    }, 
-    {
-    "id": 5,
-    "name": "CAMISETA TITULAR BOCA JUNIORS",
-    "price": 16000,
-    "category": "NUEVO",
-    "image": "Boca-titular.png"
-    }, 
-    {
-    "id": 6,
-    "name": "CAMISETA TITULAR RIVER PLATE",
-    "price": 16000,
-    "category": "NUEVO",
-    "image": "River-titular.png"
-    }, 
-    {
-    "id": 7,
-    "name": "BUZO NIÑOS ADIDAS",
-    "price": 25000,
-    "category": "NUEVO",
-    "image": "buzo-ninos.png"
-    }, 
-    {
-    "id": 8,
-    "name": "ZAPATILLAS OZWEEGO",
-    "price": 37000,
-    "category": "NUEVO",
-    "image": "zapatillas-ozweego.png"
-    }, 
-    {
-    "id": 9,
-    "name": "BUZO NIKE",
-    "price": 27000,
-    "category": "NUEVO",
-    "image": "buzo-nike.jpg"
-    }, 
-    {
-    "id": 10,
-    "name": "CAMISETA TITULAR BARCELONA FC",
-    "price": 16000,
-    "category": "NUEVO",
-    "image": "camiseta-barcelona.png"
-    } 
+ {
+  "id": 1,
+  "name": "X SPEEDPORTAL1",
+  "price": 62999,
+  "category": "NUEVO",
+  "image": "adidas-botas-futbol-x-speedportal.1-fg.jpg"
+ },
+ {
+  "id": 2,
+  "name": "AIR JORDAN 1",
+  "price": 30000,
+  "category": "NUEVO",
+  "image": "air-jordan-1.png"
+ },
+ {
+  "id": 3,
+  "name": "CAMISETA TITULAR ARGENTINA",
+  "price": 16000,
+  "category": "NUEVO",
+  "image": "camiseta-titular-argentina.png"
+ },
+ {
+  "id": 4,
+  "name": "BOTAS PUMA X DUA LIPA",
+  "price": 35000,
+  "category": "NUEVO",
+  "image": "botas-para-mujer-puma-X-DUA-LIPA.png"
+ },
+ {
+  "id": 5,
+  "name": "CAMISETA TITULAR BOCA JUNIORS",
+  "price": 16000,
+  "category": "NUEVO",
+  "image": "Boca-titular.png"
+ },
+ {
+  "id": 6,
+  "name": "CAMISETA TITULAR RIVER PLATE",
+  "price": 16000,
+  "category": "NUEVO",
+  "image": "River-titular.png"
+ },
+ {
+  "id": 7,
+  "name": "BUZO NIÑOS ADIDAS",
+  "price": 25000,
+  "category": "NUEVO",
+  "image": "buzo-ninos.png"
+ },
+ {
+  "id": 8,
+  "name": "ZAPATILLAS OZWEEGO",
+  "price": 37000,
+  "category": "NUEVO",
+  "image": "zapatillas-ozweego.png"
+ },
+ {
+  "id": 9,
+  "name": "BUZO NIKE",
+  "price": 27000,
+  "category": "NUEVO",
+  "image": "buzo-nike.jpg"
+ },
+ {
+  "id": 10,
+  "name": "CAMISETA TITULAR BARCELONA FC",
+  "price": 16000,
+  "category": "NUEVO",
+  "image": "camiseta-barcelona.png"
+ }
 ]

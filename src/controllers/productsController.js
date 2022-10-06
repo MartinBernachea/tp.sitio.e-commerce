@@ -7,6 +7,7 @@ const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
 const controller = {
     index: (req, res) => {
+        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         res.render('index',{ productos: products });
     },
     products: (req, res) => {
@@ -23,12 +24,37 @@ const controller = {
     },
     create: (req, res) => {
         res.render('./pages/productCreateForm')
+
     },
     store: (req, res) => {
         let datos = req.body;
-        products.push(datos);
-        fs.writeFileSync(productsFilePath,JSON.stringify(products,''),'utf-8');
+        let idNuevoProducto = (products[products.length-1].id)+1;
+        // let imagenNuevoProducto = 'qqqqq.jpg';
+        let nuevoProducto = {
+            "id": idNuevoProducto,
+            "name": datos.name,
+            "price": parseInt(datos.price),
+            "category": datos.category,
+             // "image": imagenNuevoProducto
+        };             
+        products.push(nuevoProducto);
+        fs.writeFileSync(productsFilePath,JSON.stringify(products,null,' '),'utf-8');            
         res.redirect ('/');
+    },
+    detail: (req, res) => {
+        let idProducto = req.params.id;
+        let productoBuscado;
+        for(let m of products){
+            if  (m.id == idProducto){
+                productoBuscado = m;
+                break;
+            }
+        }
+        if(productoBuscado.length > 0){
+            res.render('./pages/detalleProducto', {producto : productoBuscado});
+        }
+        res.send("Error, producto no encontrado");
+        
     }
 };
 

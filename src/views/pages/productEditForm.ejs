@@ -42,13 +42,13 @@
 						<select name="category" id="category" class="form-input">
 							<% if (productos.category=="in-sale") {%>
 								<option value="">Elegí</option>
-								<option value="in-sale" selected>En oferta</option>
-								<option value="visited" >Últimos agregados</option>
+								<option value="NUEVO" selected>Nuevo</option>
+								<option value="DESTACADO" >Destacado</option>
 							<% } %>
 							<% if (productos.category=="visited") {%>
 								<option value="">Elegí</option>
-								<option value="in-sale">En oferta</option>
-								<option value="visited" selected>Últimos agregados</option>
+								<option value="NUEVO">Nuevo</option>
+								<option value="DESTACADO" selected>Destacado</option>
 							<% } %>{
 						</select>
 					</div>
