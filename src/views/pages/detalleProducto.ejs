@@ -37,16 +37,16 @@
             </div>
 
             <div class="pd-small-photo">
-                <a href="/producto/<%= producto.id %>">
+                <a href="/detail/<%= producto.id %>">
                     <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-sphoto photo-hover" />
                 </a>
-                <a href="/producto/<%= producto.id %>">
+                <a href="/detail/<%= producto.id %>">
                     <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-sphoto photo-hover" />
                 </a>
-                <a href="/producto/<%= producto.id %>">
+                <a href="/detail/<%= producto.id %>">
                     <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-sphoto photo-hover" />
                 </a>
-                <a href="/producto/<%= producto.id %>">
+                <a href="/detail/<%= producto.id %>">
                     <img src="/img/<%= producto.image %>" alt="jordan gris" class="pd-sphoto photo-hover" />
                 </a>
             </div>
@@ -85,9 +85,9 @@
                     <a class="btn-edit" href="/edit">
                         Editar
                     </a>
-                    <form action="/product/delete" method="POST">
+                    <form action="/<%= producto.id %>?_method=DELETE" method="POST">
                         <button type="submit" class="btn-delete">
-                        Eliminar
+                            Eliminar
                         </button>
                     </form>
                 </div>

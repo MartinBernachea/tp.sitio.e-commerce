@@ -3,17 +3,27 @@ const productsController = require('./../controllers/productsController');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', productsController.index)
-// router.get('/producto/:id', productsController.products);
-router.get('/carrito', productsController.chart);
-router.get('/coming-soon', productsController.comingSoon);
-router.get('/edit', productsController.edit);
 
-// CREATE ONE PRODUCT
+/*** GET ALL PRODUCTS ***/
+router.get('/', productsController.index)
+
+/*** CARRITO ***/
+router.get('/carrito', productsController.chart);
+
+/*** COMING SOON ***/
+router.get('/coming-soon', productsController.comingSoon);
+
+/*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
+router.get('/detail/:id', productsController.detail);
+
+/*** CREATE ONE PRODUCT ***/
 router.get('/create', productsController.create);
 router.post('/create',productsController.store);
 
-// GET ONE PRODUCT (DETAIL OF ONE PRODUCT)
-router.get('/detail/:id', productsController.detail);
+/*** EDIT ONE PRODUCT ***/
+router.get('/edit', productsController.edit);
+
+/*** DELETE ONE PRODUCT ***/
+router.delete('/:id', productsController.destroy);
 
 module.exports = router;

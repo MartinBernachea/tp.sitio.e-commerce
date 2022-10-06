@@ -10,9 +10,6 @@ const controller = {
         const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         res.render('index',{ productos: products });
     },
-    products: (req, res) => {
-        res.render('./pages/detalleProducto', { productos: products })
-    },
     chart: (req, res) => {
         res.render('./pages/carrito' , { productos: products });
     },
@@ -60,6 +57,17 @@ const controller = {
         
         res.send("Error, producto no encontrado");
         
+    },
+    destroy: (req, res) => {
+        let pDeletedId = req.params.id;
+
+		let nuevaListaProductos = products.filter(function(e){
+			return e.id!=pDeletedId;
+		});
+
+		fs.writeFileSync(productsFilePath,JSON.stringify(nuevaListaProductos, null, ' '),'utf-8');  
+
+        res.redirect('/');
     }
 };
 
