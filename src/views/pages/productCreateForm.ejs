@@ -28,14 +28,24 @@
 					<div class="product-container">
 						<label for="name" class="form-label">Nombre del producto:</label>
 						<input type="text" id="name" name="name" placeholder="Ej: Buzo Adidas " class="form-input">
+					
+						<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="name") { %>
+								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% } %>
+						<% } %>
+					
 					</div>
 					<div class="product-container">
 						<label for="price" class="form-label">Precio del producto:</label>
 						<input type="text" id="price" name="price" placeholder="Ej: 13500" class="form-input">
-					</div>
-					<div class="product-container">
-						<label for="discount" class="form-label">Descuento:</label>
-						<input type="text" id="discount" name="discount"  placeholder="Ej: 10" class="form-input">
+
+						<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="price") { %>
+								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% } %>
+						<% } %>
+
 					</div>
 					<div class="product-container">
 						<label for="category" class="form-label">Categoría:</label>
@@ -44,10 +54,13 @@
 								<option value="NUEVO" > Nuevo </option>
 								<option value="DESTACADO" > Destacado </option>
 						</select>
-					</div>
-					<div class="description-container">
-						<label for="description" class="form-label">Descipción:</label>
-						<textarea name="description" id="description" class="form-input"> </textarea>
+
+						<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="category") { %>
+								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% } %>
+						<% } %>
+
 					</div>
 					<div class="load-image-container">
 						<label for="cImage" class="form-label">Cargar Imagen: </label>

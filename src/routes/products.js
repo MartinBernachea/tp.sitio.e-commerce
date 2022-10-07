@@ -2,6 +2,16 @@ const productsController = require('./../controllers/productsController');
 
 const express = require('express');
 const router = express.Router();
+const { body } = require('express-validator');
+
+
+//***  Validations  ****/
+
+let validaciones = [
+    body('name').notEmpty().withMessage('Completar campo'),
+    body('price').notEmpty().withMessage('Completar campo'), // .isNumeric([locale(['ar']), options({no_symbols: true})])
+    body('category').notEmpty().withMessage('Completar campo'),
+]
 
 
 /*** GET ALL PRODUCTS ***/
@@ -18,7 +28,7 @@ router.get('/detail/:id', productsController.detail);
 
 /*** CREATE ONE PRODUCT ***/
 router.get('/create', productsController.create);
-router.post('/create',productsController.store);
+router.post('/create', validaciones, productsController.store);
 
 /*** EDIT ONE PRODUCT ***/
 router.get('/edit', productsController.edit);
