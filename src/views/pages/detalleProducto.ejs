@@ -82,7 +82,7 @@
 
                 <img src="/img/medio-de-pago.jpg" alt="formas de pago" class="pd-img" />
                 <div class="edit-delete-container">
-                    <a class="btn-edit" href="/edit">
+                    <a class="btn-edit" href="/edit/<%= producto.id %>">
                         Editar
                     </a>
                     <form action="/<%= producto.id %>?_method=DELETE" method="POST">

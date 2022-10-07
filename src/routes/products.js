@@ -31,7 +31,8 @@ router.get('/create', productsController.create);
 router.post('/create', validaciones, productsController.store);
 
 /*** EDIT ONE PRODUCT ***/
-router.get('/edit', productsController.edit);
+router.get('/edit/:id', productsController.edit);
+router.put('/edit/:id', productsController.update);
 
 /*** DELETE ONE PRODUCT ***/
 router.delete('/:id', productsController.destroy);

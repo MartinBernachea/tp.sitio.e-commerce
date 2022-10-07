@@ -22,10 +22,39 @@ const controller = {
         res.render('./pages/coming-soon')
     },
     edit: (req, res) => {
-        res.render('./pages/productEditForm', {
-            productos: products
-        })
+        let idProducto = req.params.id;
+
+        let productoBuscado = null;
+
+        for(let m of products){
+            if(m.id == idProducto){
+                productoBuscado=m;
+                break;
+            }
+        }
+        if(productoBuscado!=null){
+            res.render('./pages/productEditForm', { productos: productoBuscado });
+        }
     },
+    update: (req, res) => {
+
+        let idProducto = req.params.id;
+
+        let datosProducto = req.body;
+
+        for(let m of products){
+            if (m.id == idProducto){
+                m.name = datosProducto.name;
+                m.price = parseInt(datosProducto.price);
+                m.category = datosProducto.category;
+                break;
+            }
+        }
+        fs.writeFileSync(productsFilePath,JSON.stringify(products,null," "), "utf-8");
+
+        res.redirect('/');
+    },
+
     create: (req, res) => {
         res.render('./pages/productCreateForm')
 
