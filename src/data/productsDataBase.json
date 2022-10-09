@@ -68,5 +68,19 @@
   "price": 16000,
   "category": "NUEVO",
   "image": "camiseta-barcelona.png"
+ },
+ {
+  "id": 11,
+  "name": "CAMISETA ARGENTINA SUPLENTE 2022",
+  "price": 16999,
+  "category": "NUEVO",
+  "image": "1665358871445.jpg"
+ },
+ {
+  "id": 12,
+  "name": "BOTINES ADIDAS MESSI EDITION LIMITED",
+  "price": 80000,
+  "category": "NUEVO",
+  "image": "1665359121067.jpg"
  }
 ]

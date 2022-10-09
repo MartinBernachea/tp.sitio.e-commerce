@@ -1,8 +1,12 @@
+//***  REQUIRES  ****/
+
 const productsController = require('./../controllers/productsController');
 
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
+const path = require('path');
+const multer = require('multer');
 
 
 //***  Validations  ****/
@@ -11,7 +15,23 @@ let validaciones = [
     body('name').notEmpty().withMessage('Completar campo'),
     body('price').notEmpty().withMessage('Completar campo'), // .isNumeric([locale(['ar']), options({no_symbols: true})])
     body('category').notEmpty().withMessage('Completar campo'),
+    body('cImage').notEmpty().withMessage('Completa campo')
 ]
+
+
+//***  MULTER  ****/
+
+const multerDiskStorage = multer.diskStorage({
+    destination: function(req, file, cb) {       // request, archivo y callback que almacena archivo en destino
+        cb(null, path.join(__dirname,'../../public/img'));    // Ruta donde almacenamos el archivo
+    },
+    filename: function(req, file, cb) {          // request, archivo y callback que almacena archivo en destino
+     let imageName = Date.now() + path.extname(file.originalname);   // milisegundos y extensión de archivo original
+        cb(null, imageName);         
+    }
+});
+
+const uploadFile = multer({ storage: multerDiskStorage });
 
 
 /*** GET ALL PRODUCTS ***/
@@ -28,7 +48,7 @@ router.get('/detail/:id', productsController.detail);
 
 /*** CREATE ONE PRODUCT ***/
 router.get('/create', productsController.create);
-router.post('/create', validaciones, productsController.store);
+router.post('/create', uploadFile.single('cImage'), productsController.store); // FALTA AGREGAR 'validaciones'
 
 /*** EDIT ONE PRODUCT ***/
 router.get('/edit/:id', productsController.edit);

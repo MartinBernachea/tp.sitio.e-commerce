@@ -69,14 +69,12 @@ const controller = {
 
         let idNuevoProducto = (products[products.length - 1].id) + 1;
 
-        // let imagenNuevoProducto = 'qqqqq.jpg';
-
         let nuevoProducto = {
             "id": idNuevoProducto,
             "name": datos.name,
             "price": parseInt(datos.price),
             "category": datos.category,
-            // "image": imagenNuevoProducto
+            "image": req.file.filename
         };
 
         products.push(nuevoProducto);
