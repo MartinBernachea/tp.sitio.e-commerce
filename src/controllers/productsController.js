@@ -14,9 +14,7 @@ const controller = {
         });
     },
     chart: (req, res) => {
-        res.render('./pages/carrito', {
-            productos: products
-        });
+        res.render('./pages/carrito', { productos: products });
     },
     comingSoon: (req, res) => {
         res.render('./pages/coming-soon')
