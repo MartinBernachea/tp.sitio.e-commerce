@@ -65,6 +65,13 @@
 					<div class="load-image-container">
 						<label for="cImage" class="form-label-img"> Añadir imagen </label>
 						<input type="file" name="cImage" id="cImage" class="form-input-img"></input>
+
+						<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="image") { %>
+								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% } %>
+						<% } %>
+
 					</div>
 					<div class="save-product">
 						<button type="submit" class="btn-secondary">Vender producto</button>

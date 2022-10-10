@@ -493,7 +493,7 @@ a i:hover {
 
 .info-precio {
   background-color: white;
-  width: 60px;
+  width: max-content;
   position: relative;
   bottom: 30px;
   transition: transform 600ms ease-out;

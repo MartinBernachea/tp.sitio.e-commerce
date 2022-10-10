@@ -60,20 +60,34 @@ const controller = {
     store: (req, res) => {
 
         let errors = validationResult(req);
+        let imagenProducto
+        let nuevoProducto
+        let idNuevoProducto = (products[products.length - 1].id) + 1;
 
         if ( errors.isEmpty() ) {
 
-        let datos = req.body;
+        if (req.file == undefined) {
+            imagenProducto = 'no-image.png'
 
-        let idNuevoProducto = (products[products.length - 1].id) + 1;
+            nuevoProducto = {
+                "id": idNuevoProducto,
+                "name": req.body.name,
+                "price": parseInt(req.body.price),
+                "category": req.body.category,
+                "image": imagenProducto
+            };
+        } 
+        else {
+            imagenProducto = req.file.filename
 
-        let nuevoProducto = {
-            "id": idNuevoProducto,
-            "name": datos.name,
-            "price": parseInt(datos.price),
-            "category": datos.category,
-            "image": req.file.filename
-        };
+            nuevoProducto = {
+                "id": idNuevoProducto,
+                "name": req.body.name,
+                "price": parseInt(req.body.price),
+                "category": req.body.category,
+                "image": imagenProducto
+            };
+        }   
 
         products.push(nuevoProducto);
 
