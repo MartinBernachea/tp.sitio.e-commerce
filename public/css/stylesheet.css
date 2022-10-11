@@ -423,12 +423,15 @@ a i:hover {
 }
 
 .modelos-por-separado:hover p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.3);
-  transition: .4s;
-}
-
-.hombre p {
 }
 
 .caja-chica-modelos a:not(:last-child) {
@@ -436,17 +439,7 @@ a i:hover {
 }
 
 .centrado-texto {
-  background-color: rgba(255, 255, 255, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #c70039 ;
-  font-size: 3rem;
-  font-weight: bold;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  cursor: pointer;
+  display: none;
 }
 
 .descripcion-producto {
