@@ -40,15 +40,25 @@ const controller = {
 
         let datosProducto = req.body;
 
+        let nombreImagenAntigua="";
+
         for(let m of products){
             if (m.id == idProducto){
+
+                nombreImagenAntigua = m.image;
+
+                // let imagenProducto = req.file;
+                // console.log(imagenProducto);
                 m.name = datosProducto.name;
                 m.price = parseInt(datosProducto.price);
                 m.category = datosProducto.category;
+                // m.image = req.file.filename;
                 break;
             }
         }
         fs.writeFileSync(productsFilePath,JSON.stringify(products,null," "), "utf-8");
+
+        fs.unlinkSync(__dirname + '/../../public/img/' + nombreImagenAntigua);
 
         res.redirect('/');
     },
@@ -125,11 +135,21 @@ const controller = {
     destroy: (req, res) => {
         let pDeletedId = req.params.id;
 
+        let nombreImagenAntigua="";
+
+		for (let o of products){
+			if (o.id==pDeletedId){
+				nombreImagenAntigua = o.image;
+			}
+		}
+
         let nuevaListaProductos = products.filter(function (e) {
             return e.id != pDeletedId;
         });
 
         fs.writeFileSync(productsFilePath, JSON.stringify(nuevaListaProductos, null, ' '), 'utf-8');
+
+        fs.unlinkSync(__dirname + '/../../public/img/' + nombreImagenAntigua);
 
         res.redirect('/');
     }
