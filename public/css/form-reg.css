@@ -29,3 +29,23 @@
   outline: none;
   font-size: 20px;
 }
+
+.add-image-button{
+  background-color: #000;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+}
+
+.add-image-button label{
+  font-size: 18px;
+  color: #fff;
+}
+
+.add-image-button :hover{
+  background-color: #c70039;
+  cursor: pointer;
+  border-radius: 10px; 
+  color: #000;
+  
+}

@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "cName": "nombreApellido",
+        "email": "nombreApellido@mail.com",
+        "password": "password encriptada",
+        "image": "default.jpg"
+    }
+]

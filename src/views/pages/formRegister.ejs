@@ -22,22 +22,27 @@
   <main>
 
     <section class="form ">
-      <form class="form-box">
+      <form class="form-box" action="userStore" method="POST" >
         <fieldset class="form-fieldset">
           <h1>REGISTRATE</h1>
 
-          <label for="nombre" class="label"> </label>
-          <input name="nombre" class="input-text" type="text" tabindex="1" placeholder="Nombre completo" required />
+          <label for="cName" class="label"> </label>
+          <input name="cName" class="input-text" type="text" tabindex="1" placeholder="Nombre completo" required />
 
           <label for="email" class="label"></label>
           <input name="email" class="input-text" type="email" tabindex="2" placeholder="Email" required />
 
-          <label for="nombre" class="label"> </label>
-          <input name="nombre" class="input-text" type="password" tabindex="1" placeholder="Contraseña" required />
+          <label for="password" class="label"> </label>
+          <input name="password" class="input-text" type="password" tabindex="1" placeholder="Contraseña" required />
 
-          <label for="nombre" class="label"> </label>
-          <input name="confirmar-contraseña" class="input-text" type="password" tabindex="1"
+          <label for="cPassword" class="label"> </label>
+          <input name="cPassword" class="input-text" type="password" tabindex="1"
             placeholder="Confirmar contraseña" required />
+
+          <div class="add-image-button">
+            <label for="uImage" class="form-label-img"> Añadir imagen </label>
+					  <input type="file" name="uImage" id="uImage" class="form-input-img"></input>
+          </div>
 
           <div class="iniciar-con">
             <a href="" class="iniciar-con-item"> Inciar con Google </a>
