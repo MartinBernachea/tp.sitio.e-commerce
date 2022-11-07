@@ -1,9 +1,14 @@
 [
-    {
-        "id": 1,
-        "cName": "nombreApellido",
-        "email": "nombreApellido@mail.com",
-        "password": "password encriptada",
-        "image": "default.jpg"
-    }
+ {
+  "id": 1,
+  "cName": "nombreApellido",
+  "email": "nombreApellido@mail.com",
+  "password": "password encriptada",
+  "image": "default.jpg"
+ },
+ {
+  "nombre": "Tobias Gondolo",
+  "email": "tobiasgondolo@gmail.com",
+  "password": "$2b$10$7WicaiIRQNeH4j4qZydkie5cjz9I/dIr0f7Zvm/t1FCL/9CwfO6K."
+ }
 ]

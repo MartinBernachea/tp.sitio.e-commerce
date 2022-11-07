@@ -25,16 +25,16 @@
     <!-- FORM -->
     <section class="form">
       <h1>INICIA SESION EN TU CUENTA</h1>
-      <form action="" class="form-box background-log-form">
+      <form class="form-box background-log-form" action="login"  method="POST">
         <div class="container">
           <!-- USUARIO -->
           <div class="fields">
-            <label for="nombre" class="label"></label>
-            <input type="text" name="nombre" class="input-text" tabindex="1"
-              placeholder="Introduce tu correo o nombre de usuario" required />
+            <label for="email" class="label"></label>
+            <input type="text" name="email" class="input-text" tabindex="1"
+              placeholder="Introduce tu correo" required />
 
-            <label for="contrseña" class="label"></label>
-            <input type="password" name="contrseña" class="input-text" tabindex="1" placeholder="Introduce tu contrseña"
+            <label for="password" class="label"></label>
+            <input type="password" name="password" class="input-text" tabindex="1" placeholder="Introduce tu contrseña"
               required />
           </div>
           <div class="config-field">
