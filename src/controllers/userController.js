@@ -54,7 +54,7 @@ const controller = {
                 
             } else {
                 usuarios = JSON.parse(archivoUsuario);
-    
+                
                 for (let i=0; i<= usuarios.length; i++){
                     if(req.body.email == usuarios[i].email && bcrypt.compareSync(req.body.password, usuarios[i].password));
                     
