@@ -15,12 +15,13 @@ const controller = {
         });
     },
     chart: (req, res) => {
-        if (req.session.usuarioLogueado == undefined){
-            res.redirect('user/login');
-        } else {
+        if (req.cookies.user != undefined) {
             res.render('./pages/carrito', { productos: products });
         }
-        
+        else if (req.session.usuarioLogueado != undefined) {
+            res.render('./pages/carrito', { productos: products });
+        }
+        else res.redirect('user/login');
     },
     comingSoon: (req, res) => {
         res.render('./pages/coming-soon')

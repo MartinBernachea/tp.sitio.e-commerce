@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- head -->
+
+<head>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+
+    <title> G&X - Login </title>
+</head>
+<!-- /head -->
+
+<body>
+    <div class="info-promo">
+        <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A
+        $20.000
+    </div>
+    <!-- Header -->
+    <%- include('partials/headerNav') %>
+    <!-- /Header -->
+
+    <!-- MAIN -->
+    <main>
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <h1> BIENVENIDO <%= locals.user.nombre %>! </h1>
+            <p> Tu mail ingresado es: <%= locals.user.email %> </p>
+            <form action="logOut" method="GET">
+                <button type="submit"> Cerrar Sesion </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <%- include('partials/footer') %>
+    <!-- /footer -->
+</body>
+
+</html>

@@ -6,14 +6,15 @@ const { body } = require('express-validator');
 const path = require('path');
 const multer = require('multer');
 
+
 //*** VALIDATIONS ****/
 let validacionesRegister = [
     body('cName').notEmpty().withMessage('Completar campo'),
     body('email').notEmpty().withMessage('Completar campo'),
     body('password').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
     body('cPassword').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
-    // body('uImage').notEmpty().withMessage('Completa campo')  // NO ANDA -- BUSCAR ERROR o RAZON
 ]
+
 let validacionesLogin = [
     body('email').notEmpty().withMessage('Completar campo'),
     body('password').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
@@ -39,5 +40,7 @@ router.post('/register', validacionesRegister , userController.userStore); //upl
 
 router.get('/login', userController.login);
 router.post('/login', validacionesLogin , userController.processLogin);
+
+router.get('/logOut', userController.logOut);
 
 module.exports = router;

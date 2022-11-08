@@ -27,7 +27,7 @@
           <h1>REGISTRATE</h1>
 
           <label for="cName" class="label"> </label>
-          <input name="cName" class="input-text" type="text" tabindex="1" placeholder="Nombre completo"  />
+          <input name="cName" class="input-text" type="text" tabindex="1" placeholder="Nombre completo" value="<%= (locals.old?.cName) ? old.cName : '' %>" />
 
           <% if (locals && locals.errors) { %>
             <% if (locals.errors[0].param=="cName") { %>
@@ -36,7 +36,7 @@
           <% } %>
 
           <label for="email" class="label"></label>
-          <input name="email" class="input-text" type="email" tabindex="2" placeholder="Email"  />
+          <input name="email" class="input-text" type="email" tabindex="2" placeholder="Email" value="<%= (locals.old?.email) ? old.email : '' %>"/>
 
           <% if (locals && locals.errors) { %>
             <% if (locals.errors[0].param=="email") { %>
@@ -62,17 +62,6 @@
                 <h3> <%= locals.errors[0].msg %>  </h3> 
               <% } %>
             <% } %>
-
-          <div class="add-image-button">
-            <label for="uImage" class="form-label-img"> Añadir imagen </label>
-					  <input type="file" name="uImage" id="uImage" class="form-input-img"></input>
-          </div>
-
-          <!-- <% if (locals && locals.errors) { %>
-            <% if (locals.errors[0].param=="uImage") { %>
-              <h3> <%= locals.errors[0].msg %>  </h3> 
-            <% } %>
-          <% } %> -->
 
           <div class="iniciar-con">
             <a href="" class="iniciar-con-item"> Inciar con Google </a>

@@ -31,7 +31,7 @@
           <div class="fields">
             <label for="email" class="label"></label>
             <input type="text" name="email" class="input-text" tabindex="1"
-              placeholder="Introduce tu correo"/>
+              placeholder="Introduce tu correo" value="<%= (locals.old?.email) ? old.email : '' %>" />
 
               <% if (locals && locals.errors) { %>
                 <% if (locals.errors[0].param=="email") { %>
@@ -51,7 +51,7 @@
           </div>
           <div class="config-field">
             <label>
-              <input type="checkbox" class="checkbox-box" />
+              <input type="checkbox" class="checkbox-box" name="mantenerSesion"/>
               Mantener sesion iniciada
             </label>
             <a href=""> Se te olvido la contraseña? </a>

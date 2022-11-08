@@ -4,9 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const session = require('express-session');
-const {
-    validationResult
-} = require('express-validator');
+const { validationResult } = require('express-validator');
 
 
 const userFilePath = path.join(__dirname, '../data/usersDataBase.json');
@@ -15,9 +13,14 @@ const user = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
 
 const controller = {
     login: (req, res) => {
-        res.render('./pages/formLogin', {
-            user: user
-        });
+        if (req.cookies.user != undefined) {
+
+            res.render('./pages/logueado', { user: JSON.parse(req.cookies.user) })
+        }
+        else if (req.session.usuarioLogueado != undefined) {
+            res.render('./pages/logueado', { user: JSON.parse(req.session.usuarioLogueado) })
+        }
+        else res.render('./pages/formLogin', { user: user });
     },
     register: (req, res) => {
         res.render('./pages/formRegister');
@@ -33,7 +36,6 @@ const controller = {
                 "nombre": req.body.cName,
                 "email": req.body.email,
                 "password": bcrypt.hashSync(req.body.password, 10)
-                // "image": 
             }
             user.push(nuevoUsuario);
 
@@ -42,7 +44,8 @@ const controller = {
             res.redirect('/');
         } else {
             res.render('./pages/formRegister', {
-                errors: errors.array()
+                errors: errors.array(),
+                old: req.body,
             });
         }
 
@@ -67,13 +70,15 @@ const controller = {
 
             if (usuarioALoguearse != undefined) {
 
-                // let validPass = bcrypt.compareSync(req.body.password, usuarioALoguearse.password);
-                console.log(usuarioALoguearse.password);
-                console.log(req.body.password);
-                // console.log(validPass);
-
                 if (bcrypt.compareSync(req.body.password, usuarioALoguearse.password) == true) {
 
+                    if (req.body.mantenerSesion == 'on') {
+                        res.cookie('user', JSON.stringify({ nombre: usuarioALoguearse.nombre , email: usuarioALoguearse.email }) , { maxAge: 60000 } );
+                    }
+
+                    req.session.usuarioLogueado = JSON.stringify({ nombre: usuarioALoguearse.nombre , email: usuarioALoguearse.email });
+
+                    console.log(req.body.mantenerSesion);
                     res.redirect('/');
 
                 } else {
@@ -85,9 +90,19 @@ const controller = {
 
         } else {
             res.render('./pages/formLogin', {
-                errors: errors.array()
+                errors: errors.array(),
+                old: req.body,
             });
         }
+    },
+    logOut: (req, res) => {
+        
+        res.clearCookie("user");// destroy the cookie
+
+        req.session.destroy((err) => {
+            res.redirect('/');
+        }) // destroy all sessions
+
     }
 };
 module.exports = controller;
