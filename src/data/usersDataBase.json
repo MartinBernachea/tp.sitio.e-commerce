@@ -15,7 +15,13 @@
  {
   "id": 3,
   "nombre": "Martin Bernachea",
-  "email": "berancheamartin@outlook.com",
+  "email": "bernacheamartin@outlook.com",
   "password": "$2b$10$t3DbrhGP/M2sGqSlrOX3VOc/v.j7tHPda6Ktus2zWnP7PcOR8XvZK"
+ },
+ {
+  "id": 4,
+  "nombre": "Emilio",
+  "email": "emilio@digitalhouse.com",
+  "password": "$2b$10$PXfDlh4HXoLWIoglsT3xuucq9B4C2DUFBzeJtwrrH80r7c3osjpMi"
  }
 ]
