@@ -8,6 +8,22 @@
     <link rel="stylesheet" href="/css/stylesheet.css">
 
     <title> G&X - Login </title>
+    <style>
+        .div-containter {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-direction: column;
+            height: 100%;
+        }
+        .div-containter h1 {
+            margin: 20px;
+            text-transform: uppercase;
+        }
+        .div-containter p {
+            margin: 10px 0px 30px 0px;
+        }
+    </style>
 </head>
 <!-- /head -->
 
@@ -22,11 +38,11 @@
 
     <!-- MAIN -->
     <main>
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <div class='div-containter'>
             <h1> BIENVENIDO <%= locals.user.nombre %>! </h1>
             <p> Tu mail ingresado es: <%= locals.user.email %> </p>
             <form action="logOut" method="GET">
-                <button type="submit"> Cerrar Sesion </button>
+                <button type="submit" class="btn-secondary"> Cerrar Sesion </button>
             </form>
         </div>
     </main>

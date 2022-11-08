@@ -78,7 +78,6 @@ const controller = {
 
                     req.session.usuarioLogueado = JSON.stringify({ nombre: usuarioALoguearse.nombre , email: usuarioALoguearse.email });
 
-                    console.log(req.body.mantenerSesion);
                     res.redirect('/');
 
                 } else {
