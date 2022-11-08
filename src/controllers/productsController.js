@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { validationResult } = require('express-validator');
+const session = require('express-session');
 
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
@@ -14,7 +15,12 @@ const controller = {
         });
     },
     chart: (req, res) => {
-        res.render('./pages/carrito', { productos: products });
+        if (req.session.usuarioLogueado == undefined){
+            res.redirect('user/login');
+        } else {
+            res.render('./pages/carrito', { productos: products });
+        }
+        
     },
     comingSoon: (req, res) => {
         res.render('./pages/coming-soon')

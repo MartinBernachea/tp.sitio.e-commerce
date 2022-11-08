@@ -6,6 +6,16 @@ const { body } = require('express-validator');
 const path = require('path');
 const multer = require('multer');
 
+//*** VALIDATIONS ****/
+let validaciones = [
+    body('cName').notEmpty().withMessage('Completar campo'),
+    body('email').notEmpty().withMessage('Completar campo'),
+    body('password').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
+    body('cPassword').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
+    // body('uImage').notEmpty().withMessage('Completa campo')  // NO ANDA -- BUSCAR ERROR o RAZON
+]
+
+
 //***  MULTER  ****/
 
 const multerDiskStorage = multer.diskStorage({
@@ -21,9 +31,9 @@ const multerDiskStorage = multer.diskStorage({
 const uploadFile = multer({ storage: multerDiskStorage });
 
 router.get('/register', userController.register);
-router.post('/register', userController.userStore); //uploadFile.single('uImage')
+router.post('/register', validaciones, userController.userStore); //uploadFile.single('uImage')
 
 router.get('/login', userController.login);
-router.post('/login', userController.processLogin);
+router.post('/login', validaciones, userController.processLogin);
 
 module.exports = router;

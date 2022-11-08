@@ -31,11 +31,23 @@
           <div class="fields">
             <label for="email" class="label"></label>
             <input type="text" name="email" class="input-text" tabindex="1"
-              placeholder="Introduce tu correo" required />
+              placeholder="Introduce tu correo"/>
 
+              <% if (locals && locals.errors) { %>
+                <% if (locals.errors[0].param=="email") { %>
+                  <h3 style="color: red;"> <%= locals.errors[0].msg %>  </h3> 
+                <% } %>
+              <% } %>
+  
             <label for="password" class="label"></label>
-            <input type="password" name="password" class="input-text" tabindex="1" placeholder="Introduce tu contrseña"
-              required />
+            <input type="password" name="password" class="input-text" tabindex="1" placeholder="Introduce tu contrseña"/>
+
+              <% if (locals && locals.errors) { %>
+                <% if (locals.errors[0].param=="password") { %>
+                  <h3 style="color: red;"> <%= locals.errors[0].msg %>  </h3> 
+                <% } %>
+              <% } %>
+
           </div>
           <div class="config-field">
             <label>
