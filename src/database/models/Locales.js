@@ -1,5 +1,5 @@
-function usuariosData(sequelize, Datatypes) {
-    let a = "Usuarios";
+function localesData(sequelize, Datatypes) {
+    let a = "Locales";
 
     let b = {
         id: {
@@ -11,28 +11,15 @@ function usuariosData(sequelize, Datatypes) {
             type: Datatypes.STRING,
             allowNull: false,
         },
-        apellido: {
-            type: Datatypes.STRING,
+        telefono: {
+            type: Datatypes.INTEGER,
             allowNull: false,
         },
-        contra: {
+        direccion: {
             type: Datatypes.STRING,
-            allowNull: false,
-        },
-        email: {
-            type: Datatypes.STRING,
-            allowNull: false,
-        },
-        admin: {
-            type: Datatypes.BOOLEAN,
             allowNull: false,
         },
     }
-
-    /* 
-        TODO: DEFINIR RELACION CON 
-        Local_id
-     */
 
     let c = {
         camelCase: false,
@@ -42,4 +29,4 @@ function usuariosData(sequelize, Datatypes) {
     return sequelize.define(a, b, c);
 }
 
-module.exports = usuariosData
+module.exports = localesData
