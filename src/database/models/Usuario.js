@@ -15,7 +15,7 @@ function usuarioData(sequelize, Datatypes) {
             type: Datatypes.STRING,
             allowNull: false,
         },
-        contra: {
+        password: {
             type: Datatypes.STRING,
             allowNull: false,
         },

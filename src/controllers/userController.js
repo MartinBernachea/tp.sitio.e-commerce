@@ -6,23 +6,20 @@ const multer = require('multer');
 const session = require('express-session');
 const { validationResult } = require('express-validator');
 
-
-const userFilePath = path.join(__dirname, '../data/usersDataBase.json');
-const user = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
-
 const db = require("../database/models");
 const { customValidationErrorMsg } = require("../utils/validations");
 
 const controller = {
     login: (req, res) => {
         if (req.cookies.user != undefined) {
-
             res.render('./pages/logueado', { user: JSON.parse(req.cookies.user) })
         }
         else if (req.session.usuarioLogueado != undefined) {
             res.render('./pages/logueado', { user: JSON.parse(req.session.usuarioLogueado) })
         }
-        else res.render('./pages/formLogin', { user: user });
+        else {
+            res.render('./pages/formLogin')
+        };
     },
     register: (req, res) => {
         res.render('./pages/formRegister');
@@ -51,7 +48,7 @@ const controller = {
                     "nombre": req.body.cName,
                     "apellido": req.body.cLastName,
                     "email": req.body.email,
-                    "contra": bcrypt.hashSync(req.body.password, 10),
+                    "password": bcrypt.hashSync(req.body.password, 10),
                     "admin": false,
                 })
 
@@ -68,42 +65,30 @@ const controller = {
 
 
     },
-    processLogin: (req, res) => {
+    processLogin: async (req, res) => {
         let errors = validationResult(req);
-        let archivoUsuario = fs.readFileSync(userFilePath, {
-            encoding: 'utf-8'
-        });
-        let usuarios = JSON.parse(archivoUsuario);
-        let usuarioALoguearse;
 
         if (errors.isEmpty()) {
 
-            for (let i = 0; i < usuarios.length; i++) {
+            const userData = await db.usuario.findOne({ where: { email: req.body.email } })
 
-                if (usuarios[i].email == req.body.email) {
-                    usuarioALoguearse = usuarios[i];
-                }
+            if (!userData) {
+                return res.send('email invalido')
+            }
+            console.log("userData", userData)
+            
+            console.log(bcrypt.compareSync(req.body.password, userData.password))
+            if (!bcrypt.compareSync(req.body.password, userData.password)) {
+                return res.send('password incorrecto');
             }
 
-            if (usuarioALoguearse != undefined) {
-
-                if (bcrypt.compareSync(req.body.password, usuarioALoguearse.password) == true) {
-
-                    if (req.body.mantenerSesion == 'on') {
-                        res.cookie('user', JSON.stringify({ nombre: usuarioALoguearse.nombre, email: usuarioALoguearse.email }), { maxAge: 60000 });
-                    }
-
-                    req.session.usuarioLogueado = JSON.stringify({ nombre: usuarioALoguearse.nombre, email: usuarioALoguearse.email });
-
-                    res.redirect('/');
-
-                } else {
-                    res.send('password incorrecto');
-                }
-            } else {
-                res.send('email invalido')
+            if (req.body.mantenerSesion == 'on') {
+                res.cookie('user', JSON.stringify({ nombre: userData.nombre, email: userData.email }), { maxAge: 60000 });
             }
 
+            req.session.usuarioLogueado = JSON.stringify({ nombre: userData.nombre, email: userData.email });
+
+            res.redirect('/');
         } else {
             res.render('./pages/formLogin', {
                 errors: errors.array(),
