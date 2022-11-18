@@ -72,6 +72,12 @@
               <% } %>
             <% } %>
 
+            <% if (locals && locals.arrCustomErrors) { %>
+                <% for (ctError of locals.arrCustomErrors) { %>
+                  <h3>-<%= ctError %></h3> 
+                <% } %> 
+            <% } %>
+
           <div class="iniciar-con">
             <a href="" class="iniciar-con-item"> Inciar con Google </a>
             <a href="" class="iniciar-con-item"> Iniciar con Facebook </a>

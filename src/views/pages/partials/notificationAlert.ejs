@@ -1,0 +1,21 @@
+<!-- 
+    type: "success" || "info" || "danger"
+    boldTitle: texto
+    title: texto
+    description: texto
+ -->
+
+<% if (locals.alert) { %>
+    <div id="alert" class="alert bottom <%= 
+    locals.alert.type=='success' ? 'success' :
+        locals.alert.type=='info' ? 'info' :
+            locals.alert.type=='danger' ? 'danger' : '' 
+    %>">
+        <i class="fa-solid fa-check fa-2xl"></i>
+        <p class="alert-msg">
+            <b><%=locals.alert.boldTitle%></b><%=locals.alert.title%><br>
+            <span><%=locals.alert.description%></span>
+        </p>
+        <i class="fa-solid fa-xmark fa-lg"></i>
+    </div>
+<% } %>

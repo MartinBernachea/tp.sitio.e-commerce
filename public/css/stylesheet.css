@@ -579,3 +579,113 @@ a i:hover {
 .foot-banner-arrow {
   font-size: 30px;
 }
+
+/* NOTIFICATION ALERT */
+.alert {
+  position: fixed;
+  width: 380px;
+  height: 90px;
+  padding: 10px 15px;
+  z-index: 9;
+  background-color: red;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.alert-msg {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.alert-msg span {
+  font-size: 0.9rem;
+}
+
+.alert.bottom {
+  bottom: 20px;
+  left: 100%;
+  transition: all 500ms ease-out;
+  opacity: 0.92;
+  transform: translateX(-420px);
+}
+
+/* SUCCESS */
+.alert.success {
+  background-color: #def2d5;
+  border: 1px solid #5c6f51ae;
+}
+
+.alert.success i {
+  margin: 10px;
+}
+
+.alert.success i,
+.alert.success p,
+.alert.success p b,
+.alert.success p span {
+  color: #5c6f51;
+}
+
+.alert.success .fa-xmark {
+  color: #5c6f518f;
+  cursor: pointer;
+}
+
+.alert.success .fa-xmark:hover {
+  color: #5c6f51;
+}
+
+/* DANGER */
+.alert.danger {
+  background-color: #ebc8c4;
+  border: 1px solid #b22e2ea6;
+}
+
+.alert.danger i {
+  margin: 10px;
+}
+
+.alert.danger i,
+.alert.danger p,
+.alert.danger p b,
+.alert.danger p span {
+  color: #b22e2f;
+}
+
+.alert.danger .fa-xmark {
+  color: #b22e2e79;
+  cursor: pointer;
+}
+
+.alert.danger .fa-xmark:hover {
+  color: #4280b0;
+}
+
+/* INFO */
+.alert.info {
+  background-color: #cce8f4;
+  border: 1px solid #4280b09d;
+}
+
+.alert.info i {
+  margin: 10px;
+}
+
+.alert.info i,
+.alert.info p,
+.alert.info p b,
+.alert.info p span {
+  color: #4280b0;
+}
+
+.alert.info .fa-xmark {
+  color: #4280b085;
+  cursor: pointer;
+}
+
+.alert.info .fa-xmark:hover {
+  color: #4280b0;
+}

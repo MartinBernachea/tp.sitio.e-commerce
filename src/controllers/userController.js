@@ -10,7 +10,8 @@ const { validationResult } = require('express-validator');
 const userFilePath = path.join(__dirname, '../data/usersDataBase.json');
 const user = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
 
-const db = require("../database/models")
+const db = require("../database/models");
+const { customValidationErrorMsg } = require("../utils/validations");
 
 const controller = {
     login: (req, res) => {
@@ -26,19 +27,38 @@ const controller = {
     register: (req, res) => {
         res.render('./pages/formRegister');
     },
-    userStore: (req, res, next) => {
+    userStore: async (req, res, next) => {
         let errors = validationResult(req);
-
         if (errors.isEmpty()) {
-            db.usuario.create({
-                "nombre": req.body.cName,
-                "apellido": req.body.cLastName,
-                "email": req.body.email,
-                "contra": bcrypt.hashSync(req.body.password, 10),
-                "admin": false,
-            })
-                .then(resp => res.redirect('/'))
-                .catch(err => console.log("err"))
+            try {
+                const usersWithSameEmail = await db.usuario.findAll({ where: { email: req.body.email } })
+                const arrCustomErrors = [];
+
+                /* Existe usuario con el mismo mail? */
+                if (usersWithSameEmail.length != 0) arrCustomErrors.push(customValidationErrorMsg.existentMail);
+
+                /* Coinciden las contraseñas ingresadas en form? */
+                if (req.body.password != req.body.cPassword) arrCustomErrors.push(customValidationErrorMsg.notMatchPass);
+
+                if (arrCustomErrors.length > 0) {
+                    return res.render('./pages/formRegister', {
+                        arrCustomErrors: arrCustomErrors,
+                        old: req.body,
+                    });
+                }
+
+                await db.usuario.create({
+                    "nombre": req.body.cName,
+                    "apellido": req.body.cLastName,
+                    "email": req.body.email,
+                    "contra": bcrypt.hashSync(req.body.password, 10),
+                    "admin": false,
+                })
+
+                res.redirect('/')
+            } catch (err) {
+                console.log("err")
+            }
         } else {
             res.render('./pages/formRegister', {
                 errors: errors.array(),

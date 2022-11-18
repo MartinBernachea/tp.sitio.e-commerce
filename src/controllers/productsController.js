@@ -12,7 +12,13 @@ const controller = {
     index: (req, res) => {
         const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         res.render('index', {
-            productos: products
+            productos: products,
+            alert: {
+                type:"info",
+                boldTitle:"Listo! ",
+                title:"Cuenta creada exitosamente",
+                description:"jasdasd",
+            }
         });
     },
     chart: (req, res) => {
@@ -32,13 +38,13 @@ const controller = {
 
         let productoBuscado = null;
 
-        for(let m of products){
-            if(m.id == idProducto){
-                productoBuscado=m;
+        for (let m of products) {
+            if (m.id == idProducto) {
+                productoBuscado = m;
                 break;
             }
         }
-        if(productoBuscado!=null){
+        if (productoBuscado != null) {
             res.render('./pages/productEditForm', { productos: productoBuscado });
         }
     },
@@ -48,10 +54,10 @@ const controller = {
 
         let datosProducto = req.body;
 
-        let nombreImagenAntigua="";
+        let nombreImagenAntigua = "";
 
-        for(let m of products){
-            if (m.id == idProducto){
+        for (let m of products) {
+            if (m.id == idProducto) {
 
                 nombreImagenAntigua = m.image;
 
@@ -64,7 +70,7 @@ const controller = {
                 break;
             }
         }
-        fs.writeFileSync(productsFilePath,JSON.stringify(products,null," "), "utf-8");
+        fs.writeFileSync(productsFilePath, JSON.stringify(products, null, " "), "utf-8");
 
         fs.unlinkSync(__dirname + '/../../public/img/' + nombreImagenAntigua);
 
@@ -82,40 +88,40 @@ const controller = {
         let nuevoProducto
         let idNuevoProducto = (products[products.length - 1].id) + 1;
 
-        if ( errors.isEmpty() ) {
+        if (errors.isEmpty()) {
 
-        if (req.file == undefined) {
-            imagenProducto = 'no-image.png'
+            if (req.file == undefined) {
+                imagenProducto = 'no-image.png'
 
-            nuevoProducto = {
-                "id": idNuevoProducto,
-                "name": req.body.name,
-                "price": parseInt(req.body.price),
-                "category": req.body.category,
-                "image": imagenProducto
-            };
-        } 
+                nuevoProducto = {
+                    "id": idNuevoProducto,
+                    "name": req.body.name,
+                    "price": parseInt(req.body.price),
+                    "category": req.body.category,
+                    "image": imagenProducto
+                };
+            }
+            else {
+                imagenProducto = req.file.filename
+
+                nuevoProducto = {
+                    "id": idNuevoProducto,
+                    "name": req.body.name,
+                    "price": parseInt(req.body.price),
+                    "category": req.body.category,
+                    "image": imagenProducto
+                };
+            }
+
+            products.push(nuevoProducto);
+
+            fs.writeFileSync(productsFilePath, JSON.stringify(products, null, ' '), 'utf-8');
+
+            res.redirect('/');
+        }
         else {
-            imagenProducto = req.file.filename
-
-            nuevoProducto = {
-                "id": idNuevoProducto,
-                "name": req.body.name,
-                "price": parseInt(req.body.price),
-                "category": req.body.category,
-                "image": imagenProducto
-            };
-        }   
-
-        products.push(nuevoProducto);
-
-        fs.writeFileSync(productsFilePath, JSON.stringify(products, null, ' '), 'utf-8');
-
-        res.redirect('/');
-    }
-    else {
-        res.render('./pages/productCreateForm', {errors: errors.array() } ); 
-    }
+            res.render('./pages/productCreateForm', { errors: errors.array() });
+        }
 
     },
     detail: (req, res) => {
@@ -143,13 +149,13 @@ const controller = {
     destroy: (req, res) => {
         let pDeletedId = req.params.id;
 
-        let nombreImagenAntigua="";
+        let nombreImagenAntigua = "";
 
-		for (let o of products){
-			if (o.id==pDeletedId){
-				nombreImagenAntigua = o.image;
-			}
-		}
+        for (let o of products) {
+            if (o.id == pDeletedId) {
+                nombreImagenAntigua = o.image;
+            }
+        }
 
         let nuevaListaProductos = products.filter(function (e) {
             return e.id != pDeletedId;
