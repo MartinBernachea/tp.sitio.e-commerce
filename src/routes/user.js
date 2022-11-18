@@ -6,23 +6,9 @@ const { body } = require('express-validator');
 const path = require('path');
 const multer = require('multer');
 
-
-//*** VALIDATIONS ****/
-let validacionesRegister = [
-    body('cName').notEmpty().withMessage('Completar campo'),
-    body('email').notEmpty().withMessage('Completar campo'),
-    body('password').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
-    body('cPassword').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
-]
-
-let validacionesLogin = [
-    body('email').notEmpty().withMessage('Completar campo'),
-    body('password').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
-]
-
+const {userRegisterValidation, userLoginValidation} = require("../utils/validations")
 
 //***  MULTER  ****/
-
 const multerDiskStorage = multer.diskStorage({
     destination: function(req, file, cb) {       // request, archivo y callback que almacena archivo en destino
         cb(null, path.join(__dirname,'../../public/img'));    // Ruta donde almacenamos el archivo
@@ -36,10 +22,10 @@ const multerDiskStorage = multer.diskStorage({
 const uploadFile = multer({ storage: multerDiskStorage });
 
 router.get('/register', userController.register);
-router.post('/register', validacionesRegister , userController.userStore); //uploadFile.single('uImage')
+router.post('/register', userRegisterValidation , userController.userStore); //uploadFile.single('uImage')
 
 router.get('/login', userController.login);
-router.post('/login', validacionesLogin , userController.processLogin);
+router.post('/login', userLoginValidation , userController.processLogin);
 
 router.get('/logOut', userController.logOut);
 

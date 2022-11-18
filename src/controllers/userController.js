@@ -10,6 +10,7 @@ const { validationResult } = require('express-validator');
 const userFilePath = path.join(__dirname, '../data/usersDataBase.json');
 const user = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
 
+const db = require("../database/models")
 
 const controller = {
     login: (req, res) => {
@@ -28,20 +29,16 @@ const controller = {
     userStore: (req, res, next) => {
         let errors = validationResult(req);
 
-        let idNuevoUsuario = (user[user.length - 1].id) + 1;
-
         if (errors.isEmpty()) {
-            let nuevoUsuario = {
-                "id": idNuevoUsuario,
+            db.usuario.create({
                 "nombre": req.body.cName,
+                "apellido": req.body.cLastName,
                 "email": req.body.email,
-                "password": bcrypt.hashSync(req.body.password, 10)
-            }
-            user.push(nuevoUsuario);
-
-            fs.writeFileSync(userFilePath, JSON.stringify(user, null, ' '), 'utf-8');
-
-            res.redirect('/');
+                "contra": bcrypt.hashSync(req.body.password, 10),
+                "admin": false,
+            })
+                .then(resp => res.redirect('/'))
+                .catch(err => console.log("err"))
         } else {
             res.render('./pages/formRegister', {
                 errors: errors.array(),
@@ -73,10 +70,10 @@ const controller = {
                 if (bcrypt.compareSync(req.body.password, usuarioALoguearse.password) == true) {
 
                     if (req.body.mantenerSesion == 'on') {
-                        res.cookie('user', JSON.stringify({ nombre: usuarioALoguearse.nombre , email: usuarioALoguearse.email }) , { maxAge: 60000 } );
+                        res.cookie('user', JSON.stringify({ nombre: usuarioALoguearse.nombre, email: usuarioALoguearse.email }), { maxAge: 60000 });
                     }
 
-                    req.session.usuarioLogueado = JSON.stringify({ nombre: usuarioALoguearse.nombre , email: usuarioALoguearse.email });
+                    req.session.usuarioLogueado = JSON.stringify({ nombre: usuarioALoguearse.nombre, email: usuarioALoguearse.email });
 
                     res.redirect('/');
 
@@ -95,7 +92,7 @@ const controller = {
         }
     },
     logOut: (req, res) => {
-        
+
         res.clearCookie("user");// destroy the cookie
 
         req.session.destroy((err) => {
