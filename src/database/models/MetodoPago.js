@@ -1,5 +1,5 @@
-function metodosPagoData(sequelize, Datatypes) {
-    let a = "MetodosPago";
+function MetodoPagoData(sequelize, Datatypes) {
+    let a = "metodoPago";
 
     let b = {
         id: {
@@ -13,14 +13,21 @@ function metodosPagoData(sequelize, Datatypes) {
         },
     }
 
-    // TODO: DEFINIR RELACION CON Local_id
-
     let c = {
         camelCase: false,
         timestamps: false,
+        freezeTableName: true,
+        tableName: 'metodo_pago',
     }
 
-    return sequelize.define(a, b, c);
+    const MetodoPago = sequelize.define(a, b, c);
+
+    MetodoPago.associate = (models) => {
+        MetodoPago.hasMany(models.detalleVenta, {
+            foreignKey: "metodo_pago_id"
+        })
+    }
+    return MetodoPago
 }
 
-module.exports = metodosPagoData
+module.exports = MetodoPagoData

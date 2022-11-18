@@ -1,5 +1,5 @@
-function localesData(sequelize, Datatypes) {
-    let a = "Locales";
+function localData(sequelize, Datatypes) {
+    let a = "local";
 
     let b = {
         id: {
@@ -24,9 +24,22 @@ function localesData(sequelize, Datatypes) {
     let c = {
         camelCase: false,
         timestamps: false,
+        freezeTableName: true,
     }
 
-    return sequelize.define(a, b, c);
+    const Local = sequelize.define(a, b, c);
+
+    Local.associate = (models) => {
+        Local.hasMany(models.venta, {
+            foreignKey: "local_id"
+        })
+
+        Local.hasMany(models.usuario, {
+            foreignKey: "local_id"
+        })
+    }
+
+    return Local
 }
 
-module.exports = localesData
+module.exports = localData

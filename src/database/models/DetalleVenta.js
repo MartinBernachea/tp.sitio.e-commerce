@@ -1,21 +1,30 @@
 module.exports = (sequelize, dataTypes) => {
-    const detalleVenta = sequelize.define('DetallesVenta',{ 
+    const DetalleVenta = sequelize.define('detalleVenta', {
         id: {
             autoIncrement: true,
             primaryKey: true,
-            type:  dataTypes.INTEGER
+            type: dataTypes.INTEGER
         },
         fecha_venta: {
             allowNule: false,
             type: dataTypes.DATE
-
         },
-        // Metodo_pago_id:{
+    }, {
+        camelCase: false,
+        timestamps: false,
+        tableName: 'detalle_venta',
+        freezeTableName: true,
+    });
 
-        // }
-},{camelCase: false,
-    timestamps: false,
-    tableName: 'detalle_venta'});
+    DetalleVenta.associate = (models) => {
+        DetalleVenta.hasMany(models.venta,{
+            foreignKey: "detalle_venta_id"
+        })
 
-    return detalleVenta;
+        DetalleVenta.belongsTo(models.metodoPago, {
+            foreignKey: "metodo_pago_id"
+        })
+    }
+
+    return DetalleVenta;
 }

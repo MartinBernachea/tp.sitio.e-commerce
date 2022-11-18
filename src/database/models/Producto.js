@@ -1,9 +1,9 @@
 module.exports = (sequelize, dataTypes) => {
-    const Producto = sequelize.define('Productos',{ 
+    const Producto = sequelize.define('producto', {
         id: {
             autoIncrement: true,
             primaryKey: true,
-            type:  dataTypes.INTEGER
+            type: dataTypes.INTEGER
         },
         nombre: {
             allowNule: false,
@@ -13,9 +13,6 @@ module.exports = (sequelize, dataTypes) => {
             allowNule: false,
             type: dataTypes.DECIMAL
         },
-        // creador_id: {
-        
-        // },
         imagen: {
             allowNule: false,
             type: dataTypes.STRING
@@ -28,16 +25,30 @@ module.exports = (sequelize, dataTypes) => {
             allowNule: false,
             type: dataTypes.DATE
         },
-        fecha_borrador:{
+        fecha_borrador: {
             allowNule: false,
             type: dataTypes.DATE
         },
-        // Categoria_id:{
+    }, {
+        camelCase: false,
+        timestamps: false,
+        tableName: 'producto',
+        freezeTableName: true,
+    });
 
-        // }
-},{camelCase: false,
-    timestamps: false,
-    tableName: 'producto'});
+    Producto.associate = (models) => {
+        Producto.belongsTo(models.usuario, {
+            foreignKey: "usuario_id"
+        })
+
+        Producto.hasMany(models.venta, {
+            foreignKey: "producto_id"
+        })
+
+        Producto.belongsTo(models.categoria, {
+            foreignKey: "categoria_id"
+        })
+    }
 
     return Producto;
 }

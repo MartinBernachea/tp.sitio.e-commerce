@@ -1,5 +1,5 @@
-function ventasData(sequelize, Datatypes) {
-    let a = "Ventas";
+function ventaData(sequelize, Datatypes) {
+    let a = "venta";
 
     let b = {
         id: {
@@ -8,28 +8,39 @@ function ventasData(sequelize, Datatypes) {
             autoIncrement: true
         },
         cantidad: {
-            type: Datatypes.STRING,
+            type: Datatypes.INTEGER,
             allowNull: false,
         },
         monto_unitario: {
-            type: Datatypes.STRING,
+            type: Datatypes.DECIMAL,
             allowNull: false,
         },
     }
-
-    /* 
-         TODO: DEFINIR RELACION CON:
-         Detalle_Venta_id
-         Producto_id
-         Local_id
-     */
 
     let c = {
         camelCase: false,
         timestamps: false,
+        freezeTableName: true,
     }
 
-    return sequelize.define(a, b, c);
+    const Venta = sequelize.define(a, b, c);
+
+    Venta.associate = (models) => {
+        Venta.belongsTo(models.local, {
+            foreignKey: "local_id"
+        })
+
+        Venta.belongsTo(models.producto, {
+            foreignKey: "producto_id"
+        })
+
+        
+        Venta.belongsTo(models.detalleVenta, {
+            foreignKey: "detalle_venta_id"
+        })
+    }
+
+    return Venta
 }
 
-module.exports = ventasData
+module.exports = ventaData

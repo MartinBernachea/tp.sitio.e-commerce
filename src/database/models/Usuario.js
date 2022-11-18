@@ -1,5 +1,5 @@
-function usuariosData(sequelize, Datatypes) {
-    let a = "Usuarios";
+function usuarioData(sequelize, Datatypes) {
+    let a = "usuario";
 
     let b = {
         id: {
@@ -29,17 +29,26 @@ function usuariosData(sequelize, Datatypes) {
         },
     }
 
-    /* 
-        TODO: DEFINIR RELACION CON 
-        Local_id
-     */
 
     let c = {
         camelCase: false,
         timestamps: false,
+        freezeTableName: true,
     }
 
-    return sequelize.define(a, b, c);
+    const Usuario = sequelize.define(a, b, c);
+
+    Usuario.associate = (models) => {
+        Usuario.belongsTo(models.local, {
+            foreignKey: "local_id"
+        })
+
+        Usuario.hasMany(models.producto, {
+            foreignKey: "usuario_id"
+        })
+    }
+
+    return Usuario;
 }
 
-module.exports = usuariosData
+module.exports = usuarioData
