@@ -13,6 +13,10 @@ module.exports = (sequelize, dataTypes) => {
             allowNule: false,
             type: dataTypes.DECIMAL
         },
+        // categoria: {
+        //     allowNule: false,
+        //     type:dataTypes.STRING
+        // },
         imagen: {
             allowNule: false,
             type: dataTypes.STRING

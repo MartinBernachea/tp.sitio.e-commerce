@@ -6,20 +6,18 @@ const session = require('express-session');
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-const models = require("../database/models/index");
+const db = require("../database/models");
+
 
 const controller = {
     index: (req, res) => {
-        const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-        res.render('index', {
-            productos: products,
-            alert: {
-                type:"info",
-                boldTitle:"Listo! ",
-                title:"Cuenta creada exitosamente",
-                description:"jasdasd",
-            }
-        });
+        db.producto.findAll({
+            limit: 12
+        })
+        .then(function(productos){
+            res.render('index', {
+                productos: productos,})
+        })
     },
     chart: (req, res) => {
         if (req.cookies.user != undefined) {
@@ -38,15 +36,13 @@ const controller = {
 
         let productoBuscado = null;
 
-        for (let m of products) {
-            if (m.id == idProducto) {
-                productoBuscado = m;
-                break;
-            }
-        }
-        if (productoBuscado != null) {
-            res.render('./pages/productEditForm', { productos: productoBuscado });
-        }
+        db.producto.findByPk(idProducto)
+            .then(function(producto){
+
+            if (productoBuscado != null) {
+                res.render('./pages/productEditForm', { productos: productoBuscado });
+            }else { res.redirect("/")}
+        })
     },
     update: (req, res) => {
 
@@ -86,7 +82,7 @@ const controller = {
         let errors = validationResult(req);
         let imagenProducto
         let nuevoProducto
-        let idNuevoProducto = (products[products.length - 1].id) + 1;
+
 
         if (errors.isEmpty()) {
 
@@ -94,28 +90,26 @@ const controller = {
                 imagenProducto = 'no-image.png'
 
                 nuevoProducto = {
-                    "id": idNuevoProducto,
-                    "name": req.body.name,
-                    "price": parseInt(req.body.price),
-                    "category": req.body.category,
-                    "image": imagenProducto
+                    nombre: req.body.name,
+                    precio: req.body.price,
+                    categoria: req.body.category,
+                    imagen: imagenProducto
                 };
             }
             else {
                 imagenProducto = req.file.filename
 
                 nuevoProducto = {
-                    "id": idNuevoProducto,
-                    "name": req.body.name,
-                    "price": parseInt(req.body.price),
-                    "category": req.body.category,
-                    "image": imagenProducto
+                    nombre: req.body.name,
+                    precio: req.body.price,
+                    categoria: req.body.category,
+                    imagen: imagenProducto
                 };
             }
 
-            products.push(nuevoProducto);
-
-            fs.writeFileSync(productsFilePath, JSON.stringify(products, null, ' '), 'utf-8');
+            db.producto.create(
+                nuevoProducto
+            )
 
             res.redirect('/');
         }
