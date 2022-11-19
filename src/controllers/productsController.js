@@ -40,13 +40,15 @@ const controller = {
     edit: (req, res) => {
         let idProducto = req.params.id;
 
-        let productoBuscado = null;
 
         db.producto.findByPk(idProducto)
             .then(function (producto) {
 
-                if (productoBuscado != null) {
-                    res.render('./pages/productEditForm', { productos: productoBuscado });
+                if (producto != null) {
+                    db.categoria.findAll()
+                    .then(function(categorias) {
+                    res.render('./pages/productEditForm', { producto: producto, categorias: categorias });
+                    })
                 } else { res.redirect("/") }
             })
     },
@@ -58,25 +60,17 @@ const controller = {
 
         let nombreImagenAntigua = "";
 
-        for (let m of products) {
-            if (m.id == idProducto) {
+        console.log(datosProducto);
+        // db.producto.update({
+        //     nombre:datosProducto.nombre,
+        //     precio:datosProducto.precio,
+        //     categoria:datosProducto.categoria,
+        //     imagen:req.file.imagen
+        // }, { where: {id:idProducto}
 
-                nombreImagenAntigua = m.image;
+        // })
 
-                // let imagenProducto = req.file;
-                // console.log(imagenProducto);
-                m.name = datosProducto.name;
-                m.price = parseInt(datosProducto.price);
-                m.category = datosProducto.category;
-                // m.image = req.file.filename;
-                break;
-            }
-        }
-        fs.writeFileSync(productsFilePath, JSON.stringify(products, null, " "), "utf-8");
-
-        fs.unlinkSync(__dirname + '/../../public/img/' + nombreImagenAntigua);
-
-        res.redirect('/');
+        // res.redirect('/');
     },
 
     create: (req, res) => {
@@ -133,26 +127,27 @@ const controller = {
         }
 
     },
-    detail: (req, res) => {
+    detail: async(req, res) => {
 
         let idProducto = req.params.id;
 
-        let productoBuscado = null;
+        try{
+            const currentProduct = await db.producto.findByPk(idProducto);
+            if(currentProduct){
+                res.render('./pages/detalleProducto', {
+                    producto: currentProduct
+                });
+            }else {
+                req.session.notificationAlert = {
+                    type: "danger",
+                    boldTitle: "ups! ",
+                    title: "Producto no encontrado",
+                }
+                res.redirect('/');
+            }}
 
-        for (let m of products) {
-            if (m.id == idProducto) {
-                productoBuscado = m;
-                break;
-            }
-        }
-
-        if (productoBuscado != null) {
-            res.render('./pages/detalleProducto', {
-                producto: productoBuscado
-            });
-        }
-
-        res.send("Error, producto no encontrado");
+        catch{
+            error => console.log(error)}
 
     },
     destroy: (req, res) => {
@@ -170,9 +165,9 @@ const controller = {
             return e.id != pDeletedId;
         });
 
-        fs.writeFileSync(productsFilePath, JSON.stringify(nuevaListaProductos, null, ' '), 'utf-8');
-
-        fs.unlinkSync(__dirname + '/../../public/img/' + nombreImagenAntigua);
+        db.producto.destroy({
+            where: { id: pDeletedId}
+        })
 
         res.redirect('/');
     }

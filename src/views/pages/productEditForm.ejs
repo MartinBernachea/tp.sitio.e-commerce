@@ -5,9 +5,9 @@
 
 <head>
 	<%- include('partials/head') %>
-    <link rel="stylesheet" href="/css/stylesheet.css">
+	<link rel="stylesheet" href="/css/stylesheet.css">
 
-    <title> G&X - Edit </title>
+	<title> G&X - Edit </title>
 </head>
 <!-- /head -->
 
@@ -17,35 +17,33 @@
 	<!-- /Header -->
 
 	<div class="products-wrapper">
-		<div class="title-container">	
+		<div class="title-container">
 			<div class="editing-title">
-				<h2 class="products-title">Estás editando: <i><%=productos.name%></i></h2>
+				<h2 class="products-title">Estás editando: <i><%=producto.nombre%></i></h2>
 			</div>
 		</div>
 		<div class="box-container">
-			<form action="/edit/<%=productos.id%>?_method=PUT" method="POST">
+			<form action="/edit/<%=producto.id%>?_method=PUT" method="POST">
 				<div class="pe-container">
 					<div class="product-container">
 						<label for="name" class="form-label">Nombre del producto:</label>
-						<input type="text" id="name" name="name" value="<%=productos.name%>" placeholder="Ej: Buzo Adidas " class="form-input">
+						<input type="text" id="name" name="name" value="<%=producto.nombre%>"
+							placeholder="Ej: Buzo Adidas " class="form-input">
 					</div>
 					<div class="product-container">
 						<label for="price" class="form-label">Precio del producto:</label>
-						<input type="text" id="price" name="price"  value="<%=productos.price%>" placeholder="Ej: 13500" class="form-input">
+						<input type="text" id="price" name="price" value="<%=producto.precio%>" placeholder="Ej: 13500"
+							class="form-input">
 					</div>
 					<div class="product-container">
 						<label for="category" class="form-label">Categoría:</label>
 						<select name="category" id="category" class="form-input">
-							<% if (productos.category=="NUEVO") {%>
-								<option value="">Elegí</option>
-								<option value="NUEVO" selected>Nuevo</option>
-								<option value="DESTACADO" >Destacado</option>
+							<option value=""> Elegí </option>
+							<% for(categoria of categorias) { %>
+							<option value="<%= categoria.id %>" <% if(categoria.id == producto.categoria_id) {
+								%> selected <% } %>
+							<%=categoria.nombre%> </option>
 							<% } %>
-							<% if (productos.category=="DESTACADO") {%>
-								<option value="">Elegí</option>
-								<option value="NUEVO">Nuevo</option>
-								<option value="DESTACADO" selected>Destacado</option>
-							<% } %>{
 						</select>
 					</div>
 					<div class="load-image-container">
@@ -64,5 +62,6 @@
 	<!-- footer -->
 	<%- include('partials/footer') %>
 	<!-- /footer -->
-</body>	
+</body>
+
 </html>
