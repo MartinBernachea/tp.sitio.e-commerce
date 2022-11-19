@@ -14,10 +14,11 @@ const controller = {
         db.producto.findAll({
             limit: 12
         })
-        .then(function(productos){
-            res.render('index', {
-                productos: productos,})
-        })
+            .then(function (productos) {
+                res.render('index', {
+                    productos: productos,
+                })
+            })
     },
     chart: (req, res) => {
         if (req.cookies.user != undefined) {
@@ -37,12 +38,12 @@ const controller = {
         let productoBuscado = null;
 
         db.producto.findByPk(idProducto)
-            .then(function(producto){
+            .then(function (producto) {
 
-            if (productoBuscado != null) {
-                res.render('./pages/productEditForm', { productos: productoBuscado });
-            }else { res.redirect("/")}
-        })
+                if (productoBuscado != null) {
+                    res.render('./pages/productEditForm', { productos: productoBuscado });
+                } else { res.redirect("/") }
+            })
     },
     update: (req, res) => {
 
@@ -74,8 +75,11 @@ const controller = {
     },
 
     create: (req, res) => {
-        res.render('./pages/productCreateForm')
-
+        db.categoria.findAll()
+            .then(categorias => {
+                console.log("categorias", categorias)
+                res.render('./pages/productCreateForm', { categorias })
+            })
     },
     store: (req, res) => {
 
@@ -92,7 +96,7 @@ const controller = {
                 nuevoProducto = {
                     nombre: req.body.name,
                     precio: req.body.price,
-                    categoria: req.body.category,
+                    categoria_id: req.body.category,
                     imagen: imagenProducto
                 };
             }
@@ -102,7 +106,7 @@ const controller = {
                 nuevoProducto = {
                     nombre: req.body.name,
                     precio: req.body.price,
-                    categoria: req.body.category,
+                    categoria_id: req.body.category,
                     imagen: imagenProducto
                 };
             }

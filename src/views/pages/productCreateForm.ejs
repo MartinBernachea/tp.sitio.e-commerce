@@ -50,9 +50,10 @@
 					<div class="product-container">
 						<label for="category" class="form-label">Categoría:</label>
 						<select name="category" id="category" class="form-input">
-								<option value=""> Elegí </option>
-								<option value="NUEVO" > Nuevo </option>
-								<option value="DESTACADO" > Destacado </option>
+ 								<option value=""> Elegí </option>
+								<% for(categoria of locals.categorias) { %>
+									<option value="<%= categoria.id %>" > <%=categoria.nombre%> </option>
+								<% } %>
 						</select>
 
 						<% if (locals && locals.errors) { %>
