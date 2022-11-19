@@ -21,21 +21,26 @@ module.exports = (sequelize, dataTypes) => {
             allowNule: false,
             type: dataTypes.STRING
         },
-        fecha_creacion: {
-            allowNule: false,
-            type: dataTypes.DATE
+        createdAt: {
+            allowNull: false,
+            type: dataTypes.DATE,
+            defaultValue: dataTypes.NOW,
+            field: "created_at",
         },
-        fecha_modificacion: {
-            allowNule: false,
-            type: dataTypes.DATE
+        updatedAt: {
+            type: dataTypes.DATE,
+            field: "updated_at",
+            defaultValue: dataTypes.NOW,
+            allowNull: false,
         },
-        fecha_borrador: {
-            allowNule: false,
-            type: dataTypes.DATE
+        deletedAt: {
+            type: dataTypes.DATE,
+            field: "deleted_at",
+            defaultValue: dataTypes.NOW,
+            allowNull: false,
         },
     }, {
         camelCase: false,
-        timestamps: false,
         tableName: 'producto',
         freezeTableName: true,
     });
