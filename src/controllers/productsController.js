@@ -14,10 +14,15 @@ const controller = {
         db.producto.findAll({
             limit: 12
         })
-            .then(function (productos) {
-                res.render('index', {
-                    productos: productos,
-                })
+            .then(productos => {
+                let localsParams = { productos }
+
+                if (req.session.notificationAlert) {
+                    localsParams.notificationAlert = req.session.notificationAlert;
+                    req.session.notificationAlert = null
+                }
+
+                res.render('index', localsParams)
             })
     },
     chart: (req, res) => {
@@ -77,11 +82,10 @@ const controller = {
     create: (req, res) => {
         db.categoria.findAll()
             .then(categorias => {
-                console.log("categorias", categorias)
                 res.render('./pages/productCreateForm', { categorias })
             })
     },
-    store: (req, res) => {
+    store: async (req, res) => {
 
         let errors = validationResult(req);
         let imagenProducto
@@ -97,7 +101,7 @@ const controller = {
                     nombre: req.body.name,
                     precio: req.body.price,
                     categoria_id: req.body.category,
-                    imagen: imagenProducto
+                    imagen: imagenProducto,
                 };
             }
             else {
@@ -107,15 +111,22 @@ const controller = {
                     nombre: req.body.name,
                     precio: req.body.price,
                     categoria_id: req.body.category,
-                    imagen: imagenProducto
+                    imagen: imagenProducto,
                 };
             }
 
-            db.producto.create(
-                nuevoProducto
-            )
+            try {
+                const resp = await db.producto.create(nuevoProducto)
+                req.session.notificationAlert = {
+                    type: "success",
+                    boldTitle: "Bien! ",
+                    title: "Producto creado exitosamente:",
+                    tag: `<a href="/detail/${resp.id}">${req.body.name}</a>`,
+                }
+                res.redirect('/');
+            } catch (err) {
 
-            res.redirect('/');
+            }
         }
         else {
             res.render('./pages/productCreateForm', { errors: errors.array() });

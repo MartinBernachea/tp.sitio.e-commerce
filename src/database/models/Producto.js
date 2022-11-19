@@ -36,8 +36,7 @@ module.exports = (sequelize, dataTypes) => {
         deletedAt: {
             type: dataTypes.DATE,
             field: "deleted_at",
-            defaultValue: dataTypes.NOW,
-            allowNull: false,
+            allowNull: true,
         },
     }, {
         camelCase: false,

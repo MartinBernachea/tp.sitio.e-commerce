@@ -5,16 +5,17 @@
     description: texto
  -->
 
-<% if (locals.alert) { %>
+<% if (locals.notificationAlert) { %>
     <div id="alert" class="alert bottom <%= 
-    locals.alert.type=='success' ? 'success' :
-        locals.alert.type=='info' ? 'info' :
-            locals.alert.type=='danger' ? 'danger' : '' 
+    locals.notificationAlert.type=='success' ? 'success' :
+        locals.notificationAlert.type=='info' ? 'info' :
+            locals.notificationAlert.type=='danger' ? 'danger' : '' 
     %>">
         <i class="fa-solid fa-check fa-2xl"></i>
         <p class="alert-msg">
-            <b><%=locals.alert.boldTitle%></b><%=locals.alert.title%><br>
-            <span><%=locals.alert.description%></span>
+            <b><%=locals.notificationAlert.boldTitle%></b><%=locals.notificationAlert.title%><br>
+            <span><%-locals.notificationAlert.tag%></span>
+            <span><%=locals.notificationAlert.description%></span>
         </p>
         <i class="fa-solid fa-xmark fa-lg"></i>
     </div>
