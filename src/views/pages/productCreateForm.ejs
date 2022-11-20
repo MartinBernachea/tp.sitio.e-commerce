@@ -84,6 +84,39 @@
 							<% } %>
 						<% } %>
 					</div>
+
+					<div class="load-image-container">
+						<label for="cImage3" class="form-label-img"> Añadir imagen secundaria 2</label>
+						<input type="file" name="cImage3" id="cImage3" class="form-input-img"></input>
+
+						<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% } %>
+						<% } %>
+					</div>
+
+					<div class="load-image-container">
+						<label for="cImage4" class="form-label-img"> Añadir imagen secundaria 3</label>
+						<input type="file" name="cImage4" id="cImage4" class="form-input-img"></input>
+
+						<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% } %>
+						<% } %>
+					</div>
+
+					<div class="load-image-container">
+						<label for="cImage5" class="form-label-img"> Añadir imagen secundaria 4</label>
+						<input type="file" name="cImage5" id="cImage5" class="form-input-img"></input>
+
+						<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% } %>
+						<% } %>
+					</div>
 											
 					<div class="save-product">
 						<button type="submit" class="btn-secondary">Vender producto</button>

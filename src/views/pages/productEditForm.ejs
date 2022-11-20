@@ -40,9 +40,9 @@
 						<select name="category" id="category" class="form-input">
 							<option value=""> Elegí </option>
 							<% for(categoria of categorias) { %>
-							<option value="<%= categoria.id %>" <% if(categoria.id == producto.categoria_id) {
-								%> selected <% } %>
-							<%=categoria.nombre%> </option>
+								<option value="<%= categoria.id %>" <% if(categoria.id==producto.categoria_id){ %> selected <% } %> >
+									<%=categoria.nombre%> 
+								</option>
 							<% } %>
 						</select>
 					</div>

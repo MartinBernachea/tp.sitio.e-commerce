@@ -91,7 +91,6 @@ const controller = {
 
             try {
                 const respNewProduct = await db.producto.create(nuevoProducto);
-
                 const imagesTag = ["cImage1", "cImage2", "cImage3", "cImage4", "cImage5"];
                 const uploadedImages = req.files;
                 const arrProductImages = [];
@@ -161,23 +160,23 @@ const controller = {
     destroy: (req, res) => {
         let pDeletedId = req.params.id;
 
-        let nombreImagenAntigua = "";
-
-        for (let o of products) {
-            if (o.id == pDeletedId) {
-                nombreImagenAntigua = o.image;
-            }
-        }
-
-        let nuevaListaProductos = products.filter(function (e) {
-            return e.id != pDeletedId;
-        });
-
         db.producto.destroy({
             where: { id: pDeletedId }
-        })
+        }).then(resp => {
 
-        res.redirect('/');
+            db.imagen.destroy(
+                { 
+                    where: { producto_id: pDeletedId },
+                }
+            );
+
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                title: "Producto eliminado exitosamente",
+            }
+            res.redirect('/');
+        })
     }
 };
 
