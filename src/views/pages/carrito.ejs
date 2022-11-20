@@ -36,7 +36,7 @@
                 <!-- CARD -->
                 <section class="product-detail-container">
 
-                    <img src="/img/camiseta-titular-argentina.png" alt="img-producto-1" class="img-producto-carrito">
+                    <img src="/img/products/camiseta-titular-argentina.png" alt="img-producto-1" class="img-producto-carrito">
 
                     <div class="detail-container">
                         <div class="product-details">
@@ -68,7 +68,7 @@
                 <!-- CARD -->
                 <section class="product-detail-container">
 
-                    <img src="/img/adidas-botas-futbol-x-speedportal.1-fg.jpg" alt="img-producto-1"
+                    <img src="/img/products/adidas-botas-futbol-x-speedportal.1-fg.jpg" alt="img-producto-1"
                         class="img-producto-carrito">
 
                     <div class="detail-container">
@@ -102,7 +102,7 @@
                 <!-- CARD -->
                 <section class="product-detail-container">
 
-                    <img src="/img/River-titular.png" alt="img-producto-1" class="img-producto-carrito">
+                    <img src="/img/products/River-titular.png" alt="img-producto-1" class="img-producto-carrito">
 
                     <div class="detail-container">
                         <div class="product-details">
@@ -188,23 +188,7 @@
                     <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
                     <a href="" class="titular-secundario">Ver Todos</a>
                 </div>
-                <div class="caja-chica-destacados">
-                    <% for(let p of productos) { %>
-                        <div class="product-card">
-                            <a href="/detail/<%= p.id %>">
-                                <div>
-                                    <img class="product-image" src="./img/<%= p.image %>"
-                                        alt="img-producto">
-                                    <p class="info-precio">$<%= p.price %></p>
-                                </div>
-                                <div class="product-data-container">
-                                    <p class="descripcion-producto"><%= p.name %></p>
-                                    <p class="categoria-producto"><%= p.category %></p>
-                                </div>
-                            </a>
-                        </div>
-                        <% } %>
-                
+                <div class="caja-chica-destacados">                
                 </div>
             </section>
     </main>

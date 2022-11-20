@@ -3,11 +3,7 @@ const path = require('path');
 const { validationResult } = require('express-validator');
 const session = require('express-session');
 
-const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
-
 const db = require("../database/models");
-
 
 const controller = {
     index: (req, res) => {
@@ -28,12 +24,12 @@ const controller = {
                 res.render('index', localsParams)
             })
     },
-    chart: (req, res) => {
+    chart: async (req, res) => {
         if (req.cookies.user != undefined) {
-            res.render('./pages/carrito', { productos: products });
+            res.render('./pages/carrito');
         }
         else if (req.session.usuarioLogueado != undefined) {
-            res.render('./pages/carrito', { productos: products });
+            res.render('./pages/carrito');
         }
         else res.redirect('user/login');
     },
