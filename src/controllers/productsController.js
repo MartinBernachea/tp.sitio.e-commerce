@@ -12,7 +12,10 @@ const db = require("../database/models");
 const controller = {
     index: (req, res) => {
         db.producto.findAll({
-            limit: 12
+            limit: 12,
+            include: [{
+                model: db.imagen,
+            }]
         })
             .then(productos => {
                 let localsParams = { productos }
@@ -46,9 +49,9 @@ const controller = {
 
                 if (producto != null) {
                     db.categoria.findAll()
-                    .then(function(categorias) {
-                    res.render('./pages/productEditForm', { producto: producto, categorias: categorias });
-                    })
+                        .then(function (categorias) {
+                            res.render('./pages/productEditForm', { producto: producto, categorias: categorias });
+                        })
                 } else { res.redirect("/") }
             })
     },
@@ -127,27 +130,36 @@ const controller = {
         }
 
     },
-    detail: async(req, res) => {
+    detail: async (req, res) => {
 
         let idProducto = req.params.id;
 
-        try{
-            const currentProduct = await db.producto.findByPk(idProducto);
-            if(currentProduct){
+        try {
+            const currentProduct = await db.producto.findByPk(idProducto,
+                {
+                    include: [{
+                        model: db.imagen
+                    }]
+                });
+
+            console.log("currentProduct", currentProduct.imagens[0].nombre)
+            if (currentProduct) {
                 res.render('./pages/detalleProducto', {
                     producto: currentProduct
                 });
-            }else {
+            } else {
                 req.session.notificationAlert = {
                     type: "danger",
                     boldTitle: "ups! ",
                     title: "Producto no encontrado",
                 }
                 res.redirect('/');
-            }}
+            }
+        }
 
-        catch{
-            error => console.log(error)}
+        catch {
+            error => console.log(error)
+        }
 
     },
     destroy: (req, res) => {
@@ -166,7 +178,7 @@ const controller = {
         });
 
         db.producto.destroy({
-            where: { id: pDeletedId}
+            where: { id: pDeletedId }
         })
 
         res.redirect('/');

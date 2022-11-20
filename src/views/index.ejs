@@ -32,22 +32,23 @@
                 </div>
                 
                 <div class="caja-chica-productos">
-                    <% for(let p of productos) { %>
-                    <div class="product-card">
-                        <a href="/detail/<%= p.id %>">
-                            <div>
-                                <img class="product-image" src="./img/<%= p.imagen %>"
-                                    alt="img-producto">
-                                <p class="info-precio">$<%= p.precio %></p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto"><%= p.nombre %></p>
-                                <p class="categoria-producto"><%= p.categoria %></p>
-                            </div>
-                        </a>
-                    </div>
+                    <% if(productos.length > 0) {%>
+                        <% for(let p of productos) { %>
+                        <div class="product-card">
+                            <a href="/detail/<%= p.id %>">
+                                <div>
+                                    <img class="product-image" src="./img/products/<%= p.imagens[0].nombre %>"
+                                        alt="img-producto">
+                                    <p class="info-precio">$<%= p.precio %></p>
+                                </div>
+                                <div class="product-data-container">
+                                    <p class="descripcion-producto"><%= p.nombre %></p>
+                                    <p class="categoria-producto"><%= p.categoria %></p>
+                                </div>
+                            </a>
+                        </div>
+                        <% } %>
                     <% } %>
-                    
                     
                 </div>
             </section>
