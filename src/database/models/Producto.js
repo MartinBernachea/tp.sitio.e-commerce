@@ -13,14 +13,6 @@ module.exports = (sequelize, dataTypes) => {
             allowNule: false,
             type: dataTypes.DECIMAL
         },
-        // categoria: {
-        //     allowNule: false,
-        //     type:dataTypes.STRING
-        // },
-        imagen: {
-            allowNule: false,
-            type: dataTypes.STRING
-        },
         createdAt: {
             allowNull: false,
             type: dataTypes.DATE,
@@ -55,6 +47,10 @@ module.exports = (sequelize, dataTypes) => {
 
         Producto.belongsTo(models.categoria, {
             foreignKey: "categoria_id"
+        })
+
+        Producto.hasMany(models.imagen, {
+            foreignKey: "producto_id"
         })
     }
 

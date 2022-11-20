@@ -82,45 +82,45 @@ const controller = {
     store: async (req, res) => {
 
         let errors = validationResult(req);
-        let imagenProducto
-        let nuevoProducto
-
 
         if (errors.isEmpty()) {
-
-            if (req.file == undefined) {
-                imagenProducto = 'no-image.png'
-
-                nuevoProducto = {
-                    nombre: req.body.name,
-                    precio: req.body.price,
-                    categoria_id: req.body.category,
-                    imagen: imagenProducto,
-                };
-            }
-            else {
-                imagenProducto = req.file.filename
-
-                nuevoProducto = {
-                    nombre: req.body.name,
-                    precio: req.body.price,
-                    categoria_id: req.body.category,
-                    imagen: imagenProducto,
-                };
-            }
+            nuevoProducto = {
+                nombre: req.body.name,
+                precio: req.body.price,
+                categoria_id: req.body.category,
+            };
 
             try {
-                const resp = await db.producto.create(nuevoProducto)
+                const respNewProduct = await db.producto.create(nuevoProducto);
+
+                const imagesTag = ["cImage1", "cImage2", "cImage3", "cImage4", "cImage5"];
+                const uploadedImages = req.files;
+                const arrProductImages = [];
+                imagesTag.forEach(currentTag => {
+                    const principal = currentTag == imagesTag[0];
+                    if (uploadedImages[currentTag]) {
+                        arrProductImages.push({
+                            nombre: uploadedImages[currentTag][0].filename,
+                            producto_id: respNewProduct.id,
+                            principal,
+                        });
+                    } else {
+                        arrProductImages.push({
+                            nombre: 'no-image.png',
+                            producto_id: respNewProduct.id,
+                            principal,
+                        });
+                    }
+                })
+                const respNewImages = await db.imagen.bulkCreate(arrProductImages);
                 req.session.notificationAlert = {
                     type: "success",
                     boldTitle: "Bien! ",
                     title: "Producto creado exitosamente:",
-                    tag: `<a href="/detail/${resp.id}">${req.body.name}</a>`,
+                    tag: `<a href="/detail/${respNewProduct.id}">${req.body.name}</a>`,
                 }
                 res.redirect('/');
-            } catch (err) {
-
-            }
+            } catch (err) { }
         }
         else {
             res.render('./pages/productCreateForm', { errors: errors.array() });

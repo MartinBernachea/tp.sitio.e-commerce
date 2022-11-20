@@ -64,16 +64,27 @@
 
 					</div>
 					<div class="load-image-container">
-						<label for="cImage" class="form-label-img"> Añadir imagen </label>
-						<input type="file" name="cImage" id="cImage" class="form-input-img"></input>
+						<label for="cImage1" class="form-label-img"> Añadir imagen principal</label>
+						<input type="file" name="cImage1" id="cImage1" class="form-input-img"></input>
 
 						<% if (locals && locals.errors) { %>
 							<% if (locals.errors[0].param=="cImage") { %>
 								<h3> <%= locals.errors[0].msg %>  </h3> 
 							<% } %>
 						<% } %>
-
 					</div>
+
+					<div class="load-image-container">
+						<label for="cImage2" class="form-label-img"> Añadir imagen secundaria 1</label>
+						<input type="file" name="cImage2" id="cImage2" class="form-input-img"></input>
+
+						<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% } %>
+						<% } %>
+					</div>
+											
 					<div class="save-product">
 						<button type="submit" class="btn-secondary">Vender producto</button>
 					</div>
