@@ -44,7 +44,7 @@ function usuarioData(sequelize, Datatypes) {
         })
 
         Usuario.hasMany(models.producto, {
-            foreignKey: "usuario_id"
+            foreignKey: "creador_id"
         })
     }
 
