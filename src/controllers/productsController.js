@@ -81,50 +81,36 @@ const controller = {
     store: async (req, res) => {
 
         let errors = validationResult(req);
-console.log(req.body);
+
         if (errors.isEmpty()) {
             nuevoProducto = {
                 nombre: req.body.name,
                 precio: req.body.price,
-                Categoria_id: req.body.category,
-                creador_id: "4"
+                categoria_id: req.body.category,
             };
 
-            try {   console.log("Entre al try");
-                // const respNewProduct =  
-                let idImagen;
-                db.producto.create(nuevoProducto)
-                .then(resultado => { idImagen = resultado.id;
-                    console.log(resultado.id + "linea 97")});
+            try {
+                const respNewProduct = await db.producto.create(nuevoProducto);
                 const imagesTag = ["cImage1", "cImage2", "cImage3", "cImage4", "cImage5"];
                 const uploadedImages = req.files;
                 const arrProductImages = [];
-                
-                setTimeout(imagesTag.forEach(currentTag => {
+                imagesTag.forEach(currentTag => {
                     const principal = currentTag == imagesTag[0];
                     if (uploadedImages[currentTag]) {
-                        console.log("te estoy cargando imagenes, porfavor anda");
-                        console.log(idImagen);
                         arrProductImages.push({
                             nombre: uploadedImages[currentTag][0].filename,
-                            producto_id: idImagen,
+                            producto_id: respNewProduct.id,
                             principal,
                         });
                     } else {
                         arrProductImages.push({
                             nombre: 'no-image.png',
-                            producto_id: idImagen,
+                            producto_id: respNewProduct.id,
                             principal,
                         });
                     }
-                }), 1000)
-                
-
-
-
-                console.log(arrProductImages);
-                const respNewImages =  db.imagen.bulkCreate(arrProductImages);
-                console.log(respNewImages);
+                })
+                const respNewImages = await db.imagen.bulkCreate(arrProductImages);
                 req.session.notificationAlert = {
                     type: "success",
                     boldTitle: "Bien! ",

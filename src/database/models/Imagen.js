@@ -11,17 +11,12 @@ module.exports = (sequelize, dataTypes) => {
         },
         principal: {
             allowNull: false,
-            type: dataTypes.INTEGER
+            type: dataTypes.BOOLEAN,
         },
-        producto_id: {
-            type: dataTypes.INTEGER,
-            allowNull: false
-        }
     }, {
         camelCase: false,
         timestamps: false,
         freezeTableName: true,
-        tableName: "imagen"
     });
 
     Imagen.associate = (models) => {

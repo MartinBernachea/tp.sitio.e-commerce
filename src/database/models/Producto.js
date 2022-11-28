@@ -30,14 +30,6 @@ module.exports = (sequelize, dataTypes) => {
             field: "deleted_at",
             allowNull: true,
         },
-        Categoria_id: {
-            type:dataTypes.INTEGER,
-            allowNull: false
-        },
-        creador_id: {
-            type: dataTypes.INTEGER,
-            allowNule: false
-        }
     }, {
         camelCase: false,
         tableName: 'producto',
@@ -46,7 +38,7 @@ module.exports = (sequelize, dataTypes) => {
 
     Producto.associate = (models) => {
         Producto.belongsTo(models.usuario, {
-            foreignKey: "creador_id"
+            foreignKey: "usuario_id"
         })
 
         Producto.hasMany(models.venta, {
