@@ -4,6 +4,7 @@ const path = require('path');
 const methodOverride =  require('method-override'); // Pasar poder usar los métodos PUT y DELETE
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 // ************ Route System require and use() ************
 const userRouter = require('./routes/user'); // Rutas /user

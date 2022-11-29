@@ -1,25 +1,25 @@
 module.exports = 
   {
     "development": {
-      "username": "289888_proyecto",
-      "password": "HermanosFLT3",
-      "database": "tobigondolo_proyectofinal",
-      "host": "mysql-tobigondolo.alwaysdata.net",
+      "username": process.env.DB_USER,
+      "password": process.env.DB_PASS,
+      "database": process.env.DB_NAME,
+      "host": process.env.DB_HOST,
+      "port": process.env.DB_PORT,
       "dialect": "mysql",
-      
     },
     "test": {
-      "username": "289888_proyecto",
-      "password": "HermanosFLT3",
-      "database": "tobigondolo_proyectofinal",
-      "host": "mysql-tobigondolo.alwaysdata.net",
-      "dialect": "mysql"
+      "username": "",
+      "password": "",
+      "database": "",
+      "host": "",
+      "dialect": ""
     },
     "production": {
-      "username": "289888_proyecto",
-      "password": "HermanosFLT3",
-      "database": "tobigondolo_proyectofinal",
-      "host": "mysql-tobigondolo.alwaysdata.net",
+      "username": process.env.DB_USER,
+      "password": process.env.DB_PASS,
+      "database": process.env.DB_NAME,
+      "host": process.env.DB_HOST,
       "dialect": "mysql"
     }
   }
