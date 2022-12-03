@@ -39,8 +39,8 @@
     <!-- MAIN -->
     <main>
         <div class='div-containter'>
-            <h1> BIENVENIDO <%= locals.user.nombre %>! </h1>
-            <p> Tu mail ingresado es: <%= locals.user.email %> </p>
+            <h1> BIENVENIDO <%= locals.userData.nombre %>! </h1>
+            <p> Tu mail ingresado es: <%= locals.userData.email %> </p>
             <form action="logOut" method="GET">
                 <button type="submit" class="btn-secondary"> Cerrar Sesion </button>
             </form>

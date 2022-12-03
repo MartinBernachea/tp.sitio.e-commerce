@@ -1,7 +1,7 @@
-const { getUserData } = require("../utils/userData");
+const { getUserDataParsed } = require("../utils/userData");
 
 const adminPermissions = (req, res, next) => {
-    const userData = getUserData(req)
+    const userData = getUserDataParsed(req)
 
     if (userData) {
         if (userData.admin) return next()
@@ -10,7 +10,7 @@ const adminPermissions = (req, res, next) => {
 }
 
 const superPermissions = (req, res, next) => {
-    const userData = getUserData(req)
+    const userData = getUserDataParsed(req)
 
     if (userData) {
         if (userData.super) return next()
@@ -19,7 +19,7 @@ const superPermissions = (req, res, next) => {
 }
 
 const userPermissions = (req, res, next) => {
-    const userData = getUserData(req)
+    const userData = getUserDataParsed(req)
 
     if (userData) {
         return next()
@@ -28,7 +28,7 @@ const userPermissions = (req, res, next) => {
 }
 
 const noUserPermissions = (req, res, next) => {
-    const userData = getUserData(req)
+    const userData = getUserDataParsed(req)
 
     if (userData) {
         res.redirect("/");

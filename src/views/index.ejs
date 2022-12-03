@@ -5,133 +5,142 @@
 
 <head>
     <%- include('./pages/partials/head') %>
-    <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/stylesheet.css">
 
-    <title> G&X - Home </title>
+        <title> G&X - Home </title>
 </head>
 <!-- /head -->
 
 <body>
     <div class="info-promo"> <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A $20.000 </div>
     <!-- Header -->
-    <%- include('./pages/partials/headerNav') %>
-    <!-- /Header -->
+    <%- include('./pages/partials/headerNav', locals) %>
+        <!-- /Header -->
 
-    <!-- MAIN -->
-    <main>
-        <!--BANNER -->
-        <img src="./img/FOTO-BANNER.png" alt="img-home-banner" class="home-banner">
+        <!-- MAIN -->
+        <main>
+            <!--BANNER -->
+            <img src="./img/FOTO-BANNER.png" alt="img-home-banner" class="home-banner">
 
-        <!--SECTIONS-->
-        <section class="caja-grande">
-            <!--NUEVOS LANZAMIENTOS-->
-            <section>
-                <div class="caja-chica-titulo">
-                    <h2 class="titulares">NUEVOS LANZAMIENTOS</h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
-                </div>
-                
-                <div class="caja-chica-productos">
-                    <% if(productos.length > 0) {%>
+            <!--SECTIONS-->
+            <section class="caja-grande">
+                <!--NUEVOS LANZAMIENTOS-->
+                <section>
+                    <div class="caja-chica-titulo">
+                        <h2 class="titulares">NUEVOS LANZAMIENTOS</h2>
+                        <a href="" class="titular-secundario">Ver Todos</a>
+                    </div>
+
+                    <div class="caja-chica-productos">
+                        <% if(productos.length> 0) {%>
+                            <% for(let p of productos) { %>
+                                <div class="product-card">
+                                    <a href="/detail/<%= p.id %>">
+                                        <div>
+                                            <img class="product-image" src="./img/products/<%= p.imagens[0].nombre %>"
+                                                alt="img-producto">
+                                            <p class="info-precio">$<%= p.precio %>
+                                            </p>
+                                        </div>
+                                        <div class="product-data-container">
+                                            <p class="descripcion-producto">
+                                                <%= p.nombre %>
+                                            </p>
+                                            <p class="categoria-producto">
+                                                <%= p.categoria %>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <% } %>
+                                    <% } %>
+
+                    </div>
+                </section>
+
+                <!--¿PARA QUIEN COMPRAS?-->
+                <section>
+                    <h2 class="titulares">¿PARA QUIÉN COMPRAS?</h2>
+                    <div class="caja-chica-modelos">
+                        <a href="/coming-soon">
+                            <div class="modelos-por-separado mujer">
+                                <p class="centrado-texto">MUJER</p>
+                            </div>
+                        </a>
+                        <a href="/coming-soon">
+                            <div class="modelos-por-separado hombre">
+                                <p class="centrado-texto">HOMBRE</p>
+                            </div>
+                        </a>
+                        <a href="/coming-soon">
+                            <div class="modelos-por-separado ninos">
+                                <p class="centrado-texto">NIÑOS</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+                <!--PRODUCTOS DESTACADOS-->
+                <section class="caja-chica">
+                    <div class="caja-chica-titulo">
+                        <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
+                        <a href="" class="titular-secundario">Ver Todos</a>
+                    </div>
+                    <div class="caja-chica-destacados">
                         <% for(let p of productos) { %>
-                        <div class="product-card">
-                            <a href="/detail/<%= p.id %>">
-                                <div>
-                                    <img class="product-image" src="./img/products/<%= p.imagens[0].nombre %>"
-                                        alt="img-producto">
-                                    <p class="info-precio">$<%= p.precio %></p>
-                                </div>
-                                <div class="product-data-container">
-                                    <p class="descripcion-producto"><%= p.nombre %></p>
-                                    <p class="categoria-producto"><%= p.categoria %></p>
-                                </div>
-                            </a>
-                        </div>
-                        <% } %>
-                    <% } %>
-                    
+                            <div class="product-card">
+                                <a href="/detail/<%= p.id %>">
+                                    <div>
+                                        <img class="product-image" src="./img/<%= p.image %>" alt="img-producto">
+                                        <p class="info-precio">$<%= p.price %>
+                                        </p>
+                                    </div>
+                                    <div class="product-data-container">
+                                        <p class="descripcion-producto">
+                                            <%= p.name %>
+                                        </p>
+                                        <p class="categoria-producto">
+                                            <%= p.category %>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <% } %>
+
+                    </div>
+                </section>
+
+            </section>
+            <!-- FOOT BANNER -->
+            <section class="foot-banner">
+                <h2> BUSCALO POR MARCA </h2>
+                <div class="foot-carrousel">
+                    <li class="foot-banner-li foot-banner-arrow"> <i class="fa-solid fa-angle-left"></i> </li>
+                    <ul class="foot-banner-ul">
+                        <li class="foot-banner-li">
+                            <img src="./img/brands/adidas-brand.png" alt="adidas-logo">
+                        </li>
+                        <li class="foot-banner-li">
+                            <img src="./img/brands/crocs-brand.png" alt="crocs-logo">
+                        </li>
+                        <li class="foot-banner-li">
+                            <img src="./img/brands/kappa-brand.png" alt="kappa-logo">
+                        </li>
+                        <li class="foot-banner-li">
+                            <img src="./img/brands/puma-brand.png" alt="puma-logo">
+                        </li>
+                        <li class="foot-banner-li">
+                            <img src="./img/brands/reebok-brand.png" alt="reebok-logo">
+                        </li>
+                    </ul>
+                    <li class="foot-banner-li foot-banner-arrow"> <i class="fa-solid fa-angle-right"></i> </li>
                 </div>
             </section>
 
-            <!--¿PARA QUIEN COMPRAS?-->
-            <section>
-                <h2 class="titulares">¿PARA QUIÉN COMPRAS?</h2>
-                <div class="caja-chica-modelos">
-                    <a href="/coming-soon">
-                        <div class="modelos-por-separado mujer">
-                            <p class="centrado-texto">MUJER</p>
-                        </div>
-                    </a>
-                    <a href="/coming-soon">
-                        <div class="modelos-por-separado hombre">
-                            <p class="centrado-texto">HOMBRE</p>
-                        </div>
-                    </a>
-                    <a href="/coming-soon">
-                        <div class="modelos-por-separado ninos">
-                            <p class="centrado-texto">NIÑOS</p>
-                        </div>
-                    </a>
-                </div>
-            </section>
-            <!--PRODUCTOS DESTACADOS-->
-            <section class="caja-chica">
-                <div class="caja-chica-titulo">
-                    <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
-                </div>
-                <div class="caja-chica-destacados">
-                    <% for(let p of productos) { %>
-                        <div class="product-card">
-                            <a href="/detail/<%= p.id %>">
-                                <div>
-                                    <img class="product-image" src="./img/<%= p.image %>"
-                                        alt="img-producto">
-                                    <p class="info-precio">$<%= p.price %></p>
-                                </div>
-                                <div class="product-data-container">
-                                    <p class="descripcion-producto"><%= p.name %></p>
-                                    <p class="categoria-producto"><%= p.category %></p>
-                                </div>
-                            </a>
-                        </div>
-                        <% } %>
-                
-                </div>
-            </section>
+        </main>
 
-        </section>
-        <!-- FOOT BANNER -->
-        <section class="foot-banner">
-            <h2> BUSCALO POR MARCA </h2>
-            <div class="foot-carrousel">
-                <li class="foot-banner-li foot-banner-arrow"> <i class="fa-solid fa-angle-left"></i> </li>
-                <ul class="foot-banner-ul">
-                    <li class="foot-banner-li">
-                        <img src="./img/brands/adidas-brand.png" alt="adidas-logo">
-                    </li>
-                    <li class="foot-banner-li">
-                        <img src="./img/brands/crocs-brand.png" alt="crocs-logo">
-                    </li>
-                    <li class="foot-banner-li">
-                        <img src="./img/brands/kappa-brand.png" alt="kappa-logo">
-                    </li>
-                    <li class="foot-banner-li">
-                        <img src="./img/brands/puma-brand.png" alt="puma-logo">
-                    </li>
-                    <li class="foot-banner-li">
-                        <img src="./img/brands/reebok-brand.png" alt="reebok-logo">
-                    </li>
-                </ul>
-                <li class="foot-banner-li foot-banner-arrow"> <i class="fa-solid fa-angle-right"></i> </li>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- footer -->
-    <%- include('./pages/partials/footer') %>
-    <!-- /footer -->
+        <!-- footer -->
+        <%- include('./pages/partials/footer') %>
+            <!-- /footer -->
 </body>
 
 </html>

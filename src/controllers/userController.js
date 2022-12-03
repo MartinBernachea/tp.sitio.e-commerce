@@ -8,6 +8,7 @@ const { validationResult } = require('express-validator');
 
 const db = require("../database/models");
 const { customValidationErrorMsg } = require("../utils/validations");
+const { getUserDataStringified } = require('../utils/userData');
 
 const controller = {
     login: (req, res) => {
@@ -93,11 +94,8 @@ const controller = {
         }
     },
     account: (req, res) => {
-        if (req.cookies.user) {
-            res.render('./pages/logueado', { user: JSON.parse(req.cookies.user) })
-        } else {
-            res.render('./pages/logueado', { user: JSON.parse(req.session.usuarioLogueado) })
-        }
+        const userData = getUserDataStringified(req);
+        res.render('./pages/logueado', { userData })
     },
     logOut: (req, res) => {
 

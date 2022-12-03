@@ -27,7 +27,7 @@ router.post('/register', noUserPermissions, userRegisterValidation, userControll
 
 router.get('/account', userPermissions, userController.account);
 
-router.get('/login', noUserPermissions, userController.login);
+router.get('/login', /* noUserPermissions, */ userController.login);
 router.post('/login', noUserPermissions, userLoginValidation, userController.processLogin);
 
 router.get('/logOut', userPermissions, userController.logOut);

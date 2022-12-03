@@ -4,6 +4,7 @@ const { validationResult } = require('express-validator');
 const session = require('express-session');
 
 const db = require("../database/models");
+const { getUserDataStringified } = require('../utils/userData');
 
 const controller = {
     index: (req, res) => {
@@ -14,7 +15,8 @@ const controller = {
             }]
         })
             .then(productos => {
-                let localsParams = { productos }
+                const userData = getUserDataStringified(req);
+                let localsParams = { productos, userData }
 
                 if (req.session.notificationAlert) {
                     localsParams.notificationAlert = req.session.notificationAlert;
@@ -165,7 +167,7 @@ const controller = {
         }).then(resp => {
 
             db.imagen.destroy(
-                { 
+                {
                     where: { producto_id: pDeletedId },
                 }
             );
