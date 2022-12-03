@@ -83,6 +83,7 @@
                 </button>
 
                 <img src="/img/medio-de-pago.jpg" alt="formas de pago" class="pd-img" />
+                <% if(locals.userData?.admin) { %>
                 <div class="edit-delete-container">
                     <a class="btn-edit" href="/edit/<%= producto.id %>">
                         Editar
@@ -93,6 +94,7 @@
                         </button>
                     </form>
                 </div>
+                <% } %>
             </div>
         </section>
         <section class="caja-grande">

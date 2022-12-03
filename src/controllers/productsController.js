@@ -27,20 +27,24 @@ const controller = {
             })
     },
     chart: async (req, res) => {
+        const userData = getUserDataStringified(req);
+
         if (req.cookies.user != undefined) {
-            res.render('./pages/carrito');
+            res.render('./pages/carrito', { userData });
         }
         else if (req.session.usuarioLogueado != undefined) {
-            res.render('./pages/carrito');
+            res.render('./pages/carrito', { userData });
         }
         else res.redirect('user/login');
     },
     comingSoon: (req, res) => {
-        res.render('./pages/coming-soon')
+        const userData = getUserDataStringified(req);
+
+        res.render('./pages/coming-soon', { userData })
     },
     edit: (req, res) => {
         let idProducto = req.params.id;
-
+        const userData = getUserDataStringified(req);
 
         db.producto.findByPk(idProducto)
             .then(function (producto) {
@@ -48,7 +52,7 @@ const controller = {
                 if (producto != null) {
                     db.categoria.findAll()
                         .then(function (categorias) {
-                            res.render('./pages/productEditForm', { producto: producto, categorias: categorias });
+                            res.render('./pages/productEditForm', { producto: producto, categorias: categorias, userData });
                         })
                 } else { res.redirect("/") }
             })
@@ -75,13 +79,15 @@ const controller = {
     },
 
     create: (req, res) => {
+        const userData = getUserDataStringified(req);
+
         db.categoria.findAll()
             .then(categorias => {
-                res.render('./pages/productCreateForm', { categorias })
+                res.render('./pages/productCreateForm', { categorias, userData })
             })
     },
     store: async (req, res) => {
-
+        const userData = getUserDataStringified(req);
         let errors = validationResult(req);
 
         if (errors.isEmpty()) {
@@ -123,7 +129,7 @@ const controller = {
             } catch (err) { }
         }
         else {
-            res.render('./pages/productCreateForm', { errors: errors.array() });
+            res.render('./pages/productCreateForm', { errors: errors.array(), userData });
         }
 
     },
@@ -140,9 +146,12 @@ const controller = {
                 });
 
             console.log("currentProduct", currentProduct.imagens[0].nombre)
+
+            const userData = getUserDataStringified(req);
             if (currentProduct) {
                 res.render('./pages/detalleProducto', {
-                    producto: currentProduct
+                    producto: currentProduct,
+                    userData
                 });
             } else {
                 req.session.notificationAlert = {

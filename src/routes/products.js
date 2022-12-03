@@ -40,7 +40,7 @@ router.get('/carrito', userPermissions, productsController.chart);
 router.get('/coming-soon', adminPermissions, productsController.comingSoon);
 
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
-router.get('/detail/:id', adminPermissions, productsController.detail);
+router.get('/detail/:id', productsController.detail);
 
 /*** CREATE ONE PRODUCT ***/
 router.get('/create', adminPermissions, productsController.create);
