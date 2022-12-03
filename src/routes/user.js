@@ -7,7 +7,7 @@ const path = require('path');
 const multer = require('multer');
 
 const { userRegisterValidation, userLoginValidation } = require("../utils/validations");
-const { userPermissions, adminPermissions, noUserPermissions } = require('./permission');
+const { userPermissions, adminPermissions, noUserPermissions, superPermissions } = require('./permission');
 
 //***  MULTER  ****/
 const multerDiskStorage = multer.diskStorage({
@@ -26,6 +26,8 @@ router.get('/register', noUserPermissions, userController.register);
 router.post('/register', noUserPermissions, userRegisterValidation, userController.userStore); //uploadFile.single('uImage')
 
 router.get('/account', userPermissions, userController.account);
+
+router.get('/panel', superPermissions, userController.panel);
 
 router.get('/login', /* noUserPermissions, */ userController.login);
 router.post('/login', noUserPermissions, userLoginValidation, userController.processLogin);

@@ -7,6 +7,7 @@ const session = require('express-session');
 const { validationResult } = require('express-validator');
 
 const db = require("../database/models");
+
 const { customValidationErrorMsg } = require("../utils/validations");
 const { getUserDataStringified } = require('../utils/userData');
 
@@ -105,6 +106,34 @@ const controller = {
             res.redirect('/');
         }) // destroy all sessions
 
+    },
+    panel: async (req, res) => {
+        const userData = getUserDataStringified(req);
+        const formData = req.query;
+        const wasFormSent = Object.values(formData).length > 0;
+        const isFormEmpty = Object.values(formData).every(ctValue => ctValue.trim() == "");
+        const currentPage = formData.page ?? 1;
+        let queryFilters = {
+            limit: 10,
+            offset: 10 * (currentPage - 1)
+        }
+
+        if (!isFormEmpty) {
+            let formFilters = {}
+            const Op = db.Sequelize.Op;
+            if (formData.userName) formFilters["nombre"] = {[Op.like]: `%${formData.userName}%`}
+            if (formData.userLastname) formFilters["apellido"] = {[Op.like]: `%${formData.userLastname}%`}
+            if (formData.userEmail) formFilters["email"] = {[Op.like]: `%${formData.userEmail}%`}
+            if (formData.userRole) {
+                if (formData.userRole == "2") formFilters["admin"] = true
+                if (formData.userRole == "3") formFilters["super"] = true
+            }
+
+            queryFilters["where"] = formFilters;
+        }
+        
+        const usersList = wasFormSent ? await db.usuario.findAll(queryFilters) : null
+        res.render('./pages/usersPanel', { userData, usersList, formData });
     }
 };
 module.exports = controller;

@@ -1,0 +1,12 @@
+table{
+    width: 100%;
+    max-width: 500px;
+}
+
+tr th {
+    padding:4px;
+}
+
+tr {
+    border-bottom: 2px solid black;
+}
