@@ -7,7 +7,8 @@ const router = express.Router();
 const path = require('path');
 const multer = require('multer');
 
-const { productCreateValidation } = require("../utils/validations")
+const { productCreateValidation } = require("../utils/validations");
+const { adminPermissions, userPermissions } = require('./permission');
 
 //***  MULTER  ****/
 const multerDiskStorage = multer.diskStorage({
@@ -33,23 +34,23 @@ const multipleImages = uploadFile.fields([
 router.get('/', productsController.index)
 
 /*** CARRITO ***/
-router.get('/carrito', productsController.chart);
+router.get('/carrito', userPermissions, productsController.chart);
 
 /*** COMING SOON ***/
-router.get('/coming-soon', productsController.comingSoon);
+router.get('/coming-soon', adminPermissions, productsController.comingSoon);
 
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
-router.get('/detail/:id', productsController.detail);
+router.get('/detail/:id', adminPermissions, productsController.detail);
 
 /*** CREATE ONE PRODUCT ***/
-router.get('/create', productsController.create);
-router.post('/create', multipleImages, productCreateValidation, productsController.store); // FALTA AGREGAR 'validaciones' de img
+router.get('/create', adminPermissions, productsController.create);
+router.post('/create', adminPermissions, multipleImages, productCreateValidation, productsController.store); // FALTA AGREGAR 'validaciones' de img
 
 /*** EDIT ONE PRODUCT ***/
-router.get('/edit/:id', productsController.edit);
-router.put('/edit/:id', productsController.update);
+router.get('/edit/:id', adminPermissions, productsController.edit);
+router.put('/edit/:id', adminPermissions, productsController.update);
 
 /*** DELETE ONE PRODUCT ***/
-router.delete('/:id', productsController.destroy);
+router.delete('/:id', adminPermissions, productsController.destroy);
 
 module.exports = router;

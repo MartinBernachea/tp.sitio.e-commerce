@@ -6,27 +6,30 @@ const { body } = require('express-validator');
 const path = require('path');
 const multer = require('multer');
 
-const {userRegisterValidation, userLoginValidation} = require("../utils/validations")
+const { userRegisterValidation, userLoginValidation } = require("../utils/validations");
+const { userPermissions, adminPermissions, noUserPermissions } = require('./permission');
 
 //***  MULTER  ****/
 const multerDiskStorage = multer.diskStorage({
-    destination: function(req, file, cb) {       // request, archivo y callback que almacena archivo en destino
-        cb(null, path.join(__dirname,'../../public/img'));    // Ruta donde almacenamos el archivo
+    destination: function (req, file, cb) {       // request, archivo y callback que almacena archivo en destino
+        cb(null, path.join(__dirname, '../../public/img'));    // Ruta donde almacenamos el archivo
     },
-    filename: function(req, file, cb) {          // request, archivo y callback que almacena archivo en destino
-    let imageName = Date.now() + path.extname(file.originalname);   // milisegundos y extensión de archivo original
-        cb(null, imageName);         
+    filename: function (req, file, cb) {          // request, archivo y callback que almacena archivo en destino
+        let imageName = Date.now() + path.extname(file.originalname);   // milisegundos y extensión de archivo original
+        cb(null, imageName);
     }
 });
 
 const uploadFile = multer({ storage: multerDiskStorage });
 
-router.get('/register', userController.register);
-router.post('/register', userRegisterValidation , userController.userStore); //uploadFile.single('uImage')
+router.get('/register', noUserPermissions, userController.register);
+router.post('/register', noUserPermissions, userRegisterValidation, userController.userStore); //uploadFile.single('uImage')
 
-router.get('/login', userController.login);
-router.post('/login', userLoginValidation , userController.processLogin);
+router.get('/account', userPermissions, userController.account);
 
-router.get('/logOut', userController.logOut);
+router.get('/login', noUserPermissions, userController.login);
+router.post('/login', noUserPermissions, userLoginValidation, userController.processLogin);
+
+router.get('/logOut', userPermissions, userController.logOut);
 
 module.exports = router;

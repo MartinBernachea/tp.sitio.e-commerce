@@ -27,6 +27,10 @@ function usuarioData(sequelize, Datatypes) {
             type: Datatypes.BOOLEAN,
             allowNull: false,
         },
+        super: {
+            type: Datatypes.BOOLEAN,
+            allowNull: false,
+        },
     }
 
 

@@ -11,15 +11,7 @@ const { customValidationErrorMsg } = require("../utils/validations");
 
 const controller = {
     login: (req, res) => {
-        if (req.cookies.user != undefined) {
-            res.render('./pages/logueado', { user: JSON.parse(req.cookies.user) })
-        }
-        else if (req.session.usuarioLogueado != undefined) {
-            res.render('./pages/logueado', { user: JSON.parse(req.session.usuarioLogueado) })
-        }
-        else {
-            res.render('./pages/formLogin')
-        };
+        res.render('./pages/formLogin')
     },
     register: (req, res) => {
         res.render('./pages/formRegister');
@@ -50,6 +42,7 @@ const controller = {
                     "email": req.body.email,
                     "password": bcrypt.hashSync(req.body.password, 10),
                     "admin": false,
+                    "super": false,
                 })
 
                 res.redirect('/')
@@ -69,24 +62,27 @@ const controller = {
         let errors = validationResult(req);
 
         if (errors.isEmpty()) {
-
             const userData = await db.usuario.findOne({ where: { email: req.body.email } })
+            const frontUserData = {
+                nombre: userData.nombre,
+                email: userData.email,
+                admin: userData.admin,
+                super: userData.super,
+            };
 
             if (!userData) {
                 return res.send('email invalido')
             }
-            console.log("userData", userData)
-            
-            console.log(bcrypt.compareSync(req.body.password, userData.password))
+
             if (!bcrypt.compareSync(req.body.password, userData.password)) {
                 return res.send('password incorrecto');
             }
 
             if (req.body.mantenerSesion == 'on') {
-                res.cookie('user', JSON.stringify({ nombre: userData.nombre, email: userData.email }), { maxAge: 60000 });
+                res.cookie('user', JSON.stringify(frontUserData), { maxAge: 60000 });
             }
 
-            req.session.usuarioLogueado = JSON.stringify({ nombre: userData.nombre, email: userData.email });
+            req.session.usuarioLogueado = JSON.stringify(frontUserData);
 
             res.redirect('/');
         } else {
@@ -94,6 +90,13 @@ const controller = {
                 errors: errors.array(),
                 old: req.body,
             });
+        }
+    },
+    account: (req, res) => {
+        if (req.cookies.user) {
+            res.render('./pages/logueado', { user: JSON.parse(req.cookies.user) })
+        } else {
+            res.render('./pages/logueado', { user: JSON.parse(req.session.usuarioLogueado) })
         }
     },
     logOut: (req, res) => {

@@ -5,6 +5,7 @@
         <div class="header-logo">
             <a href="/"><img src="/img/H&M-Logo.png" alt="G&X-logo"></a>
         </div>
+
         <!-- NAV -->
 
         <div class="header-nav-items fulled-menu">
@@ -22,12 +23,25 @@
                     <a href="/coming-soon"> NIÑO </a>
                 </li>
                 <li class="li-item">
-                    <a href="/create"> CREATE </a>
-                </li>
-                <li class="li-item">
                     <a href="/coming-soon"> MARCA </a>
                 </li>
+                <li class="li-item">
+                    <a href="/create"> CREATE </a>
+                </li>
             </ul>
+
+            <!-- <% if(locals?.user?.admin){ %> -->
+                <ul class="header-ul">
+                    <li class="li-item">
+                        <a href="/create"> CREATE </a>
+                    </li>
+                </ul>
+                <ul class="header-ul">
+                    <li class="li-item">
+                        <a href="/create"> CREATE </a>
+                    </li>
+                </ul>
+            <!-- <%}%> -->
         </div>
 
         <div class="header-nav-items collapsed-menu">
@@ -63,7 +77,11 @@
             </div>
             <!--  HEADER ICONOS -->
             <div class="header-icons">
-                <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
+                <% if(locals?.user){ %>
+                    <a href="/user/account"><i class="fa-regular fa-user icon-header">123</i></a>
+                <%} else {%>
+                    <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
+                <%}%>
                 <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
                 <a href="/carrito"><i class="fa-solid fa-basket-shopping icon-header"></i></a>
             </div>
@@ -72,5 +90,5 @@
 
     <!-- ALERT -->
     <%- include('./notificationAlert') %>
-    <!-- /ALERT -->
+        <!-- /ALERT -->
 </header>
