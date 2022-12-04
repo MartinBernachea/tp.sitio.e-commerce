@@ -108,32 +108,50 @@ const controller = {
 
     },
     panel: async (req, res) => {
+        const resultsPerPage = 1;
         const userData = getUserDataStringified(req);
         const formData = req.query;
+
+        let localsParams = { userData, formData}
+        
         const wasFormSent = Object.values(formData).length > 0;
         const isFormEmpty = Object.values(formData).every(ctValue => ctValue.trim() == "");
-        const currentPage = formData.page ?? 1;
-        let queryFilters = {
-            limit: 10,
-            offset: 10 * (currentPage - 1)
-        }
-
-        if (!isFormEmpty) {
-            let formFilters = {}
-            const Op = db.Sequelize.Op;
-            if (formData.userName) formFilters["nombre"] = {[Op.like]: `%${formData.userName}%`}
-            if (formData.userLastname) formFilters["apellido"] = {[Op.like]: `%${formData.userLastname}%`}
-            if (formData.userEmail) formFilters["email"] = {[Op.like]: `%${formData.userEmail}%`}
-            if (formData.userRole) {
-                if (formData.userRole == "2") formFilters["admin"] = true
-                if (formData.userRole == "3") formFilters["super"] = true
+        
+        if (wasFormSent) {
+            const currentPage = formData.page ?? 1;
+            let queryFilters = {
+                limit: resultsPerPage,
+                offset: resultsPerPage * (currentPage - 1)
             }
 
-            queryFilters["where"] = formFilters;
+            let formFilters;
+
+            if (!isFormEmpty) {
+                let filters = {}
+                const Op = db.Sequelize.Op;
+                if (formData.userName) filters["nombre"] = { [Op.like]: `%${formData.userName}%` }
+                if (formData.userLastname) filters["apellido"] = { [Op.like]: `%${formData.userLastname}%` }
+                if (formData.userEmail) filters["email"] = { [Op.like]: `%${formData.userEmail}%` }
+                if (formData.userRole) {
+                    if (formData.userRole == "2") filters["admin"] = true
+                    if (formData.userRole == "3") filters["super"] = true
+                }
+                formFilters = { where: filters };
+                queryFilters["where"] = filters;
+            }
+
+            const allElements = await db.usuario.findAll(formFilters)
+            const elements = await db.usuario.findAll(queryFilters)
+
+            localsParams["usersResults"] = {
+                elements,
+                quantity: allElements.length,
+                page: currentPage, 
+                resultsPerPage,
+             }
         }
-        
-        const usersList = wasFormSent ? await db.usuario.findAll(queryFilters) : null
-        res.render('./pages/usersPanel', { userData, usersList, formData });
+
+        res.render('./pages/usersPanel', localsParams);
     }
 };
 module.exports = controller;

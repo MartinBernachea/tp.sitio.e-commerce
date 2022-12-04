@@ -1,0 +1,200 @@
+
+<!-- 
+    Params que recibe el componente:
+    -quantity: cantidad resultados totales
+    -resultsPerPage: cantidad resultados por pagina
+    -page: pagina actual
+ -->
+
+ <!-- <a href="/user/account"><i class="fa-regular fa-user icon-header">123</i></a> -->
+
+<%  
+    const pagesNumber = Math.ceil(Number(locals.quantity / locals.resultsPerPage));
+    const maxIconPages = 5;
+    const buttonsPages = pagesNumber > 5 ? 5 : pagesNumber;
+%>
+
+<div class="pagination-container">
+    <% if(locals.page >= 5 && locals.page <= pagesNumber - maxIconPages +1 ) { %>
+        <button 
+            class="left-right-container"
+            name="page" 
+            type="submit" 
+            value="<%= Number(locals.page) - 1 %>"
+        > 
+            <i class="fa-solid fa-chevron-left form-pagination-number fa-sm left-button"></i>
+        </button>
+
+        <input 
+            class="form-pagination-number" 
+            type="submit" 
+            name="page" 
+            value="<%= 1 %>" 
+        />
+
+        <span>...</span>
+        <input 
+            class="form-pagination-number" 
+            type="submit" 
+            name="page" 
+            value="<%= Number(locals.page) - 1 %>" 
+        />
+
+        <input 
+            class="form-pagination-number selected" 
+            name="page" 
+            type="submit" 
+            value="<%= locals.page %>" 
+            disabled
+        />
+
+        <input 
+            class="form-pagination-number" 
+            type="submit" 
+            name="page" 
+            value="<%= Number(locals.page) + 1 %>" 
+        />
+        <span>...</span>
+        <input 
+            class="form-pagination-number" 
+            type="submit" 
+            name="page" 
+            value="<%= pagesNumber %>" 
+        />
+
+        <% if(Number(locals.page) == pagesNumber) { %>
+            <i class="fa-solid fa-chevron-right form-pagination-number fa-xs left-button disabled"></i>
+        <% } else { %>
+            <button 
+                class="left-right-container"
+                name="page" 
+                type="submit" 
+                value="<%= Number(locals.page) + 1 %>"
+            > 
+                <i class="fa-solid fa-chevron-right form-pagination-number fa-sm left-button"></i>
+            </button>
+        <% } %>
+
+    <% } else if(locals.page >= 5 && Number(locals.page) > pagesNumber - maxIconPages +1) { %> 
+        <% if(Number(locals.page) == 1) { %>
+            <i class="fa-solid fa-chevron-left form-pagination-number fa-xs left-button disabled"></i>
+        <% } else { %>
+            <button 
+                class="left-right-container"
+                name="page" 
+                type="submit" 
+                value="<%= Number(locals.page) - 1 %>"
+            > 
+                <i class="fa-solid fa-chevron-left form-pagination-number fa-sm left-button"></i>
+            </button>
+        <% } %>
+        
+        <input 
+            class="form-pagination-number" 
+            type="submit" 
+            name="page" 
+            value="<%= 1 %>" 
+        />
+
+        <span>...</span>
+
+        <% for(var i = pagesNumber - maxIconPages; i<=pagesNumber; i++) { %>   
+            <% if(i==locals.page) {%>
+                <input 
+                    class="form-pagination-number selected" 
+                    name="page" 
+                    type="submit" 
+                    value="<%= i %>" 
+                    disabled
+                />
+            <% } else { %>
+                <input 
+                    class="form-pagination-number" 
+                    type="submit" 
+                    name="page" 
+                    value="<%= i %>" 
+                />
+            <% } %>
+        <% } %>
+        
+        <% if(locals.page==pagesNumber) { %>
+            <i class="fa-solid fa-chevron-right form-pagination-number fa-xs left-button disabled"></i>
+        <% } else { %>
+            <button 
+                class="left-right-container"
+                name="page" 
+                type="submit" 
+                value="<%= Number(locals.page) + 1 %>"
+            > 
+                <i class="fa-solid fa-chevron-right form-pagination-number fa-sm left-button"></i>
+            </button>
+        <% } %>
+
+
+    <% } else if(locals.page < 5) { %>    
+        <% if(locals.page==1) { %>
+            <i class="fa-solid fa-chevron-left form-pagination-number fa-xs left-button disabled"></i>
+        <% } else { %>
+            <button 
+                class="left-right-container"
+                name="page" 
+                type="submit" 
+                value="<%= Number(locals.page) - 1 %>"
+            > 
+                <i class="fa-solid fa-chevron-left form-pagination-number fa-sm left-button"></i>
+            </button>
+        <% } %>
+
+        <% for(var i = 1; i<=buttonsPages; i++) { %>   
+            <% if(i==locals.page) {%>
+                <input 
+                    class="form-pagination-number selected" 
+                    name="page" 
+                    type="submit" 
+                    value="<%= i %>" 
+                    disabled
+                />
+            <% } else { %>
+                <input 
+                    class="form-pagination-number" 
+                    type="submit" 
+                    name="page" 
+                    value="<%= i %>" 
+                />
+            <% } %>
+        <% } %>
+
+        <% if(pagesNumber > maxIconPages) { %>
+            <span>...</span>
+            <% if(pagesNumber==locals.page) {%>
+                <input 
+                    class="form-pagination-number selected" 
+                    name="page" 
+                    type="submit" 
+                    value="<%= pagesNumber %>" 
+                    disabled
+                />
+            <% } else { %>
+                <input 
+                    class="form-pagination-number" 
+                    type="submit" 
+                    name="page" 
+                    value="<%= pagesNumber %>" 
+                />
+            <% } %>
+        <% } %>
+
+        <% if(Number(locals.page) == pagesNumber) { %>
+            <i class="fa-solid fa-chevron-right form-pagination-number fa-xs left-button disabled"></i>
+        <% } else { %>
+            <button 
+                class="left-right-container"
+                name="page" 
+                type="submit" 
+                value="<%= Number(locals.page) + 1 %>"
+            > 
+                <i class="fa-solid fa-chevron-right form-pagination-number fa-sm left-button"></i>
+            </button>
+        <% } %>
+    <% } %>
+</div>

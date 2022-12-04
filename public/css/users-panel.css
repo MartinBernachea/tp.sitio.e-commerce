@@ -1,12 +1,69 @@
-table{
+table {
     width: 100%;
     max-width: 500px;
 }
 
 tr th {
-    padding:4px;
+    padding: 4px;
 }
 
 tr {
     border-bottom: 2px solid black;
+}
+
+
+
+
+.pagination-container {
+    display: flex;
+}
+
+.pagination-container span {
+    width: 35px;
+    height: 35px;
+    padding-top:5px;
+    text-align: center;
+}
+
+.pagination-container .left-button {
+    position: relative;
+}
+
+.pagination-container .left-button::before {
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-5px, 1px);  
+}
+
+.pagination-container .left-right-container {
+    border:none;
+    background-color: transparent;
+}
+
+.form-pagination-number {
+    width: 35px;
+    height: 35px;
+    border: none;
+    margin: 0 4px;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.form-pagination-number.selected {
+    background-color: #f0f0f0;
+}
+
+.form-pagination-number:not(.selected):hover {
+    background-color: #d2d2d2;
+    cursor: pointer;
+}
+
+.pagination-container .disabled::before {
+    color: #a7a6a7;
+}
+
+.pagination-container .disabled:hover {
+    background-color: transparent;
+    cursor: default;
 }
