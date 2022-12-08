@@ -22,12 +22,12 @@
   <main>
 
     <section class="form ">
-      <form class="form-box" action="register" method="POST" >
+      <form class="form-box" action="register" method="POST"  id="register">
         <fieldset class="form-fieldset">
           <h1>REGISTRATE</h1>
 
           <label for="cName" class="label"> </label>
-          <input name="cName" class="input-text" type="text" tabindex="1" placeholder="Nombres" value="<%= (locals.old?.cName) ? old.cName : '' %>" />
+          <input name="cName" id="cName" class="input-text" type="text" tabindex="1" placeholder="Nombres" value="<%= (locals.old?.cName) ? old.cName : '' %>" />
 
           <% if (locals && locals.errors) { %>
             <% if (locals.errors[0].param=="cName") { %>
@@ -36,7 +36,7 @@
           <% } %>
 
           <label for="cLastName" class="label"> </label>
-          <input name="cLastName" class="input-text" type="text" tabindex="2" placeholder="Apellidos" value="<%= (locals.old?.cLastName) ? old.cLastName : '' %>" />
+          <input name="cLastName" id="cLastName" class="input-text" type="text" tabindex="2" placeholder="Apellidos" value="<%= (locals.old?.cLastName) ? old.cLastName : '' %>" />
 
           <% if (locals && locals.errors) { %>
             <% if (locals.errors[0].param=="cLastName") { %>
@@ -45,7 +45,7 @@
           <% } %>
 
           <label for="email" class="label"></label>
-          <input name="email" class="input-text" type="email" tabindex="3" placeholder="Email" value="<%= (locals.old?.email) ? old.email : '' %>"/>
+          <input name="email" id="email" class="input-text" type="email" tabindex="3" placeholder="Email" value="<%= (locals.old?.email) ? old.email : '' %>"/>
 
           <% if (locals && locals.errors) { %>
             <% if (locals.errors[0].param=="email") { %>
@@ -54,7 +54,7 @@
           <% } %>
 
           <label for="password" class="label"> </label>
-          <input name="password" class="input-text" type="password" tabindex="4" placeholder="Contraseña"  />
+          <input name="password" id="password" class="input-text" type="password" tabindex="4" placeholder="Contraseña"  />
 
           <% if (locals && locals.errors) { %>
             <% if (locals.errors[0].param=="password") { %>
@@ -63,7 +63,7 @@
           <% } %>
 
           <label for="cPassword" class="label"> </label>
-          <input name="cPassword" class="input-text" type="password" tabindex="5"
+          <input name="cPassword" id="cPassword" class="input-text" type="password" tabindex="5"
             placeholder="Confirmar contraseña"  />
 
             <% if (locals && locals.errors) { %>
@@ -103,5 +103,7 @@
   <%- include('partials/footer') %>
   <!-- /footer -->
 </body>
+
+<script src="/js/validationsCreate.js"></script>
 
 </html>
