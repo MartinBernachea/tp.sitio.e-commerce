@@ -44,65 +44,89 @@
                 <h1> Panel de usuarios: </h1>
 
                 <form action="panel" method="GET">
-                    <input name="userName" placeholder="Nombre" type="text" value="<%= (locals.formData?.userName) ?? '' %>" />
-                    <input name="userLastname" placeholder="Apellido" type="text" value="<%= (locals.formData?.userLastname) ?? '' %>"/>
-                    <input name="userEmail" placeholder="Email" type="text" value="<%= (locals.formData?.userEmail) ?? '' %>"/>
+                    <input name="userName" placeholder="Nombre" type="text"
+                        value="<%= (locals.formData?.userName) ?? '' %>" />
+                    <input name="userLastname" placeholder="Apellido" type="text"
+                        value="<%= (locals.formData?.userLastname) ?? '' %>" />
+                    <input name="userEmail" placeholder="Email" type="text"
+                        value="<%= (locals.formData?.userEmail) ?? '' %>" />
+                    Rol:
                     <select name="userRole">
-                        <option value="" > Todos </option>
-                        <option value="1" <% if(locals.formData?.userRole == 1) { %> selected<%}%> > Usuario </option>
-                        <option value="2" <% if(locals.formData?.userRole == 2) { %> selected<%}%> > Admin </option>
-                        <option value="3" <% if(locals.formData?.userRole == 3) { %> selected<%}%> > Super </option>
+                        <option value=""> Todos </option>
+                        <option value="1" <% if(locals.formData?.userRole==1) { %> selected<%}%> > Usuario </option>
+                        <option value="2" <% if(locals.formData?.userRole==2) { %> selected<%}%> > Admin </option>
+                        <option value="3" <% if(locals.formData?.userRole==3) { %> selected<%}%> > Super </option>
                     </select>
-                    <button type="submit" class="btn-primary"> Buscar </button>
-                
-                    <div class="users-form-response">
-                        <% if(locals.usersResults) {%>
-                            <% if(locals.usersResults.quantity > 0) {%>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Email</th>
-                                            <th>Admin</th>
-                                            <th>Super</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for(currentUser of locals.usersResults.elements) { %>
-                                            <tr>
-                                                <td><%= currentUser.nombre %></td>
-                                                <td><%= currentUser.apellido %></td>
-                                                <td><%= currentUser.email %></td>
-                                                <td><% if(currentUser.admin) {%> SI <%} else {%> NO <%}%></td>
-                                                <td><% if(currentUser.super) {%> SI <%} else {%> NO <%}%></td>
-                                                <td></td>
-                                            </tr>
-                                        <% } %>
-                                    </tbody>
-                                </table>
+                    Restringido:
+                    <select name="userRestringido">
+                        <option value=""> Todos </option>
+                        <option value="1" <% if(locals.formData?.userRestringido==1) { %> selected<%}%> > SI </option>
+                        <option value="2" <% if(locals.formData?.userRestringido==2) { %> selected<%}%> > NO </option>
+                    </select>
 
-                                <%- include('partials/tablePagination', {
-                                    quantity: locals.usersResults.quantity,
-                                    resultsPerPage: locals.usersResults.resultsPerPage,
-                                    page: locals.usersResults.page,
-                                }) %>
-                            
+                    <button type="submit" class="btn-primary"> Buscar </button>
+
+                    <% if(locals.usersResults) {%>
+                        <% if(locals.usersResults.quantity> 0) {%>
+                            <table id="user-edit-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Email</th>
+                                        <th>Admin</th>
+                                        <th>Super</th>
+                                        <th>Restringido</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-user-panel">
+                                    <% for(currentUser of locals.usersResults.elements) { %>
+                                        <tr>
+                                            <td>
+                                                <%= currentUser.nombre %>
+                                            </td>
+                                            <td>
+                                                <%= currentUser.apellido %>
+                                            </td>
+                                            <td>
+                                                <%= currentUser.email %>
+                                            </td>
+                                            <td>
+                                                <% if(currentUser.admin) {%> SI <%} else {%> NO <%}%>
+                                            </td>
+                                            <td>
+                                                <% if(currentUser.super) {%> SI <%} else {%> NO <%}%>
+                                            </td>
+                                            <td>
+                                                <% if(currentUser.restringido) {%> SI <%} else {%> NO <%}%>
+                                            </td>
+                                            <td style="padding:0 4px">
+                                                <%- include('partials/modals/userEditModal', {userData: currentUser}) %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                            <div class="user-form-pagination-container">
+                                <%- include('partials/tablePagination', { quantity: locals.usersResults.quantity,
+                                    resultsPerPage: locals.usersResults.resultsPerPage, page: locals.usersResults.page,
+                                    }) %>
+                            </div>
                             <% } else { %>
                                 <p>No hay coincidencias con la busqueda</p>
-                            <% } %>
-                        <% } %>
-                    </div>
+                                <% } %>
+                                    <% } %>
                 </form>
-
-                    <%- include('partials/userEditModal') %>
             </div>
         </main>
 
         <!-- footer -->
         <%- include('partials/footer') %>
             <!-- /footer -->
+
+
+            <script src="/js/user-edit-modal.js"></script>
 </body>
 
 </html>

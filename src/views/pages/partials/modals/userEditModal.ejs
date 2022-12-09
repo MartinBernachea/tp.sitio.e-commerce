@@ -1,0 +1,62 @@
+<div>
+    <div id="modalBackground" class="user-modal-background">
+        <div class="user-modal" id="modal<%= locals.userData.id %>">
+            <h1>Modificar datos de usuario:</h1>
+            <hr />
+            <form class="edit-user-form" action="editUser/<%= locals.userData.id %>" method="POST">
+                <div class="inputs-container">
+                    <label>
+                        Nombres:
+                        <input name="cName" class="input-text-secondary" type="text" tabindex="1" placeholder="Nombres"
+                            value="<%= locals.userData.nombre %>" />
+                    </label>
+
+                    <label>
+                        Apellidos:
+                        <input name="cLastName" class="input-text-secondary" type="text" tabindex="2"
+                            placeholder="Apellidos" value="<%= locals.userData.apellido %>" />
+                    </label>
+
+                    <label>
+                        Email:
+                        <input name="email" class="input-text-secondary" type="email" tabindex="3" placeholder="Email"
+                            value="<%= locals.userData.email %>" />
+                    </label>
+
+                    <div style="margin:18px 0">
+                        <div>
+                            ¿Tiene permisos de admin?
+                            <select name="admin">
+                                <option value="SI" <% if(locals.userData.admin){ %> selected <% } %> >SI</option>
+                                <option value="NO" <% if(!locals.userData.admin){ %> selected <% } %> >NO</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            ¿Tiene permisos de super?
+                            <select name="super">
+                                <option value="SI" <% if(locals.userData.super){ %> selected <% } %> >SI</option>
+                                <option value="NO" <% if(!locals.userData.super){ %> selected <% } %> >NO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        ¿Tiene acceso restringido a la plataforma?
+                        <select name="restringido">
+                            <option value="SI" <% if(locals.userData.restringido){ %> selected <% } %> >SI</option>
+                            <option value="NO" <% if(!locals.userData.restringido){ %> selected <% } %> >NO</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="buttons-container">
+                    <button id="btnCancelar-modal<%= locals.userData.id %>"
+                        class="btn-secondary btn-small btnCancelar">Cancelar</button>
+                    <button id="btnAplicar-modal<%= locals.userData.id %>"
+                        class="btn-primary btn-small btnAplicar">Aplicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <i class="fa-solid fa-pen fa-sm btnShow" id="btnShow-modal<%= locals.userData.id %>"></i>
+</div>

@@ -108,20 +108,26 @@ const controller = {
 
     },
     panel: async (req, res) => {
-        const resultsPerPage = 1;
+        const resultsPerPage = 10;
         const userData = getUserDataStringified(req);
         const formData = req.query;
 
-        let localsParams = { userData, formData}
-        
+        let localsParams = { userData, formData }
+
+        if (req.session.notificationAlert) {
+            localsParams.notificationAlert = req.session.notificationAlert;
+            req.session.notificationAlert = null
+        }
+
         const wasFormSent = Object.values(formData).length > 0;
         const isFormEmpty = Object.values(formData).every(ctValue => ctValue.trim() == "");
-        
+
         if (wasFormSent) {
             const currentPage = formData.page ?? 1;
             let queryFilters = {
                 limit: resultsPerPage,
-                offset: resultsPerPage * (currentPage - 1)
+                offset: resultsPerPage * (currentPage - 1),
+                attributes: ['id', 'nombre', 'apellido', "email", "admin", "super", "restringido"]
             }
 
             let formFilters;
@@ -133,8 +139,16 @@ const controller = {
                 if (formData.userLastname) filters["apellido"] = { [Op.like]: `%${formData.userLastname}%` }
                 if (formData.userEmail) filters["email"] = { [Op.like]: `%${formData.userEmail}%` }
                 if (formData.userRole) {
+                    if (formData.userRole == "1") {
+                        filters["admin"] = false
+                        filters["super"] = false
+                    }
                     if (formData.userRole == "2") filters["admin"] = true
                     if (formData.userRole == "3") filters["super"] = true
+                }
+                if (formData.userRestringido) {
+                    if (formData.userRestringido == "1") filters["restringido"] = true
+                    if (formData.userRestringido == "2") filters["super"] = false
                 }
                 formFilters = { where: filters };
                 queryFilters["where"] = filters;
@@ -143,15 +157,49 @@ const controller = {
             const allElements = await db.usuario.findAll(formFilters)
             const elements = await db.usuario.findAll(queryFilters)
 
+            console.log("elements", elements)
+
             localsParams["usersResults"] = {
                 elements,
                 quantity: allElements.length,
-                page: currentPage, 
+                page: currentPage,
                 resultsPerPage,
-             }
+            }
         }
 
         res.render('./pages/usersPanel', localsParams);
+    },
+    editUser: async (req, res) => {
+        const newData = {
+            nombre: req.body.cName,
+            apellido: req.body.cLastName,
+            email: req.body.email,
+            admin: req.body.admin == "SI",
+            super: req.body.super == "SI",
+            restringido: req.body.restringido == "SI",
+        }
+
+        console.log("newData", newData)
+        try {
+            const resp = await db.usuario.update(newData, { where: { id: req.params.id } });
+            console.log("resp", resp)
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                title: "Usuario editado correctamente",
+            }
+            res.redirect('/user/panel')
+
+        } catch (err) {
+            console.log("err", err)
+            req.session.notificationAlert = {
+                type: "danger",
+                boldTitle: "Bien! ",
+                title: "Usuario editado correctamente",
+            }
+            // res.redirect('/user/panel')
+        }
     }
+
 };
 module.exports = controller;

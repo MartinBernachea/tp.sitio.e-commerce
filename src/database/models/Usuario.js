@@ -31,6 +31,11 @@ function usuarioData(sequelize, Datatypes) {
             type: Datatypes.BOOLEAN,
             allowNull: false,
         },
+        restringido: {
+            type: Datatypes.BOOLEAN,
+            defaultValue: 0,
+            allowNull: false,
+        },
     }
 
 

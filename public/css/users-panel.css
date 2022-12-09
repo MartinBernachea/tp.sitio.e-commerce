@@ -1,18 +1,46 @@
 table {
     width: 100%;
-    max-width: 500px;
+    max-width: 800px;
+    margin: 30px auto;
+    margin-top: 50px;
+    border-spacing: 0;
 }
 
 tr th {
     padding: 4px;
 }
 
-tr {
-    border-bottom: 2px solid black;
+thead tr {
+    background-color: #f58d8d;
+}
+
+tbody tr td {
+    text-align: center;
+}
+
+tbody tr {
+    height: 40px;
 }
 
 
+tbody tr:nth-child(odd) {
+    background-color: #e9e9e9;
+}
 
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+
+.hiddenModal {
+    display: none;
+}
+
+.user-form-pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
 
 .pagination-container {
     display: flex;
@@ -21,7 +49,7 @@ tr {
 .pagination-container span {
     width: 35px;
     height: 35px;
-    padding-top:5px;
+    padding-top: 5px;
     text-align: center;
 }
 
@@ -31,13 +59,13 @@ tr {
 
 .pagination-container .left-button::before {
     position: absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-5px, 1px);  
+    left: 50%;
+    top: 50%;
+    transform: translate(-5px, 1px);
 }
 
 .pagination-container .left-right-container {
-    border:none;
+    border: none;
     background-color: transparent;
 }
 
@@ -67,3 +95,66 @@ tr {
     background-color: transparent;
     cursor: default;
 }
+
+.user-modal {
+    width: 600px;
+    height: 400px;
+    z-index: 999;
+    background-color: #fff;
+    margin-bottom: 10%;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+.user-modal-background {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #19192071;
+    justify-content: center;
+    align-items: center;
+    transition: 400ms all ease-in-out;
+}
+
+.show-modal {
+    display: flex;
+    opacity: 1;
+    transition: 400ms all ease-in-out;
+}
+
+.edit-user-form {
+    flex-grow: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-user-form .buttons-container {
+    width: 100%;
+    background-color: #e7e1e1d7;
+    padding: 15px 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.edit-user-form .inputs-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-user-form .inputs-container * {
+    margin-top: 4px;
+}
+
