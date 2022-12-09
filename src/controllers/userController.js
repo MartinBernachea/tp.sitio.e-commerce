@@ -120,7 +120,9 @@ const controller = {
         }
 
         const wasFormSent = Object.values(formData).length > 0;
-        const isFormEmpty = Object.values(formData).every(ctValue => ctValue.trim() == "");
+        const isFormEmpty = Object.values(formData).every(ctValue => {
+            return ctValue.trim() ? ctValue.trim() : ctValue
+        });
 
         if (wasFormSent) {
             const currentPage = formData.page ?? 1;
@@ -170,6 +172,7 @@ const controller = {
         res.render('./pages/usersPanel', localsParams);
     },
     editUser: async (req, res) => {
+        console.log("ENTRAMOS")
         const newData = {
             nombre: req.body.cName,
             apellido: req.body.cLastName,
@@ -188,7 +191,7 @@ const controller = {
                 boldTitle: "Bien! ",
                 title: "Usuario editado correctamente",
             }
-            res.redirect('/user/panel')
+            res.status(200).json({ status: 200, message: "OK" })
 
         } catch (err) {
             console.log("err", err)
@@ -197,7 +200,7 @@ const controller = {
                 boldTitle: "Bien! ",
                 title: "Usuario editado correctamente",
             }
-            // res.redirect('/user/panel')
+            res.status(200).json({ status: 200, message: "OK" })
         }
     }
 

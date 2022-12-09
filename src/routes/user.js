@@ -7,7 +7,7 @@ const path = require('path');
 const multer = require('multer');
 
 const { userRegisterValidation, userLoginValidation } = require("../utils/validations");
-const { userPermissions, adminPermissions, noUserPermissions, superPermissions } = require('./permission');
+const { userPermissions, adminPermissions, noUserPermissions, superPermissions, superPermissionsJSON } = require('./permission');
 
 //***  MULTER  ****/
 const multerDiskStorage = multer.diskStorage({
@@ -28,9 +28,9 @@ router.post('/register', noUserPermissions, userRegisterValidation, userControll
 router.get('/account', userPermissions, userController.account);
 
 router.get('/panel', superPermissions, userController.panel);
-router.post('/editUser/:id', superPermissions, userController.editUser);
+router.post('/editUser/:id', superPermissionsJSON, userController.editUser);
 
-router.get('/login', /* noUserPermissions, */ userController.login);
+router.get('/login', noUserPermissions, userController.login);
 router.post('/login', noUserPermissions, userLoginValidation, userController.processLogin);
 
 router.get('/logOut', userPermissions, userController.logOut);

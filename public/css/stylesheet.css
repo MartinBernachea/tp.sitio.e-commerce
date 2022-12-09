@@ -5,6 +5,7 @@
 @import url(./coming-soon.css);
 @import url(./product-form.css);
 @import url(./users-panel.css);
+@import url(./loader.css);
 
 * {
   font-family: "Hind Vadodara", sans-serif;
@@ -33,6 +34,11 @@ a {
 a:hover,
 a i:hover {
   color: #c70039;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .titulares {

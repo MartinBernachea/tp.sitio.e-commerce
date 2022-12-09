@@ -3,7 +3,7 @@
         <div class="user-modal" id="modal<%= locals.userData.id %>">
             <h1>Modificar datos de usuario:</h1>
             <hr />
-            <form class="edit-user-form" action="editUser/<%= locals.userData.id %>" method="POST">
+            <div class="edit-user-form" action="editUser/<%= locals.userData.id %>" method="POST">
                 <div class="inputs-container">
                     <label>
                         Nombres:
@@ -47,16 +47,21 @@
                             <option value="NO" <% if(!locals.userData.restringido){ %> selected <% } %> >NO</option>
                         </select>
                     </div>
-
                 </div>
+
                 <div class="buttons-container">
                     <button id="btnCancelar-modal<%= locals.userData.id %>"
                         class="btn-secondary btn-small btnCancelar">Cancelar</button>
                     <button id="btnAplicar-modal<%= locals.userData.id %>"
                         class="btn-primary btn-small btnAplicar">Aplicar</button>
+                    <button id="loader" class="btn-primary btn-small" style="display:none">
+                        <%- include('../components/spinner') %>
+                    </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-    <i class="fa-solid fa-pen fa-sm btnShow" id="btnShow-modal<%= locals.userData.id %>"></i>
+    <i class="btnShow" id="btnShow-modal<%= locals.userData.id %>">X</i>
 </div>
+
+<!-- <i class="fa-solid fa-pen fa-sm btnShow" id="btnShow-modal<%= locals.userData.id %>">X</i> -->

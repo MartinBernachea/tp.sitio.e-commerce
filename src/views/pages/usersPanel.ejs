@@ -43,7 +43,7 @@
             <div class='div-containter'>
                 <h1> Panel de usuarios: </h1>
 
-                <form action="panel" method="GET">
+                <form id="userPanelForm" action="panel" method="GET">
                     <input name="userName" placeholder="Nombre" type="text"
                         value="<%= (locals.formData?.userName) ?? '' %>" />
                     <input name="userLastname" placeholder="Apellido" type="text"

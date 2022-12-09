@@ -1,19 +1,26 @@
 const userEditTable = document.querySelector("#user-edit-table");
+let formLoading = false;
 
 let modalData = {
     stored: {},
-    saveInitialValues: (modalId) => {
+    getModalData: (modalId) => {
+        let currentData = {};
         const formInputs = document.querySelectorAll(`#${modalId} input`)
         const formSelects = document.querySelectorAll(`#${modalId} select`)
         const formElements = [...formInputs, ...formSelects]
-        console.log("formElements", formElements)
         formElements.forEach(ctElement => {
-            modalData.stored = {
-                ...modalData.stored
+            currentData = {
+                ...currentData
                 , [ctElement.name]: ctElement.value
             }
         })
+        return currentData;
     },
+
+    saveInitialValues: (modalId) => {
+        modalData.stored = modalData.getModalData(modalId);
+    },
+
     restoreInitialValues: (modalId) => {
         const formInputs = document.querySelectorAll(`#${modalId} input`)
         const formSelects = document.querySelectorAll(`#${modalId} select`)
@@ -44,37 +51,74 @@ const getModalId = (event) => {
     return eventSplitted[1];
 }
 
-userEditTable.addEventListener("click", (event) => {
-
-    if (event.target.classList.contains("btnShow")) {
-        const modalId = getModalId(event);
-        modalData.saveInitialValues(modalId);
-        showModal(modalId);
-        return
-    }
-
-    if (event.target.classList.contains("btnCancelar")) {
-        event.preventDefault();
-        const modalId = getModalId(event);
-        hiddeModal(modalId)
-        modalData.restoreInitialValues(modalId);
-        return
-    }
-
-    if (event.target.classList.contains("btnAplicar")) {
-        /* TODO: VALIDACIONES DEL FORM */
-        if (false) {
-            event.preventDefault();
-            return;
+const setLoadingModal = (loading, modalId) => {
+    const formInputs = document.querySelectorAll(`#${modalId} input`)
+    const formSelects = document.querySelectorAll(`#${modalId} select`)
+    const formElements = [...formInputs, ...formSelects];
+    formElements.forEach(ctElement => ctElement.disabled = true)
+    formLoading = loading;
+    const arrButtons = document.querySelectorAll(`#${modalId} .buttons-container button`)
+    arrButtons.forEach(ctElement => {
+        if (loading) {
+            ctElement.id == "loader" ? ctElement.style.display = "flex" : ctElement.style.display = "none"
+        } else {
+            ctElement.id == "loader" ? ctElement.style.display = "none" : ctElement.style.display = "flex"
         }
-        return
-    }
+    })
+}
 
-    if (event.target.id == "modalBackground") {
-        const modalId = event.target.firstElementChild.id
-        hiddeModal(modalId)
-        modalData.restoreInitialValues(modalId);
-        return
-    }
+const sendEditUser = async (modalId) => {
+    const prefijo = "modal"
+    const id = modalId.slice(prefijo.length, modalId.length)
+    setLoadingModal(true, modalId);
+    try {
 
+        await fetch(window.location.origin + "/user/editUser/" + id, {
+            method: 'POST',
+            body: JSON.stringify(modalData.getModalData(modalId)),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(response => response.json())
+            .then(response => {
+                document.querySelector("#userPanelForm").submit();
+                hiddeModal(modalId)
+            })
+
+    } catch (err) {
+        console.log("err".err)
+    } finally { setLoadingModal(false, modalId); }
+
+}
+
+userEditTable.addEventListener("click", (event) => {
+    if (!formLoading) {
+        if (event.target.classList.contains("btnShow")) {
+            const modalId = getModalId(event);
+            modalData.saveInitialValues(modalId);
+            showModal(modalId);
+            return
+        }
+
+        if (event.target.classList.contains("btnCancelar")) {
+            event.preventDefault();
+            const modalId = getModalId(event);
+            hiddeModal(modalId)
+            modalData.restoreInitialValues(modalId);
+            return
+        }
+
+        if (event.target.classList.contains("btnAplicar")) {
+            event.preventDefault();
+            const modalId = getModalId(event);
+            sendEditUser(modalId)
+            return
+        }
+
+        if (event.target.id == "modalBackground") {
+            const modalId = event.target.firstElementChild.id
+            hiddeModal(modalId)
+            modalData.restoreInitialValues(modalId);
+            return
+        }
+    }
 })
