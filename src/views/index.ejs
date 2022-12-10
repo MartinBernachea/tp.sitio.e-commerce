@@ -20,7 +20,28 @@
     <!-- MAIN -->
     <main>
         <!--BANNER -->
-        <img src="./img/FOTO-BANNER.png" alt="img-home-banner" class="home-banner">
+        <div class="center">
+            <div class="banner-container">
+                <div class="images">
+                    <img src="./img/banner/campeones.png" alt="">
+                    <img src="./img/banner/messias.jpg" alt="">
+                    <img src="./img/banner/seleccion.jpg" alt="">
+                </div>
+    
+                <div onclick="side_slide(-1)" class="slide left">
+                    <span class="fas fa-angle-left"></span>
+                </div>
+                <div onclick="side_slide(1)" class="slide right">
+                    <span class="fas fa-angle-right"></span>
+                </div>
+    
+                <div class="btn-sliders">
+                    <span onclick="btn_slide(1)"></span>
+                    <span onclick="btn_slide(2)"></span>
+                    <span onclick="btn_slide(3)"></span>
+                </div>
+            </div>
+        </div>
 
         <!--SECTIONS-->
         <section class="caja-grande">
@@ -132,6 +153,7 @@
     <!-- footer -->
     <%- include('./pages/partials/footer') %>
     <!-- /footer -->
+	<script src="/js/index.js"></script>
 </body>
 
 </html>
