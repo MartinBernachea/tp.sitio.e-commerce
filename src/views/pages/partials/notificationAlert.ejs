@@ -6,17 +6,27 @@
  -->
 
 <% if (locals.notificationAlert) { %>
-    <div id="alert" class="alert bottom <%= 
+    <script>
+        window.onload = () => {
+            document.querySelector("#notificationAlert").classList.add("show")
+        }
+    </script>
+
+    <div id="notificationAlert" class="alert bottom <%= 
     locals.notificationAlert.type=='success' ? 'success' :
         locals.notificationAlert.type=='info' ? 'info' :
             locals.notificationAlert.type=='danger' ? 'danger' : '' 
     %>">
-        <i class="fa-solid fa-check fa-2xl"></i>
-        <p class="alert-msg">
-            <b><%=locals.notificationAlert.boldTitle%></b><%=locals.notificationAlert.title%><br>
-            <span><%-locals.notificationAlert.tag%></span>
-            <span><%=locals.notificationAlert.description%></span>
-        </p>
-        <i class="fa-solid fa-xmark fa-lg"></i>
+        <div class="alert-container">
+            <i class="fa-solid fa-check fa-2xl"></i>
+            <p class="alert-msg">
+                <b><%=locals.notificationAlert.boldTitle%></b><%=locals.notificationAlert.title%><br>
+                <span><%-locals.notificationAlert.tag%></span>
+                <span><%=locals.notificationAlert.description%></span>
+            </p>
+            <i id="btn-close-alert" class="fa-solid fa-xmark fa-lg"></i>
+            <div id="alert-time-mark"></div>
+        </div>
     </div>
+    <script src="/js/notificationAlert.js"></script>
 <% } %>

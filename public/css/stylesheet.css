@@ -613,16 +613,13 @@ button:disabled {
 /* NOTIFICATION ALERT */
 .alert {
   position: fixed;
+  overflow: hidden;
   width: 380px;
   height: 90px;
-  padding: 10px 15px;
   z-index: 9;
-  background-color: red;
   border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   opacity: 0.5;
+  transition: all 500ms ease-out;
 }
 
 .alert-msg {
@@ -638,8 +635,22 @@ button:disabled {
   bottom: 20px;
   left: 100%;
   transition: all 500ms ease-out;
+}
+
+.alert.bottom.show {
   opacity: 0.92;
   transform: translateX(-420px);
+  transition: all 500ms ease-out;
+}
+
+.alert-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 /* SUCCESS */
@@ -718,4 +729,23 @@ button:disabled {
 
 .alert.info .fa-xmark:hover {
   color: #4280b0;
+}
+
+.alert.bottom.hidde-alert {
+  transform: translateX(0px);
+  transition-delay: 0ms;
+}
+
+#alert-time-mark {
+  position: absolute;
+  bottom: 0;
+  right: 100%;
+  width: 100%;
+  height: 5px;
+  background-color: rgba(83, 83, 83, 0.527);
+}
+
+#notificationAlert.active #alert-time-mark {
+  right: 0;
+  transition: 6000ms all linear;
 }
