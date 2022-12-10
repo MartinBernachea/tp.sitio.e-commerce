@@ -40,32 +40,61 @@
 
         <!-- MAIN -->
         <main>
-            <div class='div-containter'>
+            <section class='section-user-panel caja-grande'>
                 <h1> Panel de usuarios: </h1>
 
                 <form id="userPanelForm" action="panel" method="GET">
-                    <input name="userName" placeholder="Nombre" type="text"
-                        value="<%= (locals.formData?.userName) ?? '' %>" />
-                    <input name="userLastname" placeholder="Apellido" type="text"
-                        value="<%= (locals.formData?.userLastname) ?? '' %>" />
-                    <input name="userEmail" placeholder="Email" type="text"
-                        value="<%= (locals.formData?.userEmail) ?? '' %>" />
-                    Rol:
-                    <select name="userRole">
-                        <option value=""> Todos </option>
-                        <option value="1" <% if(locals.formData?.userRole==1) { %> selected<%}%> > Usuario </option>
-                        <option value="2" <% if(locals.formData?.userRole==2) { %> selected<%}%> > Admin </option>
-                        <option value="3" <% if(locals.formData?.userRole==3) { %> selected<%}%> > Super </option>
-                    </select>
-                    Restringido:
-                    <select name="userRestringido">
-                        <option value=""> Todos </option>
-                        <option value="1" <% if(locals.formData?.userRestringido==1) { %> selected<%}%> > SI </option>
-                        <option value="2" <% if(locals.formData?.userRestringido==2) { %> selected<%}%> > NO </option>
-                    </select>
+                    <div class="form-header-container">
+                        <div class="form-inputs-container">
+                            <label class="form-label-input">
+                                <span>Nombre:</span>
+                                <input name="userName" type="text" placeholder="Joe"
+                                    value="<%= (locals.formData?.userName) ?? '' %>" />
+                            </label>
+                            <label class="form-label-input">
+                                <span>Apellido:</span>
+                                <input name="userLastname" type="text" placeholder="Doe"
+                                    value="<%= (locals.formData?.userLastname) ?? '' %>" />
+                            </label>
+                            <label class="form-label-input">
+                                <span>Email:</span>
+                                <input name="userEmail" type="text" placeholder="joe-doe@gmail.com"
+                                    value="<%= (locals.formData?.userEmail) ?? '' %>" />
+                            </label>
+                        </div>
+                        <div class="form-inputs-container">
+                            <label class="form-label-input">
+                                <span>Rol:</span>
+                                <select name="userRole">
+                                    <option value=""> Todos </option>
+                                    <option value="1" <% if(locals.formData?.userRole==1) { %> selected<%}%> >
+                                            Usuario
+                                    </option>
+                                    <option value="2" <% if(locals.formData?.userRole==2) { %> selected<%}%> > Admin
+                                    </option>
+                                    <option value="3" <% if(locals.formData?.userRole==3) { %> selected<%}%> > Super
+                                    </option>
+                                </select>
+                            </label>
+                            <label class="form-label-input">
+                                <span>Restringido:</span>
+                                <select name="userRestringido">
+                                    <option value=""> Todos </option>
+                                    <option value="1" <% if(locals.formData?.userRestringido==1) { %> selected<%}%>
+                                            > SI
+                                    </option>
+                                    <option value="2" <% if(locals.formData?.userRestringido==2) { %> selected<%}%>
+                                            > NO
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
 
-                    <button type="submit" class="btn-primary"> Buscar </button>
-
+                    </div>
+                    <div class="form-buttons-container">
+                        <button type="reset" class="btn-secondary"> Limpiar </button>
+                        <button type="submit" class="btn-primary"> Buscar </button>
+                    </div>
                     <% if(locals.usersResults) {%>
                         <% if(locals.usersResults.quantity> 0) {%>
                             <table id="user-edit-table">
@@ -118,7 +147,8 @@
                                 <% } %>
                                     <% } %>
                 </form>
-            </div>
+
+            </section>
         </main>
 
         <!-- footer -->
