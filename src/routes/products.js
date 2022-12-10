@@ -42,6 +42,9 @@ router.get('/coming-soon', adminPermissions, productsController.comingSoon);
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
 router.get('/detail/:id', productsController.detail);
 
+/*** STORE CON FILTROS ***/
+router.get('/store', productsController.store);
+
 /*** CREATE ONE PRODUCT ***/
 router.get('/create', adminPermissions, productsController.create);
 router.post('/create', adminPermissions, multipleImages, productCreateValidation, productsController.store); // FALTA AGREGAR 'validaciones' de img

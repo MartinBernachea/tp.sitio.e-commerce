@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- head -->
+
+<head>
+    <%- include('partials/head') %>
+        <link rel="stylesheet" href="/css/stylesheet.css">
+
+        <title> G&X - Cart </title>
+</head>
+<!-- /head -->
+
+<body>
+    <div class="info-promo">
+        <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A
+        $20.000
+    </div>
+
+    <!-- Header -->
+    <%- include('partials/headerNav', locals) %>
+        <!-- /Header -->
+
+        <main>
+            <section class="caja-grande caja-grande2">
+                <div class="store-container">
+                    <aside class="store-filters-container">
+                        <form>
+                            <% if(locals.filters) { %>
+                                <% for(filter of locals.filters) { %>
+                                    <div class="filter-container">
+                                        <h3 class="filter-title"><%= filter.title %>: </h3>
+                                        <% if(filter.type=="check") { %>
+                                            <% for(option of filter.options) { %>
+                                                <label class="filter-label">
+                                                    <input type="checkbox" name="<%= option.description %>" 
+                                                        <% if(locals.applicated[option.description]) {%> checked <% } %>
+                                                    >
+                                                    <%= option.description %>
+                                                </label>
+                                            <% } %>
+                                        <% } %>
+
+                                        <% if(filter.type=="radio") { %>
+                                            <% for(option of filter.options) { %>
+                                                <label class="filter-label">
+                                                    <input type="radio" name="<%= filter.title %>" value="<%= option.description%>" 
+                                                        <% if(locals.applicated[filter.title] == option.description) {%> checked <% } %>
+                                                    >
+                                                    <%= option.description %>
+                                                </label>
+                                            <% } %>
+                                        <% } %>
+
+
+                                    </div>
+                                <% } %>
+                            <% } %>
+                            <button type="submit" class="btn-primary"> Aplicar </button>
+                        </form>
+                    </aside>
+                    <div class="store-results-container">
+                        <section>
+                            <div class="caja-chica-titulo">
+                                <h2 class="titulares">NUEVOS LANZAMIENTOS</h2>
+                                <a href="" class="titular-secundario">Ver Todos</a>
+                            </div>
+                            
+                            <div class="caja-chica-productos">
+                                <% if(locals.products.length > 0) {%>
+                                    <% for(let product of locals.products) { %>
+                                    <div class="product-card">
+                                        <a href="/detail/<%= product.id %>">
+                                            <div>
+                                                <img class="product-image" src="./img/products/<%= product.imagens[0].nombre %>"
+                                                    alt="img-producto">
+                                                <p class="info-precio">$<%= product.precio %></p>
+                                            </div>
+                                            <div class="product-data-container">
+                                                <p class="descripcion-producto"><%= product.nombre %></p>
+                                                <p class="categoria-producto"><%= product.categoria %></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <% } %>
+                                <% } %>
+                                
+                            </div>
+                        </section>
+        
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- footer -->
+        <%- include('partials/footer') %>
+            <!-- /footer -->
+</body>
+
+</html>

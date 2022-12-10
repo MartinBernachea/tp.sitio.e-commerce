@@ -188,6 +188,127 @@ const controller = {
             }
             res.redirect('/');
         })
+    },
+
+    store: (req, res) => {
+
+        console.log("req.query", req.query);
+
+
+        db.producto.findAll({
+            limit: 12,
+            include: [{
+                model: db.imagen,
+            }]
+        })
+            .then(products => {
+                const userData = getUserDataStringified(req);
+
+                if (req.session.notificationAlert) {
+                    localsParams.notificationAlert = req.session.notificationAlert;
+                    req.session.notificationAlert = null
+                }
+
+                const filters = [
+                    {
+                        title: "Ordenar por",
+                        type: "radio",
+                        options: [
+                            {
+                                id: 1,
+                                description: "Precio (de mayor a menor)"
+                            },
+                            {
+                                id: 2,
+                                description: "Precio (de menor a mayor)"
+                            },
+                        ]
+                    },
+                    {
+                        title: "Genero",
+                        type: "check",
+                        options: [
+                            {
+                                id: 3,
+                                description: "Mujer"
+                            },
+                            {
+                                id: 4,
+                                description: "Hombre"
+                            },
+                            {
+                                id: 5,
+                                description: "Niño"
+                            },
+                            {
+                                id: 5,
+                                description: "Unisex"
+                            },
+                        ]
+                    },
+                    {
+                        title: "Marca",
+                        type: "check",
+                        options: [
+                            {
+                                id: 6,
+                                description: "Nike"
+                            },
+                            {
+                                id: 7,
+                                description: "Adidas"
+                            },
+                            {
+                                id: 8,
+                                description: "Topper"
+                            }
+                        ]
+                    },
+                    {
+                        title: "Tipo de producto",
+                        type: "check",
+                        options: [
+                            {
+                                id: 9,
+                                description: "Calzado"
+                            },
+                            {
+                                id: 10,
+                                description: "Pantalones"
+                            },
+                            {
+                                id: 11,
+                                description: "Remeras"
+                            },
+                            {
+                                id: 12,
+                                description: "Camperas"
+                            }
+                        ]
+                    },
+                    {
+                        title: "Actividades",
+                        type: "check",
+                        options: [
+                            {
+                                id: 13,
+                                description: "Running"
+                            },
+                            {
+                                id: 14,
+                                description: "Futbol"
+                            }
+                        ]
+                    }
+                ]
+
+                let products1 = [...products]
+                products1.shift();
+                const products2 = [...products1, ...products1, ...products1, ...products1, ...products1, ...products1]
+                let localsParams = { products: [...products2], userData, filters, applicated: req.query }
+
+                res.render("./pages/store.ejs", localsParams)
+            })
     }
 };
 

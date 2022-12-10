@@ -1,0 +1,27 @@
+.store-container {
+    width: 100%;
+    display: flex;
+    /* background-color: red; */
+
+}
+
+.store-filters-container {
+    width: 20%;
+    max-width: 300px;
+    min-width: 230px;
+    /* background-color: blue; */
+
+}
+
+.store-results-container {
+    /* background-color: green; */
+    width: 70%;
+    flex-grow: 1;
+
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5px;
+}
