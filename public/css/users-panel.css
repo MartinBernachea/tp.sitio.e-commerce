@@ -171,11 +171,15 @@ tbody tr:nth-child(even) {
     pointer-events: none;
 }
 
+.user-modal-background.initial-position {
+    transform: translateY(-100%);
+}
+
 .show-modal {
     display: flex;
     opacity: 1;
     transition: 300ms opacity ease-in-out;
-    pointer-events:all;
+    pointer-events: all;
 }
 
 .edit-user-form {

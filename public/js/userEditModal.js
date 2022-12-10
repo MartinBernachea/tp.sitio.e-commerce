@@ -43,6 +43,17 @@ const hiddeModal = (modalId) => {
 
 const showModal = (modalId) => {
     const modalRef = document.querySelector("#" + modalId);
+    /* SOLUCION BUG */
+    /* 
+    Habian veces donde al cargar la seccion, de forma random, el modal aparecia visible y automaticamente desaparecia:
+    El modal inicialmente tiene clase con opacidad 0 y trans de opacidad de 500ms 
+    (supongo que el bug se daba porque al iniciar screen aparecia con opacidad 1 y transicionaba a 0, en lugar de iniciar directo con 0).
+    Se agrego una clase solo de uso inicial que ubica al modal en una posicion fuera de la screen, para que, si ese evento random sucede, 
+    no sea visible
+     */
+    if (modalRef.parentElement.classList.contains("initial-position")) modalRef.parentElement.classList.remove("initial-position")
+    /* SOLUCION BUG */
+
     modalRef.parentElement.classList.add("show-modal");
 }
 
