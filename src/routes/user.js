@@ -6,7 +6,7 @@ const { body } = require('express-validator');
 const path = require('path');
 const multer = require('multer');
 
-const { userRegisterValidation, userLoginValidation } = require("../utils/validations");
+const { userRegisterValidation } = require("../utils/validations");
 const { userPermissions, adminPermissions, noUserPermissions, superPermissions, superPermissionsJSON } = require('./permission');
 
 //***  MULTER  ****/
@@ -31,7 +31,7 @@ router.get('/panel', superPermissions, userController.panel);
 router.post('/editUser/:id', superPermissionsJSON, userController.editUser);
 
 router.get('/login', noUserPermissions, userController.login);
-router.post('/login', noUserPermissions, userLoginValidation, userController.processLogin);
+router.post('/login', noUserPermissions, userController.processLogin);
 
 router.get('/logOut', userPermissions, userController.logOut);
 

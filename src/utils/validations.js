@@ -15,11 +15,6 @@ const userRegisterValidation = [
     body('cPassword').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
 ]
 
-const userLoginValidation = [
-    body('email').notEmpty().withMessage('Completar campo'),
-    body('password').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
-]
-
 const customValidationErrorMsg = {
     existentMail: "Ya existe un usuario registrado con el mismo email",
     notMatchPass: "Las contraseñas ingresadas deben coincidir",
@@ -28,6 +23,5 @@ const customValidationErrorMsg = {
 module.exports = {
     productCreateValidation,
     userRegisterValidation,
-    userLoginValidation,
     customValidationErrorMsg
 }

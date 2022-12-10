@@ -65,20 +65,35 @@ const controller = {
 
         if (errors.isEmpty()) {
             const userData = await db.usuario.findOne({ where: { email: req.body.email } })
+            console.log("userData", userData)
+
+            if (!userData) {
+                return res.render('./pages/formLogin', {
+                    error: "Email invalido",
+                    old: req.body,
+                });
+            }
+
+            if (!bcrypt.compareSync(req.body.password, userData.password)) {
+                return res.render('./pages/formLogin', {
+                    error: "Password incorrecto",
+                    old: req.body,
+                });
+            }
+
+            if (userData.restringido) {
+                return res.render('./pages/formLogin', {
+                    error: "Acceso restringido: Comunicarse con el administrador del sitio",
+                    old: req.body,
+                });
+            }
+
             const frontUserData = {
                 nombre: userData.nombre,
                 email: userData.email,
                 admin: userData.admin,
                 super: userData.super,
             };
-
-            if (!userData) {
-                return res.send('email invalido')
-            }
-
-            if (!bcrypt.compareSync(req.body.password, userData.password)) {
-                return res.send('password incorrecto');
-            }
 
             if (req.body.mantenerSesion == 'on') {
                 res.cookie('user', JSON.stringify(frontUserData), { maxAge: 60000 });
@@ -172,7 +187,6 @@ const controller = {
         res.render('./pages/usersPanel', localsParams);
     },
     editUser: async (req, res) => {
-        console.log("ENTRAMOS")
         const newData = {
             nombre: req.body.cName,
             apellido: req.body.cLastName,
@@ -182,10 +196,8 @@ const controller = {
             restringido: req.body.restringido == "SI",
         }
 
-        console.log("newData", newData)
         try {
             const resp = await db.usuario.update(newData, { where: { id: req.params.id } });
-            console.log("resp", resp)
             req.session.notificationAlert = {
                 type: "success",
                 boldTitle: "Bien! ",
@@ -194,13 +206,12 @@ const controller = {
             res.status(200).json({ status: 200, message: "OK" })
 
         } catch (err) {
-            console.log("err", err)
             req.session.notificationAlert = {
                 type: "danger",
-                boldTitle: "Bien! ",
-                title: "Usuario editado correctamente",
+                boldTitle: "Ups! ",
+                title: "No se pudieron efectuar las modificaciones",
             }
-            res.status(200).json({ status: 200, message: "OK" })
+            res.status(500).json({ status: 500, message: "ERROR" })
         }
     }
 

@@ -92,3 +92,7 @@
 .redir-crear-cuenta {
   font-weight: bold;
 }
+
+.login-error-container{
+  margin-bottom: 8px;
+}
