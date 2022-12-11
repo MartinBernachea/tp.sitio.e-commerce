@@ -16,42 +16,48 @@
     <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A
     $20.000
   </div>
-	<!-- Header -->
-	<%- include('partials/headerNav') %>
-	<!-- /Header -->
+  <!-- Header -->
+  <%- include('partials/headerNav') %>
+  <!-- /Header -->
 
   <!-- MAIN -->
   <main>
     <!-- FORM -->
     <section class="form">
       <h1>INICIA SESION EN TU CUENTA</h1>
-      <form class="form-box background-log-form" action="login"  method="POST">
+      <form class="form-box background-log-form" action="login" method="POST">
         <div class="container">
           <!-- USUARIO -->
           <div class="fields">
-            <label for="email" class="label"></label>
-            <input type="text" name="email" class="input-text" tabindex="1"
-              placeholder="Introduce tu correo" value="<%= (locals.old?.email) ? old.email : '' %>" />
+            <div class="field-item">
+              <input type="text" name="email" class="input-text" tabindex="1" value="<%= (locals.old?.email) ? old.email : '' %>" required/>
+              <label for="email" class="label">
+                <span class="text-span">Correo</span>
+              </label>
 
               <% if (locals && locals.errors) { %>
-                <% if (locals.errors[0].param=="email") { %>
-                  <h3 style="color: red;"> <%= locals.errors[0].msg %>  </h3> 
-                <% } %>
+              <% if (locals.errors[0].param=="email") { %>
+              <h3 style="color: red;"> <%= locals.errors[0].msg %> </h3>
               <% } %>
-  
-            <label for="password" class="label"></label>
-            <input type="password" name="password" class="input-text" tabindex="1" placeholder="Introduce tu contrseña"/>
+              <% } %>
+            </div>
+            <div class="field-item">
+              <input type="password" name="password" class="input-text" tabindex="1" required/>
+              <label for="password" class="label">
+                <span class="text-span">Contraseña</span>
+              </label>
+
 
               <% if (locals && locals.errors) { %>
-                <% if (locals.errors[0].param=="password") { %>
-                  <h3 style="color: red;"> <%= locals.errors[0].msg %>  </h3> 
-                <% } %>
+              <% if (locals.errors[0].param=="password") { %>
+              <h3 style="color: red;"> <%= locals.errors[0].msg %> </h3>
               <% } %>
-
+              <% } %>
+            </div>
           </div>
           <div class="config-field">
             <label>
-              <input type="checkbox" class="checkbox-box" name="mantenerSesion"/>
+              <input type="checkbox" class="checkbox-box" name="mantenerSesion" />
               Mantener sesion iniciada
             </label>
             <a href=""> Se te olvido la contraseña? </a>
@@ -74,9 +80,9 @@
     </section>
   </main>
 
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
+  <!-- footer -->
+  <%- include('partials/footer') %>
+  <!-- /footer -->
 </body>
 
 </html>

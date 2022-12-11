@@ -21,63 +21,85 @@
   <!-- MAIN -->
   <main>
 
-    <section class="form ">
-      <form class="form-box" action="register" method="POST" >
+    <section class="form">
+      <form class="reg-form-box" action="register" method="POST">
         <fieldset class="form-fieldset">
           <h1>REGISTRATE</h1>
+          <div class="fields">
+            <div class="field-item">
+              <input name="cName" class="input-text" type="text" tabindex="1"
+                value="<%= (locals.old?.cName) ? old.cName : '' %>" required/>
+              <label for="cName" class="label">
+                <span class="text-span">Nombre</span>
+              </label>
 
-          <label for="cName" class="label"> </label>
-          <input name="cName" class="input-text" type="text" tabindex="1" placeholder="Nombres" value="<%= (locals.old?.cName) ? old.cName : '' %>" />
-
-          <% if (locals && locals.errors) { %>
-            <% if (locals.errors[0].param=="cName") { %>
-              <h3> <%= locals.errors[0].msg %>  </h3> 
-            <% } %>
-          <% } %>
-
-          <label for="cLastName" class="label"> </label>
-          <input name="cLastName" class="input-text" type="text" tabindex="2" placeholder="Apellidos" value="<%= (locals.old?.cLastName) ? old.cLastName : '' %>" />
-
-          <% if (locals && locals.errors) { %>
-            <% if (locals.errors[0].param=="cLastName") { %>
-              <h3> <%= locals.errors[0].msg %>  </h3> 
-            <% } %>
-          <% } %>
-
-          <label for="email" class="label"></label>
-          <input name="email" class="input-text" type="email" tabindex="3" placeholder="Email" value="<%= (locals.old?.email) ? old.email : '' %>"/>
-
-          <% if (locals && locals.errors) { %>
-            <% if (locals.errors[0].param=="email") { %>
-              <h3> <%= locals.errors[0].msg %>  </h3> 
-            <% } %>
-          <% } %>
-
-          <label for="password" class="label"> </label>
-          <input name="password" class="input-text" type="password" tabindex="4" placeholder="Contraseña"  />
-
-          <% if (locals && locals.errors) { %>
-            <% if (locals.errors[0].param=="password") { %>
-              <h3> <%= locals.errors[0].msg %>  </h3> 
-            <% } %>
-          <% } %>
-
-          <label for="cPassword" class="label"> </label>
-          <input name="cPassword" class="input-text" type="password" tabindex="5"
-            placeholder="Confirmar contraseña"  />
-
-            <% if (locals && locals.errors) { %>
-              <% if (locals.errors[0].param=="cPassword") { %>
-                <h3> <%= locals.errors[0].msg %>  </h3> 
+              <% if (locals && locals.errors) { %>
+              <% if (locals.errors[0].param=="cName") { %>
+              <h3> <%= locals.errors[0].msg %> </h3>
               <% } %>
-            <% } %>
+              <% } %>
+            </div>
 
-            <% if (locals && locals.arrCustomErrors) { %>
-                <% for (ctError of locals.arrCustomErrors) { %>
-                  <h3>-<%= ctError %></h3> 
-                <% } %> 
-            <% } %>
+            <div class="field-item">
+              <input name="cLastName" class="input-text" type="text" tabindex="2"
+                value="<%= (locals.old?.cLastName) ? old.cLastName : '' %>" required/>
+              <label for="cLastName" class="label">
+                <span class="text-span">Apellido</span>
+              </label>
 
+              <% if (locals && locals.errors) { %>
+              <% if (locals.errors[0].param=="cLastName") { %>
+              <h3> <%= locals.errors[0].msg %> </h3>
+              <% } %>
+              <% } %>
+            </div>
+
+            <div class="field-item">
+              <input name="email" class="input-text" type="email" tabindex="3"
+                value="<%= (locals.old?.email) ? old.email : '' %>" required/>
+              <label for="email" class="label">
+                <span class="text-span">Email</span>
+              </label>
+
+              <% if (locals && locals.errors) { %>
+              <% if (locals.errors[0].param=="email") { %>
+              <h3> <%= locals.errors[0].msg %> </h3>
+              <% } %>
+              <% } %>
+            </div>
+
+            <div class="field-item">
+              <input name="password" class="input-text" type="password" tabindex="4" required/>
+              <label for="password" class="label">
+                <span class="text-span">Contraseña</span>
+              </label>
+
+              <% if (locals && locals.errors) { %>
+              <% if (locals.errors[0].param=="password") { %>
+              <h3> <%= locals.errors[0].msg %> </h3>
+              <% } %>
+              <% } %>
+            </div>
+
+            <div class="field-item">
+              <input name="cPassword" class="input-text" type="password" tabindex="5" required/>
+              <label for="cPassword" class="label">
+                <span class="text-span">Confirmar contraseña</span>
+              </label>
+
+              <% if (locals && locals.errors) { %>
+              <% if (locals.errors[0].param=="cPassword") { %>
+              <h3> <%= locals.errors[0].msg %> </h3>
+              <% } %>
+              <% } %>
+
+              <% if (locals && locals.arrCustomErrors) { %>
+              <% for (ctError of locals.arrCustomErrors) { %>
+              <h3>-<%= ctError %></h3>
+              <% } %>
+              <% } %>
+            </div>
+          </div>
           <div class="iniciar-con">
             <a href="" class="iniciar-con-item"> Inciar con Google </a>
             <a href="" class="iniciar-con-item"> Iniciar con Facebook </a>
