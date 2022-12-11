@@ -45,12 +45,12 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: "producto_id"
         })
 
-        Producto.belongsTo(models.categoria, {
-            foreignKey: "categoria_id"
+        Producto.hasMany(models.categoriaProducto, {
+            foreignKey: "producto_id",
         })
 
         Producto.hasMany(models.imagen, {
-            foreignKey: "producto_id"
+            foreignKey: "producto_id",
         })
     }
 
