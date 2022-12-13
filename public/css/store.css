@@ -1,27 +1,38 @@
 .store-container {
     width: 100%;
     display: flex;
-    /* background-color: red; */
-
 }
 
 .store-filters-container {
     width: 20%;
     max-width: 300px;
     min-width: 230px;
-    /* background-color: blue; */
-
+    margin-top:40px;
 }
 
 .store-results-container {
-    /* background-color: green; */
     width: 70%;
     flex-grow: 1;
 
 }
 
 .filter-container {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 10px 5px;
+    padding: 20px 5px 10px 5px;
+}
+
+.store-filters-floating-container {
+    position: sticky;
+    top: 0;
+}
+
+input[type="checkbox"] {
+    accent-color: #c42121;    
+    border: 2px;
+}
+
+input[type="radio"] {
+    accent-color: #c42121;    
 }

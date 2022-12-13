@@ -25,39 +25,42 @@
             <section class="caja-grande caja-grande2">
                 <div class="store-container">
                     <aside class="store-filters-container">
-                        <form>
-                            <% if(locals.filters) { %>
-                                <% for(filter of locals.filters) { %>
-                                    <div class="filter-container">
-                                        <h3 class="filter-title"><%= filter.title %>: </h3>
-                                        <% if(filter.type=="check") { %>
-                                            <% for(option of filter.options) { %>
-                                                <label class="filter-label">
-                                                    <input type="checkbox" name="<%= option.description %>" 
-                                                        <% if(locals.applicated[option.description]) {%> checked <% } %>
-                                                    >
-                                                    <%= option.description %>
-                                                </label>
-                                            <% } %>
+                        <div class="store-filters-floating-container">
+                            <form>
+                                <% if(locals.filters) { %>
+                                        <% for(filter of locals.filters) { %>
+                                            <div class="filter-container">
+                                                
+                                                <h3 class="filter-title"><%= filter.title %>: </h3>
+                                                <% if(filter.type=="check") { %>
+                                                    <% for(option of filter.options) { %>
+                                                        <label class="filter-label">
+                                                            <input type="checkbox" name="<%= option.description %>" 
+                                                                <% if(locals.applicated[option.description]) {%> checked <% } %>
+                                                            >
+                                                            <%= option.description %>
+                                                        </label>
+                                                    <% } %>
+                                                <% } %>
+
+                                                <% if(filter.type=="radio") { %>
+                                                    <% for(option of filter.options) { %>
+                                                        <label class="filter-label">
+                                                            <input type="radio" name="<%= filter.title %>" value="<%= option.description%>" 
+                                                                <% if(locals.applicated[filter.title] == option.description) {%> checked <% } %>
+                                                            >
+                                                            <%= option.description %>
+                                                        </label>
+                                                    <% } %>
+                                                <% } %>
+
+
+                                            </div>
                                         <% } %>
-
-                                        <% if(filter.type=="radio") { %>
-                                            <% for(option of filter.options) { %>
-                                                <label class="filter-label">
-                                                    <input type="radio" name="<%= filter.title %>" value="<%= option.description%>" 
-                                                        <% if(locals.applicated[filter.title] == option.description) {%> checked <% } %>
-                                                    >
-                                                    <%= option.description %>
-                                                </label>
-                                            <% } %>
-                                        <% } %>
-
-
-                                    </div>
-                                <% } %>
-                            <% } %>
-                            <button type="submit" class="btn-primary"> Aplicar </button>
-                        </form>
+                                        <button type="submit" class="btn-primary"> Aplicar </button>
+                                <% } %>       
+                            </form>
+                        </div>
                     </aside>
                     <div class="store-results-container">
                         <section>
@@ -65,14 +68,17 @@
                                 <h2 class="titulares">NUEVOS LANZAMIENTOS</h2>
                                 <a href="" class="titular-secundario">Ver Todos</a>
                             </div>
-                            
+
+                            <%= JSON.stringify(locals.products) %>
                             <div class="caja-chica-productos">
                                 <% if(locals.products.length > 0) {%>
                                     <% for(let product of locals.products) { %>
                                     <div class="product-card">
                                         <a href="/detail/<%= product.id %>">
                                             <div>
-                                                <img class="product-image" src="./img/products/<%= product.imagens[0].nombre %>"
+                                                <!-- <img class="product-image" src="./img/products/<%= product.imagens?.length > 0 ? product.imagens[0].nombre : "" %>" -->
+                                                <img class="product-image" src="./img/products/"
+<                                                 
                                                     alt="img-producto">
                                                 <p class="info-precio">$<%= product.precio %></p>
                                             </div>
@@ -83,8 +89,7 @@
                                         </a>
                                     </div>
                                     <% } %>
-                                <% } %>
-                                
+                                <% } %>    
                             </div>
                         </section>
         

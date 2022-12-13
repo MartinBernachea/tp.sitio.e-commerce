@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- head -->
+
+<head>
+    <%- include('partials/head') %>
+        <link rel="stylesheet" href="/css/stylesheet.css">
+
+        <title> G&X - Cart </title>
+</head>
+<!-- /head -->
+
+<body>
+    <div class="info-promo">
+        <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A
+        $20.000
+    </div>
+
+    <!-- Header -->
+    <%- include('partials/headerNav', locals) %>
+        <!-- /Header -->
+
+        <main>
+            <section class="caja-grande caja-grande2">
+
+                <div class="admin-panel-container">
+                    <div class="admin-panel-sections">
+                        <aside class="admin-panel-aside">
+                            <ul>
+                                <li class="selected">
+                                    <a href="/admin/panel/products"><i class="fa-solid fa-box"></i> Productos</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/panel/categories"><i class="fa-solid fa-tag"></i> Categorias</a>
+                                </li>
+                            </ul>
+                        </aside>
+                        
+                        <% if(locals.section == "productsPanel") {%>
+                            <%- include('partials/adminPanelProducts') %>
+                        <% } %>
+
+                        <% if(locals.section == "categoriesPanel") {%>
+                            <%- include('partials/adminPanelCategories') %>
+                        <% } %>
+                        
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- footer -->
+        <%- include('partials/footer') %>
+            <!-- /footer -->
+</body>
+
+</html>

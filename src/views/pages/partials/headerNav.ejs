@@ -28,30 +28,17 @@
                 <% if(locals?.userData?.admin){ %>
                     <li class="li-item"> | </li>
                     <li class="li-item">
-                        <a href="/create"> PRODUCTS PANEL </a>
+                        <a href="/admin/panel"> ADMIN PANEL </a>
                     </li>
                 <%}%>
 
                 <% if(locals?.userData?.super){ %>
                     <li class="li-item"> | </li>
                     <li class="li-item">
-                        <a href="/user/panel"> USERS PANEL </a>
+                        <a href="/user/panel"> SUPER PANEL </a>
                     </li>
                 <%}%>
             </ul>
-
-            <!-- <% if(locals?.user?.admin){ %> -->
-                <!-- <ul class="header-ul">
-                    <li class="li-item">
-                        <a href="/create"> CREATE </a>
-                    </li>
-                </ul>
-                <ul class="header-ul">
-                    <li class="li-item">
-                        <a href="/create"> CREATE </a>
-                    </li>
-                </ul> -->
-            <!-- <%}%> -->
         </div>
 
         <div class="header-nav-items collapsed-menu">

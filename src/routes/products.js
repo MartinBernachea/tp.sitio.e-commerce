@@ -39,6 +39,11 @@ router.get('/carrito', userPermissions, productsController.chart);
 /*** COMING SOON ***/
 router.get('/coming-soon', adminPermissions, productsController.comingSoon);
 
+/*** PRODUCTS-PANEL ***/
+router.get('/admin/panel/products', adminPermissions, productsController.productsPanel);
+router.get('/admin/panel/categories', adminPermissions, productsController.categoriesPanel);
+router.get('/admin/panel', adminPermissions, productsController.adminPanel);
+
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
 router.get('/detail/:id', productsController.detail);
 
@@ -46,7 +51,7 @@ router.get('/detail/:id', productsController.detail);
 router.get('/store', productsController.store);
 
 /*** CREATE ONE PRODUCT ***/
-router.get('/create', adminPermissions, productsController.create);
+// router.get('/create', adminPermissions, productsController.create);
 router.post('/create', adminPermissions, multipleImages, productCreateValidation, productsController.store); // FALTA AGREGAR 'validaciones' de img
 
 /*** EDIT ONE PRODUCT ***/

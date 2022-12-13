@@ -1,0 +1,65 @@
+<div id="admin-create-category-modal">
+    <div id="modalBackground" class="user-modal-background initial-position">
+        <div class="user-modal" id="modal<%= locals.userData.id %>">
+            <div class="edit-user-form">
+                <div class="edit-user-modal-container">
+                    <h1>Modificar datos de usuario:</h1>
+                    <hr class="edit-user-form-separador"/>
+                    <div class="form-inputs-container">
+                        <label class="form-label-input">
+                            <span>Nombre:</span>
+                            <input name="cName" class="input-text-secondary" type="text" tabindex="1"
+                                placeholder="Nombres" value="<%= locals.userData.nombre %>" />
+                        </label>
+
+                        <label class="form-label-input">
+                            <span>Apellidos:</span>
+                            <input name="cLastName" class="input-text-secondary" type="text" tabindex="2"
+                                placeholder="Apellidos" value="<%= locals.userData.apellido %>" />
+                        </label>
+
+                        <label class="form-label-input">
+                            <span>Email:</span>
+                            <input name="email" class="input-text-secondary" type="email" tabindex="3"
+                                placeholder="Email" value="<%= locals.userData.email %>" />
+                        </label>
+                    </div>
+                    <div class="form-inputs-container col">
+                        <label class="form-label-input row">
+                            <span>¿Tiene permisos de admin?</span>
+
+                            <select name="admin">
+                                <option value="SI" <% if(locals.userData.admin){ %> selected <% } %> >SI</option>
+                                <option value="NO" <% if(!locals.userData.admin){ %> selected <% } %> >NO</option>
+                            </select>
+                        </label>
+                        <label class="form-label-input row">
+                            <span>¿Tiene permisos de super?</span>
+                            <select name="super">
+                                <option value="SI" <% if(locals.userData.super){ %> selected <% } %> >SI</option>
+                                <option value="NO" <% if(!locals.userData.super){ %> selected <% } %> >NO</option>
+                            </select>
+                        </label>
+                        <label class="form-label-input row">
+                            <span>¿Tiene acceso restringido a la plataforma?</span>
+                            <select name="restringido">
+                                <option value="SI" <% if(locals.userData.restringido){ %> selected <% } %> >SI</option>
+                                <option value="NO" <% if(!locals.userData.restringido){ %> selected <% } %> >NO</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="buttons-container">
+                    <button id="btnCancelar-modal<%= locals.userData.id %>"
+                        class="btn-secondary btn-small btnCancelar">Cancelar</button>
+                    <button id="btnAplicar-modal<%= locals.userData.id %>"
+                        class="btn-primary btn-small btnAplicar">Aplicar</button>
+                    <button id="loader" class="btn-primary btn-small" style="display:none">
+                        <%- include('../components/spinner') %>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn-terceary" id="btn-admin-create-category"> Crear nueva </button>
+</div>

@@ -1,0 +1,100 @@
+.admin-panel-container {
+    /* background-color: rgb(247, 137, 137); */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-panel-sections {
+    display: flex;
+    /* background-color: rgb(241, 241, 241); */
+    width: 100%;
+}
+
+.admin-panel-aside {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: rgb(252, 252, 252); */
+    width: 260px;
+}
+
+.admin-panel-aside li {
+    list-style: none;
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.admin-panel-aside li i {
+    margin-right: 8px;
+}
+
+.admin-panel-aside li a,
+.admin-panel-aside li i {
+    color: rgb(124, 124, 124);
+}
+
+
+
+.admin-products-section .form-inputs-container {
+    margin: 0;
+}
+
+
+
+
+
+
+.admin-products-section {
+    /* background-color: violet; */
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    grid-template-areas: "title title""form metrics";
+    width: 100%;
+    padding: 30px;
+    gap: 20px;
+}
+
+.admin-title-section {
+    grid-area: title;
+}
+
+.admin-products-metrics-container {
+    grid-area: metrics;
+    background-color: violet;
+}
+
+
+
+.product-panel-title {
+    margin: 8px 0;
+}
+
+
+
+.label-lg {
+    width: 100%;
+    max-width: 350px;
+}
+
+
+
+
+
+
+/* CREATE PRODUCT */
+
+
+
+/* CREATE CATEGORY */
+
+.form-create-category {
+    width: 80%;
+
+
+}
+
+.form-create-category .form-buttons-container {
+    margin-top: 20px;
+}

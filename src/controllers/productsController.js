@@ -4,6 +4,8 @@ const { validationResult } = require('express-validator');
 const session = require('express-session');
 
 const db = require("../database/models");
+const sequelize = require("sequelize");
+
 const { getUserDataStringified } = require('../utils/userData');
 
 const controller = {
@@ -78,15 +80,31 @@ const controller = {
         // res.redirect('/');
     },
 
-    create: (req, res) => {
+    adminPanel: async (req, res) => {
+        const userData = getUserDataStringified(req);
+        res.render('./pages/adminPanel', { userData });
+    },
+
+    productsPanel: (req, res) => {
         const userData = getUserDataStringified(req);
 
         db.categoria.findAll()
             .then(categorias => {
-                res.render('./pages/productCreateForm', { categorias, userData })
+                res.render('./pages/adminPanel', { categorias, userData, section: "productsPanel" })
             })
     },
-    store: async (req, res) => {
+
+    categoriesPanel: (req, res) => {
+        const userData = getUserDataStringified(req);
+
+        db.categoria.findAll()
+            .then(categorias => {
+                res.render('./pages/adminPanel', { categorias, userData, section: "categoriesPanel" })
+            })
+    },
+
+
+    store1: async (req, res) => {
         const userData = getUserDataStringified(req);
         let errors = validationResult(req);
 
@@ -190,125 +208,167 @@ const controller = {
         })
     },
 
-    store: (req, res) => {
+    store: async (req, res) => {
+        const resultsPerPage = 12;
+        const formData = req.query;
+        const currentPage = formData.page ?? 1;
 
-        console.log("req.query", req.query);
+        const queryFilters = {
+            model: db.producto,
+            include: [
+                {
+                    model: db.categoriaProducto,
+                    include: [
+                        {
+                            where: { categorium: { id: 1 } },
+                            model: db.categoria,
+                        }
+                    ]
+                },
+            ],
+        }
 
 
-        db.producto.findAll({
-            limit: 12,
-            include: [{
-                model: db.imagen,
-            }]
-        })
-            .then(products => {
-                const userData = getUserDataStringified(req);
+        const products = await db.producto.findAll(queryFilters);
+        console.log("#######################")
+        console.log("#######################")
+        console.log("#######################")
+        console.log("products", products[0].categoriaProductos[0].categorium)
+        console.log("#######################")
+        console.log("#######################")
+        console.log("#######################")
+        // const products = await db.producto.findAll({
+        //     where: {
+        //         categoria_id: { [sequelize.Op.and]: [1, 2] },
+        //     },
+        //     include: [
+        //         {
+        //             model: db.categoriaProducto,
+        //             group: ["producto_id"],
+        //             attributes: [
+        //                 "producto_id",
+        //                 [sequelize.fn('GROUP_CONCAT', sequelize.col('categoria')), 'categoria_id']
+        //             ],
+        //             include: [
+        //                 {
+        //                     model: db.categoria,
+        //                 }
+        //             ]
 
-                if (req.session.notificationAlert) {
-                    localsParams.notificationAlert = req.session.notificationAlert;
-                    req.session.notificationAlert = null
-                }
+        //         }
+        //     ],
+        // })
 
-                const filters = [
+
+
+
+
+
+        const userData = getUserDataStringified(req);
+
+        if (req.session.notificationAlert) {
+            localsParams.notificationAlert = req.session.notificationAlert;
+            req.session.notificationAlert = null
+        }
+
+
+        const filters = [
+            {
+                title: "Ordenar por",
+                type: "radio",
+                options: [
                     {
-                        title: "Ordenar por",
-                        type: "radio",
-                        options: [
-                            {
-                                id: 1,
-                                description: "Precio (de mayor a menor)"
-                            },
-                            {
-                                id: 2,
-                                description: "Precio (de menor a mayor)"
-                            },
-                        ]
+                        id: 1,
+                        description: "Precio (de mayor a menor)"
                     },
                     {
-                        title: "Genero",
-                        type: "check",
-                        options: [
-                            {
-                                id: 3,
-                                description: "Mujer"
-                            },
-                            {
-                                id: 4,
-                                description: "Hombre"
-                            },
-                            {
-                                id: 5,
-                                description: "Niño"
-                            },
-                            {
-                                id: 5,
-                                description: "Unisex"
-                            },
-                        ]
+                        id: 2,
+                        description: "Precio (de menor a mayor)"
+                    },
+                ]
+            },
+            {
+                title: "Genero",
+                type: "check",
+                options: [
+                    {
+                        id: 3,
+                        description: "Mujer"
                     },
                     {
-                        title: "Marca",
-                        type: "check",
-                        options: [
-                            {
-                                id: 6,
-                                description: "Nike"
-                            },
-                            {
-                                id: 7,
-                                description: "Adidas"
-                            },
-                            {
-                                id: 8,
-                                description: "Topper"
-                            }
-                        ]
+                        id: 4,
+                        description: "Hombre"
                     },
                     {
-                        title: "Tipo de producto",
-                        type: "check",
-                        options: [
-                            {
-                                id: 9,
-                                description: "Calzado"
-                            },
-                            {
-                                id: 10,
-                                description: "Pantalones"
-                            },
-                            {
-                                id: 11,
-                                description: "Remeras"
-                            },
-                            {
-                                id: 12,
-                                description: "Camperas"
-                            }
-                        ]
+                        id: 5,
+                        description: "Niño"
                     },
                     {
-                        title: "Actividades",
-                        type: "check",
-                        options: [
-                            {
-                                id: 13,
-                                description: "Running"
-                            },
-                            {
-                                id: 14,
-                                description: "Futbol"
-                            }
-                        ]
+                        id: 5,
+                        description: "Unisex"
+                    },
+                ]
+            },
+            {
+                title: "Marca",
+                type: "check",
+                options: [
+                    {
+                        id: 6,
+                        description: "Nike"
+                    },
+                    {
+                        id: 7,
+                        description: "Adidas"
+                    },
+                    {
+                        id: 8,
+                        description: "Topper"
                     }
                 ]
+            },
+            {
+                title: "Tipo de producto",
+                type: "check",
+                options: [
+                    {
+                        id: 9,
+                        description: "Calzado"
+                    },
+                    {
+                        id: 10,
+                        description: "Pantalones"
+                    },
+                    {
+                        id: 11,
+                        description: "Remeras"
+                    },
+                    {
+                        id: 12,
+                        description: "Camperas"
+                    }
+                ]
+            },
+            {
+                title: "Actividades",
+                type: "check",
+                options: [
+                    {
+                        id: 13,
+                        description: "Running"
+                    },
+                    {
+                        id: 14,
+                        description: "Futbol"
+                    }
+                ]
+            }
+        ]
 
-                let products1 = [...products]
-                products1.shift();
-                const products2 = [...products1, ...products1, ...products1, ...products1, ...products1, ...products1]
-                let localsParams = { products: [...products2], userData, filters, applicated: req.query }
+        console.log("products", products)
+        let localsParams = { products, userData, filters, applicated: formData }
 
-                res.render("./pages/store.ejs", localsParams)
-            })
+        res.render("./pages/store.ejs", localsParams)
     }
 };
 

@@ -5,6 +5,7 @@
 @import url(./coming-soon.css);
 @import url(./product-form.css);
 @import url(./users-panel.css);
+@import url(./products-panel.css);
 @import url(./loader.css);
 @import url(./store.css);
 
@@ -57,6 +58,21 @@ button:disabled {
   height: min-content;
   width: auto;
   background-color: rgb(202, 51, 51);
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 9px 26px;
+}
+
+.btn-terceary{
+  height: min-content;
+  width: auto;
+  background-color: rgb(23, 146, 23);
   color: #fff;
   font-size: 16px;
   display: flex;
