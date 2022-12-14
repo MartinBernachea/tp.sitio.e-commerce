@@ -7,6 +7,7 @@ const db = require("../database/models");
 const sequelize = require("sequelize");
 
 const { getUserDataStringified } = require('../utils/userData');
+const config = require('../../appConfig');
 
 const controller = {
     index: (req, res) => {
@@ -209,61 +210,85 @@ const controller = {
     },
 
     store: async (req, res) => {
-        const resultsPerPage = 12;
-        const formData = req.query;
-        const currentPage = formData.page ?? 1;
+        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_STORE;
+        let formData = { ...req.query, Page: req.query.Page ?? 1 };
+        const currentPage = formData.Page;
+        const filtersTitle = ["Generos", "Marcas", "Categorias"];
+
+        /* Se busca unificar req.query de los filtros: 
+            Tenemos filtros agrupados:
+            Marca: Adidas / Nike / Topper / etc
+            Si seleccionamos solo 1 se recibe su id: Marca: "1"
+            Si se selecciona mas de 1 se reciben ambos ids en un array: Marca: ["1", "2"]
+            Con esta moficiacion siempre se recibe en un array, sin importar la cantidad.
+        */
+        filtersTitle.forEach(ctTitle => {
+            if (typeof (formData[ctTitle]) == "string") {
+                formData = { ...formData, [ctTitle]: [formData[ctTitle]] }
+            }
+        })
+        /* ***** */
 
         const queryFilters = {
-            model: db.producto,
+            limit: resultsPerPage,
+            offset: resultsPerPage * (currentPage - 1),
+            attributes: [
+                "id",
+                "precio",
+                "nombre",
+                // [sequelize.fn('COUNT', 'id'), 'cantidad']
+            ],
             include: [
                 {
-                    model: db.categoriaProducto,
-                    include: [
-                        {
-                            where: { categorium: { id: 1 } },
-                            model: db.categoria,
-                        }
-                    ]
+                    model: db.imagen
+                },
+                {
+                    model: db.genero,
+                    where: formData[filtersTitle[0]]?.length > 0 ? { id: { [sequelize.Op.in]: formData[filtersTitle[0]] } } : {}
+                },
+                {
+                    model: db.marca,
+                    where: formData[filtersTitle[1]]?.length > 0 ? { id: { [sequelize.Op.in]: formData[filtersTitle[1]] } } : {}
+                },
+                {
+                    model: db.categoria,
+                    where: formData[filtersTitle[2]]?.length > 0 ? { id: { [sequelize.Op.in]: formData[filtersTitle[2]] } } : {}
                 },
             ],
         }
 
+        const generos = db.genero.findAll();
+        const marcas = db.marca.findAll();
+        const categorias = db.categoria.findAll();
+        const producosFiltrados = db.producto.findAndCountAll(queryFilters);
+        const response = await Promise.all([generos, marcas, categorias, producosFiltrados]);
 
-        const products = await db.producto.findAll(queryFilters);
-        console.log("#######################")
-        console.log("#######################")
-        console.log("#######################")
-        console.log("products", products[0].categoriaProductos[0].categorium)
-        console.log("#######################")
-        console.log("#######################")
-        console.log("#######################")
-        // const products = await db.producto.findAll({
-        //     where: {
-        //         categoria_id: { [sequelize.Op.and]: [1, 2] },
-        //     },
-        //     include: [
-        //         {
-        //             model: db.categoriaProducto,
-        //             group: ["producto_id"],
-        //             attributes: [
-        //                 "producto_id",
-        //                 [sequelize.fn('GROUP_CONCAT', sequelize.col('categoria')), 'categoria_id']
-        //             ],
-        //             include: [
-        //                 {
-        //                     model: db.categoria,
-        //                 }
-        //             ]
+        const filters = [
+            {
+                title: filtersTitle[0],
+                options: response[0],
+                type: "check",
+            },
+            {
+                title: filtersTitle[1],
+                options: response[1],
+                type: "check",
+            },
+            {
+                title: filtersTitle[2],
+                options: response[2],
+                type: "check",
+            },
+        ];
 
-        //         }
-        //     ],
-        // })
+        const products = {
+            elements: response[3].rows,
+            quantity: response[3].count,
+            page: currentPage,
+            resultsPerPage,
+        }
 
-
-
-
-
-
+        console.log("products", products)
         const userData = getUserDataStringified(req);
 
         if (req.session.notificationAlert) {
@@ -271,102 +296,12 @@ const controller = {
             req.session.notificationAlert = null
         }
 
-
-        const filters = [
-            {
-                title: "Ordenar por",
-                type: "radio",
-                options: [
-                    {
-                        id: 1,
-                        description: "Precio (de mayor a menor)"
-                    },
-                    {
-                        id: 2,
-                        description: "Precio (de menor a mayor)"
-                    },
-                ]
-            },
-            {
-                title: "Genero",
-                type: "check",
-                options: [
-                    {
-                        id: 3,
-                        description: "Mujer"
-                    },
-                    {
-                        id: 4,
-                        description: "Hombre"
-                    },
-                    {
-                        id: 5,
-                        description: "Niño"
-                    },
-                    {
-                        id: 5,
-                        description: "Unisex"
-                    },
-                ]
-            },
-            {
-                title: "Marca",
-                type: "check",
-                options: [
-                    {
-                        id: 6,
-                        description: "Nike"
-                    },
-                    {
-                        id: 7,
-                        description: "Adidas"
-                    },
-                    {
-                        id: 8,
-                        description: "Topper"
-                    }
-                ]
-            },
-            {
-                title: "Tipo de producto",
-                type: "check",
-                options: [
-                    {
-                        id: 9,
-                        description: "Calzado"
-                    },
-                    {
-                        id: 10,
-                        description: "Pantalones"
-                    },
-                    {
-                        id: 11,
-                        description: "Remeras"
-                    },
-                    {
-                        id: 12,
-                        description: "Camperas"
-                    }
-                ]
-            },
-            {
-                title: "Actividades",
-                type: "check",
-                options: [
-                    {
-                        id: 13,
-                        description: "Running"
-                    },
-                    {
-                        id: 14,
-                        description: "Futbol"
-                    }
-                ]
-            }
-        ]
-
-        console.log("products", products)
-        let localsParams = { products, userData, filters, applicated: formData }
+        let localsParams = {
+            products,
+            userData,
+            filters,
+            applicated: formData
+        }
 
         res.render("./pages/store.ejs", localsParams)
     }

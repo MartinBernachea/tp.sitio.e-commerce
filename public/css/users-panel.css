@@ -50,11 +50,15 @@ tbody tr:nth-child(even) {
     width: 35px;
     height: 35px;
     padding-top: 5px;
-    text-align: center;
 }
 
 .pagination-container .left-button {
     position: relative;
+    cursor: pointer;
+}
+
+.pagination-container i {
+    pointer-events:inherit;
 }
 
 .pagination-container .left-button::before {
