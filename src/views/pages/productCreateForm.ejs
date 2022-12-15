@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<!-- head -->
+<!-- head -->title
 
 <head>
 	<%- include('partials/head') %>
-    <link rel="stylesheet" href="/css/stylesheet.css">
+	<link rel="stylesheet" href="/css/stylesheet.css">
 
-    <title> G&X - Create </title>
+	<title> G&X - Create </title>
 </head>
 <!-- /head -->
 
@@ -17,107 +17,136 @@
 	<!-- /Header -->
 
 	<div class="products-wrapper">
-		<div class="title-container">
-			<div class="editing-title">
-				<h2 class="products-title"> Llena el formulario y vende! Asi de simple! </h2>
-			</div>
-		</div>
+
+		<!-- <h2 class="products-title"> Llena el formulario y vende! Asi de simple! </h2> -->
+
 		<div class="box-container">
-			<form action="create" method="POST" enctype="multipart/form-data">	
+			<form action="create" method="POST" enctype="multipart/form-data">
 				<div class="pe-container">
-					<div class="product-container">
-						<label for="name" class="form-label">Nombre del producto:</label>
-						<input type="text" id="name" name="name" placeholder="Ej: Buzo Adidas " class="form-input">
-					
-						<% if (locals && locals.errors) { %>
-							<% if (locals.errors[0].param=="name") { %>
-								<h3> <%= locals.errors[0].msg %>  </h3> 
-							<% } %>
-						<% } %>
-					
-					</div>
-					<div class="product-container">
-						<label for="price" class="form-label">Precio del producto:</label>
-						<input type="text" id="price" name="price" placeholder="Ej: 13500" class="form-input">
+					<div class="img-container">
+						<div class="load-main-image-container cImage1" id="preview">
+							<input type="file" name="cImage1" id="cImage1" class="form-input-img"></input>
+							<label for="cImage1" class="form-label-img" id="cImage1-preview">
+								<img src="/img/no-img.jpg" alt="">
+								<div>
+									<span>+</span>
+								</div>
+							</label>
 
-						<% if (locals && locals.errors) { %>
-							<% if (locals.errors[0].param=="price") { %>
-								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="cImage") { %>
+							<h3> <%= locals.errors[0].msg %> </h3>
 							<% } %>
-						<% } %>
+							<% } %>
+						</div>
+						<div class="sub-img-container">
+							<div class="load-sub-image-container">
+								<input type="file" name="cImage2" id="cImage2" class="form-input-img"></input>
+								<label for="cImage2" class="form-label-img" id="cImage2-preview">
+									<img src="/img/no-img.jpg" alt="">
+									<div>
+										<span>+</span>
+									</div>
+								</label>
 
-					</div>
-					<div class="product-container">
-						<label for="category" class="form-label">Categoría:</label>
-						<select name="category" id="category" class="form-input">
- 								<option value=""> Elegí </option>
-								<% for(categoria of locals.categorias) { %>
-									<option value="<%= categoria.id %>" > <%=categoria.nombre%> </option>
+								<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %> </h3>
 								<% } %>
-						</select>
+								<% } %>
+							</div>
 
-						<% if (locals && locals.errors) { %>
+							<div class="load-sub-image-container">
+								<input type="file" name="cImage3" id="cImage3" class="form-input-img"></input>
+								<label for="cImage3" class="form-label-img" id="cImage3-preview">
+									<img src="/img/no-img.jpg" alt="">
+									<div>
+										<span>+</span>
+									</div>
+								</label>
+
+								<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+								<% } %>
+							</div>
+
+							<div class="load-sub-image-container">
+								<input type="file" name="cImage4" id="cImage4" class="form-input-img"></input>
+								<label for="cImage4" class="form-label-img" id="cImage4-preview">
+									<img src="/img/no-img.jpg" alt="">
+									<div>
+										<span>+</span>
+									</div>
+								</label>
+
+								<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+								<% } %>
+							</div>
+
+							<div class="load-sub-image-container">
+								<input type="file" name="cImage5" id="cImage5" class="form-input-img"></input>
+								<label for="cImage5" class="form-label-img" id="cImage5-preview">
+									<img src="/img/no-img.jpg" alt="">
+									<div>
+										<span>+</span>
+									</div>
+								</label>
+
+								<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+								<% } %>
+							</div>
+						</div>
+					</div>
+
+					<div class="data-container">
+						<div class="product-container">
+							<label for="name" class="form-label">Nombre del producto:</label>
+							<input type="text" id="name" name="name" placeholder="Ej: Buzo Adidas " class="form-input">
+
+							<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="name") { %>
+							<h3> <%= locals.errors[0].msg %> </h3>
+							<% } %>
+							<% } %>
+
+						</div>
+						<div class="product-container">
+							<label for="price" class="form-label">Precio del producto:</label>
+							<input type="text" id="price" name="price" placeholder="Ej: 13500" class="form-input">
+
+							<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="price") { %>
+							<h3> <%= locals.errors[0].msg %> </h3>
+							<% } %>
+							<% } %>
+
+						</div>
+						<div class="product-container">
+							<label for="category" class="form-label">Categoría:</label>
+							<select name="category" id="category" class="form-input">
+								<option value=""> Elegí </option>
+								<% for(categoria of locals.categorias) { %>
+								<option value="<%= categoria.id %>"> <%=categoria.nombre%> </option>
+								<% } %>
+							</select>
+
+							<% if (locals && locals.errors) { %>
 							<% if (locals.errors[0].param=="category") { %>
-								<h3> <%= locals.errors[0].msg %>  </h3> 
+							<h3> <%= locals.errors[0].msg %> </h3>
 							<% } %>
-						<% } %>
-
-					</div>
-					<div class="load-image-container">
-						<label for="cImage1" class="form-label-img"> Añadir imagen principal</label>
-						<input type="file" name="cImage1" id="cImage1" class="form-input-img"></input>
-
-						<% if (locals && locals.errors) { %>
-							<% if (locals.errors[0].param=="cImage") { %>
-								<h3> <%= locals.errors[0].msg %>  </h3> 
 							<% } %>
-						<% } %>
+
+						</div>
 					</div>
 
-					<div class="load-image-container">
-						<label for="cImage2" class="form-label-img"> Añadir imagen secundaria 1</label>
-						<input type="file" name="cImage2" id="cImage2" class="form-input-img"></input>
-
-						<% if (locals && locals.errors) { %>
-							<% if (locals.errors[0].param=="cImage") { %>
-								<h3> <%= locals.errors[0].msg %>  </h3> 
-							<% } %>
-						<% } %>
-					</div>
-
-					<div class="load-image-container">
-						<label for="cImage3" class="form-label-img"> Añadir imagen secundaria 2</label>
-						<input type="file" name="cImage3" id="cImage3" class="form-input-img"></input>
-
-						<% if (locals && locals.errors) { %>
-							<% if (locals.errors[0].param=="cImage") { %>
-								<h3> <%= locals.errors[0].msg %>  </h3> 
-							<% } %>
-						<% } %>
-					</div>
-
-					<div class="load-image-container">
-						<label for="cImage4" class="form-label-img"> Añadir imagen secundaria 3</label>
-						<input type="file" name="cImage4" id="cImage4" class="form-input-img"></input>
-
-						<% if (locals && locals.errors) { %>
-							<% if (locals.errors[0].param=="cImage") { %>
-								<h3> <%= locals.errors[0].msg %>  </h3> 
-							<% } %>
-						<% } %>
-					</div>
-
-					<div class="load-image-container">
-						<label for="cImage5" class="form-label-img"> Añadir imagen secundaria 4</label>
-						<input type="file" name="cImage5" id="cImage5" class="form-input-img"></input>
-
-						<% if (locals && locals.errors) { %>
-							<% if (locals.errors[0].param=="cImage") { %>
-								<h3> <%= locals.errors[0].msg %>  </h3> 
-							<% } %>
-						<% } %>
-					</div>
-											
 					<div class="save-product">
 						<button type="submit" class="btn-secondary">Vender producto</button>
 					</div>
@@ -130,5 +159,7 @@
 	<!-- footer -->
 	<%- include('partials/footer') %>
 	<!-- /footer -->
-</body>	
+	<script src="/js/index.js"></script>
+</body>
+
 </html>
