@@ -3,6 +3,7 @@ const path = require('path');
 const { validationResult } = require('express-validator');
 const session = require('express-session');
 
+
 const db = require("../database/models");
 const sequelize = require("sequelize");
 
@@ -153,7 +154,7 @@ const controller = {
 
     },
     detail: async (req, res) => {
-
+        
         let idProducto = req.params.id;
 
         try {
