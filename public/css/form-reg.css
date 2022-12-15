@@ -49,3 +49,33 @@
   color: #000;
   
 }
+
+.formulario__grupo-correcto .formulario__validacion-estado{
+  color: #1ed12d;
+  opacity: 1;
+}
+
+.formulario__grupo-incorrecto .label{
+  color: #bb2929;
+  opacity: 1;
+}
+
+.formulario__grupo-incorrecto .formulario__validacion-estado{
+  color: #bb2929;
+  opacity: 1;
+}
+
+.formulario__grupo-incorrecto .input-text{
+  color: #bb2929;
+  opacity: 1;
+}
+
+.input-text-error{
+  font-size: 12px;
+  margin-bottom: 0px;
+  display: none;
+}
+
+.input-text-error-activo{
+  display: block;
+}

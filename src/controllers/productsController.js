@@ -3,6 +3,7 @@ const path = require('path');
 const { validationResult } = require('express-validator');
 const session = require('express-session');
 
+
 const db = require("../database/models");
 
 const controller = {
@@ -126,7 +127,7 @@ const controller = {
 
     },
     detail: async (req, res) => {
-
+        
         let idProducto = req.params.id;
 
         try {
@@ -140,7 +141,7 @@ const controller = {
             console.log("currentProduct", currentProduct.imagens[0].nombre)
             if (currentProduct) {
                 res.render('./pages/detalleProducto', {
-                    producto: currentProduct
+                    producto: currentProduct,
                 });
             } else {
                 req.session.notificationAlert = {

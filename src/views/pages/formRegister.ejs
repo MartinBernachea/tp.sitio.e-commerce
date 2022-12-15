@@ -26,33 +26,52 @@
         <fieldset class="form-fieldset">
           <h1>REGISTRATE</h1>
 
-          <label for="cName" class="label"> </label>
-          <input name="cName" id="cName" class="input-text" type="text" tabindex="1" placeholder="Nombres" value="<%= (locals.old?.cName) ? old.cName : '' %>" />
-
-          <% if (locals && locals.errors) { %>
-            <% if (locals.errors[0].param=="cName") { %>
-              <h3> <%= locals.errors[0].msg %>  </h3> 
+          <div class="formulario__grupo" id="grupo__nombre">
+            <label for="cName" class="label"> </label>
+            <div>
+              <input name="cName" id="cName" class="input-text" type="text" tabindex="1" placeholder="Nombres" value="<%= (locals.old?.cName) ? old.cName : '' %>" />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="input-text-error"> Solo se pueden utilizar letras y espacios, pueden llevar acentos. No puede estar vacio.</p>
+            <% if (locals && locals.errors) { %>
+              <% if (locals.errors[0].param=="cName") { %>
+                <h3> <%= locals.errors[0].msg %>  </h3> 
+              <% } %>
             <% } %>
-          <% } %>
+            
+          </div>
 
-          <label for="cLastName" class="label"> </label>
-          <input name="cLastName" id="cLastName" class="input-text" type="text" tabindex="2" placeholder="Apellidos" value="<%= (locals.old?.cLastName) ? old.cLastName : '' %>" />
-
-          <% if (locals && locals.errors) { %>
-            <% if (locals.errors[0].param=="cLastName") { %>
-              <h3> <%= locals.errors[0].msg %>  </h3> 
+          <div class="formulario__grupo" id="grupo__nombre">
+            <label for="cLastName" class="label"> </label>
+            <div>
+              <input name="cLastName" id="cLastName" class="input-text" type="text" tabindex="2" placeholder="Apellidos" value="<%= (locals.old?.cLastName) ? old.cLastName : '' %>" />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="input-text-error"> Solo se pueden utilizar letras y espacios, pueden llevar acentos. No puede estar vacio.</p>
+            <% if (locals && locals.errors) { %>
+              <% if (locals.errors[0].param=="cLastName") { %>
+                <h3> <%= locals.errors[0].msg %>  </h3> 
+              <% } %>
             <% } %>
-          <% } %>
 
-          <label for="email" class="label"></label>
-          <input name="email" id="email" class="input-text" type="email" tabindex="3" placeholder="Email" value="<%= (locals.old?.email) ? old.email : '' %>"/>
+            </div>
 
-          <% if (locals && locals.errors) { %>
-            <% if (locals.errors[0].param=="email") { %>
-              <h3> <%= locals.errors[0].msg %>  </h3> 
+
+          <div class="formulario__grupo" id="grupo__nombre">
+            <label for="email" class="label"></label>
+            <div>
+              <input name="email" id="email" class="input-text" type="email" tabindex="3" placeholder="Email" value="<%= (locals.old?.email) ? old.email : '' %>"/>
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="input-text-error"> Solo se pueden registrar email validos.</p>
+            <% if (locals && locals.errors) { %>
+              <% if (locals.errors[0].param=="email") { %>
+                <h3> <%= locals.errors[0].msg %>  </h3> 
+              <% } %>
             <% } %>
-          <% } %>
+          </div>
 
+          
           <label for="password" class="label"> </label>
           <input name="password" id="password" class="input-text" type="password" tabindex="4" placeholder="Contraseña"  />
 
