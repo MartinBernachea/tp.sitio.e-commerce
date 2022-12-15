@@ -3,12 +3,17 @@ const { json } = require("express/lib/response");
 
 
 function agregarProducto(id){
+    const productoGuardado = localStorage.getItem("carrito");
     let carrito = []
-    carrito.push(id)
-    console.log(carrito);   
-}
-
-function guardarStorage(){
+    if(productoGuardado){
+        carrito = [...JSON.parse(productoGuardado)]
+        
+    }
+    
+    carrito.push(id) 
+    
     localStorage.setItem("carrito", JSON.stringify(carrito))
 }
+
+
 

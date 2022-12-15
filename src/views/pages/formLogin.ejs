@@ -25,6 +25,11 @@
     <!-- FORM -->
     <section class="form">
       <h1>INICIA SESION EN TU CUENTA</h1>
+
+      <div class="formulario__mensaje" id="formulario__mensaje">
+        <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
+      </div>
+
       <form class="form-box background-log-form" action="login"  method="POST">
         <div class="container">
           <!-- USUARIO -->
@@ -78,5 +83,8 @@
 	<%- include('partials/footer') %>
 	<!-- /footer -->
 </body>
+
+<script src="/js/validationsLogin.js"></script>
+
 
 </html>
