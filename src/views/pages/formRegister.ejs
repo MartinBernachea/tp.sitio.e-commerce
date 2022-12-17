@@ -25,22 +25,27 @@
       <form class="form-box" action="register" method="POST"  id="register">
         <fieldset class="form-fieldset">
           <h1>REGISTRATE</h1>
+
           <div class="fields">
-            <div class="field-item">
+            <div class="field-item" id="grupo__nombre">
+              <i class="formulario__validacion-estado fas fa-times-circle" style="position:absolute;"></i>
+              
               <input name="cName" class="input-text" type="text" tabindex="1"
-                value="<%= (locals.old?.cName) ? old.cName : '' %>" required/>
+                  value="<%= (locals.old?.cName) ? old.cName : '' %>" required/>
               <label for="cName" class="label">
                 <span class="text-span">Nombre</span>
               </label>
-
+              
               <% if (locals && locals.errors) { %>
               <% if (locals.errors[0].param=="cName") { %>
               <h3> <%= locals.errors[0].msg %> </h3>
               <% } %>
               <% } %>
             </div>
+            <p class="input-text-error grupo__nombre"> Solo se pueden utilizar letras y espacios, pueden llevar acentos. No puede estar vacio.</p>
 
-            <div class="field-item">
+            <div class="field-item" id="grupo__apellido">
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
               <input name="cLastName" class="input-text" type="text" tabindex="2"
                 value="<%= (locals.old?.cLastName) ? old.cLastName : '' %>" required/>
               <label for="cLastName" class="label">
@@ -53,40 +58,43 @@
               <% } %>
               <% } %>
             </div>
+            <p class="input-text-error grupo__apellido"> Solo se pueden utilizar letras y espacios, pueden llevar acentos. No puede estar vacio.</p>
 
-            <div class="field-item">
+            <div class="field-item"  id="grupo__correo">
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
               <input name="email" class="input-text" type="email" tabindex="3"
                 value="<%= (locals.old?.email) ? old.email : '' %>" required/>
               <label for="email" class="label">
                 <span class="text-span">Email</span>
               </label>
-
               <% if (locals && locals.errors) { %>
               <% if (locals.errors[0].param=="email") { %>
               <h3> <%= locals.errors[0].msg %> </h3>
               <% } %>
               <% } %>
             </div>
+            <p class="input-text-error grupo__correo"> Solo se pueden registrar email validos.</p>
 
-            <div class="field-item">
-              <input name="password" class="input-text" type="password" tabindex="4" required/>
+            <div class="field-item"  id="grupo__password">
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+              <input name="password" id="password" class="input-text" type="password" tabindex="4" required/>
               <label for="password" class="label">
                 <span class="text-span">Contraseña</span>
               </label>
-
               <% if (locals && locals.errors) { %>
               <% if (locals.errors[0].param=="password") { %>
               <h3> <%= locals.errors[0].msg %> </h3>
               <% } %>
               <% } %>
             </div>
+            <p class="input-text-error grupo__password"> Solo se pueden registrar contraseñas de 4 a 12 digitos.</p>
 
-            <div class="field-item">
-              <input name="cPassword" class="input-text" type="password" tabindex="5" required/>
+            <div class="field-item"  id="grupo__password2">
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+              <input name="cPassword" id="cPassword" class="input-text" type="password" tabindex="5" required/>
               <label for="cPassword" class="label">
                 <span class="text-span">Confirmar contraseña</span>
               </label>
-
               <% if (locals && locals.errors) { %>
               <% if (locals.errors[0].param=="cPassword") { %>
               <h3> <%= locals.errors[0].msg %> </h3>
@@ -99,7 +107,15 @@
               <% } %>
               <% } %>
             </div>
+            <p class="input-text-error grupo__password2"> Ambas contraseñas deben coincidir.</p>
+
+
           </div>
+
+          <div class="formulario_mensaje" id="formulario_mensaje">
+            <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
+          </div>
+
           <div class="iniciar-con">
             <a href="" class="iniciar-con-item"> Inciar con Google </a>
             <a href="" class="iniciar-con-item"> Iniciar con Facebook </a>
@@ -126,6 +142,6 @@
   <!-- /footer -->
 </body>
 
-<script src="/js/validationsCreate.js"></script>
+<script src="/js/validationsRegister.js"></script>
 
 </html>

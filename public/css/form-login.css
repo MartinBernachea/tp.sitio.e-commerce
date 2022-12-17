@@ -45,6 +45,7 @@
   position: relative;
   overflow: hidden;
   margin: 10px 0px 15px 0px;
+  text-align: left;
 }
 
 .field-item .label {
@@ -58,7 +59,8 @@
 }
 
 .input-text {
-  width: 100%;
+  width: calc(100% - 20px);
+  justify-self: flex-start;
   border: none;
   outline: none;
   font-size: 16px;
