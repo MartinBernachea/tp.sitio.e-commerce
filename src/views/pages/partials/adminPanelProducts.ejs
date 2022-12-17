@@ -4,22 +4,20 @@
     <form class="admin-products-form">
         <div class="admin-products-inputs-container">
             <div class="admin-product-panel-inputs-container">
-                <label class="form-label-input label-sm listo">
+                <label class="form-label-input label-sm">
                     <span>Id:</span>
                     <input name="productId" type="text" placeholder="1" value="<%= (locals.applicated?.productId) ?? '' %>"/>
                 </label>
 
-                <label class="form-label-input label-lg listo">
+                <label class="form-label-input label-lg">
                     <span>Nombre:</span>
                     <input name="productName" type="text" placeholder="Remera Nike" value="<%= (locals.applicated?.productName) ?? '' %>" />
                 </label>
 
-                <label class="form-label-input label-sm">
-                    <span>Precio:</span>
-                    <input name="productPrice" type="text" placeholder="Joe" />
-                </label>
+                <%- include('components/inputRangeTwoPoints', { ...locals.rangoPrecios, initialValues: locals.applicated}) %> 
             </div>
-            <div class="admin-product-panel-inputs-container listo">
+
+            <div class="admin-product-panel-inputs-container">
                 <label class="form-label-input label-md">
                     <span>Categoria:</span>
                     <select name="categoriaId" id="categoriaId">
@@ -29,7 +27,7 @@
                         <% } %>
                     </select>
                 </label>
-                <label class="form-label-input label-md listo">
+                <label class="form-label-input label-md">
                     <span>Genero:</span>
                     <select name="generoId" id="generoId">
                         <option value=""> Todos </option>
@@ -38,7 +36,7 @@
                         <% } %>
                     </select>
                 </label>
-                <label class="form-label-input label-md listo">
+                <label class="form-label-input label-md">
                     <span>Marca:</span>
                     <select name="marcaId" id="marcaId">
                         <option value=""> Todas </option>
@@ -53,7 +51,7 @@
         <div class="admin-products-inputs-container">
             <div class="admin-product-panel-inputs-container">
 
-                <label class="form-label-input label-md listo">
+                <label class="form-label-input label-lg">
                     <span>Creado por:</span>
                     <select name="usuarioId" id="usuarioId">
                         <option value=""> Todos </option>
@@ -63,12 +61,12 @@
                     </select>
                 </label>
 
-                <label class="form-label-input label-md listo">
+                <label class="form-label-input label-md">
                     <span>Creado desde:</span>
                     <input name="creadoDesde" type="date" value="<%= (locals.applicated?.creadoDesde) ?? '' %>"/>
                 </label>
 
-                <label class="form-label-input label-md listo">
+                <label class="form-label-input label-md">
                     <span>Creado hasta:</span>
                     <input name="creadoHasta" type="date" value="<%= (locals.applicated?.creadoHasta) ?? '' %>"/>
                 </label>

@@ -1,0 +1,21 @@
+
+<!-- 
+    Params que recibe el componente:
+    -lowerValue: valor minimo posible
+    -upperValue: valor maximo posible
+    -initialValues: seria el req.body / req.params enviado anteriormente (ese obj dentro debe tener: lower y upper)
+
+ -->
+
+
+<div style="display:flex; flex-direction:column; width: 250px; margin: 0 20px;">
+    <span>Rango precios:</span>
+    <span class="multi-range">
+        <input type="range" min="<%= locals.lowerValue %>" max="<%= locals.upperValue %>" value="<%= locals.initialValues.lower ? locals.initialValues.lower : locals.lowerValue %>" id="lower" name="lower">
+        <input type="range" min="<%= locals.lowerValue %>" max="<%= locals.upperValue %>" value="<%= locals.initialValues.upper ? locals.initialValues.upper : locals.upperValue %>" id="upper" name="upper">
+        <p id="lowerLabel" class="multi-range-min-label">$<%= locals.initialValues.lower ? locals.initialValues.lower : locals.lowerValue %> </p>
+        <p id="upperLabel" class="multi-range-max-label">$<%= locals.initialValues.upper ? locals.initialValues.upper : locals.upperValue %></p>
+    </span>
+</div>
+
+<script src="/js/inputRangeTwoPoints.js"></script>

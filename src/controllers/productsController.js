@@ -348,14 +348,22 @@ const controller = {
         const producosFiltrados = db.producto.findAndCountAll(queryFilters);
 
         const creadores = db.sequelize.query("SELECT usuario.id, usuario.nombre, usuario.apellido, COUNT(*) FROM `producto` INNER JOIN `usuario` ON usuario.id=producto.usuario_id GROUP BY usuario.id;")
+        const rangoPrecios = db.producto.findAll({
+            attributes: [
+                [sequelize.fn('min', sequelize.col('precio')), 'lowerValue'],
+                [sequelize.fn('max', sequelize.col('precio')), 'upperValue']
+            ]
+        })
 
-        const response = await Promise.all([generos, marcas, categorias, producosFiltrados, creadores]);
+        const response = await Promise.all([generos, marcas, categorias, producosFiltrados, creadores, rangoPrecios]);
 
 
+
+        
         console.log("#################")
         console.log("#################")
         console.log("#################")
-        console.log("opcionesCreadores", response[4][0])
+        console.log("formData", formData)
         console.log("#################")
         console.log("#################")
         console.log("#################")
@@ -383,15 +391,10 @@ const controller = {
             opcionesMarcas: response[1],
             opcionesCategorias: response[2],
             opcionesCreadores: response[4][0],
+            rangoPrecios: response[5][0].dataValues,
         }
 
-
-
-
-        db.categoria.findAll()
-            .then(categorias => {
-                res.render('./pages/adminPanel', localsParams)
-            })
+        res.render('./pages/adminPanel', localsParams)
     },
 
 

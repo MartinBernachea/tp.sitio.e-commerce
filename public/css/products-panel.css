@@ -116,28 +116,13 @@
 }
 
 
-
-
-
-
 /* CREATE PRODUCT */
 /* CREATE CATEGORY */
 
 .form-create-category {
     width: 80%;
-
-
 }
 
 .form-create-category .form-buttons-container {
     margin-top: 20px;
-}
-
-
-
-
-
-/* BORRAR */
-.listo {
-    background-color: red;
 }

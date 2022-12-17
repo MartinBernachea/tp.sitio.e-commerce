@@ -8,6 +8,7 @@
 @import url(./products-panel.css);
 @import url(./loader.css);
 @import url(./store.css);
+@import url(./inputRangeTwoPoints.css);
 
 * {
   font-family: "Hind Vadodara", sans-serif;
