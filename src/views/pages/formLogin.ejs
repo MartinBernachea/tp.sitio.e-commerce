@@ -25,12 +25,15 @@
     <!-- FORM -->
     <section class="form">
       <h1>INICIA SESION EN TU CUENTA</h1>
-      <form class="form-box background-log-form" action="login" method="POST">
+      <form class="form-box background-log-form" action="login" method="POST" autocomplete="off">
         <div class="container">
           <!-- USUARIO -->
           <div class="fields">
             <div class="field-item">
-              <input type="text" name="email" class="input-text" tabindex="1" value="<%= (locals.old?.email) ? old.email : '' %>" required/>
+              <input type="text" name="email" class="input-text" tabindex="1" value="<%= (locals.old?.email) ? old.email : '' %>" required 
+              role="presentation" 
+              autocomplete="off"
+              />
               <label for="email" class="label">
                 <span class="text-span">Correo</span>
               </label>
@@ -42,7 +45,8 @@
               <% } %>
             </div>
             <div class="field-item">
-              <input type="password" name="password" class="input-text" tabindex="1" required/>
+              <input type="password" name="password" class="input-text" tabindex="1" required 
+              autocomplete="new-password" />
               <label for="password" class="label">
                 <span class="text-span">Contraseña</span>
               </label>
