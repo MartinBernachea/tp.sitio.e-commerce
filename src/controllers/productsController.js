@@ -87,23 +87,7 @@ const controller = {
         res.render('./pages/adminPanel', { userData });
     },
 
-    productsPanel: (req, res) => {
-        const userData = getUserDataStringified(req);
 
-        db.categoria.findAll()
-            .then(categorias => {
-                res.render('./pages/adminPanel', { categorias, userData, section: "productsPanel" })
-            })
-    },
-
-    categoriesPanel: (req, res) => {
-        const userData = getUserDataStringified(req);
-
-        db.categoria.findAll()
-            .then(categorias => {
-                res.render('./pages/adminPanel', { categorias, userData, section: "categoriesPanel" })
-            })
-    },
 
 
     store1: async (req, res) => {
@@ -154,7 +138,7 @@ const controller = {
 
     },
     detail: async (req, res) => {
-        
+
         let idProducto = req.params.id;
 
         try {
@@ -237,7 +221,6 @@ const controller = {
                 "id",
                 "precio",
                 "nombre",
-                // [sequelize.fn('COUNT', 'id'), 'cantidad']
             ],
             include: [
                 {
@@ -289,7 +272,6 @@ const controller = {
             resultsPerPage,
         }
 
-        console.log("products", products)
         const userData = getUserDataStringified(req);
 
         if (req.session.notificationAlert) {
@@ -305,7 +287,136 @@ const controller = {
         }
 
         res.render("./pages/store.ejs", localsParams)
-    }
+    },
+
+
+    productsPanel: async (req, res) => {
+        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
+        let formData = { ...req.query, page: req.query.page ?? 1 };
+        const currentPage = formData.page;
+
+        let productsParams = {}
+
+        const isNotEmpty = (param) => param && param != ""
+
+        if (isNotEmpty(formData.productId)) productsParams.id = formData.productId;
+
+        if (isNotEmpty(formData.productName)) productsParams.nombre = { [sequelize.Op.substring]: formData.productName };
+
+        if (isNotEmpty(formData.creadoHasta) || isNotEmpty(formData.creadoDesde)) {
+            let fechaInicial = "0/0/0";
+            let fechaFinal = new Date();
+
+            if (isNotEmpty(formData.creadoDesde)) fechaInicial = formData.creadoDesde
+            if (isNotEmpty(formData.creadoHasta)) fechaFinal = formData.creadoHasta
+
+            productsParams.created_at = { [sequelize.Op.between]: [fechaInicial, fechaFinal] }
+        }
+
+        const queryFilters = {
+            limit: resultsPerPage,
+            offset: resultsPerPage * (currentPage - 1),
+            order: ["id"],
+            where: productsParams,
+            include: [
+                {
+                    model: db.usuario,
+                    attributes: ["nombre", "apellido"],
+                    where: isNotEmpty(formData.usuarioId) ? { id: formData.usuarioId } : {}
+                },
+                {
+                    model: db.genero,
+                    attributes: ["nombre"],
+                    where: isNotEmpty(formData.generoId) ? { id: formData.generoId } : {}
+                },
+                {
+                    model: db.marca,
+                    attributes: ["nombre"],
+                    where: isNotEmpty(formData.marcaId) ? { id: formData.marcaId } : {}
+                },
+                {
+                    model: db.categoria,
+                    attributes: ["nombre"],
+                    where: isNotEmpty(formData.categoriaId) ? { id: formData.categoriaId } : {}
+                },
+            ],
+        }
+
+        const generos = db.genero.findAll();
+        const marcas = db.marca.findAll();
+        const categorias = db.categoria.findAll();
+        const producosFiltrados = db.producto.findAndCountAll(queryFilters);
+
+        const creadores = db.sequelize.query("SELECT usuario.id, usuario.nombre, usuario.apellido, COUNT(*) FROM `producto` INNER JOIN `usuario` ON usuario.id=producto.usuario_id GROUP BY usuario.id;")
+
+        const response = await Promise.all([generos, marcas, categorias, producosFiltrados, creadores]);
+
+
+        console.log("#################")
+        console.log("#################")
+        console.log("#################")
+        console.log("opcionesCreadores", response[4][0])
+        console.log("#################")
+        console.log("#################")
+        console.log("#################")
+
+        const products = {
+            elements: response[3].rows,
+            quantity: response[3].count,
+            page: currentPage,
+            resultsPerPage,
+        }
+
+        const userData = getUserDataStringified(req);
+
+        if (req.session.notificationAlert) {
+            localsParams.notificationAlert = req.session.notificationAlert;
+            req.session.notificationAlert = null
+        }
+
+        let localsParams = {
+            userData,
+            section: "productsPanel",
+            applicated: formData,
+            products,
+            opcionesGeneros: response[0],
+            opcionesMarcas: response[1],
+            opcionesCategorias: response[2],
+            opcionesCreadores: response[4][0],
+        }
+
+
+
+
+        db.categoria.findAll()
+            .then(categorias => {
+                res.render('./pages/adminPanel', localsParams)
+            })
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    categoriesPanel: (req, res) => {
+        const userData = getUserDataStringified(req);
+
+        db.categoria.findAll()
+            .then(categorias => {
+                res.render('./pages/adminPanel', { categorias, userData, section: "categoriesPanel" })
+            })
+    },
 };
 
 module.exports = controller;

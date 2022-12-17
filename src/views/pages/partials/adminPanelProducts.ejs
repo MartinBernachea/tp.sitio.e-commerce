@@ -1,39 +1,84 @@
 <section class="admin-products-section">
     <h1 class="admin-title-section"> Panel de productos: </h1>
 
-    <form>
-        <div class="form-inputs-container">
-            <label class="form-label-input label-lg">
-                <span>Nombre:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
+    <form class="admin-products-form">
+        <div class="admin-products-inputs-container">
+            <div class="admin-product-panel-inputs-container">
+                <label class="form-label-input label-sm listo">
+                    <span>Id:</span>
+                    <input name="productId" type="text" placeholder="1" value="<%= (locals.applicated?.productId) ?? '' %>"/>
+                </label>
 
-            <label class="form-label-input label-lg">
-                <span>Precio:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
+                <label class="form-label-input label-lg listo">
+                    <span>Nombre:</span>
+                    <input name="productName" type="text" placeholder="Remera Nike" value="<%= (locals.applicated?.productName) ?? '' %>" />
+                </label>
 
-            <label class="form-label-input label-lg">
-                <span>Categorias:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
-
-            <label class="form-label-input label-lg">
-                <span>Creado desde:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
-
-            <label class="form-label-input label-lg">
-                <span>Creado hasta:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
+                <label class="form-label-input label-sm">
+                    <span>Precio:</span>
+                    <input name="productPrice" type="text" placeholder="Joe" />
+                </label>
+            </div>
+            <div class="admin-product-panel-inputs-container listo">
+                <label class="form-label-input label-md">
+                    <span>Categoria:</span>
+                    <select name="categoriaId" id="categoriaId">
+                        <option value=""> Todas </option>
+                        <% for(categoria of locals.opcionesCategorias) { %>
+                            <option value="<%= categoria.id %>" <% if(locals.applicated?.categoriaId==categoria.id) { %> selected<%}%>> <%=categoria.nombre%> </option>
+                        <% } %>
+                    </select>
+                </label>
+                <label class="form-label-input label-md listo">
+                    <span>Genero:</span>
+                    <select name="generoId" id="generoId">
+                        <option value=""> Todos </option>
+                        <% for(genero of locals.opcionesGeneros) { %>
+                            <option value="<%= genero.id %>" <% if(locals.applicated?.generoId==genero.id) { %> selected<%}%>> <%=genero.nombre%> </option>
+                        <% } %>
+                    </select>
+                </label>
+                <label class="form-label-input label-md listo">
+                    <span>Marca:</span>
+                    <select name="marcaId" id="marcaId">
+                        <option value=""> Todas </option>
+                        <% for(marca of locals.opcionesMarcas) { %>   
+                            <option value="<%= marca.id %>" <% if(locals.applicated?.marcaId==marca.id) { %> selected<%}%>> <%=marca.nombre%> </option>
+                        <% } %>
+                    </select>
+                </label>
+            </div>
         </div>
 
-        <div class="form-buttons-container">
+        <div class="admin-products-inputs-container">
+            <div class="admin-product-panel-inputs-container">
+
+                <label class="form-label-input label-md listo">
+                    <span>Creado por:</span>
+                    <select name="usuarioId" id="usuarioId">
+                        <option value=""> Todos </option>
+                        <% for(usuario of locals.opcionesCreadores) { %>
+                            <option value="<%= usuario.id %>" <% if(locals.applicated?.usuarioId==usuario.id) { %> selected<%}%>> <%=usuario.nombre%> <%=usuario.apellido%> (id: <%=usuario.id%>)  </option>
+                        <% } %>
+                    </select>
+                </label>
+
+                <label class="form-label-input label-md listo">
+                    <span>Creado desde:</span>
+                    <input name="creadoDesde" type="date" value="<%= (locals.applicated?.creadoDesde) ?? '' %>"/>
+                </label>
+
+                <label class="form-label-input label-md listo">
+                    <span>Creado hasta:</span>
+                    <input name="creadoHasta" type="date" value="<%= (locals.applicated?.creadoHasta) ?? '' %>"/>
+                </label>
+            </div>
+        </div>
+
+        <div class="admin-products-buttons-container">
             <button type="reset" class="btn-secondary"> Limpiar </button>
             <button type="submit" class="btn-primary"> Buscar </button>
             <button type="submit" class="btn-terceary"> Crear nuevo </button>
-
         </div>
 
         <table>
@@ -42,23 +87,40 @@
                     <th>id</th>
                     <th>Nombre</th>
                     <th>Precio</th>
-                    <th>Categorias</th>
+                    <th>Categoria</th>
+                    <th>Genero</th>
+                    <th>Marca</th>
+                    <th>Fecha creacion</th>
+                    <th>Creado por</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Zapatilla</td>
-                    <td>$100</td>
-                    <td>Cat1 Cat2</td>
-                </tr>
+                <% for(product of locals.products.elements) { %>
+                    <tr>
+                        <td> <%= product.id %></td>
+                        <td> <%= product.nombre %></td>
+                        <td> <%= product.precio %></td>
+
+                        <td> <%= product.categorium.nombre %></td>
+                        <td> <%= product.genero.nombre %></td>
+                        <td> <%= product.marca.nombre %></td>
+
+                        <td> <%= product.createdAt %> <%= product.createdAt %></td>
+
+                        <td> <%= product.usuario.nombre %> <%= product.usuario.apellido %></td>
+
+                        <!-- <%= JSON.stringify(product)%> -->
+                    </tr>
+                    <% } %>
             </tbody>
         </table>
+    
+        <div class="user-form-pagination-container">
+            <%- include('tablePagination', { 
+                    quantity: locals.products.quantity,
+                    resultsPerPage: locals.products.resultsPerPage, 
+                    page: locals.products.page,
+                }) %>
+        </div>
     </form>
-
-    <div class="admin-products-metrics-container">
-
-        asdasd
-
-    </div>
 </section>
