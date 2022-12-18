@@ -10,6 +10,7 @@ const sequelize = require("sequelize");
 const { getUserDataStringified } = require('../utils/userData');
 const config = require('../../appConfig');
 const { generarOrderTablaProducto } = require('../database/utils/orders');
+const { formatProductDate } = require('../database/utils/format');
 
 const controller = {
     index: (req, res) => {
@@ -389,12 +390,7 @@ const controller = {
 
         const response = await Promise.all([generos, marcas, categorias, producosFiltrados, creadores, rangoPrecios]);
 
-        const formatedProductsElements = response[3].rows.map(ctProduct => {
-            const fechaCreacion = new Date(ctProduct.createdAt);
-            const formatedCreatedAt = `${fechaCreacion.getDate()}/${fechaCreacion.getMonth() + 1}/${fechaCreacion.getFullYear()}`
-            const formatedProduct = { ...ctProduct.dataValues, createdAt: formatedCreatedAt }
-            return formatedProduct
-        })
+        const formatedProductsElements = formatProductDate(response[3].rows)
 
         const products = {
             elements: formatedProductsElements,

@@ -1,9 +1,5 @@
 const db = require("../models");
 
-// order: [[db
-//     .categoria, "nombre", "ASC"]],
-
-
 const generarOrderTablaProducto = (order) => {
     switch (order) {
         case "id_asc":
@@ -58,9 +54,6 @@ const generarOrderTablaProducto = (order) => {
             return [["id", "ASC"]];
     }
 }
-
-
-
 
 module.exports = {
     generarOrderTablaProducto,
