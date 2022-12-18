@@ -5,15 +5,17 @@ let upperVal = parseInt(upperSlider.value);
 let lowerLabel = document.querySelector("#lowerLabel")
 let upperLabel = document.querySelector("#upperLabel")
 
+const unidadEscala = ((lowerSlider.max - lowerSlider.min) / 8);
+
 upperSlider.oninput = function () {
     lowerVal = parseInt(lowerSlider.value);
     upperVal = parseInt(upperSlider.value);
 
-    if (upperVal < lowerVal + 4) {
-        lowerSlider.value = upperVal - 4;
-        
+    if (upperVal <= lowerVal + unidadEscala) {
+        lowerSlider.value = upperVal - unidadEscala;
+
         if (lowerVal == lowerSlider.min) {
-            upperSlider.value = 4;
+            upperSlider.value = unidadEscala;
         }
     }
     lowerLabel.innerHTML = `$${lowerSlider.value}`;
@@ -24,11 +26,11 @@ lowerSlider.oninput = function () {
     lowerVal = parseInt(lowerSlider.value);
     upperVal = parseInt(upperSlider.value);
 
-    if (lowerVal > upperVal - 4) {
-        upperSlider.value = lowerVal + 4;
+    if (lowerVal >= upperVal - unidadEscala) {
+        upperSlider.value = lowerVal + unidadEscala;
 
         if (upperVal == upperSlider.max) {
-            lowerSlider.value = parseInt(upperSlider.max) - 4;
+            lowerSlider.value = parseInt(upperSlider.max) - unidadEscala;
         }
 
     }

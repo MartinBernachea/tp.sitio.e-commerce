@@ -14,7 +14,6 @@
                     <input name="productName" type="text" placeholder="Remera Nike" value="<%= (locals.applicated?.productName) ?? '' %>" />
                 </label>
 
-                <%- include('components/inputRangeTwoPoints', { ...locals.rangoPrecios, initialValues: locals.applicated}) %> 
             </div>
 
             <div class="admin-product-panel-inputs-container">
@@ -47,6 +46,7 @@
                 </label>
             </div>
         </div>
+        <%- include('components/inputRangeTwoPoints', { ...locals.rangoPrecios, initialValues: locals.applicated}) %> 
 
         <div class="admin-products-inputs-container">
             <div class="admin-product-panel-inputs-container">
