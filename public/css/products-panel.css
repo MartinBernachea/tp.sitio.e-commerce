@@ -37,7 +37,6 @@
     margin: 20px 0;
     font-size: 18px;
     padding: 10px 20px;
-    background-color: red;
 }
 
 .admin-panel-aside li i {
@@ -49,9 +48,12 @@
     color: rgb(124, 124, 124);
 }
 
+.admin-panel-aside .selected{
+    background-color: red;
+}
+
 .admin-products-form {
     width: auto;
-    /* background-color: red; */
 }
 
 .admin-products-section .admin-products-inputs-container div:not(:last-child) {

@@ -49,6 +49,7 @@ input[type="radio"] {
     margin: 0 auto;
     position: relative;
     padding-right:4px;
+    cursor:pointer;
 }
 
 .btn-sort-table i {

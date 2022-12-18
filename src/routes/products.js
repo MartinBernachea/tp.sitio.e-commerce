@@ -42,6 +42,8 @@ router.get('/coming-soon', adminPermissions, productsController.comingSoon);
 /*** PRODUCTS-PANEL ***/
 router.get('/admin/panel/products', adminPermissions, productsController.productsPanel);
 router.get('/admin/panel/categories', adminPermissions, productsController.categoriesPanel);
+router.get('/admin/panel/genres', adminPermissions, productsController.genresPanel);
+router.get('/admin/panel/brands', adminPermissions, productsController.brandsPanel);
 
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
 router.get('/detail/:id', productsController.detail);

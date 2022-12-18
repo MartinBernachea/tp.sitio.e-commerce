@@ -9,8 +9,9 @@ const sequelize = require("sequelize");
 
 const { getUserDataStringified } = require('../utils/userData');
 const config = require('../../appConfig');
-const { generarOrderTablaProducto } = require('../database/utils/orders');
+const { generarOrderTablaProducto, generarOrderGenericoIdNombre } = require('../database/utils/orders');
 const { formatProductDate } = require('../database/utils/format');
+const { isParamNotEmpty } = require('../database/utils/generics');
 
 const controller = {
     index: (req, res) => {
@@ -325,24 +326,19 @@ const controller = {
         const currentPage = formData.page;
 
         let productsParams = {}
+        if (isParamNotEmpty(formData.productId)) productsParams.id = formData.productId;
 
-        const isNotEmpty = (param) => param && param != ""
+        if (isParamNotEmpty(formData.productName)) productsParams.nombre = { [sequelize.Op.substring]: formData.productName };
 
-        if (isNotEmpty(formData.productId)) productsParams.id = formData.productId;
-
-        if (isNotEmpty(formData.productName)) productsParams.nombre = { [sequelize.Op.substring]: formData.productName };
-
-        if (isNotEmpty(formData.creadoHasta) || isNotEmpty(formData.creadoDesde)) {
+        if (isParamNotEmpty(formData.creadoHasta) || isParamNotEmpty(formData.creadoDesde)) {
             let fechaInicial = "0/0/0";
             let fechaFinal = new Date();
-
-            if (isNotEmpty(formData.creadoDesde)) fechaInicial = formData.creadoDesde
-            if (isNotEmpty(formData.creadoHasta)) fechaFinal = formData.creadoHasta
-
+            if (isParamNotEmpty(formData.creadoDesde)) fechaInicial = formData.creadoDesde
+            if (isParamNotEmpty(formData.creadoHasta)) fechaFinal = formData.creadoHasta
             productsParams.created_at = { [sequelize.Op.between]: [fechaInicial, fechaFinal] }
         }
 
-        if (isNotEmpty(formData.lower) && isNotEmpty(formData.upper)) {
+        if (isParamNotEmpty(formData.lower) && isParamNotEmpty(formData.upper)) {
             productsParams.precio = { [sequelize.Op.between]: [formData.lower, formData.upper] }
         }
 
@@ -355,22 +351,22 @@ const controller = {
                 {
                     model: db.usuario,
                     attributes: ["nombre", "apellido"],
-                    where: isNotEmpty(formData.usuarioId) ? { id: formData.usuarioId } : {},
+                    where: isParamNotEmpty(formData.usuarioId) ? { id: formData.usuarioId } : {},
                 },
                 {
                     model: db.genero,
                     attributes: ["nombre"],
-                    where: isNotEmpty(formData.generoId) ? { id: formData.generoId } : {},
+                    where: isParamNotEmpty(formData.generoId) ? { id: formData.generoId } : {},
                 },
                 {
                     model: db.marca,
                     attributes: ["nombre"],
-                    where: isNotEmpty(formData.marcaId) ? { id: formData.marcaId } : {},
+                    where: isParamNotEmpty(formData.marcaId) ? { id: formData.marcaId } : {},
                 },
                 {
                     model: db.categoria,
                     attributes: ["nombre"],
-                    where: isNotEmpty(formData.categoriaId) ? { id: formData.categoriaId } : {},
+                    where: isParamNotEmpty(formData.categoriaId) ? { id: formData.categoriaId } : {},
                 },
             ],
         }
@@ -421,14 +417,216 @@ const controller = {
         res.render('./pages/adminPanel', localsParams)
     },
 
-    categoriesPanel: (req, res) => {
-        const userData = getUserDataStringified(req);
 
-        db.categoria.findAll()
-            .then(categorias => {
-                res.render('./pages/adminPanel', { categorias, userData, section: "categoriesPanel" })
-            })
+
+
+
+
+
+    categoriesPanel: async (req, res) => {
+        const userData = getUserDataStringified(req);
+        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
+        let formData = { ...req.query, page: req.query.page ?? 1 };
+        const currentPage = formData.page;
+
+        let categoriesParams = {}
+        if (isParamNotEmpty(formData.categoriaId)) categoriesParams.id = formData.categoriaId;
+        if (isParamNotEmpty(formData.categoriaNombre)) categoriesParams.nombre = { [sequelize.Op.substring]: formData.categoriaNombre };
+
+        const queryFilters = {
+            subQuery: false,
+            limit: resultsPerPage,
+            offset: resultsPerPage * (currentPage - 1),
+            order: generarOrderGenericoIdNombre(formData.order),
+            where: categoriesParams,
+
+            attributes: [
+                "id",
+                "nombre",
+            ],
+        }
+
+        const response = await db.categoria.findAndCountAll(queryFilters);
+        const categoriasSinCantidadProductos = response.rows;
+        const categoriasIds = categoriasSinCantidadProductos.map(ctCategoria => ctCategoria.dataValues.id)
+
+        let queryCondicionWhere = "";
+
+        categoriasIds.forEach((ctId, index) => {
+            queryCondicionWhere += "categoria_id=" + ctId
+
+            if (index < categoriasIds.length - 1) {
+                queryCondicionWhere += " OR "
+            }
+        })
+
+        const cantidadesProductos = await db.sequelize.query("SELECT categoria_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY categoria_id")
+        const cantidadProductosFixed = cantidadesProductos[0]
+
+        const categoriasConCantidadProductos = categoriasSinCantidadProductos.map(ctElement => {
+            const formatedElement = {
+                ...ctElement.dataValues
+            }
+            const cantidadIndex = cantidadProductosFixed.findIndex(ct => ct.id == formatedElement.id);
+            formatedElement.cantidadProductos = cantidadIndex >= 0 ? cantidadProductosFixed[cantidadIndex].cantidad : 0
+            return formatedElement
+        })
+
+        const categorias = {
+            elements: categoriasConCantidadProductos,
+            quantity: response.count,
+            page: currentPage,
+            resultsPerPage,
+        }
+
+        let localsParams = {
+            categorias,
+            userData,
+            section: "categoriesPanel",
+            applicated: formData,
+
+        }
+
+        res.render('./pages/adminPanel', localsParams)
+
     },
+
+
+    genresPanel: async (req, res) => {
+        const userData = getUserDataStringified(req);
+        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
+        let formData = { ...req.query, page: req.query.page ?? 1 };
+        const currentPage = formData.page;
+
+        let categoriesParams = {}
+        if (isParamNotEmpty(formData.categoriaId)) categoriesParams.id = formData.categoriaId;
+        if (isParamNotEmpty(formData.categoriaNombre)) categoriesParams.nombre = { [sequelize.Op.substring]: formData.categoriaNombre };
+
+        const queryFilters = {
+            subQuery: false,
+            limit: resultsPerPage,
+            offset: resultsPerPage * (currentPage - 1),
+            order: generarOrderGenericoIdNombre(formData.order),
+            where: categoriesParams,
+
+            attributes: [
+                "id",
+                "nombre",
+            ],
+        }
+
+        const response = await db.categoria.findAndCountAll(queryFilters);
+        const categoriasSinCantidadProductos = response.rows;
+        const categoriasIds = categoriasSinCantidadProductos.map(ctCategoria => ctCategoria.dataValues.id)
+
+        let queryCondicionWhere = "";
+
+        categoriasIds.forEach((ctId, index) => {
+            queryCondicionWhere += "categoria_id=" + ctId
+
+            if (index < categoriasIds.length - 1) {
+                queryCondicionWhere += " OR "
+            }
+        })
+
+        const cantidadesProductos = await db.sequelize.query("SELECT categoria_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY categoria_id")
+        const cantidadProductosFixed = cantidadesProductos[0]
+
+        const categoriasConCantidadProductos = categoriasSinCantidadProductos.map(ctElement => {
+            const formatedElement = {
+                ...ctElement.dataValues
+            }
+            const cantidadIndex = cantidadProductosFixed.findIndex(ct => ct.id == formatedElement.id);
+            formatedElement.cantidadProductos = cantidadIndex >= 0 ? cantidadProductosFixed[cantidadIndex].cantidad : 0
+            return formatedElement
+        })
+
+        const categorias = {
+            elements: categoriasConCantidadProductos,
+            quantity: response.count,
+            page: currentPage,
+            resultsPerPage,
+        }
+
+        let localsParams = {
+            categorias,
+            userData,
+            section: "genresPanel",
+            applicated: formData,
+
+        }
+
+        res.render('./pages/adminPanel', localsParams)
+    },
+
+    brandsPanel: async (req, res) => {
+        const userData = getUserDataStringified(req);
+        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
+        let formData = { ...req.query, page: req.query.page ?? 1 };
+        const currentPage = formData.page;
+
+        let categoriesParams = {}
+        if (isParamNotEmpty(formData.categoriaId)) categoriesParams.id = formData.categoriaId;
+        if (isParamNotEmpty(formData.categoriaNombre)) categoriesParams.nombre = { [sequelize.Op.substring]: formData.categoriaNombre };
+
+        const queryFilters = {
+            subQuery: false,
+            limit: resultsPerPage,
+            offset: resultsPerPage * (currentPage - 1),
+            order: generarOrderGenericoIdNombre(formData.order),
+            where: categoriesParams,
+
+            attributes: [
+                "id",
+                "nombre",
+            ],
+        }
+
+        const response = await db.categoria.findAndCountAll(queryFilters);
+        const categoriasSinCantidadProductos = response.rows;
+        const categoriasIds = categoriasSinCantidadProductos.map(ctCategoria => ctCategoria.dataValues.id)
+
+        let queryCondicionWhere = "";
+
+        categoriasIds.forEach((ctId, index) => {
+            queryCondicionWhere += "categoria_id=" + ctId
+
+            if (index < categoriasIds.length - 1) {
+                queryCondicionWhere += " OR "
+            }
+        })
+
+        const cantidadesProductos = await db.sequelize.query("SELECT categoria_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY categoria_id")
+        const cantidadProductosFixed = cantidadesProductos[0]
+
+        const categoriasConCantidadProductos = categoriasSinCantidadProductos.map(ctElement => {
+            const formatedElement = {
+                ...ctElement.dataValues
+            }
+            const cantidadIndex = cantidadProductosFixed.findIndex(ct => ct.id == formatedElement.id);
+            formatedElement.cantidadProductos = cantidadIndex >= 0 ? cantidadProductosFixed[cantidadIndex].cantidad : 0
+            return formatedElement
+        })
+
+        const categorias = {
+            elements: categoriasConCantidadProductos,
+            quantity: response.count,
+            page: currentPage,
+            resultsPerPage,
+        }
+
+        let localsParams = {
+            categorias,
+            userData,
+            section: "brandsPanel",
+            applicated: formData,
+
+        }
+
+        res.render('./pages/adminPanel', localsParams)
+    },
+    
+
 };
 
 module.exports = controller;

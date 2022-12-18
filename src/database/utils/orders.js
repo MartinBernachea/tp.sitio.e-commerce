@@ -55,6 +55,26 @@ const generarOrderTablaProducto = (order) => {
     }
 }
 
+const generarOrderGenericoIdNombre = (order) => {
+    switch (order) {
+        case "id_asc":
+            return [["id", "ASC"]];
+
+        case "id_desc":
+            return [["id", "DESC"]];
+
+        case "nombre_asc":
+            return [["nombre", "ASC"], ["id", "ASC"]];
+
+        case "nombre_desc":
+            return [["nombre", "DESC"], ["id", "ASC"]];
+
+        default:
+            return [["id", "ASC"]];
+    }
+}
+
 module.exports = {
     generarOrderTablaProducto,
+    generarOrderGenericoIdNombre,
 }
