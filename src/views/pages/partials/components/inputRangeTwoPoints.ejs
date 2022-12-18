@@ -8,8 +8,8 @@
  -->
 
 
-<div style="display:flex; flex-direction:column; width: 250px; margin: 0 20px;">
-    <span>Rango precios:</span>
+<div class="input-range-two-points-container">
+    <span class="form-label-input-title">Rango precios:</span>
     <span class="multi-range">
         <input type="range" min="<%= locals.lowerValue %>" max="<%= locals.upperValue %>" value="<%= locals.initialValues.lower ? locals.initialValues.lower : locals.lowerValue %>" id="lower" name="lower">
         <input type="range" min="<%= locals.lowerValue %>" max="<%= locals.upperValue %>" value="<%= locals.initialValues.upper ? locals.initialValues.upper : locals.upperValue %>" id="upper" name="upper">

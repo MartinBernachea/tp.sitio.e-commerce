@@ -9,16 +9,25 @@
 .admin-panel-sections {
     display: flex;
     justify-content: center;
-    /* background-color: rgb(241, 241, 241); */
     width: 100%;
+}
+
+.admin-title-section {
+    font-size: 2rem;
+}
+
+.admin-panel {
+    width: 100%;
+    max-width: 1300px;
+    background-color: rgba(247, 247, 247, 0.829);
 }
 
 .admin-panel-aside {
     padding: 40px;
     display: flex;
     flex-direction: column;
-    /* background-color: rgb(252, 252, 252); */
-    width:20%;
+    background-color: rgba(219, 219, 219, 0.527);
+    width: 20%;
     max-width: 210px;
     max-width: 290px;
 }
@@ -27,8 +36,8 @@
     list-style: none;
     margin: 20px 0;
     font-size: 18px;
-    width: max-content;
-
+    padding: 10px 20px;
+    background-color: red;
 }
 
 .admin-panel-aside li i {
@@ -66,26 +75,35 @@
 
 .admin-products-buttons-container {
     display: flex;
-    margin-top: 14px;
+    margin-top: 24px;
 }
 
 .admin-products-buttons-container button:not(:last-child) {
     margin-right: 8px;
 }
 
-.admin-products-buttons-container button:last-child {
-    margin-left: 24px;
+.admin-products-head{
+    display: flex;
+    justify-content: space-between;
 }
-
 
 .admin-products-section {
     /* background-color: violet; */
     width: 100%;
-    max-width: 1150px;
-    padding: 30px 50px;
+    padding: 30px 30px 0 30px;
 }
 
-.admin-title-section {}
+.admin-products-section .no-coincidencia-error {
+    margin: 30px 0;
+
+}
+
+.admin-product-range-container {
+    margin-top: 20px;
+    margin-bottom: 4px;
+    width: 100%;
+    max-width: 500px;
+}
 
 .admin-products-metrics-container {
     background-color: violet;

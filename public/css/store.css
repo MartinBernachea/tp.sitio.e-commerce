@@ -7,7 +7,7 @@
     width: 20%;
     max-width: 300px;
     min-width: 230px;
-    margin-top:40px;
+    margin-top: 40px;
 }
 
 .store-results-container {
@@ -29,10 +29,42 @@
 }
 
 input[type="checkbox"] {
-    accent-color: #c42121;    
+    accent-color: #c42121;
     border: 2px;
 }
 
 input[type="radio"] {
-    accent-color: #c42121;    
+    accent-color: #c42121;
+}
+
+.btn-sort-table {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 auto;
+    position: relative;
+    padding-right:4px;
+}
+
+.btn-sort-table i {
+    color: rgba(71, 71, 71, 0.575);
+}
+
+.btn-sort-table i.active {
+    color: rgb(0, 0, 0);
+}
+
+.btn-sort-table i::before {
+    height: 16px !important;
+    line-height: 16px !important;
+    vertical-align: middle !important;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
 }

@@ -23,7 +23,6 @@
 
         <main>
             <section class="caja-grande caja-grande2">
-
                 <div class="admin-panel-container">
                     <div class="admin-panel-sections">
                         <aside class="admin-panel-aside">
@@ -36,15 +35,19 @@
                                 </li>
                             </ul>
                         </aside>
-                        
-                        <% if(locals.section == "productsPanel") {%>
-                            <%- include('partials/adminPanelProducts') %>
-                        <% } %>
+                        <div class="admin-panel">
+                            <% if(locals.section == "productsPanel") {%>
+                                <%- include('partials/adminPanelProducts') %>
+                            <% } %>
 
-                        <% if(locals.section == "categoriesPanel") {%>
-                            <%- include('partials/adminPanelCategories') %>
-                        <% } %>
-                        
+                            <% if(locals.section == "createProduct") {%>
+                                <%- include('partials/createProductForm') %>
+                            <% } %>
+
+                            <% if(locals.section == "categoriesPanel") {%>
+                                <%- include('partials/adminPanelCategories') %>
+                            <% } %>
+                        </div>
 
                     </div>
                 </div>

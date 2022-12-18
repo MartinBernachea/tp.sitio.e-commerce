@@ -1,6 +1,9 @@
-<section class="admin-products-section">
-    <h1 class="admin-title-section"> Panel de productos: </h1>
 
+<section class="admin-products-section">
+    <div class="admin-products-head">
+        <h1 class="admin-title-section"> Panel de productos: </h1>
+        <a class="btn-terceary" href='/admin/panel/products/create' type="button"> Crear nuevo producto </a>
+    </div>
     <form class="admin-products-form">
         <div class="admin-products-inputs-container">
             <div class="admin-product-panel-inputs-container">
@@ -46,7 +49,6 @@
                 </label>
             </div>
         </div>
-        <%- include('components/inputRangeTwoPoints', { ...locals.rangoPrecios, initialValues: locals.applicated}) %> 
 
         <div class="admin-products-inputs-container">
             <div class="admin-product-panel-inputs-container">
@@ -70,55 +72,126 @@
                     <span>Creado hasta:</span>
                     <input name="creadoHasta" type="date" value="<%= (locals.applicated?.creadoHasta) ?? '' %>"/>
                 </label>
+
             </div>
+        </div>
+
+        <div class="admin-product-range-container">
+            <%- include('components/inputRangeTwoPoints', { ...locals.rangoPrecios, initialValues: locals.applicated}) %> 
         </div>
 
         <div class="admin-products-buttons-container">
             <button type="reset" class="btn-secondary"> Limpiar </button>
             <button type="submit" class="btn-primary"> Buscar </button>
-            <button type="submit" class="btn-terceary"> Crear nuevo </button>
         </div>
+        <% if(locals.products) {%>
+            <% if(locals.products.quantity > 0) {%>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "id_asc") ? "id_desc" : "id_asc" %>"
+                                    />
+                                    Id 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order == "id_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(!locals.applicated?.order || locals.applicated.order == "id_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "nombre_asc") ? "nombre_desc" : "nombre_asc" %>"
+                                    />
+                                    Nombre 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "nombre_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "nombre_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>                                
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "precio_asc") ? "precio_desc" : "precio_asc" %>"
+                                    />
+                                    Precio 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "precio_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "precio_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "categoria_asc") ? "categoria_desc" : "categoria_asc" %>"
+                                    />
+                                    Categoria 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "categoria_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "categoria_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "genero_asc") ? "genero_desc" : "genero_asc" %>"
+                                    />
+                                    Genero 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "genero_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "genero_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "marca_asc") ? "marca_desc" : "marca_asc" %>"
+                                    />
+                                    Marca 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "marca_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "marca_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "createdAt_asc") ? "createdAt_desc" : "createdAt_asc" %>"
+                                    />
+                                    Fecha creacion 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "createdAt_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "createdAt_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "usuario_asc") ? "usuario_desc" : "usuario_asc" %>"
+                                    />
+                                    Creado por
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "usuario_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "usuario_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(product of locals.products.elements) { %>
+                            <tr>
+                                <td> <%= product.id %></td>
+                                <td> <%= product.nombre %></td>
+                                <td> <%= product.precio %></td>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Categoria</th>
-                    <th>Genero</th>
-                    <th>Marca</th>
-                    <th>Fecha creacion</th>
-                    <th>Creado por</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for(product of locals.products.elements) { %>
-                    <tr>
-                        <td> <%= product.id %></td>
-                        <td> <%= product.nombre %></td>
-                        <td> <%= product.precio %></td>
+                                <td> <%= product.categorium.nombre %></td>
+                                <td> <%= product.genero.nombre %></td>
+                                <td> <%= product.marca.nombre %></td>
 
-                        <td> <%= product.categorium.nombre %></td>
-                        <td> <%= product.genero.nombre %></td>
-                        <td> <%= product.marca.nombre %></td>
+                                <td> <%= product.createdAt %></td>
 
-                        <td> <%= product.createdAt %> <%= product.createdAt %></td>
-
-                        <td> <%= product.usuario.nombre %> <%= product.usuario.apellido %></td>
-
-                        <!-- <%= JSON.stringify(product)%> -->
-                    </tr>
-                    <% } %>
-            </tbody>
-        </table>
-    
-        <div class="user-form-pagination-container">
-            <%- include('tablePagination', { 
-                    quantity: locals.products.quantity,
-                    resultsPerPage: locals.products.resultsPerPage, 
-                    page: locals.products.page,
-                }) %>
-        </div>
+                                <td> <%= product.usuario.nombre %> <%= product.usuario.apellido %></td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            
+                <div class="user-form-pagination-container">
+                    <%- include('tablePagination', { 
+                            quantity: locals.products.quantity,
+                            resultsPerPage: locals.products.resultsPerPage, 
+                            page: locals.products.page,
+                        }) %>
+                </div>
+            <% } else { %>
+                <p class="no-coincidencia-error">No hay coincidencias con la busqueda</p>
+            <% } %>
+        <% } %>
     </form>
 </section>

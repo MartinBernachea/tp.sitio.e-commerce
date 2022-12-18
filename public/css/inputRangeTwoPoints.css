@@ -1,16 +1,23 @@
+.input-range-two-points-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* width: 250px; */
+}
+
 input[type=range] {
   box-sizing: border-box;
   appearance: none;
-  width: 250px;
+  /* width: 250px; */
+  width: 100%;
+
   margin: 0;
   padding: 0 2px;
-  /* Add some L/R padding to ensure box shadow of handle is shown */
   overflow: hidden;
   border: 0;
   border-radius: 1px;
   outline: none;
   background: linear-gradient(grey, grey) no-repeat center;
-  /* Use a linear gradient to generate only the 2px height background */
   background-size: 100% 2px;
   pointer-events: none;
 }
@@ -27,7 +34,6 @@ input[type=range]::-webkit-slider-thumb {
   background-color: #fff;
   position: relative;
   margin: 5px 0;
-  /* Add some margin to ensure box shadow is shown */
   cursor: pointer;
   appearance: none;
   pointer-events: all;
@@ -47,9 +53,9 @@ input[type=range]::-webkit-slider-thumb::before {
 .multi-range {
   position: relative;
   height: 50px;
-  width: 250px;
+  /* width: 250px; */
+  width: 100%;
 }
-
 
 .multi-range input[type=range] {
   position: absolute;
@@ -67,14 +73,15 @@ input[type=range]::-webkit-slider-thumb::before {
   background-color: grey;
 }
 
-.multi-range-max-label{
- position:absolute;
- right:0;
- bottom:-4px;
+.multi-range-max-label {
+  position: absolute;
+  right: 0;
+  bottom: -4px;
 }
-.multi-range-min-label{
-  position:absolute;
-  left:0;
-  bottom:-4px;
+
+.multi-range-min-label {
+  position: absolute;
+  left: 0;
+  bottom: -4px;
 
 }

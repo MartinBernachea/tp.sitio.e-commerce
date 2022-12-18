@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<!-- head -->title
-
-<head>
-	<%- include('partials/head') %>
-	<link rel="stylesheet" href="/css/stylesheet.css">
-
-	<title> G&X - Create </title>
-</head>
-<!-- /head -->
-
-<body>
-	<!-- Header -->
-	<%- include('partials/headerNav', locals) %>
-	<!-- /Header -->
-
 	<div class="products-wrapper">
-
-		<!-- <h2 class="products-title"> Llena el formulario y vende! Asi de simple! </h2> -->
-
 		<div class="box-container">
 			<form action="create" method="POST" enctype="multipart/form-data">
 				<div class="pe-container">
@@ -148,18 +127,10 @@
 					</div>
 
 					<div class="save-product">
-						<button type="submit" class="btn-secondary">Vender producto</button>
+						<a class="btn-secondary" href='/admin/panel/products' type="button"> Volver </a>
+						<button type="submit" class="btn-primary">Crear producto</button>
 					</div>
 				</div>
 			</form>
 		</div>
-
 	</div>
-
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
-	<script src="/js/index.js"></script>
-</body>
-
-</html>

@@ -9,6 +9,7 @@ const sequelize = require("sequelize");
 
 const { getUserDataStringified } = require('../utils/userData');
 const config = require('../../appConfig');
+const { generarOrderTablaProducto } = require('../database/utils/orders');
 
 const controller = {
     index: (req, res) => {
@@ -90,7 +91,34 @@ const controller = {
 
 
 
-    store1: async (req, res) => {
+
+
+    getCreateProduct: async (req, res) => {
+        const userData = getUserDataStringified(req);
+
+        const generos = db.genero.findAll();
+        const marcas = db.marca.findAll();
+        const categorias = db.categoria.findAll();
+
+        const response = await Promise.all([generos, marcas, categorias])
+
+        let localsParams = {
+            userData,
+            section: "createProduct",
+            generos: response[0],
+            marcas: response[1],
+            categorias: response[2],
+        }
+
+        res.render('./pages/adminPanel', localsParams)
+    },
+
+
+
+
+
+
+    postCreateProduct: async (req, res) => {
         const userData = getUserDataStringified(req);
         let errors = validationResult(req);
 
@@ -135,8 +163,8 @@ const controller = {
         else {
             res.render('./pages/productCreateForm', { errors: errors.array(), userData });
         }
-
     },
+
     detail: async (req, res) => {
 
         let idProducto = req.params.id;
@@ -313,31 +341,35 @@ const controller = {
             productsParams.created_at = { [sequelize.Op.between]: [fechaInicial, fechaFinal] }
         }
 
+        if (isNotEmpty(formData.lower) && isNotEmpty(formData.upper)) {
+            productsParams.precio = { [sequelize.Op.between]: [formData.lower, formData.upper] }
+        }
+
         const queryFilters = {
             limit: resultsPerPage,
             offset: resultsPerPage * (currentPage - 1),
-            order: ["id"],
+            order: generarOrderTablaProducto(formData.order),
             where: productsParams,
             include: [
                 {
                     model: db.usuario,
                     attributes: ["nombre", "apellido"],
-                    where: isNotEmpty(formData.usuarioId) ? { id: formData.usuarioId } : {}
+                    where: isNotEmpty(formData.usuarioId) ? { id: formData.usuarioId } : {},
                 },
                 {
                     model: db.genero,
                     attributes: ["nombre"],
-                    where: isNotEmpty(formData.generoId) ? { id: formData.generoId } : {}
+                    where: isNotEmpty(formData.generoId) ? { id: formData.generoId } : {},
                 },
                 {
                     model: db.marca,
                     attributes: ["nombre"],
-                    where: isNotEmpty(formData.marcaId) ? { id: formData.marcaId } : {}
+                    where: isNotEmpty(formData.marcaId) ? { id: formData.marcaId } : {},
                 },
                 {
                     model: db.categoria,
                     attributes: ["nombre"],
-                    where: isNotEmpty(formData.categoriaId) ? { id: formData.categoriaId } : {}
+                    where: isNotEmpty(formData.categoriaId) ? { id: formData.categoriaId } : {},
                 },
             ],
         }
@@ -357,19 +389,15 @@ const controller = {
 
         const response = await Promise.all([generos, marcas, categorias, producosFiltrados, creadores, rangoPrecios]);
 
-
-
-        
-        console.log("#################")
-        console.log("#################")
-        console.log("#################")
-        console.log("formData", formData)
-        console.log("#################")
-        console.log("#################")
-        console.log("#################")
+        const formatedProductsElements = response[3].rows.map(ctProduct => {
+            const fechaCreacion = new Date(ctProduct.createdAt);
+            const formatedCreatedAt = `${fechaCreacion.getDate()}/${fechaCreacion.getMonth() + 1}/${fechaCreacion.getFullYear()}`
+            const formatedProduct = { ...ctProduct.dataValues, createdAt: formatedCreatedAt }
+            return formatedProduct
+        })
 
         const products = {
-            elements: response[3].rows,
+            elements: formatedProductsElements,
             quantity: response[3].count,
             page: currentPage,
             resultsPerPage,
@@ -396,21 +424,6 @@ const controller = {
 
         res.render('./pages/adminPanel', localsParams)
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     categoriesPanel: (req, res) => {
         const userData = getUserDataStringified(req);
