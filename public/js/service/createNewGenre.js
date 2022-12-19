@@ -1,5 +1,5 @@
 const createNewGenre = async (params) => {
-    const resp = await fetch(window.location.origin + "/admin/createNewGenre", {
+    const resp = await fetch(window.location.origin + "/admin/panel/createNewGenre", {
         method: 'POST',
         body: JSON.stringify(params),
         headers: { 'Content-Type': 'application/json' }
@@ -8,6 +8,6 @@ const createNewGenre = async (params) => {
 }
 
 const importedScript = async (...params) => {
-    console.log("EJECUTAMOS SCRIPT")
+    console.log("Ejecutamos createNewGenre")
     return await createNewGenre(...params);
 }

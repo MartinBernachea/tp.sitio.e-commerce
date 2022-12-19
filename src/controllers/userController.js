@@ -129,10 +129,7 @@ const controller = {
 
         let localsParams = { userData, formData }
 
-        if (req.session.notificationAlert) {
-            localsParams.notificationAlert = req.session.notificationAlert;
-            req.session.notificationAlert = null
-        }
+        getNotificationAlert(localsParams, req)
 
         const wasFormSent = Object.values(formData).length > 0;
         const isFormEmpty = Object.values(formData).every(ctValue => {

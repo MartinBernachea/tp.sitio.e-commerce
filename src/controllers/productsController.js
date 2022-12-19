@@ -25,10 +25,7 @@ const controller = {
                 const userData = getUserDataStringified(req);
                 let localsParams = { productos, userData }
 
-                if (req.session.notificationAlert) {
-                    localsParams.notificationAlert = req.session.notificationAlert;
-                    req.session.notificationAlert = null
-                }
+                getNotificationAlert(localsParams, req)
 
                 res.render('index', localsParams)
             })
@@ -299,10 +296,7 @@ const controller = {
 
         const userData = getUserDataStringified(req);
 
-        if (req.session.notificationAlert) {
-            localsParams.notificationAlert = req.session.notificationAlert;
-            req.session.notificationAlert = null
-        }
+        getNotificationAlert(localsParams, req)
 
         let localsParams = {
             products,
@@ -391,11 +385,6 @@ const controller = {
 
         const userData = getUserDataStringified(req);
 
-        if (req.session.notificationAlert) {
-            localsParams.notificationAlert = req.session.notificationAlert;
-            req.session.notificationAlert = null
-        }
-
         let localsParams = {
             userData,
             section: "productsPanel",
@@ -407,6 +396,9 @@ const controller = {
             opcionesCreadores: response[4][0],
             rangoPrecios: response[5][0].dataValues,
         }
+
+        getNotificationAlert(localsParams, req)
+
 
         res.render('./pages/adminPanel', localsParams)
     },
@@ -468,6 +460,8 @@ const controller = {
 
         }
 
+        getNotificationAlert(localsParams, req)
+
         res.render('./pages/adminPanel', localsParams)
 
     },
@@ -528,43 +522,9 @@ const controller = {
             applicated: formData,
         }
 
-        if (req.session.notificationAlert) {
-            localsParams.notificationAlert = req.session.notificationAlert;
-            req.session.notificationAlert = null
-        }
+        getNotificationAlert(localsParams, req)
 
         res.render('./pages/adminPanel', localsParams)
-    },
-
-    createNewGenre: async (req, res) => {
-        const genreObject = {
-            nombre: req.body.nombre
-        }
-
-        const existElement = await db.genero.findOne({ where: genreObject })
-
-        if (existElement != null) {
-            res.status(401).json({ status: 401, message: "Ya existe una categoria con ese nombre", error: true, })
-        } else {
-            try {
-                const resp = await db.genero.create(genreObject);
-
-                req.session.notificationAlert = {
-                    type: "success",
-                    boldTitle: "Bien! ",
-                    title: `Se creo correctamente el genero ${resp.dataValues.nombre} (con id ${resp.dataValues.id})`,
-                }
-                res.status(200).json({ status: 200, message: "OK" })
-
-            } catch (err) {
-                req.session.notificationAlert = {
-                    type: "danger",
-                    boldTitle: "Ups! ",
-                    title: "No se pudo crear el genero",
-                }
-                res.status(500).json({ status: 500, message: "ERROR" })
-            }
-        }
     },
 
     brandsPanel: async (req, res) => {
@@ -623,8 +583,105 @@ const controller = {
             applicated: formData,
         }
 
+        getNotificationAlert(localsParams, req)
+
+
         res.render('./pages/adminPanel', localsParams)
     },
+
+    createNewBrand: async (req, res) => {
+        const brandObject = {
+            nombre: req.body.nombre
+        }
+
+        const existElement = await db.marca.findOne({ where: brandObject })
+
+        if (existElement != null) {
+            res.status(401).json({ status: 401, message: "Ya existe una marca con ese nombre", error: true, })
+        } else {
+            try {
+                const resp = await db.marca.create(brandObject);
+
+                req.session.notificationAlert = {
+                    type: "success",
+                    boldTitle: "Bien! ",
+                    tag: `Se creo correctamente la marca <b>${resp.dataValues.nombre}</b> con id <b>${resp.dataValues.id}</b>`
+                }
+                res.status(200).json({ status: 200, message: "OK" })
+
+            } catch (err) {
+                req.session.notificationAlert = {
+                    type: "danger",
+                    boldTitle: "Ups! ",
+                    title: "No se pudo crear la marca",
+                }
+                res.status(500).json({ status: 500, message: "ERROR" })
+            }
+        }
+    },
+
+    createNewGenre: async (req, res) => {
+        const genreObject = {
+            nombre: req.body.nombre
+        }
+
+        const existElement = await db.genero.findOne({ where: genreObject })
+
+        if (existElement != null) {
+            res.status(401).json({ status: 401, message: "Ya existe un genero con ese nombre", error: true, })
+        } else {
+            try {
+                const resp = await db.genero.create(genreObject);
+
+                req.session.notificationAlert = {
+                    type: "success",
+                    boldTitle: "Bien! ",
+                    tag: `Se creo correctamente el genero <b>${resp.dataValues.nombre}</b> con id <b>${resp.dataValues.id}</b>`
+                }
+                res.status(200).json({ status: 200, message: "OK" })
+
+            } catch (err) {
+                req.session.notificationAlert = {
+                    type: "danger",
+                    boldTitle: "Ups! ",
+                    title: "No se pudo crear el genero",
+                }
+                res.status(500).json({ status: 500, message: "ERROR" })
+            }
+        }
+    },
+
+    createNewCategory: async (req, res) => {
+        const categoryObject = {
+            nombre: req.body.nombre
+        }
+
+        const existElement = await db.categoria.findOne({ where: categoryObject })
+
+        if (existElement != null) {
+            res.status(401).json({ status: 401, message: "Ya existe una categoria con ese nombre", error: true, })
+        } else {
+            try {
+                const resp = await db.categoria.create(categoryObject);
+
+                req.session.notificationAlert = {
+                    type: "success",
+                    boldTitle: "Bien! ",
+                    tag: `Se creo correctamente la categoria <b>${resp.dataValues.nombre}</b> con id <b>${resp.dataValues.id}</b>`
+                }
+                res.status(200).json({ status: 200, message: "OK" })
+
+            } catch (err) {
+                req.session.notificationAlert = {
+                    type: "danger",
+                    boldTitle: "Ups! ",
+                    title: "No se pudo crear la categroia",
+                }
+                res.status(500).json({ status: 500, message: "ERROR" })
+            }
+        }
+    },
+
 
 
 };
