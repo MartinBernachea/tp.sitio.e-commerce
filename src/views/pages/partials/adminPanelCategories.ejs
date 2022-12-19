@@ -1,7 +1,11 @@
 <section class="admin-products-section">
     <div class="admin-products-head">
         <h1 class="admin-title-section"> Panel de categorias: </h1>
-        <a class="btn-terceary" href='/admin/panel/products/create' type="button"> Crear nueva categoria </a>
+        <%- include('modals/adminAgregarModal', {
+            modalTitle: "Agregar nueva categoria",
+            btnSuccessLabel: "Agregar",
+            btnSuccessAction: "", 
+        }) %>    
     </div>
 
     <form class="admin-products-form">

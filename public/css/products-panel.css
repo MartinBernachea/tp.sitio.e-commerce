@@ -135,14 +135,21 @@
     min-width: 60px
 }
 
-
-/* CREATE PRODUCT */
-/* CREATE CATEGORY */
-
 .form-create-category {
     width: 80%;
 }
 
 .form-create-category .form-buttons-container {
     margin-top: 20px;
+}
+
+
+.btn-plus-icon{
+    color:white;
+    padding: 8px 22px 8px 20px !important;
+}
+
+.btn-plus-icon i{
+    color:white;
+    margin-right: 8px;
 }

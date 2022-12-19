@@ -11,7 +11,7 @@ const { getUserDataStringified } = require('../utils/userData');
 const config = require('../../appConfig');
 const { generarOrderTablaProducto, generarOrderGenericoIdNombre } = require('../database/utils/orders');
 const { formatProductDate } = require('../database/utils/format');
-const { isParamNotEmpty } = require('../database/utils/generics');
+const { isParamNotEmpty, agregarCantidadesProductos } = require('../database/utils/generics');
 
 const controller = {
     index: (req, res) => {
@@ -114,11 +114,6 @@ const controller = {
 
         res.render('./pages/adminPanel', localsParams)
     },
-
-
-
-
-
 
     postCreateProduct: async (req, res) => {
         const userData = getUserDataStringified(req);
@@ -319,7 +314,6 @@ const controller = {
         res.render("./pages/store.ejs", localsParams)
     },
 
-
     productsPanel: async (req, res) => {
         const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
         let formData = { ...req.query, page: req.query.page ?? 1 };
@@ -417,12 +411,6 @@ const controller = {
         res.render('./pages/adminPanel', localsParams)
     },
 
-
-
-
-
-
-
     categoriesPanel: async (req, res) => {
         const userData = getUserDataStringified(req);
         const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
@@ -463,14 +451,7 @@ const controller = {
         const cantidadesProductos = await db.sequelize.query("SELECT categoria_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY categoria_id")
         const cantidadProductosFixed = cantidadesProductos[0]
 
-        const categoriasConCantidadProductos = categoriasSinCantidadProductos.map(ctElement => {
-            const formatedElement = {
-                ...ctElement.dataValues
-            }
-            const cantidadIndex = cantidadProductosFixed.findIndex(ct => ct.id == formatedElement.id);
-            formatedElement.cantidadProductos = cantidadIndex >= 0 ? cantidadProductosFixed[cantidadIndex].cantidad : 0
-            return formatedElement
-        })
+        const categoriasConCantidadProductos = agregarCantidadesProductos(categoriasSinCantidadProductos, cantidadProductosFixed)
 
         const categorias = {
             elements: categoriasConCantidadProductos,
@@ -491,23 +472,22 @@ const controller = {
 
     },
 
-
     genresPanel: async (req, res) => {
         const userData = getUserDataStringified(req);
         const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
         let formData = { ...req.query, page: req.query.page ?? 1 };
         const currentPage = formData.page;
 
-        let categoriesParams = {}
-        if (isParamNotEmpty(formData.categoriaId)) categoriesParams.id = formData.categoriaId;
-        if (isParamNotEmpty(formData.categoriaNombre)) categoriesParams.nombre = { [sequelize.Op.substring]: formData.categoriaNombre };
+        let genresParams = {}
+        if (isParamNotEmpty(formData.generoId)) genresParams.id = formData.generoId;
+        if (isParamNotEmpty(formData.generoNombre)) genresParams.nombre = { [sequelize.Op.substring]: formData.generoNombre };
 
         const queryFilters = {
             subQuery: false,
             limit: resultsPerPage,
             offset: resultsPerPage * (currentPage - 1),
             order: generarOrderGenericoIdNombre(formData.order),
-            where: categoriesParams,
+            where: genresParams,
 
             attributes: [
                 "id",
@@ -515,48 +495,76 @@ const controller = {
             ],
         }
 
-        const response = await db.categoria.findAndCountAll(queryFilters);
-        const categoriasSinCantidadProductos = response.rows;
-        const categoriasIds = categoriasSinCantidadProductos.map(ctCategoria => ctCategoria.dataValues.id)
+        const response = await db.genero.findAndCountAll(queryFilters);
+        const generosSinCantidadProductos = response.rows;
+        const generosIds = generosSinCantidadProductos.map(ctGenero => ctGenero.dataValues.id)
 
         let queryCondicionWhere = "";
 
-        categoriasIds.forEach((ctId, index) => {
-            queryCondicionWhere += "categoria_id=" + ctId
+        generosIds.forEach((ctId, index) => {
+            queryCondicionWhere += "genero_id=" + ctId
 
-            if (index < categoriasIds.length - 1) {
+            if (index < generosIds.length - 1) {
                 queryCondicionWhere += " OR "
             }
         })
 
-        const cantidadesProductos = await db.sequelize.query("SELECT categoria_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY categoria_id")
+        const cantidadesProductos = await db.sequelize.query("SELECT genero_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY genero_id")
         const cantidadProductosFixed = cantidadesProductos[0]
 
-        const categoriasConCantidadProductos = categoriasSinCantidadProductos.map(ctElement => {
-            const formatedElement = {
-                ...ctElement.dataValues
-            }
-            const cantidadIndex = cantidadProductosFixed.findIndex(ct => ct.id == formatedElement.id);
-            formatedElement.cantidadProductos = cantidadIndex >= 0 ? cantidadProductosFixed[cantidadIndex].cantidad : 0
-            return formatedElement
-        })
+        const generosConCantidadProductos = agregarCantidadesProductos(generosSinCantidadProductos, cantidadProductosFixed)
 
-        const categorias = {
-            elements: categoriasConCantidadProductos,
+        const generos = {
+            elements: generosConCantidadProductos,
             quantity: response.count,
             page: currentPage,
             resultsPerPage,
         }
 
         let localsParams = {
-            categorias,
+            generos,
             userData,
             section: "genresPanel",
             applicated: formData,
+        }
 
+        if (req.session.notificationAlert) {
+            localsParams.notificationAlert = req.session.notificationAlert;
+            req.session.notificationAlert = null
         }
 
         res.render('./pages/adminPanel', localsParams)
+    },
+
+    createNewGenre: async (req, res) => {
+        const genreObject = {
+            nombre: req.body.nombre
+        }
+
+        const existElement = await db.genero.findOne({ where: genreObject })
+
+        if (existElement != null) {
+            res.status(401).json({ status: 401, message: "Ya existe una categoria con ese nombre", error: true, })
+        } else {
+            try {
+                const resp = await db.genero.create(genreObject);
+
+                req.session.notificationAlert = {
+                    type: "success",
+                    boldTitle: "Bien! ",
+                    title: `Se creo correctamente el genero ${resp.dataValues.nombre} (con id ${resp.dataValues.id})`,
+                }
+                res.status(200).json({ status: 200, message: "OK" })
+
+            } catch (err) {
+                req.session.notificationAlert = {
+                    type: "danger",
+                    boldTitle: "Ups! ",
+                    title: "No se pudo crear el genero",
+                }
+                res.status(500).json({ status: 500, message: "ERROR" })
+            }
+        }
     },
 
     brandsPanel: async (req, res) => {
@@ -565,16 +573,16 @@ const controller = {
         let formData = { ...req.query, page: req.query.page ?? 1 };
         const currentPage = formData.page;
 
-        let categoriesParams = {}
-        if (isParamNotEmpty(formData.categoriaId)) categoriesParams.id = formData.categoriaId;
-        if (isParamNotEmpty(formData.categoriaNombre)) categoriesParams.nombre = { [sequelize.Op.substring]: formData.categoriaNombre };
+        let brandParams = {}
+        if (isParamNotEmpty(formData.marcaId)) brandParams.id = formData.marcaId;
+        if (isParamNotEmpty(formData.marcaNombre)) brandParams.nombre = { [sequelize.Op.substring]: formData.marcaNombre };
 
         const queryFilters = {
             subQuery: false,
             limit: resultsPerPage,
             offset: resultsPerPage * (currentPage - 1),
             order: generarOrderGenericoIdNombre(formData.order),
-            where: categoriesParams,
+            where: brandParams,
 
             attributes: [
                 "id",
@@ -582,50 +590,42 @@ const controller = {
             ],
         }
 
-        const response = await db.categoria.findAndCountAll(queryFilters);
-        const categoriasSinCantidadProductos = response.rows;
-        const categoriasIds = categoriasSinCantidadProductos.map(ctCategoria => ctCategoria.dataValues.id)
+        const response = await db.marca.findAndCountAll(queryFilters);
+        const marcasSinCantidadProductos = response.rows;
+        const marcasIds = marcasSinCantidadProductos.map(ctMarca => ctMarca.dataValues.id)
 
         let queryCondicionWhere = "";
 
-        categoriasIds.forEach((ctId, index) => {
-            queryCondicionWhere += "categoria_id=" + ctId
+        marcasIds.forEach((ctId, index) => {
+            queryCondicionWhere += "marca_id=" + ctId
 
-            if (index < categoriasIds.length - 1) {
+            if (index < marcasIds.length - 1) {
                 queryCondicionWhere += " OR "
             }
         })
 
-        const cantidadesProductos = await db.sequelize.query("SELECT categoria_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY categoria_id")
+        const cantidadesProductos = await db.sequelize.query("SELECT marca_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY marca_id")
         const cantidadProductosFixed = cantidadesProductos[0]
 
-        const categoriasConCantidadProductos = categoriasSinCantidadProductos.map(ctElement => {
-            const formatedElement = {
-                ...ctElement.dataValues
-            }
-            const cantidadIndex = cantidadProductosFixed.findIndex(ct => ct.id == formatedElement.id);
-            formatedElement.cantidadProductos = cantidadIndex >= 0 ? cantidadProductosFixed[cantidadIndex].cantidad : 0
-            return formatedElement
-        })
+        const marcasConCantidadProductos = agregarCantidadesProductos(marcasSinCantidadProductos, cantidadProductosFixed)
 
-        const categorias = {
-            elements: categoriasConCantidadProductos,
+        const marcas = {
+            elements: marcasConCantidadProductos,
             quantity: response.count,
             page: currentPage,
             resultsPerPage,
         }
 
         let localsParams = {
-            categorias,
+            marcas,
             userData,
             section: "brandsPanel",
             applicated: formData,
-
         }
 
         res.render('./pages/adminPanel', localsParams)
     },
-    
+
 
 };
 

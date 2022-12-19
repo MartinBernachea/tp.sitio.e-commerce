@@ -45,6 +45,9 @@ router.get('/admin/panel/categories', adminPermissions, productsController.categ
 router.get('/admin/panel/genres', adminPermissions, productsController.genresPanel);
 router.get('/admin/panel/brands', adminPermissions, productsController.brandsPanel);
 
+/* GENRE */
+router.post("/admin/createNewGenre", adminPermissions, productsController.createNewGenre)
+
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
 router.get('/detail/:id', productsController.detail);
 

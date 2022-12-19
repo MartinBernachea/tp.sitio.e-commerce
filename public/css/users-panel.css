@@ -57,7 +57,7 @@ tbody tr:nth-child(even) {
 }
 
 .pagination-container i {
-    pointer-events:inherit;
+    pointer-events: inherit;
 }
 
 .pagination-container .left-button::before {
@@ -172,6 +172,7 @@ tbody tr:nth-child(even) {
     align-items: center;
     transition: 500ms opacity ease-in-out;
     pointer-events: none;
+    z-index: 1000;
 }
 
 .user-modal-background.initial-position {
@@ -209,6 +210,13 @@ tbody tr:nth-child(even) {
     margin-top: 4px;
 }
 
+#errorMessageModal {
+    font-size: 14px;
+    color: #c74545;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    height: 14px;
+}
 
 
 /* FORM */
