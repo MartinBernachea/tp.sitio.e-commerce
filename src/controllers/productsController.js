@@ -263,26 +263,47 @@ const controller = {
             ],
         }
 
-        const generos = db.genero.findAll();
-        const marcas = db.marca.findAll();
-        const categorias = db.categoria.findAll();
+        const generos = db.producto.findAll({
+            include: [db.genero],
+            group: "genero_id",
+            attributes: ["genero.nombre"]
+        });
+
+        const marcas = db.producto.findAll({
+            include: [db.marca],
+            group: "marca_id",
+            attributes: ["marca.nombre"]
+        });
+
+        const categorias = await db.producto.findAll({
+            include: [db.categoria],
+            group: "categoria_id",
+            attributes: ["categorium.nombre"]
+        });
+
+        console.log("##############")
+        console.log("##############")
+        console.log("categorias", categorias)
+        console.log("##############")
+        console.log("##############")
+
         const producosFiltrados = db.producto.findAndCountAll(queryFilters);
         const response = await Promise.all([generos, marcas, categorias, producosFiltrados]);
 
         const filters = [
             {
                 title: filtersTitle[0],
-                options: response[0],
+                options: response[0].map(ctGenero => ctGenero.dataValues.genero.dataValues),
                 type: "check",
             },
             {
                 title: filtersTitle[1],
-                options: response[1],
+                options: response[1].map(ctMarca => ctMarca.dataValues.marca.dataValues),
                 type: "check",
             },
             {
                 title: filtersTitle[2],
-                options: response[2],
+                options: response[2].map(ctCategoria => ctCategoria.dataValues.categorium.dataValues),
                 type: "check",
             },
         ];
@@ -296,14 +317,14 @@ const controller = {
 
         const userData = getUserDataStringified(req);
 
-        getNotificationAlert(localsParams, req)
-
         let localsParams = {
             products,
             userData,
             filters,
             applicated: formData
         }
+
+        getNotificationAlert(localsParams, req)
 
         res.render("./pages/store.ejs", localsParams)
     },
