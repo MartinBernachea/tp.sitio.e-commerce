@@ -10,6 +10,7 @@ const db = require("../database/models");
 
 const { customValidationErrorMsg } = require("../utils/validations");
 const { getUserDataStringified } = require('../utils/userData');
+const { getNotificationAlert } = require('../utils/notificationAlert');
 
 const controller = {
     login: (req, res) => {

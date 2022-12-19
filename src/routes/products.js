@@ -8,7 +8,7 @@ const path = require('path');
 const multer = require('multer');
 
 const { productCreateValidation } = require("../utils/validations");
-const { adminPermissions, userPermissions } = require('./permission');
+const { adminPermissions, userPermissions, adminPermissionsJSON } = require('./permission');
 
 //***  MULTER  ****/
 const multerDiskStorage = multer.diskStorage({
@@ -45,9 +45,9 @@ router.get('/admin/panel/categories', adminPermissions, productsController.categ
 router.get('/admin/panel/genres', adminPermissions, productsController.genresPanel);
 router.get('/admin/panel/brands', adminPermissions, productsController.brandsPanel);
 
-router.post("/admin/panel/createNewGenre", adminPermissions, productsController.createNewGenre);
-router.post("/admin/panel/createNewBrand", adminPermissions, productsController.createNewBrand);
-router.post("/admin/panel/createNewCategory", adminPermissions, productsController.createNewCategory);
+router.post("/admin/panel/createNewGenre", adminPermissionsJSON, productsController.createNewGenre);
+router.post("/admin/panel/createNewBrand", adminPermissionsJSON, productsController.createNewBrand);
+router.post("/admin/panel/createNewCategory", adminPermissionsJSON, productsController.createNewCategory);
 
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
 router.get('/detail/:id', productsController.detail);

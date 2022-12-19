@@ -3,7 +3,6 @@ const path = require('path');
 const { validationResult } = require('express-validator');
 const session = require('express-session');
 
-
 const db = require("../database/models");
 const sequelize = require("sequelize");
 
@@ -12,6 +11,7 @@ const config = require('../../appConfig');
 const { generarOrderTablaProducto, generarOrderGenericoIdNombre } = require('../database/utils/orders');
 const { formatProductDate } = require('../database/utils/format');
 const { isParamNotEmpty, agregarCantidadesProductos } = require('../database/utils/generics');
+const { getNotificationAlert } = require('../utils/notificationAlert');
 
 const controller = {
     index: (req, res) => {
