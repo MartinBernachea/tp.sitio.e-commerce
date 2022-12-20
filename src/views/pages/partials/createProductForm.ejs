@@ -2,6 +2,27 @@
 		<div class="box-container">
 			<form action="create" method="POST" enctype="multipart/form-data">
 				<div class="pe-container">
+					<div class="admin-products-inputs-container">
+						<div class="admin-product-panel-inputs-container">
+							<label class="form-label-input label-sm">
+								<span>Id:</span>
+								<input name="generoId" type="text" placeholder="1"
+									value="<%= (locals.applicated?.generoId) ?? '' %>" />
+							</label>
+			
+							<label class="form-label-input label-lg">
+								<span>Nombre:</span>
+								<input name="generoNombre" type="text" placeholder="Nike"
+									value="<%= (locals.applicated?.generoNombre) ?? '' %>" />
+							</label>
+			
+						</div>
+					</div>
+					<div class="admin-products-buttons-container">
+						<button type="reset" class="btn-secondary"> Limpiar </button>
+						<button type="submit" class="btn-primary"> Buscar </button>
+					</div>
+					
 					<div class="img-container">
 						<div class="load-main-image-container cImage1" id="preview">
 							<input type="file" name="cImage1" id="cImage1" class="form-input-img"></input>

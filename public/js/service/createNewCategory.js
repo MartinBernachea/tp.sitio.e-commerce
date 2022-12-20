@@ -8,7 +8,7 @@ const createNewCategory = async (params) => {
     return await resp.json();
 }
 
-const importedScript = async (...params) => {
+const createScript = async (...params) => {
     console.log("Ejecutamos createNewCategory")
     return await createNewCategory(...params);
 }

@@ -76,13 +76,13 @@ adminAgregarModal.addEventListener("click", async (event) => {
             const nombre = document.querySelector("#nombre")
             const params = { nombre: nombre.value };
 
-            if (importedScript) {
+            if (createScript) {
                 try {
-                    const response = await importedScript(params);
+                    const response = await createScript(params);
                     if (response.error) throw new Error(response.message)
                     location.reload();
                 } catch (err) {
-                    document.querySelector("#errorMessageModal").innerText = err.message
+                    document.querySelector("#errorMessageModal").innerText = err.message;
                 }
             }
             return

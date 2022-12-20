@@ -7,7 +7,7 @@ const createNewGenre = async (params) => {
     return await resp.json();
 }
 
-const importedScript = async (...params) => {
+const createScript = async (...params) => {
     console.log("Ejecutamos createNewGenre")
     return await createNewGenre(...params);
 }

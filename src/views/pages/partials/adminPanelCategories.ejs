@@ -56,6 +56,7 @@
                             <th>
                                 Cantidad de productos
                             </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +65,23 @@
                                         <td> <%= categoria.id %></td>
                                         <td> <%= categoria.nombre %></td>
                                         <td> <%= categoria.cantidadProductos %></td>
+                                        <td style="width:55px;">
+                                            <div style="display:flex; justify-content: space-between; padding: 0 8px;">
+                                            <%- include('components/confirmMsg', { 
+                                                modalTitle: "Editar Categoria:",
+                                                button: `<i class="fa-solid fa-pen fa-sm btnShow" id="modalEditar${categoria.id}"></i>`,
+                                                modalId: `modalEditar${categoria.id}`,
+                                            }) %>
+
+                                            <%- include('components/confirmMsg', { 
+                                                modalTitle: "Eliminar categoria:",
+                                                button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminar${categoria.id}"></i>`,
+                                                tagConfirmMsg: `Estas seguro de eliminar la categoria <b>&nbsp;${categoria.nombre}</b> con id <b>&nbsp;${categoria.id}</b>?`,
+                                                modalId: `${categoria.id}`,
+                                                btnSuccessLabel: "Eliminar",
+                                            }) %>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <% } %>
                     </tbody>
@@ -73,7 +91,7 @@
                             quantity: locals.categorias.quantity,
                             resultsPerPage: locals.categorias.resultsPerPage, 
                             page: locals.categorias.page,
-                        }) %>
+                    }) %>
                 </div>
             <% } else { %>
                 <p class="no-coincidencia-error">No hay coincidencias con la busqueda</p>
@@ -81,3 +99,6 @@
         <% } %>
     </form>
 </section>
+
+<script src="/js/service/deleteCategory.js"></script>
+<script src="/js/handleClickAdminPanelTableActions.js"></script>

@@ -7,7 +7,7 @@ const createNewBrand = async (params) => {
     return await resp.json();
 }
 
-const importedScript = async (...params) => {
+const createScript = async (...params) => {
     console.log("Ejecutamos createNewBrand")
     return await createNewBrand(...params);
 }

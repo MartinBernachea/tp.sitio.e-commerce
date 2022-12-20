@@ -11,7 +11,7 @@
         <div class="user-modal" id="modalAgregar">
             <div class="edit-user-form">
                 <div class="edit-user-modal-container">
-                    <h1><%= locals.modalTitle %></h1>
+                    <h1><%= locals.modalTitle %>:</h1>
                     <hr class="edit-user-form-separador"/>
                     <div class="form-inputs-container">
                         <label class="form-label-input">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <button class="btn-terceary btn-plus-icon" type="button" id="btnShow"> <i class="fa-solid fa-plus"></i> Agregar nueva marca </button>
+    <button class="btn-terceary btn-plus-icon" type="button" id="btnShow"> <i class="fa-solid fa-plus"></i> <%= locals.modalTitle %> </button>
 </div>
 
 <script src="/js/adminAgregarModal.js"></script>

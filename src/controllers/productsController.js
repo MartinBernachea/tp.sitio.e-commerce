@@ -30,6 +30,7 @@ const controller = {
                 res.render('index', localsParams)
             })
     },
+
     chart: async (req, res) => {
         const userData = getUserDataStringified(req);
 
@@ -41,11 +42,13 @@ const controller = {
         }
         else res.redirect('user/login');
     },
+
     comingSoon: (req, res) => {
         const userData = getUserDataStringified(req);
 
         res.render('./pages/coming-soon', { userData })
     },
+
     edit: (req, res) => {
         let idProducto = req.params.id;
         const userData = getUserDataStringified(req);
@@ -61,6 +64,7 @@ const controller = {
                 } else { res.redirect("/") }
             })
     },
+
     update: (req, res) => {
 
         let idProducto = req.params.id;
@@ -159,6 +163,55 @@ const controller = {
         }
     },
 
+    deleteCategory: async (req, res) => {
+        const categoria_id = req.body.id;
+        try {
+            const productos = await db.producto.findAll({ where: { categoria_id } });
+            if (productos.length > 0) {
+                throw new Error("No es posible eliminar categorias con productos")
+            }
+            const resp = await db.categoria.destroy({ where: { id: categoria_id } });
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                tag: `Se elimino correctamente la categoria`
+            }
+            res.status(200).json({ status: 200, message: "OK" })
+        } catch (err) {
+            req.session.notificationAlert = {
+                type: "danger",
+                boldTitle: "Ups! ",
+                title: err.message,
+            }
+            res.status(500).json({ status: 500, message: err.message, error: true })
+        }
+    },
+
+    deleteGenre: async (req, res) => {
+        const genero_id = req.body.id;
+        try {
+            const productos = await db.producto.findAll({ where: { genero_id } });
+            if (productos.length > 0) {
+                throw new Error("No es posible eliminar generos con productos")
+            }
+            const resp = await db.genero.destroy({ where: { id: genero_id } });
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                tag: `Se elimino correctamente el genero`
+            }
+            res.status(200).json({ status: 200, message: "OK" })
+        } catch (err) {
+            req.session.notificationAlert = {
+                type: "danger",
+                boldTitle: "Ups! ",
+                title: err.message,
+            }
+            res.status(500).json({ status: 500, message: err.message, error: true })
+        }
+    },
+
+
     detail: async (req, res) => {
 
         let idProducto = req.params.id;
@@ -194,6 +247,7 @@ const controller = {
         }
 
     },
+
     destroy: (req, res) => {
         let pDeletedId = req.params.id;
 
@@ -280,12 +334,6 @@ const controller = {
             group: "categoria_id",
             attributes: ["categorium.nombre"]
         });
-
-        console.log("##############")
-        console.log("##############")
-        console.log("categorias", categorias)
-        console.log("##############")
-        console.log("##############")
 
         const producosFiltrados = db.producto.findAndCountAll(queryFilters);
         const response = await Promise.all([generos, marcas, categorias, producosFiltrados]);
