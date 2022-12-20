@@ -91,11 +91,6 @@ const controller = {
         res.render('./pages/adminPanel', { userData });
     },
 
-
-
-
-
-
     getCreateProduct: async (req, res) => {
         const userData = getUserDataStringified(req);
 
@@ -211,6 +206,29 @@ const controller = {
         }
     },
 
+    deleteBrand: async (req, res) => {
+        const marca_id = req.body.id;
+        try {
+            const productos = await db.producto.findAll({ where: { marca_id } });
+            if (productos.length > 0) {
+                throw new Error("No es posible eliminar marcas con productos")
+            }
+            const resp = await db.marca.destroy({ where: { id: marca_id } });
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                tag: `Se elimino correctamente la marca`
+            }
+            res.status(200).json({ status: 200, message: "OK" })
+        } catch (err) {
+            req.session.notificationAlert = {
+                type: "danger",
+                boldTitle: "Ups! ",
+                title: err.message,
+            }
+            res.status(500).json({ status: 500, message: err.message, error: true })
+        }
+    },
 
     detail: async (req, res) => {
 

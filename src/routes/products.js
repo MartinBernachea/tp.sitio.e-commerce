@@ -50,6 +50,7 @@ router.post("/admin/panel/createNewBrand", adminPermissionsJSON, productsControl
 router.post("/admin/panel/createNewCategory", adminPermissionsJSON, productsController.createNewCategory);
 router.post("/admin/panel/deleteCategory", adminPermissionsJSON, productsController.deleteCategory);
 router.post("/admin/panel/deleteGenre", adminPermissionsJSON, productsController.deleteGenre);
+router.post("/admin/panel/deleteBrand", adminPermissionsJSON, productsController.deleteBrand);
 
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
 router.get('/detail/:id', productsController.detail);
