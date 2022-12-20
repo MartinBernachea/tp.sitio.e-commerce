@@ -1,4 +1,4 @@
-const deleteBrand = async (params) => {
+export const deleteBrand = async (params) => {
     console.log("Ejecutamos deleteBrand")
 
     const resp = await fetch(window.location.origin + "/admin/panel/deleteBrand", {
@@ -8,5 +8,3 @@ const deleteBrand = async (params) => {
     })
     return await resp.json();
 }
-
-const deleteAction = async (params) => deleteBrand(params)

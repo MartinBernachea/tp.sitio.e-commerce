@@ -6,8 +6,8 @@
  -->
 
 <div>
-    <div id="modalBackground<%= locals.modalId %>" class="user-modal-background initial-position">
-        <div id="modal<%= locals.modalId %>" class="user-modal" style="width:400px;">
+    <div id="modalBackgroundConfirm<%= locals.modalId %>" class="user-modal-background initial-position">
+        <div id="modalConfirm<%= locals.modalId %>" class="user-modal" style="width:400px;">
             <div class="edit-user-form">
                 <div class="edit-user-modal-container">
                     <h1><%= locals.modalTitle %></h1>
@@ -18,9 +18,9 @@
 
                 </div>
                 <div class="buttons-container">
-                    <button id="btnCancel<%= locals.modalId %>"
+                    <button id="btnCancelConfirm<%= locals.modalId %>"
                         class="btn-secondary btn-small btnCancelar">Cancelar</button>
-                    <button id="btnSuccess<%= locals.modalId %>"
+                    <button id="btnSuccessConfirm<%= locals.modalId %>"
                         class="btn-primary btn-small btnSuccess"><%- locals.btnSuccessLabel %></button>
                 </div>
             </div>

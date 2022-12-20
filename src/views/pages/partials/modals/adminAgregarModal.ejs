@@ -4,11 +4,12 @@
     btnSuccessLabel
     nombre
     scriptPath
+    action
  -->
 
-<div id="adminAgregarModal">
-    <div id="modalBackground" class="user-modal-background initial-position">
-        <div class="user-modal" id="modalAgregar">
+<div id="admin<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>">
+    <div id="modalBackground<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>" class="user-modal-background initial-position">
+        <div class="user-modal" id="modal<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>">
             <div class="edit-user-form">
                 <div class="edit-user-modal-container">
                     <h1><%= locals.modalTitle %>:</h1>
@@ -23,9 +24,9 @@
                         <p id="errorMessageModal" class="input-text-error input-text-error-activo"></p>
                     </div>
                 <div class="buttons-container">
-                    <button id="btnCancelar-modal<%= locals.userData.id %>"
+                    <button id="btnCancel<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>"
                         class="btn-secondary btn-small btnCancelar">Cancelar</button>
-                    <button id="btnAplicar-modal<%= locals.userData.id %>"
+                    <button id="btnSuccess<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>"
                         class="btn-primary btn-small btnAplicar"><%= locals.btnSuccessLabel %></button>
                     <button id="loader" class="btn-primary btn-small" style="display:none">
                         <%- include('../components/spinner') %>
@@ -35,8 +36,11 @@
         </div>
     </div>
 
-    <button class="btn-terceary btn-plus-icon" type="button" id="btnShow"> <i class="fa-solid fa-plus"></i> <%= locals.modalTitle %> </button>
+    <% if(locals.button) { %>
+        <%- locals.button %>
+    <% }else{ %>
+        <button class="btn-terceary btn-plus-icon" type="button" id="btnShow<%=locals.action%><%= locals.modalId ? locals.modalId : "" %></button>"> <i class="fa-solid fa-plus"></i> <%= locals.modalTitle %> </button>
+    <% } %>
 </div>
 
-<script src="/js/adminAgregarModal.js"></script>
-<script src="<%=locals.scriptPath%>"></script>
+<script src="/js/admin<%=locals.action%>Modal.js" type="module"></script>

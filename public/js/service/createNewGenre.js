@@ -1,13 +1,10 @@
-const createNewGenre = async (params) => {
+export const createNewGenre = async (params) => {
+    console.log("Ejecutamos createNewGenre")
+
     const resp = await fetch(window.location.origin + "/admin/panel/createNewGenre", {
         method: 'POST',
         body: JSON.stringify(params),
         headers: { 'Content-Type': 'application/json' }
     })
     return await resp.json();
-}
-
-const createScript = async (...params) => {
-    console.log("Ejecutamos createNewGenre")
-    return await createNewGenre(...params);
 }

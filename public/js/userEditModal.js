@@ -101,6 +101,7 @@ const sendEditUser = async (modalId) => {
 
 }
 
+
 userEditTable.addEventListener("click", (event) => {
     if (!formLoading) {
         if (event.target.classList.contains("btnShow")) {

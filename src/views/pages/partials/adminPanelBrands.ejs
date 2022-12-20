@@ -77,7 +77,7 @@
                                             <%- include('components/confirmMsg', { 
                                                 modalTitle: "Eliminar marca:",
                                                 button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminar${marca.id}"></i>`,
-                                                tagConfirmMsg: `Estas seguro de eliminar la marca <b>&nbsp;${marca.nombre}</b> con id <b>&nbsp;${marca.id}</b>?`,
+                                                tagConfirmMsg: `Estas seguro de eliminar la marca <b>&nbsp;${marca.nombre}</b>&nbsp;con id <b>&nbsp;${marca.id}</b>?`,
                                                 modalId: `${marca.id}`,
                                                 btnSuccessLabel: "Eliminar",
                                             }) %>
@@ -101,5 +101,4 @@
     </form>
 </section>
 
-<script src="/js/service/deleteBrand.js"></script>
-<script src="/js/handleClickAdminPanelTableActions.js"></script>
+<script src="/js/handleClickAdminPanelTableActions.js" type="module"></script>

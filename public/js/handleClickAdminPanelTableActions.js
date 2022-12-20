@@ -1,14 +1,17 @@
+import { deleteCategory } from "./service/deleteCategory.js";
+import { deleteBrand } from "./service/deleteBrand.js";
+import { deleteGenre } from "./service/deleteGenre.js";
+
 const resultsTable = document.querySelector("table")
 
-
 const hiddeCurrentModal = (id) => {
-    const modalRef = document.querySelector(`#modal${id}`);
+    const modalRef = document.querySelector(`#modalConfirm${id}`);
     const modalContainer = modalRef.parentElement;
     if (modalContainer.classList.contains("show-modal")) modalContainer.classList.remove("show-modal")
 }
 
 const showCurrentModal = (id) => {
-    const modalRef = document.querySelector(`#modal${id}`);
+    const modalRef = document.querySelector(`#modalConfirm${id}`);
     /* SOLUCION BUG */
     /* 
     Habian veces donde al cargar la seccion, de forma random, el modal aparecia visible y automaticamente desaparecia:
@@ -29,17 +32,22 @@ const extraerNumeroId = (prefijo, nombreEntero) => {
 resultsTable.addEventListener("click", async (event) => {
     event.preventDefault();
 
-    if (event.target.id.includes("modalEliminar")) {
-        showCurrentModal(extraerNumeroId("modalEliminar", event.target.id))
+    if (event.target.id.includes("modalEliminarConfirm")) {
+        showCurrentModal(extraerNumeroId("modalEliminarConfirm", event.target.id))
         return
     }
 
-    if (event.target.id.includes("btnSuccess")) {
+    if (event.target.id.includes("btnSuccessConfirm")) {
         event.preventDefault();
 
-        if (deleteAction) {
+        let deleteFunction;
+        if (location.href.includes("categories")) deleteFunction = deleteCategory;
+        if (location.href.includes("genres")) deleteFunction = deleteGenre;
+        if (location.href.includes("brands")) deleteFunction = deleteBrand;
+
+        if (deleteFunction) {
             try {
-                const response = await deleteAction({ id: extraerNumeroId("btnSuccess", event.target.id) });
+                const response = await deleteFunction({ id: extraerNumeroId("btnSuccessConfirm", event.target.id) });
             } catch (err) {
                 console.log(err)
             } finally {
@@ -50,14 +58,14 @@ resultsTable.addEventListener("click", async (event) => {
         return
     }
 
-    if (event.target.id.includes("btnCancel")) {
+    if (event.target.id.includes("btnCancelConfirm")) {
         event.preventDefault();
-        hiddeCurrentModal(extraerNumeroId("btnCancel", event.target.id))
+        hiddeCurrentModal(extraerNumeroId("btnCancelConfirm", event.target.id))
         return
     }
 
-    if (event.target.id.includes("modalBackground")) {
-        hiddeCurrentModal(extraerNumeroId("modalBackground", event.target.id))
+    if (event.target.id.includes("modalBackgroundConfirm")) {
+        hiddeCurrentModal(extraerNumeroId("modalBackgroundConfirm", event.target.id))
         return
     }
 })

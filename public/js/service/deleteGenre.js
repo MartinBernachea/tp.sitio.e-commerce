@@ -1,4 +1,4 @@
-const deleteGenre = async (params) => {
+export const deleteGenre = async (params) => {
     console.log("Ejecutamos deleteGenre")
 
     const resp = await fetch(window.location.origin + "/admin/panel/deleteGenre", {
@@ -8,5 +8,3 @@ const deleteGenre = async (params) => {
     })
     return await resp.json();
 }
-
-const deleteAction = async (params) => deleteGenre(params)

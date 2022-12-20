@@ -78,7 +78,7 @@
                                             <%- include('components/confirmMsg', { 
                                                 modalTitle: "Eliminar genero:",
                                                 button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminar${genero.id}"></i>`,
-                                                tagConfirmMsg: `Estas seguro de eliminar el genero <b>&nbsp;${genero.nombre}</b> con id <b>&nbsp;${genero.id}</b>?`,
+                                                tagConfirmMsg: `Estas seguro de eliminar el genero <b>&nbsp;${genero.nombre}</b>&nbsp;con id <b>&nbsp;${genero.id}</b>?`,
                                                 modalId: `${genero.id}`,
                                                 btnSuccessLabel: "Eliminar",
                                             }) %>
@@ -102,5 +102,4 @@
     </form>
 </section>
 
-<script src="/js/service/deleteGenre.js"></script>
-<script src="/js/handleClickAdminPanelTableActions.js"></script>
+<script src="/js/handleClickAdminPanelTableActions.js" type="module"></script>

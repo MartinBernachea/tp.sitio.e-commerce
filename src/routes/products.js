@@ -48,9 +48,15 @@ router.get('/admin/panel/brands', adminPermissions, productsController.brandsPan
 router.post("/admin/panel/createNewGenre", adminPermissionsJSON, productsController.createNewGenre);
 router.post("/admin/panel/createNewBrand", adminPermissionsJSON, productsController.createNewBrand);
 router.post("/admin/panel/createNewCategory", adminPermissionsJSON, productsController.createNewCategory);
+
 router.post("/admin/panel/deleteCategory", adminPermissionsJSON, productsController.deleteCategory);
 router.post("/admin/panel/deleteGenre", adminPermissionsJSON, productsController.deleteGenre);
 router.post("/admin/panel/deleteBrand", adminPermissionsJSON, productsController.deleteBrand);
+
+
+router.post("/admin/panel/editCategory", adminPermissionsJSON, productsController.editCategory);
+router.post("/admin/panel/editGenre", adminPermissionsJSON, productsController.editGenre);
+router.post("/admin/panel/editBrand", adminPermissionsJSON, productsController.editBrand);
 
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
 router.get('/detail/:id', productsController.detail);

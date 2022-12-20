@@ -230,6 +230,60 @@ const controller = {
         }
     },
 
+    editCategory: async (req, res) => {
+        const categoria_id = req.body.id;
+        const categoria_nombre = req.body.nombre;
+        try {
+            if (categoria_nombre.trim().length == 0) throw new Error("No es posible asignar un nombre vacio");
+            const categoriaExistente = await db.categoria.findOne({ where: { nombre: categoria_nombre } })
+            if (categoriaExistente != null) throw new Error("Ya existe otra categoria con ese nombre");
+
+            const resp = await db.categoria.update({ nombre: categoria_nombre }, { where: { id: categoria_id } });
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                tag: `Se edito correctamente la categoria`
+            }
+            res.status(200).json({ status: 200, message: "OK" })
+        } catch (err) {
+            req.session.notificationAlert = {
+                type: "danger",
+                boldTitle: "Ups! ",
+                title: err.message,
+            }
+            res.status(500).json({ status: 500, message: err.message, error: true })
+        }
+    },
+
+    editGenre: async (req, res) => {
+        const genero_id = req.body.id;
+        const genero_nombre = req.body.nombre;
+        try {
+            if (genero_nombre.trim().length == 0) throw new Error("No es posible asignar un nombre vacio");
+            const generoExistente = await db.genero.findOne({ where: { nombre: genero_nombre } })
+            if (generoExistente != null) throw new Error("Ya existe otro genero con ese nombre");
+
+            const resp = await db.genero.update({ nombre: genero_nombre }, { where: { id: genero_id } });
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                tag: `Se edito correctamente el genero`
+            }
+            res.status(200).json({ status: 200, message: "OK" })
+        } catch (err) {
+            req.session.notificationAlert = {
+                type: "danger",
+                boldTitle: "Ups! ",
+                title: err.message,
+            }
+            res.status(500).json({ status: 500, message: err.message, error: true })
+        }
+    },
+
+    editBrand: async (req, res) => {
+
+    },
+
     detail: async (req, res) => {
 
         let idProducto = req.params.id;

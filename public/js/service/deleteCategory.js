@@ -1,4 +1,4 @@
-const deleteCategory = async (params) => {
+export const deleteCategory = async (params) => {
     console.log("Ejecutamos deleteCategory")
 
     const resp = await fetch(window.location.origin + "/admin/panel/deleteCategory", {
@@ -9,4 +9,3 @@ const deleteCategory = async (params) => {
     return await resp.json();
 }
 
-const deleteAction = async (params) => deleteCategory(params)

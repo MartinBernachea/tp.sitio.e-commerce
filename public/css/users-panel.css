@@ -120,6 +120,7 @@ tbody tr:nth-child(even) {
 .edit-user-modal-container {
     padding: 20px 30px;
     padding-bottom: 0;
+    text-align: left;
 }
 
 .edit-user-form-separador {

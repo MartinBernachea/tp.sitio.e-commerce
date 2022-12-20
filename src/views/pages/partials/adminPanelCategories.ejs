@@ -5,6 +5,7 @@
             modalTitle: "Agregar nueva categoria",
             btnSuccessLabel: "Agregar",
             scriptPath: "/js/service/createNewCategory.js", 
+            action:"Agregar",
         }) %>        
     </div>
 
@@ -67,18 +68,23 @@
                                         <td> <%= categoria.cantidadProductos %></td>
                                         <td style="width:55px;">
                                             <div style="display:flex; justify-content: space-between; padding: 0 8px;">
-                                            <%- include('components/confirmMsg', { 
-                                                modalTitle: "Editar Categoria:",
-                                                button: `<i class="fa-solid fa-pen fa-sm btnShow" id="modalEditar${categoria.id}"></i>`,
-                                                modalId: `modalEditar${categoria.id}`,
-                                            }) %>
+                                            <%- include('modals/adminAgregarModal', {
+                                                modalTitle: "Editar categoria",
+                                                button: `<i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEditar${categoria.id}"></i>`,
+                                                btnSuccessLabel: "Editar",
+                                                scriptPath: "/js/service/editCategory.js", 
+                                                modalId: `${categoria.id}`,
+                                                action:"Editar",
+                                                formData: {nombre: categoria.nombre}
+                                            }) %>  
+
 
                                             <%- include('components/confirmMsg', { 
                                                 modalTitle: "Eliminar categoria:",
-                                                button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminar${categoria.id}"></i>`,
-                                                tagConfirmMsg: `Estas seguro de eliminar la categoria <b>&nbsp;${categoria.nombre}</b> con id <b>&nbsp;${categoria.id}</b>?`,
-                                                modalId: `${categoria.id}`,
+                                                button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminarConfirm${categoria.id}"></i>`,
                                                 btnSuccessLabel: "Eliminar",
+                                                tagConfirmMsg: `Estas seguro de eliminar la categoria <b>&nbsp;${categoria.nombre}</b>&nbsp; con id <b>&nbsp;${categoria.id}</b>?`,
+                                                modalId: `${categoria.id}`,
                                             }) %>
                                             </div>
                                         </td>
@@ -100,5 +106,4 @@
     </form>
 </section>
 
-<script src="/js/service/deleteCategory.js"></script>
-<script src="/js/handleClickAdminPanelTableActions.js"></script>
+<script src="/js/handleClickAdminPanelTableActions.js" type="module"></script>

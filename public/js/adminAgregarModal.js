@@ -1,44 +1,21 @@
-const adminAgregarModal = document.querySelector("#adminAgregarModal");
+import { createNewBrand } from "./service/createNewBrand.js";
+import { createNewCategory } from "./service/createNewCategory.js";
+import { createNewGenre } from "./service/createNewGenre.js";
+
+const adminAgregarModal = document.querySelector("#adminAgregar");
 let formLoading = false;
-
-let modalData = {
-    stored: {},
-    getModalData: (modalId) => {
-        let currentData = {};
-        const formInputs = document.querySelectorAll(`#${modalId} input`)
-        const formSelects = document.querySelectorAll(`#${modalId} select`)
-        const formElements = [...formInputs, ...formSelects]
-        formElements.forEach(ctElement => {
-            currentData = {
-                ...currentData
-                , [ctElement.name]: ctElement.value
-            }
-        })
-        return currentData;
-    },
-
-    saveInitialValues: (modalId) => {
-        modalData.stored = modalData.getModalData(modalId);
-    },
-
-    restoreInitialValues: (modalId) => {
-        const formInputs = document.querySelectorAll(`#${modalId} input`)
-        const formSelects = document.querySelectorAll(`#${modalId} select`)
-        const formElements = [...formInputs, ...formSelects]
-        formElements.forEach(ctElement => {
-            ctElement.value = modalData.stored[ctElement.name]
-        })
-        modalData.clear();
-    },
-    clear: () => {
-        modalData.stored = {}
-    }
-}
 
 const hiddeModal = () => {
     const modalRef = document.querySelector(`#modalAgregar`);
     const modalContainer = modalRef.parentElement;
     if (modalContainer.classList.contains("show-modal")) modalContainer.classList.remove("show-modal")
+}
+
+const resetAgregarModalInputs = () => {
+    const formInputs = document.querySelectorAll(`#modalAgregar input`)
+    const formSelects = document.querySelectorAll(`#modalAgregar select`)
+    const formElements = [...formInputs, ...formSelects]
+    formElements.forEach(ctElement => ctElement.value = "")
 }
 
 const showModal = () => {
@@ -54,43 +31,50 @@ const showModal = () => {
     if (modalRef.parentElement.classList.contains("initial-position")) modalRef.parentElement.classList.remove("initial-position")
     /* SOLUCION BUG */
 
+    resetAgregarModalInputs();
+
     modalRef.parentElement.classList.add("show-modal");
 }
 
 adminAgregarModal.addEventListener("click", async (event) => {
     if (!formLoading) {
-        if (event.target.id == "btnShow") {
+
+        if (event.target.id.includes("btnShowAgregar")) {
             showModal();
             return
         }
 
-        if (event.target.classList.contains("btnCancelar")) {
+        if (event.target.id.includes("btnCancelAgregar")) {
             event.preventDefault();
             hiddeModal()
-            // modalData.restoreInitialValues();
             return
         }
 
-        if (event.target.classList.contains("btnAplicar")) {
+        if (event.target.id.includes("btnSuccessAgregar")) {
             event.preventDefault();
+
             const nombre = document.querySelector("#nombre")
             const params = { nombre: nombre.value };
 
-            if (createScript) {
+            let editFunction;
+            if (location.href.includes("categories")) editFunction = createNewCategory;
+            if (location.href.includes("genres")) editFunction = createNewGenre;
+            if (location.href.includes("brands")) editFunction = createNewBrand;
+
+            if (editFunction) {
                 try {
-                    const response = await createScript(params);
+                    const response = await editFunction(params);
                     if (response.error) throw new Error(response.message)
                     location.reload();
                 } catch (err) {
-                    document.querySelector("#errorMessageModal").innerText = err.message;
+                    document.querySelector("#modalAgregar #errorMessageModal").innerText = err.message;
                 }
             }
             return
         }
 
-        if (event.target.id == "modalBackground") {
+        if (event.target.id == "modalBackgroundAgregar") {
             hiddeModal()
-            // modalData.restoreInitialValues();
             return
         }
     }
