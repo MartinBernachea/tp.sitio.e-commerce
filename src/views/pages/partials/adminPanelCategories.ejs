@@ -4,7 +4,6 @@
         <%- include('modals/adminAgregarModal', {
             modalTitle: "Agregar nueva categoria",
             btnSuccessLabel: "Agregar",
-            scriptPath: "/js/service/createNewCategory.js", 
             action:"Agregar",
         }) %>        
     </div>
@@ -72,7 +71,6 @@
                                                 modalTitle: "Editar categoria",
                                                 button: `<i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEditar${categoria.id}"></i>`,
                                                 btnSuccessLabel: "Editar",
-                                                scriptPath: "/js/service/editCategory.js", 
                                                 modalId: `${categoria.id}`,
                                                 action:"Editar",
                                                 formData: {nombre: categoria.nombre}

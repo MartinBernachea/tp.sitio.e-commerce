@@ -1,5 +1,6 @@
 import { editCategory } from "./service/editCategory.js";
 import { editBrand } from "./service/editBrand.js";
+import { editGenre } from "./service/editGenre.js";
 
 const adminTable = document.querySelector("table");
 let formLoading = false;
@@ -88,8 +89,8 @@ adminTable.addEventListener("click", async (event) => {
 
             let editFunction;
             if (location.href.includes("categories")) editFunction = editCategory;
-            if (location.href.includes("genres")) editFunction = editCategory;
-            if (location.href.includes("brands")) editFunction = editCategory;
+            if (location.href.includes("genres")) editFunction = editGenre;
+            if (location.href.includes("brands")) editFunction = editBrand;
 
             if (editFunction) {
                 try {

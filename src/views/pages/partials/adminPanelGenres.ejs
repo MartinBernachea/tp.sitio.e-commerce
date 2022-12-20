@@ -4,7 +4,7 @@
         <%- include('modals/adminAgregarModal', {
             modalTitle: "Agregar nuevo genero",
             btnSuccessLabel: "Agregar",
-            scriptPath: "/js/service/createNewGenre.js", 
+            action:"Agregar",
         }) %>    
     </div>
 
@@ -67,21 +67,22 @@
                                         <td> <%= genero.cantidadProductos %></td>
                                         <td style="width:55px;">
                                             <div style="display:flex; justify-content: space-between; padding: 0 8px;">
-                                                <%- include('components/confirmMsg', { 
-                                                    modalTitle: "Eliminar genero:",
-                                                    button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminar${genero.id}"></i>`,
-                                                    tagConfirmMsg: `Estas seguro de eliminar el genero <b>&nbsp;${genero.nombre}</b> con id <b>&nbsp;${genero.id}</b>?`,
+                                                <%- include('modals/adminAgregarModal', { 
+                                                    modalTitle: "Editar genero:",
+                                                    button: `<i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEditar${genero.id}"></i>`,
+                                                    btnSuccessLabel: "Editar",
                                                     modalId: `${genero.id}`,
-                                                    btnSuccessLabel: "Eliminar",
+                                                    action:"Editar",
+                                                    formData: {nombre: genero.nombre}
                                                 }) %>
 
-                                            <%- include('components/confirmMsg', { 
-                                                modalTitle: "Eliminar genero:",
-                                                button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminar${genero.id}"></i>`,
-                                                tagConfirmMsg: `Estas seguro de eliminar el genero <b>&nbsp;${genero.nombre}</b>&nbsp;con id <b>&nbsp;${genero.id}</b>?`,
-                                                modalId: `${genero.id}`,
-                                                btnSuccessLabel: "Eliminar",
-                                            }) %>
+                                                <%- include('components/confirmMsg', { 
+                                                    modalTitle: "Eliminar genero:",
+                                                    button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminarConfirm${genero.id}"></i>`,
+                                                    btnSuccessLabel: "Eliminar",
+                                                    tagConfirmMsg: `Estas seguro de eliminar el genero <b>&nbsp;${genero.nombre}</b>&nbsp;con id <b>&nbsp;${genero.id}</b>?`,
+                                                    modalId: `${genero.id}`,
+                                                }) %>
                                             </div>
                                         </td>
                                     </tr>

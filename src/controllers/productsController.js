@@ -581,7 +581,10 @@ const controller = {
             }
         })
 
-        const cantidadesProductos = await db.sequelize.query("SELECT categoria_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY categoria_id")
+        const cantidadesProductos = (categoriasSinCantidadProductos.length > 0) ?
+            await db.sequelize.query("SELECT categoria_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY categoria_id")
+            : []
+
         const cantidadProductosFixed = cantidadesProductos[0]
 
         const categoriasConCantidadProductos = agregarCantidadesProductos(categoriasSinCantidadProductos, cantidadProductosFixed)
@@ -644,7 +647,10 @@ const controller = {
             }
         })
 
-        const cantidadesProductos = await db.sequelize.query("SELECT genero_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY genero_id")
+        const cantidadesProductos = (generosSinCantidadProductos.length > 0) ?
+            await db.sequelize.query("SELECT genero_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY genero_id")
+            : []
+
         const cantidadProductosFixed = cantidadesProductos[0]
 
         const generosConCantidadProductos = agregarCantidadesProductos(generosSinCantidadProductos, cantidadProductosFixed)
@@ -705,7 +711,10 @@ const controller = {
             }
         })
 
-        const cantidadesProductos = await db.sequelize.query("SELECT marca_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY marca_id")
+        const cantidadesProductos = (marcasSinCantidadProductos.length > 0) ?
+            await db.sequelize.query("SELECT marca_id as 'id', count(*) as'cantidad' FROM producto WHERE " + queryCondicionWhere + " GROUP BY marca_id")
+            : []
+
         const cantidadProductosFixed = cantidadesProductos[0]
 
         const marcasConCantidadProductos = agregarCantidadesProductos(marcasSinCantidadProductos, cantidadProductosFixed)
