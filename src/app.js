@@ -9,6 +9,7 @@ require('dotenv').config();
 // ************ Route System require and use() ************
 const userRouter = require('./routes/user'); // Rutas /user
 const productsRouter = require('./routes/products'); // Rutas /products
+const apiRouter = require("./routes/api"); // Rutas /api
 const { cookie } = require('express-validator');
 
 // ************ express() - (don't touch) ************
@@ -37,4 +38,5 @@ app.set('views', path.join(__dirname, '/views'));
 
 app.use('/user', userRouter);
 app.use('/', productsRouter);
+app.use("/api", apiRouter);
 
