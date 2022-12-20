@@ -1,12 +1,11 @@
 <section class="admin-products-section">
     <div class="admin-products-head">
-        <h1 class="admin-title-section"> Panel de marcas: </h1>
+        <h1 class="admin-title-section"> Panel de marcas: </h1>      
         <%- include('modals/adminAgregarModal', {
             modalTitle: "Agregar nueva marca",
             btnSuccessLabel: "Agregar",
-            scriptPath: "/js/service/createNewBrand.js", 
+            action:"Agregar",
         }) %>    
-
     </div>
 
     <form class="admin-products-form">
@@ -68,19 +67,22 @@
                                         <td> <%= marca.cantidadProductos %></td>
                                         <td style="width:55px;">
                                             <div style="display:flex; justify-content: space-between; padding: 0 8px;">
-                                            <%- include('components/confirmMsg', { 
-                                                modalTitle: "Editar Categoria:",
-                                                button: `<i class="fa-solid fa-pen fa-sm btnShow" id="modalEditar${marca.id}"></i>`,
-                                                modalId: `modalEditar${marca.id}`,
-                                            }) %>
+                                                <%- include('modals/adminAgregarModal', { 
+                                                    modalTitle: "Editar marca",
+                                                    button: `<i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEditar${marca.id}"></i>`,
+                                                    btnSuccessLabel: "Editar",
+                                                    modalId: `${marca.id}`,
+                                                    action:"Editar",
+                                                    formData: {nombre: marca.nombre}
+                                                }) %>
 
-                                            <%- include('components/confirmMsg', { 
-                                                modalTitle: "Eliminar marca:",
-                                                button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminar${marca.id}"></i>`,
-                                                tagConfirmMsg: `Estas seguro de eliminar la marca <b>&nbsp;${marca.nombre}</b>&nbsp;con id <b>&nbsp;${marca.id}</b>?`,
-                                                modalId: `${marca.id}`,
-                                                btnSuccessLabel: "Eliminar",
-                                            }) %>
+                                                <%- include('components/confirmMsg', { 
+                                                    modalTitle: "Eliminar marca:",
+                                                    button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminarConfirm${marca.id}"></i>`,
+                                                    btnSuccessLabel: "Eliminar",
+                                                    tagConfirmMsg: `Estas seguro de eliminar la marca <b>&nbsp;${marca.nombre}</b>&nbsp;con id <b>&nbsp;${marca.id}</b>?`,
+                                                    modalId: `${marca.id}`,
+                                                }) %>
                                             </div>
                                         </td>
                                     </tr>

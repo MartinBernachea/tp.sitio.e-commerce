@@ -54,7 +54,6 @@ resultsTable.addEventListener("click", async (event) => {
                 location.reload();
             }
         }
-
         return
     }
 

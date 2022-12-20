@@ -246,11 +246,6 @@ const controller = {
             }
             res.status(200).json({ status: 200, message: "OK" })
         } catch (err) {
-            req.session.notificationAlert = {
-                type: "danger",
-                boldTitle: "Ups! ",
-                title: err.message,
-            }
             res.status(500).json({ status: 500, message: err.message, error: true })
         }
     },
@@ -271,17 +266,28 @@ const controller = {
             }
             res.status(200).json({ status: 200, message: "OK" })
         } catch (err) {
-            req.session.notificationAlert = {
-                type: "danger",
-                boldTitle: "Ups! ",
-                title: err.message,
-            }
             res.status(500).json({ status: 500, message: err.message, error: true })
         }
     },
 
     editBrand: async (req, res) => {
+        const marca_id = req.body.id;
+        const marca_nombre = req.body.nombre;
+        try {
+            if (marca_nombre.trim().length == 0) throw new Error("No es posible asignar un nombre vacio");
+            const marcaExistente = await db.marca.findOne({ where: { nombre: marca_nombre } })
+            if (marcaExistente != null) throw new Error("Ya existe otra marca con ese nombre");
 
+            const resp = await db.marca.update({ nombre: marca_nombre }, { where: { id: marca_id } });
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                tag: `Se edito correctamente la marca`
+            }
+            res.status(200).json({ status: 200, message: "OK" })
+        } catch (err) {
+            res.status(500).json({ status: 500, message: err.message, error: true })
+        }
     },
 
     detail: async (req, res) => {
