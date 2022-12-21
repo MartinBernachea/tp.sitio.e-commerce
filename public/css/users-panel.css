@@ -258,6 +258,12 @@ tbody tr:nth-child(even) {
     color: rgba(0, 0, 0, 0.849);
 }
 
+.form-label-input span.font-size-lg,
+.form-label-input-titlefont-size-lg {
+    font-size: 20px;
+}
+
+
 .form-label-input input,
 .form-label-input select {
     padding: 8px 12px;

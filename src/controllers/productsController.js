@@ -12,6 +12,7 @@ const { generarOrderTablaProducto, generarOrderGenericoIdNombre } = require('../
 const { formatProductDate } = require('../database/utils/format');
 const { isParamNotEmpty, agregarCantidadesProductos } = require('../database/utils/generics');
 const { getNotificationAlert } = require('../utils/notificationAlert');
+const { errorMonitor } = require('events');
 
 const controller = {
     index: (req, res) => {
@@ -49,42 +50,8 @@ const controller = {
         res.render('./pages/coming-soon', { userData })
     },
 
-    edit: (req, res) => {
-        let idProducto = req.params.id;
-        const userData = getUserDataStringified(req);
 
-        db.producto.findByPk(idProducto)
-            .then(function (producto) {
 
-                if (producto != null) {
-                    db.categoria.findAll()
-                        .then(function (categorias) {
-                            res.render('./pages/productEditForm', { producto: producto, categorias: categorias, userData });
-                        })
-                } else { res.redirect("/") }
-            })
-    },
-
-    update: (req, res) => {
-
-        let idProducto = req.params.id;
-
-        let datosProducto = req.body;
-
-        let nombreImagenAntigua = "";
-
-        console.log(datosProducto);
-        // db.producto.update({
-        //     nombre:datosProducto.nombre,
-        //     precio:datosProducto.precio,
-        //     categoria:datosProducto.categoria,
-        //     imagen:req.file.imagen
-        // }, { where: {id:idProducto}
-
-        // })
-
-        // res.redirect('/');
-    },
 
     adminPanel: async (req, res) => {
         const userData = getUserDataStringified(req);
@@ -103,9 +70,11 @@ const controller = {
         let localsParams = {
             userData,
             section: "createProduct",
-            generos: response[0],
-            marcas: response[1],
-            categorias: response[2],
+            opcionesGeneros: response[0],
+            opcionesMarcas: response[1],
+            opcionesCategorias: response[2],
+
+            submitButtonLabel: "Crear producto",
         }
 
         res.render('./pages/adminPanel', localsParams)
@@ -119,7 +88,10 @@ const controller = {
             nuevoProducto = {
                 nombre: req.body.name,
                 precio: req.body.price,
-                categoria_id: req.body.category,
+                categoria_id: req.body.categoriaId,
+                marca_id: req.body.marcaId,
+                genero_id: req.body.generoId,
+                usuario_id: userData.id
             };
 
             try {
@@ -150,12 +122,101 @@ const controller = {
                     title: "Producto creado exitosamente:",
                     tag: `<a href="/detail/${respNewProduct.id}">${req.body.name}</a>`,
                 }
-                res.redirect('/');
+                res.redirect('/admin/panel/products');
             } catch (err) { }
         }
         else {
-            res.render('./pages/productCreateForm', { errors: errors.array(), userData });
+            const generos = db.genero.findAll();
+            const marcas = db.marca.findAll();
+            const categorias = db.categoria.findAll();
+
+            const response = await Promise.all([generos, marcas, categorias])
+            let localsParams = {
+                userData,
+                section: "createProduct",
+                formData: req.body,
+                opcionesGeneros: response[0],
+                opcionesMarcas: response[1],
+                opcionesCategorias: response[2],
+                errors: errors.array()
+            }
+
+            res.render('./pages/adminPanel', localsParams)
         }
+    },
+
+    getEditProduct: async (req, res) => {
+        const userData = getUserDataStringified(req);
+
+        try {
+            if (!req.params.id) throw new Error("Producto solicitado invalido.")
+            const generos = db.genero.findAll();
+            const marcas = db.marca.findAll();
+            const categorias = db.categoria.findAll();
+            const producto = db.producto.findByPk(req.params.id, {
+                include: [{ model: db.imagen }]
+            })
+            const response = await Promise.all([generos, marcas, categorias, producto])
+
+            if (response[3] == null) throw new Error("No se encontro el producto solicitado.")
+
+
+            console.log("##############")
+            console.log("##############")
+            console.log("PRODUCTO", response[3].imagens)
+            console.log("##############")
+            console.log("##############")
+
+            const formData = {
+                name: response[3].nombre,
+                price: response[3].precio,
+                categoriaId: response[3].categoria_id,
+                generoId: response[3].genero_id,
+                marcaId: response[3].marca_id,
+                images: response[3].imagens
+            }
+
+            let localsParams = {
+                userData,
+                section: "createProduct",
+                opcionesGeneros: response[0],
+                opcionesMarcas: response[1],
+                opcionesCategorias: response[2],
+                formData,
+                submitButtonLabel: "Editar producto",
+            }
+
+            res.render('./pages/adminPanel', localsParams)
+
+        } catch (err) {
+            req.session.notificationAlert = {
+                type: "danger",
+                boldTitle: "Ups! ",
+                title: err.message,
+            }
+            res.redirect("/admin/panel/products")
+        }
+    },
+
+    postEditProduct: (req, res) => {
+
+        let idProducto = req.params.id;
+
+        let datosProducto = req.body;
+
+        let nombreImagenAntigua = "";
+
+        console.log(datosProducto);
+        // db.producto.update({
+        //     nombre:datosProducto.nombre,
+        //     precio:datosProducto.precio,
+        //     categoria:datosProducto.categoria,
+        //     imagen:req.file.imagen
+        // }, { where: {id:idProducto}
+
+        // })
+
+        // res.redirect('/');
     },
 
     deleteCategory: async (req, res) => {

@@ -66,11 +66,11 @@ router.get('/store', productsController.store);
 
 /*** CREATE ONE PRODUCT ***/
 router.get('/admin/panel/products/create', adminPermissions, productsController.getCreateProduct);
-// router.post('/createProduct', adminPermissions, multipleImages, productCreateValidation, productsController.createProduct); // FALTA AGREGAR 'validaciones' de img
+router.post('/admin/panel/products/create', adminPermissions, multipleImages, productCreateValidation, productsController.postCreateProduct);
 
 /*** EDIT ONE PRODUCT ***/
-router.get('/edit/:id', adminPermissions, productsController.edit);
-router.put('/edit/:id', adminPermissions, productsController.update);
+router.get('/admin/panel/products/edit/:id', adminPermissions, productsController.getEditProduct);
+router.put('/admin/panel/products/edit/:id', adminPermissions, productsController.postEditProduct);
 
 /*** DELETE ONE PRODUCT ***/
 router.delete('/:id', adminPermissions, productsController.destroy);

@@ -94,6 +94,7 @@ const controller = {
                 email: userData.email,
                 admin: userData.admin,
                 super: userData.super,
+                id: userData.id,
             };
 
             if (req.body.mantenerSesion == 'on') {

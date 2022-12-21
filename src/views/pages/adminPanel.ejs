@@ -47,22 +47,16 @@
                             <% } %>
 
                             <% if(locals.section == "createProduct") {%>
-                                <%- include('partials/createProductForm') %>
+                                <%- include('partials/createProductForm', locals) %>
                             <% } %>
-
-                            
 
                             <% if(locals.section == "categoriesPanel") {%>
                                 <%- include('partials/adminPanelCategories') %>
                             <% } %>
 
-
-
                             <% if(locals.section == "genresPanel") {%>
                                 <%- include('partials/adminPanelGenres') %>
                             <% } %>
-
-
 
                             <% if(locals.section == "brandsPanel") {%>
                                 <%- include('partials/adminPanelBrands') %>

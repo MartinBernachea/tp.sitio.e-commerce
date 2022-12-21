@@ -29,44 +29,45 @@ const extraerNumeroId = (prefijo, nombreEntero) => {
     return nombreEntero.slice(prefijo.length, nombreEntero.length)
 }
 
-resultsTable.addEventListener("click", async (event) => {
-    event.preventDefault();
-
-    if (event.target.id.includes("modalEliminarConfirm")) {
-        showCurrentModal(extraerNumeroId("modalEliminarConfirm", event.target.id))
-        return
-    }
-
-    if (event.target.id.includes("btnSuccessConfirm")) {
+if (resultsTable) {
+    resultsTable.addEventListener("click", async (event) => {
         event.preventDefault();
 
-        let deleteFunction;
-        if (location.href.includes("categories")) deleteFunction = deleteCategory;
-        if (location.href.includes("genres")) deleteFunction = deleteGenre;
-        if (location.href.includes("brands")) deleteFunction = deleteBrand;
-
-        if (deleteFunction) {
-            try {
-                const response = await deleteFunction({ id: extraerNumeroId("btnSuccessConfirm", event.target.id) });
-            } catch (err) {
-                console.log(err)
-            } finally {
-                location.reload();
-            }
+        if (event.target.id.includes("modalEliminarConfirm")) {
+            showCurrentModal(extraerNumeroId("modalEliminarConfirm", event.target.id))
+            return
         }
-        return
-    }
 
-    if (event.target.id.includes("btnCancelConfirm")) {
-        event.preventDefault();
-        hiddeCurrentModal(extraerNumeroId("btnCancelConfirm", event.target.id))
-        return
-    }
+        if (event.target.id.includes("btnSuccessConfirm")) {
+            event.preventDefault();
 
-    if (event.target.id.includes("modalBackgroundConfirm")) {
-        hiddeCurrentModal(extraerNumeroId("modalBackgroundConfirm", event.target.id))
-        return
-    }
-})
+            let deleteFunction;
+            if (location.href.includes("categories")) deleteFunction = deleteCategory;
+            if (location.href.includes("genres")) deleteFunction = deleteGenre;
+            if (location.href.includes("brands")) deleteFunction = deleteBrand;
 
+            if (deleteFunction) {
+                try {
+                    const response = await deleteFunction({ id: extraerNumeroId("btnSuccessConfirm", event.target.id) });
+                } catch (err) {
+                    console.log(err)
+                } finally {
+                    location.reload();
+                }
+            }
+            return
+        }
+
+        if (event.target.id.includes("btnCancelConfirm")) {
+            event.preventDefault();
+            hiddeCurrentModal(extraerNumeroId("btnCancelConfirm", event.target.id))
+            return
+        }
+
+        if (event.target.id.includes("modalBackgroundConfirm")) {
+            hiddeCurrentModal(extraerNumeroId("modalBackgroundConfirm", event.target.id))
+            return
+        }
+    })
+}
 
