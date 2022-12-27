@@ -33,23 +33,28 @@
                         <li><a href=""> Calzado </a></li>
                     </ul>
                 </h4>
-                <img src="/img/products/<%=producto.imagens[0].nombre%>" alt="Imagen principal de <%=producto.nombre%>" class="pd-bphoto" />
+                <img src="/img/products/<%=producto.imagens[0].nombre%>" alt="Imagen principal de <%=producto.nombre%>"
+                    class="pd-bphoto" />
             </div>
 
             <div class="pd-small-photo">
 
 
                 <a href="/detail/<%= producto.id %>">
-                    <img src="/img/products/<%= producto.imagens[1].nombre %>" alt="Imagen secundaria de <%=producto.nombre%>" class="pd-sphoto photo-hover" />
+                    <img src="/img/products/<%= producto.imagens[1].nombre %>"
+                        alt="Imagen secundaria de <%=producto.nombre%>" class="pd-sphoto photo-hover" />
                 </a>
                 <a href="/detail/<%= producto.id %>">
-                    <img src="/img/products/<%= producto.imagens[2].nombre %>" alt="Imagen secundaria de <%=producto.nombre%>" class="pd-sphoto photo-hover" />
+                    <img src="/img/products/<%= producto.imagens[2].nombre %>"
+                        alt="Imagen secundaria de <%=producto.nombre%>" class="pd-sphoto photo-hover" />
                 </a>
                 <a href="/detail/<%= producto.id %>">
-                    <img src="/img/products/<%= producto.imagens[3].nombre %>" alt="Imagen secundaria de <%=producto.nombre%>" class="pd-sphoto photo-hover" />
+                    <img src="/img/products/<%= producto.imagens[3].nombre %>"
+                        alt="Imagen secundaria de <%=producto.nombre%>" class="pd-sphoto photo-hover" />
                 </a>
                 <a href="/detail/<%= producto.id %>">
-                    <img src="/img/products/<%= producto.imagens[4].nombre %>" alt="Imagen secundaria de <%=producto.nombre%>" class="pd-sphoto photo-hover" />
+                    <img src="/img/products/<%= producto.imagens[4].nombre %>"
+                        alt="Imagen secundaria de <%=producto.nombre%>" class="pd-sphoto photo-hover" />
                 </a>
             </div>
 
@@ -78,7 +83,7 @@
                     </select>
                 </div>
 
-                <button class="btn-secondary" onclick="agregarProducto(<%= producto.id %>)">
+                <button class="btn-secondary" id="cart-add"> <!-- onclick="agregarProducto(<%= producto.id %>)" -->
                     Agregar al carrito <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
@@ -297,4 +302,5 @@
     <!-- /footer -->
 </body>
 <script src="/js/chart.js"></script>
+
 </html>
