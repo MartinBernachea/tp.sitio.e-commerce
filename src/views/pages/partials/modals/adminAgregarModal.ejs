@@ -1,0 +1,45 @@
+<!-- 
+    locals:
+    modalTitle
+    btnSuccessLabel
+    nombre
+    action
+ -->
+
+<div id="admin<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>">
+    <div id="modalBackground<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>" class="user-modal-background initial-position">
+        <div class="user-modal" id="modal<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>">
+            <div class="edit-user-form">
+                <div class="edit-user-modal-container">
+                    <h1><%= locals.modalTitle %>:</h1>
+                    <hr class="edit-user-form-separador"/>
+                    <div class="form-inputs-container">
+                        <label class="form-label-input">
+                            <span>Nombre:</span>
+                            <input id="nombre" name="nombre" class="input-text-secondary" type="text" tabindex="1"
+                                placeholder="Nombre" value="<%= locals.formData?.nombre ?? "" %>" />
+                            </label>
+                        </div>
+                        <p id="errorMessageModal" class="input-text-error input-text-error-activo"></p>
+                    </div>
+                <div class="buttons-container">
+                    <button id="btnCancel<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>"
+                        class="btn-secondary btn-small btnCancelar">Cancelar</button>
+                    <button id="btnSuccess<%=locals.action%><%= locals.modalId ? locals.modalId : "" %>"
+                        class="btn-primary btn-small btnAplicar"><%= locals.btnSuccessLabel %></button>
+                    <button id="loader" class="btn-primary btn-small" style="display:none">
+                        <%- include('../components/spinner') %>
+                    </button>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <% if(locals.button) { %>
+        <%- locals.button %>
+    <% }else{ %>
+        <button class="btn-terceary btn-plus-icon" type="button" id="btnShow<%=locals.action%><%= locals.modalId ? locals.modalId : "" %></button>"> <i class="fa-solid fa-plus"></i> <%= locals.modalTitle %> </button>
+    <% } %>
+</div>
+
+<script src="/js/admin<%=locals.action%>Modal.js" type="module"></script>

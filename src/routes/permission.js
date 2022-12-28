@@ -2,11 +2,14 @@ const { getUserDataParsed } = require("../utils/userData");
 
 const adminPermissions = (req, res, next) => {
     const userData = getUserDataParsed(req)
-
-    if (userData) {
-        if (userData.admin) return next()
-    }
+    if (userData) { if (userData.admin) return next() }
     res.redirect("/");
+}
+
+const adminPermissionsJSON = (req, res, next) => {
+    const userData = getUserDataParsed(req)
+    if (userData) { if (userData.admin) return next() }
+    res.status(401).json({ status: 401, message: "No tienes permisos suficientes" });
 }
 
 const superPermissions = (req, res, next) => {
@@ -45,5 +48,6 @@ module.exports = {
     superPermissions,
     userPermissions,
     noUserPermissions,
+    adminPermissionsJSON,
     superPermissionsJSON,
 }

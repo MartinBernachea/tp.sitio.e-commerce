@@ -3,8 +3,9 @@ const { body } = require('express-validator');
 const productCreateValidation = [
     body('name').notEmpty().withMessage('Completar campo'),
     body('price').notEmpty().withMessage('Completar campo'),  // .isNumeric([locale(['ar']), options({no_symbols: true})])
-    body('category').notEmpty().withMessage('Completar campo'),
-    // body('cImage').notEmpty().withMessage('Completa campo')  // NO ANDA -- BUSCAR ERROR o RAZON
+    body('categoriaId').notEmpty().withMessage('Completar campo'),
+    body('marcaId').notEmpty().withMessage('Completar campo'),
+    body('generoId').notEmpty().withMessage('Completar campo'),
 ]
 
 const userRegisterValidation = [

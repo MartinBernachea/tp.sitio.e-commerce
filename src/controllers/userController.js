@@ -10,6 +10,7 @@ const db = require("../database/models");
 
 const { customValidationErrorMsg } = require("../utils/validations");
 const { getUserDataStringified } = require('../utils/userData');
+const { getNotificationAlert } = require('../utils/notificationAlert');
 
 const controller = {
     login: (req, res) => {
@@ -103,6 +104,7 @@ const controller = {
                 email: userData.email,
                 admin: userData.admin,
                 super: userData.super,
+                id: userData.id,
             };
 
             if (req.body.mantenerSesion == 'on') {
@@ -139,10 +141,7 @@ const controller = {
 
         let localsParams = { userData, formData }
 
-        if (req.session.notificationAlert) {
-            localsParams.notificationAlert = req.session.notificationAlert;
-            req.session.notificationAlert = null
-        }
+        getNotificationAlert(localsParams, req)
 
         const wasFormSent = Object.values(formData).length > 0;
         const isFormEmpty = Object.values(formData).every(ctValue => {

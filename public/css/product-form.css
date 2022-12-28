@@ -126,6 +126,10 @@
     margin: 30px 30px 0px 0px;
 }
 
+.save-product button{
+    margin-left:14px;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 860px) {

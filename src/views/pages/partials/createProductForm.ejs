@@ -1,0 +1,173 @@
+	<div class="products-wrapper">
+		<div class="box-container">
+			<form action="create" method="POST" enctype="multipart/form-data">
+				<div class="pe-container">				
+					<div class="img-container">
+						<div class="load-main-image-container cImage1" id="preview">
+							<input type="file" name="cImage1" id="cImage1" class="form-input-img"></input>
+							<label for="cImage1" class="form-label-img" id="cImage1-preview">
+								<img src="<%= locals.formData?.images ? `/img/products/${locals.formData.images[0].dataValues.nombre}` : '/img/no-img.jpg'%>" alt="">
+								<div>
+									<span>+</span>
+								</div>
+							</label>
+
+							<% if (locals && locals.errors) { %>
+							<% if (locals.errors[0].param=="cImage") { %>
+							<h3> <%= locals.errors[0].msg %> </h3>
+							<% } %>
+							<% } %>
+						</div>
+						<div class="sub-img-container">
+							<div class="load-sub-image-container">
+								<input type="file" name="cImage2" id="cImage2" class="form-input-img"></input>
+								<label for="cImage2" class="form-label-img" id="cImage2-preview">
+									<img src="<%= locals.formData?.images ? `/img/products/${locals.formData.images[1].dataValues.nombre}` : '/img/no-img.jpg'%>" alt="">
+									<div>
+										<span>+</span>
+									</div>
+								</label>
+
+								<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+								<% } %>
+							</div>
+
+							<div class="load-sub-image-container">
+								<input type="file" name="cImage3" id="cImage3" class="form-input-img"></input>
+								<label for="cImage3" class="form-label-img" id="cImage3-preview">
+									<img src="<%= locals.formData?.images ? `/img/products/${locals.formData.images[2].dataValues.nombre}` : '/img/no-img.jpg'%>" alt="">
+									<div>
+										<span>+</span>
+									</div>
+								</label>
+
+								<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+								<% } %>
+							</div>
+
+							<div class="load-sub-image-container">
+								<input type="file" name="cImage4" id="cImage4" class="form-input-img"></input>
+								<label for="cImage4" class="form-label-img" id="cImage4-preview">
+									<img src="<%= locals.formData?.images ? `/img/products/${locals.formData.images[3].dataValues.nombre}` : '/img/no-img.jpg'%>" alt="">
+									<div>
+										<span>+</span>
+									</div>
+								</label>
+
+								<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+								<% } %>
+							</div>
+
+							<div class="load-sub-image-container">
+								<input type="file" name="cImage5" id="cImage5" class="form-input-img"></input>
+								<label for="cImage5" class="form-label-img" id="cImage5-preview">
+									<img src="<%= locals.formData?.images ? `/img/products/${locals.formData.images[4].dataValues.nombre}` : '/img/no-img.jpg'%>" alt="">
+									<div>
+										<span>+</span>
+									</div>
+								</label>
+
+								<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="cImage") { %>
+								<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+								<% } %>
+							</div>
+						</div>
+					</div>
+
+					<div class="data-container">
+						<div class="product-container">
+
+							<div class="admin-product-panel-inputs-container">
+									<label class="form-label-input label-lg">
+										<span class="font-size-lg">Nombre del producto:</span>
+										<input name="name" type="text" placeholder="1"
+											value="<%= (locals.formData?.name) ?? '' %>" />
+										<% if (locals && locals.errors) { %>
+											<% if (locals.errors[0].param=="name") { %>
+												<h3> <%= locals.errors[0].msg %> </h3>
+											<% } %>
+										<% } %>
+									</label>
+									<label class="form-label-input label-md">
+										<span class="font-size-lg">Precio:</span>
+										<input name="price" type="text" placeholder="1500"
+											value="<%= (locals.formData?.price) ?? '' %>" />
+										<% if (locals && locals.errors) { %>
+											<% if (locals.errors[0].param=="price") { %>
+												<h3> <%= locals.errors[0].msg %> </h3>
+											<% } %>
+										<% } %>
+									</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="admin-product-panel-inputs-container">
+						<label class="form-label-input label-md">
+							<span class="font-size-lg">Categoria:</span>
+							<select name="categoriaId" id="categoriaId">
+								<option value=""> Elegí </option>
+								<% for(categoria of locals.opcionesCategorias) { %>
+									<option value="<%= categoria.id %>" <% if(locals.formData?.categoriaId==categoria.id) { %> selected<%}%>> <%=categoria.nombre%> </option>
+								<% } %>
+							</select>
+							<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="categoriaId") { %>
+									<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+							<% } %>
+						</label>
+
+						<label class="form-label-input label-md">
+							<span class="font-size-lg">Genero:</span>
+							<select name="generoId" id="generoId">
+								<option value=""> Elegí </option>
+								<% for(genero of locals.opcionesGeneros) { %>
+									<option value="<%= genero.id %>" <% if(locals.formData?.generoId==genero.id) { %> selected<%}%>> <%=genero.nombre%> </option>
+								<% } %>
+							</select>
+							<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="generoId") { %>
+									<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+							<% } %>
+						</label>
+
+						<label class="form-label-input label-md">
+							<span class="font-size-lg">Marca:</span>
+							<select name="marcaId" id="marcaId">
+								<option value=""> Elegí </option>
+								<% for(marca of locals.opcionesMarcas) { %>   
+									<option value="<%= marca.id %>" <% if(locals.formData?.marcaId==marca.id) { %> selected<%}%>> <%=marca.nombre%> </option>
+								<% } %>
+							</select>
+							<% if (locals && locals.errors) { %>
+								<% if (locals.errors[0].param=="marcaId") { %>
+									<h3> <%= locals.errors[0].msg %> </h3>
+								<% } %>
+							<% } %>
+						</label>
+					</div>
+
+					<div class="save-product">
+						<a class="btn-secondary" href='/admin/panel/products' type="button"> Volver </a>
+						<button id="submitButton" type="submit" class="btn-primary"><%= locals.submitButtonLabel %></button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<script src="/js/validationsNewProductForm.js"></script>

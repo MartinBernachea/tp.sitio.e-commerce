@@ -8,6 +8,7 @@
 @import url(./products-panel.css);
 @import url(./loader.css);
 @import url(./store.css);
+@import url(./inputRangeTwoPoints.css);
 
 * {
   font-family: "Hind Vadodara", sans-serif;
@@ -72,7 +73,7 @@ button:disabled {
 .btn-terceary{
   height: min-content;
   width: auto;
-  background-color: rgb(23, 146, 23);
+  background-color: rgb(22, 173, 22);
   color: #fff;
   font-size: 16px;
   display: flex;

@@ -1,6 +1,5 @@
 table {
     width: 100%;
-    max-width: 1100px;
     margin: 30px 0;
     margin-top: 50px;
     border-spacing: 0;
@@ -58,7 +57,7 @@ tbody tr:nth-child(even) {
 }
 
 .pagination-container i {
-    pointer-events:inherit;
+    pointer-events: inherit;
 }
 
 .pagination-container .left-button::before {
@@ -121,6 +120,7 @@ tbody tr:nth-child(even) {
 .edit-user-modal-container {
     padding: 20px 30px;
     padding-bottom: 0;
+    text-align: left;
 }
 
 .edit-user-form-separador {
@@ -173,6 +173,7 @@ tbody tr:nth-child(even) {
     align-items: center;
     transition: 500ms opacity ease-in-out;
     pointer-events: none;
+    z-index: 1000;
 }
 
 .user-modal-background.initial-position {
@@ -210,6 +211,13 @@ tbody tr:nth-child(even) {
     margin-top: 4px;
 }
 
+#errorMessageModal {
+    font-size: 14px;
+    color: #c74545;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    height: 14px;
+}
 
 
 /* FORM */
@@ -244,10 +252,17 @@ tbody tr:nth-child(even) {
 }
 
 
-.form-label-input span {
+.form-label-input span,
+.form-label-input-title {
     font-weight: 600;
     color: rgba(0, 0, 0, 0.849);
 }
+
+.form-label-input span.font-size-lg,
+.form-label-input-titlefont-size-lg {
+    font-size: 20px;
+}
+
 
 .form-label-input input,
 .form-label-input select {

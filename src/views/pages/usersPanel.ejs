@@ -96,7 +96,7 @@
                         <button type="submit" class="btn-primary"> Buscar </button>
                     </div>
                     <% if(locals.usersResults) {%>
-                        <% if(locals.usersResults.quantity> 0) {%>
+                        <% if(locals.usersResults.quantity > 0) {%>
                             <table id="user-edit-table">
                                 <thead>
                                     <tr>
@@ -142,10 +142,10 @@
                                     resultsPerPage: locals.usersResults.resultsPerPage, page: locals.usersResults.page,
                                     }) %>
                             </div>
-                            <% } else { %>
-                                <p>No hay coincidencias con la busqueda</p>
-                                <% } %>
-                                    <% } %>
+                        <% } else { %>
+                            <p>No hay coincidencias con la busqueda</p>
+                        <% } %>
+                    <% } %>
                 </form>
 
             </section>

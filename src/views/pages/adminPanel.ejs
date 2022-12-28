@@ -23,28 +23,47 @@
 
         <main>
             <section class="caja-grande caja-grande2">
-
                 <div class="admin-panel-container">
                     <div class="admin-panel-sections">
                         <aside class="admin-panel-aside">
                             <ul>
-                                <li class="selected">
+                                <li <% if(locals.section == "productsPanel" || locals.section == "createProduct"){ %>class="selected" <%}%> >
                                     <a href="/admin/panel/products"><i class="fa-solid fa-box"></i> Productos</a>
                                 </li>
-                                <li>
+                                <li <% if(locals.section == "categoriesPanel"){ %>class="selected" <%}%>>
                                     <a href="/admin/panel/categories"><i class="fa-solid fa-tag"></i> Categorias</a>
+                                </li>
+                                <li <% if(locals.section == "genresPanel"){ %>class="selected" <%}%>>
+                                    <a href="/admin/panel/genres"><i class="fa-solid fa-tag"></i> Generos</a>
+                                </li>
+                                <li <% if(locals.section == "brandsPanel"){ %>class="selected" <%}%>>
+                                    <a href="/admin/panel/brands"><i class="fa-solid fa-tag"></i> Marcas</a>
                                 </li>
                             </ul>
                         </aside>
-                        
-                        <% if(locals.section == "productsPanel") {%>
-                            <%- include('partials/adminPanelProducts') %>
-                        <% } %>
+                        <div class="admin-panel">
+                            <% if(locals.section == "productsPanel") {%>
+                                <%- include('partials/adminPanelProducts') %>
+                            <% } %>
 
-                        <% if(locals.section == "categoriesPanel") {%>
-                            <%- include('partials/adminPanelCategories') %>
-                        <% } %>
-                        
+                            <% if(locals.section == "createProduct") {%>
+                                <%- include('partials/createProductForm', locals) %>
+                            <% } %>
+
+                            <% if(locals.section == "categoriesPanel") {%>
+                                <%- include('partials/adminPanelCategories') %>
+                            <% } %>
+
+                            <% if(locals.section == "genresPanel") {%>
+                                <%- include('partials/adminPanelGenres') %>
+                            <% } %>
+
+                            <% if(locals.section == "brandsPanel") {%>
+                                <%- include('partials/adminPanelBrands') %>
+                            <% } %>
+
+
+                        </div>
 
                     </div>
                 </div>

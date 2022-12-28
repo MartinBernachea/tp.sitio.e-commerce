@@ -1,64 +1,212 @@
+
 <section class="admin-products-section">
-    <h1 class="admin-title-section"> Panel de productos: </h1>
+    <div class="admin-products-head">
+        <h1 class="admin-title-section"> Panel de productos: </h1>
+        <a class="btn-terceary btn-plus-icon" href='/admin/panel/products/create' type="button"> <i class="fa-solid fa-plus"></i> Agregar nuevo producto </a>
+    </div>
+    <form class="admin-products-form">
+        <div class="admin-products-inputs-container">
+            <div class="admin-product-panel-inputs-container">
+                <label class="form-label-input label-sm">
+                    <span>Id:</span>
+                    <input name="productId" type="text" placeholder="1" value="<%= (locals.applicated?.productId) ?? '' %>"/>
+                </label>
 
-    <form>
-        <div class="form-inputs-container">
-            <label class="form-label-input label-lg">
-                <span>Nombre:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
+                <label class="form-label-input label-lg">
+                    <span>Nombre:</span>
+                    <input name="productName" type="text" placeholder="Remera Nike" value="<%= (locals.applicated?.productName) ?? '' %>" />
+                </label>
 
-            <label class="form-label-input label-lg">
-                <span>Precio:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
+            </div>
 
-            <label class="form-label-input label-lg">
-                <span>Categorias:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
-
-            <label class="form-label-input label-lg">
-                <span>Creado desde:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
-
-            <label class="form-label-input label-lg">
-                <span>Creado hasta:</span>
-                <input name="userName" type="text" placeholder="Joe" />
-            </label>
+            <div class="admin-product-panel-inputs-container">
+                <label class="form-label-input label-md">
+                    <span>Categoria:</span>
+                    <select name="categoriaId" id="categoriaId">
+                        <option value=""> Todas </option>
+                        <% for(categoria of locals.opcionesCategorias) { %>
+                            <option value="<%= categoria.id %>" <% if(locals.applicated?.categoriaId==categoria.id) { %> selected<%}%>> <%=categoria.nombre%> </option>
+                        <% } %>
+                    </select>
+                </label>
+                <label class="form-label-input label-md">
+                    <span>Genero:</span>
+                    <select name="generoId" id="generoId">
+                        <option value=""> Todos </option>
+                        <% for(genero of locals.opcionesGeneros) { %>
+                            <option value="<%= genero.id %>" <% if(locals.applicated?.generoId==genero.id) { %> selected<%}%>> <%=genero.nombre%> </option>
+                        <% } %>
+                    </select>
+                </label>
+                <label class="form-label-input label-md">
+                    <span>Marca:</span>
+                    <select name="marcaId" id="marcaId">
+                        <option value=""> Todas </option>
+                        <% for(marca of locals.opcionesMarcas) { %>   
+                            <option value="<%= marca.id %>" <% if(locals.applicated?.marcaId==marca.id) { %> selected<%}%>> <%=marca.nombre%> </option>
+                        <% } %>
+                    </select>
+                </label>
+            </div>
         </div>
 
-        <div class="form-buttons-container">
+        <div class="admin-products-inputs-container">
+            <div class="admin-product-panel-inputs-container">
+
+                <label class="form-label-input label-lg">
+                    <span>Creado por:</span>
+                    <select name="usuarioId" id="usuarioId">
+                        <option value=""> Todos </option>
+                        <% for(usuario of locals.opcionesCreadores) { %>
+                            <option value="<%= usuario.id %>" <% if(locals.applicated?.usuarioId==usuario.id) { %> selected<%}%>> <%=usuario.nombre%> <%=usuario.apellido%> (id: <%=usuario.id%>)  </option>
+                        <% } %>
+                    </select>
+                </label>
+
+                <label class="form-label-input label-md">
+                    <span>Creado desde:</span>
+                    <input name="creadoDesde" type="date" value="<%= (locals.applicated?.creadoDesde) ?? '' %>"/>
+                </label>
+
+                <label class="form-label-input label-md">
+                    <span>Creado hasta:</span>
+                    <input name="creadoHasta" type="date" value="<%= (locals.applicated?.creadoHasta) ?? '' %>"/>
+                </label>
+
+            </div>
+        </div>
+
+        <div class="admin-product-range-container">
+            <%- include('components/inputRangeTwoPoints', { ...locals.rangoPrecios, initialValues: locals.applicated}) %> 
+        </div>
+
+        <div class="admin-products-buttons-container">
             <button type="reset" class="btn-secondary"> Limpiar </button>
             <button type="submit" class="btn-primary"> Buscar </button>
-            <button type="submit" class="btn-terceary"> Crear nuevo </button>
-
         </div>
+        <% if(locals.products) {%>
+            <% if(locals.products.quantity > 0) {%>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "id_asc") ? "id_desc" : "id_asc" %>"
+                                    />
+                                    Id 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order == "id_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(!locals.applicated?.order || locals.applicated.order == "id_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "nombre_asc") ? "nombre_desc" : "nombre_asc" %>"
+                                    />
+                                    Nombre 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "nombre_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "nombre_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>                                
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "precio_asc") ? "precio_desc" : "precio_asc" %>"
+                                    />
+                                    Precio 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "precio_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "precio_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "categoria_asc") ? "categoria_desc" : "categoria_asc" %>"
+                                    />
+                                    Categoria 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "categoria_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "categoria_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "genero_asc") ? "genero_desc" : "genero_asc" %>"
+                                    />
+                                    Genero 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "genero_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "genero_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "marca_asc") ? "marca_desc" : "marca_asc" %>"
+                                    />
+                                    Marca 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "marca_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "marca_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "createdAt_asc") ? "createdAt_desc" : "createdAt_asc" %>"
+                                    />
+                                    Fecha creacion 
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "createdAt_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "createdAt_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn-sort-table" name="order" 
+                                    value="<%= (!locals.applicated?.order || locals.applicated.order ==  "usuario_asc") ? "usuario_desc" : "usuario_asc" %>"
+                                    />
+                                    Creado por
+                                    <i class="fa-solid fa-sort-down <% if(locals.applicated?.order ==  "usuario_desc") { %> active <% } %>"></i>
+                                    <i class="fa-solid fa-sort-up <% if(locals.applicated?.order ==  "usuario_asc") { %> active <% } %>"></i>
+                                </button>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(product of locals.products.elements) { %>
+                            <tr>
+                                <td> <%= product.id %></td>
+                                <td> <%= product.nombre %></td>
+                                <td> <%= product.precio %></td>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Categorias</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Zapatilla</td>
-                    <td>$100</td>
-                    <td>Cat1 Cat2</td>
-                </tr>
-            </tbody>
-        </table>
+                                <td> <%= product.categorium.nombre %></td>
+                                <td> <%= product.genero.nombre %></td>
+                                <td> <%= product.marca.nombre %></td>
+
+                                <td> <%= product.createdAt %></td>
+
+                                <td> <%= product.usuario.nombre %> <%= product.usuario.apellido %></td>
+                                <td style="width:55px;">
+                                    <div style="display:flex; justify-content: space-between; padding: 0 8px;">
+                                        
+                                        <a href="/admin/panel/products/edit/<%=product.id%>"><i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEditar${genero.id}"></i></a>
+                                        
+                                        <%- include('components/confirmMsg', { 
+                                            modalTitle: "Eliminar genero:",
+                                            button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminarConfirm${genero.id}"></i>`,
+                                            btnSuccessLabel: "Eliminar",
+                                            tagConfirmMsg: `Estas seguro de eliminar el genero <b>&nbsp;${genero.nombre}</b>&nbsp;con id <b>&nbsp;${genero.id}</b>?`,
+                                            modalId: `${genero.id}`,
+                                        }) %>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            
+                <div class="user-form-pagination-container">
+                    <%- include('tablePagination', { 
+                            quantity: locals.products.quantity,
+                            resultsPerPage: locals.products.resultsPerPage, 
+                            page: locals.products.page,
+                        }) %>
+                </div>
+            <% } else { %>
+                <p class="no-coincidencia-error">No hay coincidencias con la busqueda</p>
+            <% } %>
+        <% } %>
     </form>
-
-    <div class="admin-products-metrics-container">
-
-        asdasd
-
-    </div>
 </section>

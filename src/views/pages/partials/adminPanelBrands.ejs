@@ -1,11 +1,11 @@
 <section class="admin-products-section">
     <div class="admin-products-head">
-        <h1 class="admin-title-section"> Panel de categorias: </h1>
+        <h1 class="admin-title-section"> Panel de marcas: </h1>      
         <%- include('modals/adminAgregarModal', {
-            modalTitle: "Agregar nueva categoria",
+            modalTitle: "Agregar nueva marca",
             btnSuccessLabel: "Agregar",
             action:"Agregar",
-        }) %>        
+        }) %>    
     </div>
 
     <form class="admin-products-form">
@@ -13,14 +13,14 @@
             <div class="admin-product-panel-inputs-container">
                 <label class="form-label-input label-sm">
                     <span>Id:</span>
-                    <input name="categoriaId" type="text" placeholder="1"
-                        value="<%= (locals.applicated?.categoriaId) ?? '' %>" />
+                    <input name="marcaId" type="text" placeholder="1"
+                        value="<%= (locals.applicated?.marcaId) ?? '' %>" />
                 </label>
 
                 <label class="form-label-input label-lg">
                     <span>Nombre:</span>
-                    <input name="categoriaNombre" type="text" placeholder="Remeras"
-                        value="<%= (locals.applicated?.categoriaNombre) ?? '' %>" />
+                    <input name="marcaNombre" type="text" placeholder="Nike"
+                        value="<%= (locals.applicated?.marcaNombre) ?? '' %>" />
                 </label>
 
             </div>
@@ -30,8 +30,8 @@
             <button type="submit" class="btn-primary"> Buscar </button>
         </div>
 
-        <% if(locals.categorias) {%>
-            <% if(locals.categorias.quantity > 0) {%>
+        <% if(locals.marcas) {%>
+            <% if(locals.marcas.quantity > 0) {%>
                 <table>
                     <thead>
                         <tr>
@@ -60,30 +60,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                                <% for(categoria of locals.categorias.elements) { %>
+                                <% for(marca of locals.marcas.elements) { %>
                                     <tr>
-                                        <td> <%= categoria.id %></td>
-                                        <td> <%= categoria.nombre %></td>
-                                        <td> <%= categoria.cantidadProductos %></td>
+                                        <td> <%= marca.id %></td>
+                                        <td> <%= marca.nombre %></td>
+                                        <td> <%= marca.cantidadProductos %></td>
                                         <td style="width:55px;">
                                             <div style="display:flex; justify-content: space-between; padding: 0 8px;">
-                                            <%- include('modals/adminAgregarModal', {
-                                                modalTitle: "Editar categoria",
-                                                button: `<i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEditar${categoria.id}"></i>`,
-                                                btnSuccessLabel: "Editar",
-                                                modalId: `${categoria.id}`,
-                                                action:"Editar",
-                                                formData: {nombre: categoria.nombre}
-                                            }) %>  
+                                                <%- include('modals/adminAgregarModal', { 
+                                                    modalTitle: "Editar marca",
+                                                    button: `<i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEditar${marca.id}"></i>`,
+                                                    btnSuccessLabel: "Editar",
+                                                    modalId: `${marca.id}`,
+                                                    action:"Editar",
+                                                    formData: {nombre: marca.nombre}
+                                                }) %>
 
-
-                                            <%- include('components/confirmMsg', { 
-                                                modalTitle: "Eliminar categoria:",
-                                                button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminarConfirm${categoria.id}"></i>`,
-                                                btnSuccessLabel: "Eliminar",
-                                                tagConfirmMsg: `Estas seguro de eliminar la categoria <b>&nbsp;${categoria.nombre}</b>&nbsp; con id <b>&nbsp;${categoria.id}</b>?`,
-                                                modalId: `${categoria.id}`,
-                                            }) %>
+                                                <%- include('components/confirmMsg', { 
+                                                    modalTitle: "Eliminar marca:",
+                                                    button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminarConfirm${marca.id}"></i>`,
+                                                    btnSuccessLabel: "Eliminar",
+                                                    tagConfirmMsg: `Estas seguro de eliminar la marca <b>&nbsp;${marca.nombre}</b>&nbsp;con id <b>&nbsp;${marca.id}</b>?`,
+                                                    modalId: `${marca.id}`,
+                                                }) %>
                                             </div>
                                         </td>
                                     </tr>
@@ -92,10 +91,10 @@
                 </table>
                 <div class="user-form-pagination-container">
                     <%- include('tablePagination', { 
-                            quantity: locals.categorias.quantity,
-                            resultsPerPage: locals.categorias.resultsPerPage, 
-                            page: locals.categorias.page,
-                    }) %>
+                            quantity: locals.marcas.quantity,
+                            resultsPerPage: locals.marcas.resultsPerPage, 
+                            page: locals.marcas.page,
+                        }) %>
                 </div>
             <% } else { %>
                 <p class="no-coincidencia-error">No hay coincidencias con la busqueda</p>
