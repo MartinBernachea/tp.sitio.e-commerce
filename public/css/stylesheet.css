@@ -675,6 +675,7 @@ button:disabled {
   margin: 20px auto;
   width: 80%;
   max-width: 1200px;
+  align-items: center;
 }
 
 .foot-banner-ul {

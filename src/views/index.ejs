@@ -58,7 +58,7 @@
                         <div class="product-card">
                             <a href="/detail/<%= p.id %>">
                                 <div>
-                                    <img class="product-image" src="./img/products/"
+                                    <img class="product-image" src="<%= locals.formData?.images ? `/img/products/${locals.formData.images[1].dataValues.nombre}` : '/img/no-img.jpg'%>"
                                         alt="img-producto">
                                     <p class="info-precio">$<%= p.precio %></p>
                                 </div>
