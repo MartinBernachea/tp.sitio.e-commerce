@@ -38,7 +38,7 @@ const controller = {
                     });
                 }
 
-                await db.usuario.create({
+                const response = await db.usuario.create({
                     "nombre": req.body.cName,
                     "apellido": req.body.cLastName,
                     "email": req.body.email,
@@ -46,6 +46,16 @@ const controller = {
                     "admin": false,
                     "super": false,
                 })
+
+                const frontUserData = {
+                    nombre: response.dataValues.nombre,
+                    email: response.dataValues.email,
+                    admin: response.dataValues.admin,
+                    super: response.dataValues.super,
+                };
+                                  
+                res.cookie('user', JSON.stringify(frontUserData), { maxAge: 60000 });
+                req.session.usuarioLogueado = JSON.stringify(frontUserData);
 
                 res.redirect('/')
             } catch (err) {

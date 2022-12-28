@@ -17,6 +17,8 @@ window.addEventListener("load", function () {
     let inputs = document.querySelectorAll("#register input");
     let btnRegistrarse = document.querySelector("#btnRegistrarse");
 
+    const mensajeError = document.getElementById("formulario__mensaje");
+
     const inputPassword1 = document.getElementById("password");
     const inputPassword2 = document.getElementById("cPassword");
 
@@ -42,6 +44,9 @@ window.addEventListener("load", function () {
     }
 
     const validarCampo = (expresion, input, campo) => {
+        mensajeError.classList.remove("formulario__mensaje-activo");
+
+
         if (expresion.test(input.value)) {
             document.getElementById(`grupo__${campo}`).classList.remove("formulario__grupo-incorrecto");
             document.getElementById(`grupo__${campo}`).classList.add("formulario__grupo-correcto");
@@ -60,6 +65,8 @@ window.addEventListener("load", function () {
     }
 
     const validarContraseña2 = function () {
+        mensajeError.classList.remove("formulario__mensaje-activo");
+
         if (inputPassword1.value !== inputPassword2.value) {
             document.getElementById(`grupo__password2`).classList.add("formulario__grupo-incorrecto");
             document.getElementById(`grupo__password2`).classList.remove("formulario__grupo-correcto");
@@ -81,7 +88,7 @@ window.addEventListener("load", function () {
             document.getElementById(`grupo__password2`).classList.remove("formulario__grupo-correcto");
             document.querySelector(`#grupo__password2 i`).classList.remove("fa-check-circle");
             document.getElementById(`grupo__password2`).classList.remove("formulario__grupo-incorrecto");
-        } 
+        }
 
     }
 
@@ -92,15 +99,10 @@ window.addEventListener("load", function () {
 
     btnRegistrarse.addEventListener("click", function (e) {
         if (campos.nombre && campos.correo && campos.password && campos.apellido) {
-            e.preventDefault();
-            console.log("LO MANDA")
-            console.log("campos", campos)
-            // formulario.submit();
-
+            formulario.submit();
         } else {
-            console.log("CARTELITO DE ERROR")
             e.preventDefault();
-
+            mensajeError.classList.add("formulario__mensaje-activo");
         }
     });
 })
