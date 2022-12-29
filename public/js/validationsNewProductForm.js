@@ -18,13 +18,13 @@ previewBeforeUpload("cImage3");
 previewBeforeUpload("cImage4");
 previewBeforeUpload("cImage5");
 
+// SUBMIT BUTTON    
+
 const submitButton = document.querySelector("#submitButton")
 
 submitButton.addEventListener("click", (event) => {
     // event.preventDefault();
 
     console.log("CLICK")
-
-
 
 })

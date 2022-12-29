@@ -26,6 +26,7 @@
                     <img src="./img/banner/campeones.png" alt="">
                     <img src="./img/banner/messias.jpg" alt="">
                     <img src="./img/banner/seleccion.jpg" alt="">
+                    <img src="./img/banner/messi-campeon.jpg" alt="">
                 </div>
     
                 <div onclick="side_slide(-1)" class="slide left">
@@ -39,6 +40,7 @@
                     <span onclick="btn_slide(1)"></span>
                     <span onclick="btn_slide(2)"></span>
                     <span onclick="btn_slide(3)"></span>
+                    <span onclick="btn_slide(4)"></span>
                 </div>
             </div>
         </div>
@@ -57,8 +59,8 @@
                         <% for(let p of productos) { %>
                         <div class="product-card">
                             <a href="/detail/<%= p.id %>">
-                                <div>
-                                    <img class="product-image" src="<%= locals.formData?.images ? `/img/products/${locals.formData.images[1].dataValues.nombre}` : '/img/no-img.jpg'%>"
+                                <div>                          
+                                    <img class="product-image" src="./img/products/<%= p.imagens?.length > 0 ? p.imagens[0].nombre : "" %>""
                                         alt="img-producto">
                                     <p class="info-precio">$<%= p.precio %></p>
                                 </div>
