@@ -51,7 +51,7 @@
             <section>
                 <div class="caja-chica-titulo">
                     <h2 class="titulares">NUEVOS LANZAMIENTOS</h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
+                    <a href="/store" class="titular-secundario">Ver Todos</a>
                 </div>
                 
                 <div class="caja-chica-productos">
@@ -101,25 +101,27 @@
             <section class="caja-chica">
                 <div class="caja-chica-titulo">
                     <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
+                    <a href="/store" class="titular-secundario">Ver Todos</a>
                 </div>
-                <div class="caja-chica-destacados">
-                    <% for(let p of productos) { %>
+                <div class="caja-chica-productos">
+                    <% if(productos.length > 0) {%>
+                        <% for(let p of productos) { %>
                         <div class="product-card">
                             <a href="/detail/<%= p.id %>">
-                                <div>
-                                    <img class="product-image" src="./img/<%= p.image %>"
+                                <div>                          
+                                    <img class="product-image" src="./img/products/<%= p.imagens?.length > 0 ? p.imagens[0].nombre : "" %>""
                                         alt="img-producto">
-                                    <p class="info-precio">$<%= p.price %></p>
+                                    <p class="info-precio">$<%= p.precio %></p>
                                 </div>
                                 <div class="product-data-container">
-                                    <p class="descripcion-producto"><%= p.name %></p>
-                                    <p class="categoria-producto"><%= p.category %></p>
+                                    <p class="descripcion-producto"><%= p.nombre %></p>
+                                    <p class="categoria-producto"><%= p.categoria %></p>
                                 </div>
                             </a>
                         </div>
                         <% } %>
-                
+                    <% } %>
+                    
                 </div>
             </section>
 
@@ -128,7 +130,7 @@
         <section class="foot-banner">
             <h2> BUSCALO POR MARCA </h2>
             <div class="foot-carrousel">
-                <li class="foot-banner-li foot-banner-arrow"> <i class="fa-solid fa-angle-left"></i> </li>
+                <span class="foot-banner-li foot-banner-arrow" id="button-prev" onclick="side_slide(-1)"> <i class="fa-solid fa-angle-left"></i> </span>
                 <ul class="foot-banner-ul">
                     <li class="foot-banner-li">
                         <img src="./img/brands/adidas-brand.png" alt="adidas-logo">
@@ -146,7 +148,7 @@
                         <img src="./img/brands/reebok-brand.png" alt="reebok-logo">
                     </li>
                 </ul>
-                <li class="foot-banner-li foot-banner-arrow"> <i class="fa-solid fa-angle-right"></i> </li>
+                <span class="foot-banner-li foot-banner-arrow" id="button-next" onclick="side_slide(1)"> <i class="fa-solid fa-angle-right"></i> </span>
             </div>
         </section>
 

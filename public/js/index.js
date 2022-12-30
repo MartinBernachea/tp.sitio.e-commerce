@@ -34,3 +34,9 @@ function showImg(e){
     img[indexValue-1].style.display = "block";
     sliders[indexValue-1].style.background = "white";
 }
+
+
+// BRAND SLIDER
+
+const buttonPrev = document.getElementById('button-prev');
+const buttonNext = document.getElementById('button-next');
