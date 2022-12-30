@@ -70,7 +70,7 @@ router.post('/admin/panel/products/create', adminPermissions, multipleImages, pr
 
 /*** EDIT ONE PRODUCT ***/
 router.get('/admin/panel/products/edit/:id', adminPermissions, productsController.getEditProduct);
-router.put('/admin/panel/products/edit/:id', adminPermissions, productsController.postEditProduct);
+router.post('/admin/panel/products/edit/:id', adminPermissions, productsController.postEditProduct);
 
 /*** DELETE ONE PRODUCT ***/
 router.delete('/:id', adminPermissions, productsController.destroy);

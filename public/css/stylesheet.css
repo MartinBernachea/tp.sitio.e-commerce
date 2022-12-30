@@ -108,13 +108,10 @@ button:disabled {
   padding-left: 15px;
 }
 .btn-secondary:hover {
-  /* color: #000;
-  background-color: #c70039;
-  transition: 0.3s; */
-  background-color: rgba(0, 0, 0, .67);
+  background-color: rgba(0, 0, 0, .67);  
+  color: #000;
 }
 .btn-secondary:hover i {
-  transition: 0.3s;
   color: #000;
 }
 
