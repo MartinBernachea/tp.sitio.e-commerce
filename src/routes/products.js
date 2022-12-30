@@ -53,7 +53,6 @@ router.post("/admin/panel/deleteCategory", adminPermissionsJSON, productsControl
 router.post("/admin/panel/deleteGenre", adminPermissionsJSON, productsController.deleteGenre);
 router.post("/admin/panel/deleteBrand", adminPermissionsJSON, productsController.deleteBrand);
 
-
 router.post("/admin/panel/editCategory", adminPermissionsJSON, productsController.editCategory);
 router.post("/admin/panel/editGenre", adminPermissionsJSON, productsController.editGenre);
 router.post("/admin/panel/editBrand", adminPermissionsJSON, productsController.editBrand);
@@ -63,6 +62,7 @@ router.get('/detail/:id', productsController.detail);
 
 /*** STORE CON FILTROS ***/
 router.get('/store', productsController.store);
+router.get('/products/search', productsController.productsSearch);
 
 /*** CREATE ONE PRODUCT ***/
 router.get('/admin/panel/products/create', adminPermissions, productsController.getCreateProduct);

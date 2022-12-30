@@ -68,10 +68,48 @@
             <!-- SEARCHBAR -->
             <div class="header-searchbar">
                 <form action="" method="" class="searchbar">
-                    <input type="text" placeholder="Buscar" class="input-searchbar">
+                    <input id="searchBarInput" type="text" placeholder="Buscar" class="input-searchbar">
+                    <div id="searchBarSpinner" class="spinner dark" style="display:none;">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
                     <button class="search-button"> <i class="fa fa-search"></i> </button>
                 </form>
+                <div class="search-products-container">
+                    <h3>Resultados:</h3>
+                    <div>
+                        <div>
+
+                        </div>
+
+                        <div>
+                            Resultado 1 Titulo
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+
+                        </div>
+
+                        <div>
+                            Resultado 1 Titulo
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+
+                        </div>
+
+                        <div>
+                            Resultado 1 Titulo
+                        </div>
+                    </div>
+                </div>
             </div>
+            
             <!--  HEADER ICONOS -->
             <div class="header-icons">
                 <% if(locals?.userData){ %>
@@ -89,3 +127,5 @@
     <%- include('./notificationAlert') %>
         <!-- /ALERT -->
 </header>
+
+<script src="/js/productSearchBar.js" type="module"></script>

@@ -899,7 +899,25 @@ const controller = {
         }
     },
 
+    productsSearch: async (req, res) => {
+        const nombreBusqueda = req.query.nombre
+        const resp = await db.producto.findAndCountAll(
+            {
+                where: { nombre: { [sequelize.Op.substring]: nombreBusqueda } },
+                limit: 3,
+                include: [
+                    db.imagen
+                ]
+            }
+        )
 
+        const data = {
+            elements: resp.rows,
+            quantity: resp.count,
+        }
+
+        res.status(200).json({ status: 200, data })
+    },
 
 };
 
