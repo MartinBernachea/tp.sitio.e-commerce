@@ -64,10 +64,20 @@ const mostrarResultados = (response) => {
 const searchInputEvent = (e) => {
     const cantidadMinimaLetrasParaBusqueda = 3;
     if (e.target.value.length >= cantidadMinimaLetrasParaBusqueda) {
-        searchResultsContainer.style.display = "block";
         searchBarSpinner.style.display = "block";
         getProductsLike({ nombre: e.target.value })
-            .then(response => mostrarResultados(response));
+            /* TODO: SACAR DELAY */
+            /* 
+            .then(response => {
+                mostrarResultados(response))
+                searchResultsContainer.style.display = "block";
+            }; 
+            */
+            .then(response => setTimeout(() => {
+                mostrarResultados(response)
+                searchResultsContainer.style.display = "block";
+            }, 1000)
+            );
     } else {
         searchResultsContainer.style.display = "none";
     }
