@@ -203,23 +203,18 @@ const controller = {
 
         let idProducto = req.params.id;
 
-        let datosProducto = req.body;
-
         let nombreImagenAntigua = "";
-
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log(datosProducto.nombre);
-        console.log(req.params.id);
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         
-        // db.producto.update({
-        //     nombre:datosProducto.nombre,
-        //     precio:datosProducto.precio,
-        //     categoria:datosProducto.categoria,
-        //     imagen:req.file.imagen
-        // }, { where: {id:idProducto}
+        db.producto.update({
+            nombre:req.body.name,
+            precio:req.body.price,
+            categoria_id:req.body.categoriaId,
+            marca_id: req.body.marcaId,
+            genero_id: req.body.generoId,
+            // imagen:req.file.imagen
+        }, { where: {id:idProducto}
 
-        // })
+        })
         res.redirect('/admin/panel/products');
     },
 
