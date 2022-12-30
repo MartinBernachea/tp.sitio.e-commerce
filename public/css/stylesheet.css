@@ -211,6 +211,8 @@ button:disabled {
 }
 
 /* SEARCHBAR */
+/* SEARCHBAR */
+/* SEARCHBAR */
 
 .header-searchbar {
   display: none;
@@ -222,7 +224,7 @@ button:disabled {
 .searchbar {
   width: 15vw;
   max-width: 300px;
-  min-width: 180px;
+  min-width: 250px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -238,7 +240,48 @@ button:disabled {
 
 .search-products-container {
   position: absolute;
-  background-color: red;
+  background-color: #fff;
+  outline: none;
+  top: calc(100% + 15px);
+  width: 100%;
+  padding: 20px 10px;
+  display: none;
+}
+
+.searchProducts_producto-container {
+  margin-top: 10px;
+}
+
+.searchProducts_vermas {
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+}
+
+.searchProducts_descripcion {
+  padding-left: 10px;
+  word-break: break-word;
+}
+
+.searchProducts_foto {
+  width: 40%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.searchProducts_data {
+  font-size: 0.9rem;
+  color: rgba(51, 51, 51, 0.692);
+  line-height: 0.9rem;
+  word-break: break-word;
+}
+
+.searchProducts_nombre {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1rem;
+  margin: 4px 0 2px 0;
+  word-break: break-word;
 }
 
 .input-searchbar {
@@ -258,6 +301,14 @@ button:disabled {
   border: 0;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.searchProducts_producto-link {
+  display: flex;
+}
+
+.searchProducts_producto-link:hover {
+  opacity: 0.7;
 }
 
 /* ICONS */

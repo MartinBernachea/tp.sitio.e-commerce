@@ -906,8 +906,12 @@ const controller = {
                 where: { nombre: { [sequelize.Op.substring]: nombreBusqueda } },
                 limit: 3,
                 include: [
-                    db.imagen
-                ]
+                    db.imagen,
+                    db.categoria,
+                    db.genero,
+                    db.marca,
+                ],
+                distinct: true,
             }
         )
 

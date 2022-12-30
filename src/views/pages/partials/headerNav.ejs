@@ -30,14 +30,14 @@
                     <li class="li-item">
                         <a href="/admin/panel/products"> ADMIN PANEL </a>
                     </li>
-                <%}%>
+                    <%}%>
 
-                <% if(locals?.userData?.super){ %>
-                    <li class="li-item"> | </li>
-                    <li class="li-item">
-                        <a href="/user/panel"> SUPER PANEL </a>
-                    </li>
-                <%}%>
+                        <% if(locals?.userData?.super){ %>
+                            <li class="li-item"> | </li>
+                            <li class="li-item">
+                                <a href="/user/panel"> SUPER PANEL </a>
+                            </li>
+                            <%}%>
             </ul>
         </div>
 
@@ -67,58 +67,69 @@
         <div class="header-right">
             <!-- SEARCHBAR -->
             <div class="header-searchbar">
-                <form action="" method="" class="searchbar">
+                <form class="searchbar">
                     <input id="searchBarInput" type="text" placeholder="Buscar" class="input-searchbar">
                     <div id="searchBarSpinner" class="spinner dark" style="display:none;">
                         <div class="bounce1"></div>
                         <div class="bounce2"></div>
                         <div class="bounce3"></div>
                     </div>
-                    <button class="search-button"> <i class="fa fa-search"></i> </button>
+                    <button type="button" class="search-button"> <i class="fa fa-search"></i> </button>
                 </form>
-                <div class="search-products-container">
+                <div id="searchResultsContainer" class="search-products-container">
                     <h3>Resultados:</h3>
-                    <div>
-                        <div>
-
-                        </div>
-
-                        <div>
-                            Resultado 1 Titulo
-                        </div>
+                    <div id="searchProductsNoResultados" style="display:none" ;>
+                        No hay resultados
                     </div>
 
-                    <div>
-                        <div>
 
-                        </div>
+                    <div id="producto1" class="searchProducts_producto-container" style="display:none">
+                        <a class="searchProducts_producto-link" href="/">
+                            <img id="productoImagen" src="/img/no-img.jpg" class="searchProducts_foto" />
+                            <div class="searchProducts_descripcion">
+                                <div id="productoData" class="searchProducts_data"> Categoria - Genero - Marca</div>
+                                <div id="productoNombre" class="searchProducts_nombre"> Zapatillas Adi2000</div>
+                                <div id="productoPrecio" class="searchProducts_precio"> $123456</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="producto2" class="searchProducts_producto-container" style="display:none">
+                        <a class="searchProducts_producto-link" href="/">
 
-                        <div>
-                            Resultado 1 Titulo
-                        </div>
+                            <img id="productoImagen" src="/img/no-img.jpg" class="searchProducts_foto" />
+                            <div class="searchProducts_descripcion">
+                                <div id="productoData" class="searchProducts_data"> Categoria - Genero - Marca</div>
+                                <div id="productoNombre" class="searchProducts_nombre"> Zapatillas Adi2000</div>
+                                <div id="productoPrecio" class="searchProducts_precio"> $123456</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="producto3" class="searchProducts_producto-container" style="display:none">
+                        <a class="searchProducts_producto-link" href="/">
+                            <img id="productoImagen" src="/img/no-img.jpg" class="searchProducts_foto" />
+                            <div class="searchProducts_descripcion">
+                                <div id="productoData" class="searchProducts_data"> Categoria - Genero - Marca</div>
+                                <div id="productoNombre" class="searchProducts_nombre"> Zapatillas Adi2000</div>
+                                <div id="productoPrecio" class="searchProducts_precio"> $123456</div>
+                            </div>
+                        </a>
                     </div>
 
-                    <div>
-                        <div>
-
-                        </div>
-
-                        <div>
-                            Resultado 1 Titulo
-                        </div>
+                    <div id="searchProductsVerMas" class="searchProducts_vermas" style="display:none" ;>
+                        No hay resultados
                     </div>
                 </div>
             </div>
-            
+
             <!--  HEADER ICONOS -->
             <div class="header-icons">
                 <% if(locals?.userData){ %>
                     <a href="/user/account"><i class="fa-regular fa-user icon-header">123</i></a>
-                <%} else {%> 
-                    <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
-                <%}%> 
-                <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
-                <a href="/carrito"><i class="fa-solid fa-basket-shopping icon-header"></i></a>
+                    <%} else {%>
+                        <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
+                        <%}%>
+                            <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
+                            <a href="/carrito"><i class="fa-solid fa-basket-shopping icon-header"></i></a>
             </div>
         </div>
     </nav>
