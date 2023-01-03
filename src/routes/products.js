@@ -35,6 +35,7 @@ router.get('/', productsController.index)
 
 /*** CARRITO ***/
 router.get('/carrito', userPermissions, productsController.chart);
+router.get("/carrito/getDataFromArray", productsController.getDataFromArray)
 
 /*** COMING SOON ***/
 router.get('/coming-soon', adminPermissions, productsController.comingSoon);
