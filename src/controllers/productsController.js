@@ -52,7 +52,7 @@ const controller = {
                     [sequelize.Op.in]:productsIds
                 }
             },
-            include:[{model:db.genero},{model: db.marca}, {model: db.categoria}]
+            include:[{model:db.genero},{model: db.marca}, {model: db.categoria}, {model: db.imagen}]
         })
         res.status(200).json({ status: 200, data: productsData.map(product => {
             return product.dataValues
