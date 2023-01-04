@@ -1,7 +1,9 @@
 function showProducts(data){
     let contenedorTarjeta = document.getElementById("contenedor-tarjetas")
     let tarjetasPreIntroduccion = " ";
+    let sumatoriaInicial = 0;
     data.data.forEach((productoActual, index) => {
+        sumatoriaInicial = sumatoriaInicial + Number(productoActual.precio);
         tarjetasPreIntroduccion = tarjetasPreIntroduccion + `<section class="product-detail-container">
         <div style="height:100%; aspect-ratio: 1/1; max-height: 200px;">
             <img src="/img/products/${productoActual.imagens[0].nombre}" alt="${productoActual.nombre}" class="img-producto-carrito">
@@ -29,7 +31,7 @@ function showProducts(data){
                 <div class="cantidad-container" id="precio${index}">
                     $${productoActual.precio}
                 </div>
-                <div id="precio-por-cantidad${index}">
+                <div class="precio-por-cantidad" id="precio-por-cantidad${index}">
                     $${productoActual.precio}
                 </div>
             </div>
@@ -37,10 +39,13 @@ function showProducts(data){
         </section> 
         `
     })
+        let precioProducto = document.getElementById("precio-producto");
+        let precioTotal = document.getElementById("precio-total");
+        precioTotal.innerText="$" + sumatoriaInicial;
+        precioProducto.innerText="$" + sumatoriaInicial;
     contenedorTarjeta.innerHTML = tarjetasPreIntroduccion;
     contenedorTarjeta.addEventListener("change", function(e){
-        console.log(e.target.value);
-        console.log(typeof(e.target.value));
+
     const tagId = e.target.id
     if(tagId.includes("cantidad")){
         const productoId = tagId.slice("cantidad".length, tagId.length)
@@ -49,6 +54,23 @@ function showProducts(data){
         const precioUnitario = (precioUnitarioTag.innerText).slice(1, (precioUnitarioTag.innerText).length)
         console.log(precioUnitario);
         precioCantidadTag.innerText="$" + precioUnitario*Number(e.target.value)
+        const arrPreciosProductos = document.getElementsByClassName("precio-por-cantidad");
+        let sumatoriaPrecios = 0;
+        console.log(arrPreciosProductos);
+
+        for(let i=0; i<arrPreciosProductos.length; i++){
+            const precioTag = arrPreciosProductos[i];
+            console.log(precioTag);
+            const precio = (precioTag.innerText).slice(1, (precioTag.innerText).length)
+            console.log(precio);
+            sumatoriaPrecios = Number(precio) + sumatoriaPrecios
+        }
+
+        let precioProducto = document.getElementById("precio-producto");
+        let ivaTotal = document.getElementById("ivaTotal");
+        let precioTotal = document.getElementById("precio-total");
+        precioTotal.innerText="$" + sumatoriaPrecios;
+        precioProducto.innerText="$" + sumatoriaPrecios;
     }
     
     })
