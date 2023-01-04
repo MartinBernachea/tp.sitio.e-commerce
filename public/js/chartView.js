@@ -14,19 +14,22 @@ function showProducts(data){
         
         
                     <select id="cantidad${index}" class="cantidades" >
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                        <option value="">6</option>
-                        <option value="">7</option>
-                        <option value="">8</option>
-                        <option value="">9</option>
-                        <option value="">10</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
                     </select>
                 </div>
                 <div class="cantidad-container" id="precio${index}">
+                    $${productoActual.precio}
+                </div>
+                <div id="precio-por-cantidad${index}">
                     $${productoActual.precio}
                 </div>
             </div>
@@ -35,6 +38,20 @@ function showProducts(data){
         `
     })
     contenedorTarjeta.innerHTML = tarjetasPreIntroduccion;
+    contenedorTarjeta.addEventListener("change", function(e){
+        console.log(e.target.value);
+        console.log(typeof(e.target.value));
+    const tagId = e.target.id
+    if(tagId.includes("cantidad")){
+        const productoId = tagId.slice("cantidad".length, tagId.length)
+        const precioUnitarioTag = document.getElementById(`precio${productoId}`)
+        const precioCantidadTag = document.getElementById(`precio-por-cantidad${productoId}`)
+        const precioUnitario = (precioUnitarioTag.innerText).slice(1, (precioUnitarioTag.innerText).length)
+        console.log(precioUnitario);
+        precioCantidadTag.innerText="$" + precioUnitario*Number(e.target.value)
+    }
+    
+    })
     
 }
 
