@@ -3,9 +3,9 @@ function showProducts(data){
     let tarjetasPreIntroduccion = " ";
     data.data.forEach((productoActual, index) => {
         tarjetasPreIntroduccion = tarjetasPreIntroduccion + `<section class="product-detail-container">
-
-        <img src="/img/products/${productoActual.imagens[0].nombre}" alt="${productoActual.nombre}" class="img-producto-carrito">
-        
+        <div style="height:100%; aspect-ratio: 1/1; max-height: 200px;">
+            <img src="/img/products/${productoActual.imagens[0].nombre}" alt="${productoActual.nombre}" class="img-producto-carrito">
+        </div>
         <div class="detail-container">
             <div class="product-details">
                 <div class="product-info">
