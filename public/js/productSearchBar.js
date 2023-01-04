@@ -21,8 +21,6 @@ const setearDataEnProductoContainer = (productoContainer, data) => {
     productoContainer.querySelector("#productoPrecio").innerText = "$" + data.precio;
 }
 
-
-
 const mostrarResultados = (response) => {
     const cantidadMaximaResultados = 3;
 
@@ -66,18 +64,10 @@ const searchInputEvent = (e) => {
     if (e.target.value.length >= cantidadMinimaLetrasParaBusqueda) {
         searchBarSpinner.style.display = "block";
         getProductsLike({ nombre: e.target.value })
-            /* TODO: SACAR DELAY */
-            /* 
             .then(response => {
-                mostrarResultados(response))
-                searchResultsContainer.style.display = "block";
-            }; 
-            */
-            .then(response => setTimeout(() => {
                 mostrarResultados(response)
                 searchResultsContainer.style.display = "block";
-            }, 1000)
-            );
+            })
     } else {
         searchResultsContainer.style.display = "none";
     }
