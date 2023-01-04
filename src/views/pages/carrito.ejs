@@ -5,9 +5,9 @@
 
 <head>
     <%- include('partials/head') %>
-    <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/stylesheet.css">
 
-    <title> G&X - Cart </title>
+        <title> G&X - Cart </title>
 </head>
 <!-- /head -->
 
@@ -19,86 +19,105 @@
 
     <!-- Header -->
     <%- include('partials/headerNav', locals) %>
-    <!-- /Header -->
+        <!-- /Header -->
 
-    <main>
-        <!--SECTIONS-->
-        <section class="caja-grande caja-grande2">
-            <!--TU CARRITO-->
-            <div class="cards-container">
-                <section>
-                    <div class="subcaja-1-titulo">
-                        <h2>TU CARRITO</h2>
-                        <p class="total">"PRECIO"</p>
-                    </div>
-                </section>
-
-                <div id ="contenedor-tarjetas">
-
-                </div>
-
-                <button class="btn-secondary hidden-btn">
-                    IR A PAGAR <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
-
-            <div class="resumen-section">
-                <button class="btn-secondary">
-                    IR A PAGAR <i class="fa-solid fa-arrow-right"></i>
-                </button>
-
-                <section class="resumen-container">
-                    <div class="resumen-titulo">
-                        <h3>RESUMEN DEL PEDIDO</h3>
-                    </div>
-
-                    <div class="resumen-item">
-                        <p id="cantidad-productos">  </p>
-                        <p id="precio-producto"> $</p>
-                    </div>
-                    
-                    <div class="resumen-item">
-                        <span class="resumen-total">
-                            <p> TOTAL </p>
-                            <p id="ivaTotal"> TOTAL </p>
-                            <p id="precio-total"> $ </p>
-                        </span>
-                    </div>
-                </section>
-
-                <div class="container-cupon-pago">
-                    <section class="cupon-container">
-                        <label for="cupon-promocional"></label>
-                        <input type="text" name="cupon-promocional" id="cupon-promocional" class="cupon-input"
-                            placeholder="INTRODUCE TU CODIGO PROMOCIONAL">
-                    </section>
-
-                    <section class="opciones-pago-container">
-                        <div class="titulo-opciones-pago">
-                            <h4> OPCIONES DE PAGO </h4>
-                        </div>
-                        <div class="imagenes-opciones-pago">
-                            <img src="/img/medio-de-pago.jpg" alt="opciones-pago" class="opciones-pago-img">
+        <main>
+            <!--SECTIONS-->
+            <section id="chartContainer" class="caja-grande caja-grande2 loadingChart">
+                <!--TU CARRITO-->
+                <div class="cards-container">
+                    <section>
+                        <div class="subcaja-1-titulo">
+                            <h2>TU CARRITO</h2>
+                            <p class="total" id="carritoTotal">"PRECIO"</p>
+                            <div id="noProductsChartMessage">
+                                No hay productos dentro de tu carrito. <a href="/store">Ir Store</a>
+                            </div>
                         </div>
                     </section>
+                    <div id="contenedor-tarjetas">
+
+                    </div>
+
+                    <button id="btnPayCarrito" class="btn-secondary hidden-btn">
+                        IR A PAGAR <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <div id="loadingChart">
+                        <div class="spinner">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                        Cargando carrito
+                    </div>
                 </div>
-            </div>
-        </section>
-        <section class="caja-grande">
-            <!--PRODUCTOS DESTACADOS-->
-            <section class="caja-chica">
-                <div class="caja-chica-titulo">
-                    <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
+
+                <!-- 
+                    carritoTotal
+                    contenedor-tarjetas 
+                    resumenSection
+                -->
+
+                <div id="resumenSection" class="resumen-section">
+                    <button class="btn-secondary">
+                        IR A PAGAR <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                    <section class="resumen-container">
+                        <div class="resumen-titulo">
+                            <h3>RESUMEN DEL PEDIDO</h3>
+                        </div>
+
+                        <div class="resumen-item">
+                            <p id="cantidad-productos"> </p>
+                            <p id="precio-producto"> $</p>
+                        </div>
+
+                        <div class="resumen-item">
+                            <span class="resumen-total">
+                                <p> TOTAL </p>
+                                <p id="ivaTotal"> TOTAL </p>
+                                <p id="precio-total"> $ </p>
+                            </span>
+                        </div>
+                    </section>
+
+                    <div class="container-cupon-pago">
+                        <section class="cupon-container">
+                            <label for="cupon-promocional"></label>
+                            <input type="text" name="cupon-promocional" id="cupon-promocional" class="cupon-input"
+                                placeholder="INTRODUCE TU CODIGO PROMOCIONAL">
+                        </section>
+
+                        <section class="opciones-pago-container">
+                            <div class="titulo-opciones-pago">
+                                <h4> OPCIONES DE PAGO </h4>
+                            </div>
+                            <div class="imagenes-opciones-pago">
+                                <img src="/img/medio-de-pago.jpg" alt="opciones-pago" class="opciones-pago-img">
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <div class="caja-chica-destacados">                
-                </div>
+
             </section>
-    </main>
+            <section class="caja-grande">
+                <!--PRODUCTOS DESTACADOS-->
+                <section class="caja-chica">
+                    <div class="caja-chica-titulo">
+                        <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
+                        <a href="" class="titular-secundario">Ver Todos</a>
+                    </div>
+                    <div class="caja-chica-destacados">
+                    </div>
+                </section>
+            </section>
 
-    <!-- footer -->
-    <%- include('partials/footer') %>
-    <!-- /footer -->
+        </main>
+
+        <!-- footer -->
+        <%- include('partials/footer') %>
+            <!-- /footer -->
 </body>
 
 <script src="/js/chartView.js"></script>

@@ -1,4 +1,12 @@
-function showProducts(data){
+function showProducts(data) {
+    const chartContainer = document.querySelector("#chartContainer")
+    chartContainer.classList.remove("loadingChart")
+    if (data.data.length == 0) {
+        chartContainer.classList.add("noProductsCart")
+    } else {
+        chartContainer.classList.remove("noProductsCart")
+    }
+
     let contenedorTarjeta = document.getElementById("contenedor-tarjetas")
     let tarjetasPreIntroduccion = " ";
     let sumatoriaInicial = 0;
@@ -39,59 +47,61 @@ function showProducts(data){
         </section> 
         `
     })
-        let precioProducto = document.getElementById("precio-producto");
-        let precioTotal = document.getElementById("precio-total");
-        precioTotal.innerText="$" + sumatoriaInicial;
-        precioProducto.innerText="$" + sumatoriaInicial;
+    let precioProducto = document.getElementById("precio-producto");
+    let precioTotal = document.getElementById("precio-total");
+    precioTotal.innerText = "$" + sumatoriaInicial;
+    precioProducto.innerText = "$" + sumatoriaInicial;
     contenedorTarjeta.innerHTML = tarjetasPreIntroduccion;
-    contenedorTarjeta.addEventListener("change", function(e){
+    contenedorTarjeta.addEventListener("change", function (e) {
 
-    const tagId = e.target.id
-    if(tagId.includes("cantidad")){
-        const productoId = tagId.slice("cantidad".length, tagId.length)
-        const precioUnitarioTag = document.getElementById(`precio${productoId}`)
-        const precioCantidadTag = document.getElementById(`precio-por-cantidad${productoId}`)
-        const precioUnitario = (precioUnitarioTag.innerText).slice(1, (precioUnitarioTag.innerText).length)
-        console.log(precioUnitario);
-        precioCantidadTag.innerText="$" + precioUnitario*Number(e.target.value)
-        const arrPreciosProductos = document.getElementsByClassName("precio-por-cantidad");
-        let sumatoriaPrecios = 0;
-        console.log(arrPreciosProductos);
+        const tagId = e.target.id
+        if (tagId.includes("cantidad")) {
+            const productoId = tagId.slice("cantidad".length, tagId.length)
+            const precioUnitarioTag = document.getElementById(`precio${productoId}`)
+            const precioCantidadTag = document.getElementById(`precio-por-cantidad${productoId}`)
+            const precioUnitario = (precioUnitarioTag.innerText).slice(1, (precioUnitarioTag.innerText).length)
+            console.log(precioUnitario);
+            precioCantidadTag.innerText = "$" + precioUnitario * Number(e.target.value)
+            const arrPreciosProductos = document.getElementsByClassName("precio-por-cantidad");
+            let sumatoriaPrecios = 0;
+            console.log(arrPreciosProductos);
 
-        for(let i=0; i<arrPreciosProductos.length; i++){
-            const precioTag = arrPreciosProductos[i];
-            console.log(precioTag);
-            const precio = (precioTag.innerText).slice(1, (precioTag.innerText).length)
-            console.log(precio);
-            sumatoriaPrecios = Number(precio) + sumatoriaPrecios
+            for (let i = 0; i < arrPreciosProductos.length; i++) {
+                const precioTag = arrPreciosProductos[i];
+                console.log(precioTag);
+                const precio = (precioTag.innerText).slice(1, (precioTag.innerText).length)
+                console.log(precio);
+                sumatoriaPrecios = Number(precio) + sumatoriaPrecios
+            }
+
+            let precioProducto = document.getElementById("precio-producto");
+            let ivaTotal = document.getElementById("ivaTotal");
+            let precioTotal = document.getElementById("precio-total");
+            precioTotal.innerText = "$" + sumatoriaPrecios;
+            precioProducto.innerText = "$" + sumatoriaPrecios;
         }
 
-        let precioProducto = document.getElementById("precio-producto");
-        let ivaTotal = document.getElementById("ivaTotal");
-        let precioTotal = document.getElementById("precio-total");
-        precioTotal.innerText="$" + sumatoriaPrecios;
-        precioProducto.innerText="$" + sumatoriaPrecios;
-    }
-    
     })
-    
+
 }
 
-function getProductChartData(){
+function getProductChartData() {
     let informacionLocalStorage = localStorage.getItem("carrito");
-    if(informacionLocalStorage){
+    if (informacionLocalStorage) {
         fetch(window.location.origin + "/carrito/getDataFromArray" + "?chart=" + informacionLocalStorage)
             .then(respuesta => respuesta.json())
             .then(data => showProducts(data))
             .catch(e => console.log(e))
-    }else{
-        showProducts = [];
+    } else {
+        const chartContainer = document.querySelector("#chartContainer")
+        chartContainer.classList.add("noProductsCart")
+        chartContainer.classList.remove("loadingChart")
     }
 }
 
 
 
-window.addEventListener("load", function(){
+window.addEventListener("load", function () {
     getProductChartData()
 })
 
