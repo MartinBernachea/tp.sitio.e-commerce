@@ -73,7 +73,7 @@ const controller = {
             opcionesGeneros: response[0],
             opcionesMarcas: response[1],
             opcionesCategorias: response[2],
-
+            action: "create",
             submitButtonLabel: "Crear producto",
         }
 
@@ -184,6 +184,7 @@ const controller = {
                 opcionesCategorias: response[2],
                 formData,
                 submitButtonLabel: "Editar producto",
+                action: req.params.id,
             }
 
             res.render('./pages/adminPanel', localsParams)
@@ -202,21 +203,19 @@ const controller = {
 
         let idProducto = req.params.id;
 
-        let datosProducto = req.body;
-
         let nombreImagenAntigua = "";
+        
+        db.producto.update({
+            nombre:req.body.name,
+            precio:req.body.price,
+            categoria_id:req.body.categoriaId,
+            marca_id: req.body.marcaId,
+            genero_id: req.body.generoId,
+            // imagen:req.file.imagen
+        }, { where: {id:idProducto}
 
-        console.log(datosProducto);
-        // db.producto.update({
-        //     nombre:datosProducto.nombre,
-        //     precio:datosProducto.precio,
-        //     categoria:datosProducto.categoria,
-        //     imagen:req.file.imagen
-        // }, { where: {id:idProducto}
-
-        // })
-
-        // res.redirect('/');
+        })
+        res.redirect('/admin/panel/products');
     },
 
     deleteCategory: async (req, res) => {

@@ -7,27 +7,49 @@ const router = express.Router();
 const path = require('path');
 const multer = require('multer');
 
-const { productCreateValidation } = require("../utils/validations");
-const { adminPermissions, userPermissions, adminPermissionsJSON } = require('./permission');
+const {
+    productCreateValidation
+} = require("../utils/validations");
+const {
+    adminPermissions,
+    userPermissions,
+    adminPermissionsJSON
+} = require('./permission');
 
 //***  MULTER  ****/
 const multerDiskStorage = multer.diskStorage({
-    destination: function (req, file, cb) {       // request, archivo y callback que almacena archivo en destino
-        cb(null, path.join(__dirname, '../../public/img/products'));    // Ruta donde almacenamos el archivo
+    destination: function (req, file, cb) { // request, archivo y callback que almacena archivo en destino
+        cb(null, path.join(__dirname, '../../public/img/products')); // Ruta donde almacenamos el archivo
     },
-    filename: function (req, file, cb) {          // request, archivo y callback que almacena archivo en destino
-        let imageName = file.fieldname + "-" + Date.now() + path.extname(file.originalname);   // milisegundos y extensión de archivo original
+    filename: function (req, file, cb) { // request, archivo y callback que almacena archivo en destino
+        let imageName = file.fieldname + "-" + Date.now() + path.extname(file.originalname); // milisegundos y extensión de archivo original
         cb(null, imageName);
     }
 });
 
-const uploadFile = multer({ storage: multerDiskStorage });
-const multipleImages = uploadFile.fields([
-    { name: "cImage1", maxCount: 10 },
-    { name: "cImage2", maxCount: 10 },
-    { name: "cImage3", maxCount: 10 },
-    { name: "cImage4", maxCount: 10 },
-    { name: "cImage5", maxCount: 10 },
+const uploadFile = multer({
+    storage: multerDiskStorage
+});
+const multipleImages = uploadFile.fields([{
+        name: "cImage1",
+        maxCount: 10
+    },
+    {
+        name: "cImage2",
+        maxCount: 10
+    },
+    {
+        name: "cImage3",
+        maxCount: 10
+    },
+    {
+        name: "cImage4",
+        maxCount: 10
+    },
+    {
+        name: "cImage5",
+        maxCount: 10
+    },
 ])
 
 /*** GET ALL PRODUCTS ***/
@@ -70,7 +92,7 @@ router.post('/admin/panel/products/create', adminPermissions, multipleImages, pr
 
 /*** EDIT ONE PRODUCT ***/
 router.get('/admin/panel/products/edit/:id', adminPermissions, productsController.getEditProduct);
-router.put('/admin/panel/products/edit/:id', adminPermissions, productsController.postEditProduct);
+router.post('/admin/panel/products/edit/:id', adminPermissions, multipleImages, productCreateValidation, productsController.postEditProduct);
 
 /*** DELETE ONE PRODUCT ***/
 router.delete('/:id', adminPermissions, productsController.destroy);
