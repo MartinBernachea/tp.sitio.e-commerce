@@ -8,15 +8,11 @@ notificationAlertRef?.addEventListener("click", (event) => {
 
 const removeShowClass = () => {
     notificationAlertRef.classList.remove("show");
+    notificationAlertRef.classList.remove("active");
     window.clearTimeout(modalTimer);
 }
 
 let modalTimer;
-
-window.addEventListener("load", () => {
-    notificationAlertRef.classList.add("active");
-    modalTimer = window.setTimeout(removeShowClass, 6000);
-})
 
 notificationAlertRef?.addEventListener("mouseenter", (event) => {
     console.log("INGRESO")

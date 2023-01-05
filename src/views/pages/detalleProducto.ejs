@@ -78,7 +78,7 @@
                     </select>
                 </div>
 
-                <button class="btn-secondary" onclick="agregarProducto(<%= producto.id %>)">
+                <button class="btn-secondary" onclick="agregarProducto(<%= producto.id %>, <%= locals.userData.id %>)">
                     Agregar al carrito <i class="fa-solid fa-arrow-right"></i>
                 </button>
 
