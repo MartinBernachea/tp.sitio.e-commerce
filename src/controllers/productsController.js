@@ -44,6 +44,28 @@ const controller = {
         else res.redirect('user/login');
     },
 
+    getDataFromArray: async (req, res) => {
+        let productsIds = JSON.parse(req.query.chart); 
+            const productsData = await db.producto.findAll({
+            where: {
+                id:{
+                    [sequelize.Op.in]:productsIds
+                }
+            },
+            include:[{model:db.genero},{model: db.marca}, {model: db.categoria}, {model: db.imagen}]
+        })
+        res.status(200).json({ status: 200, data: productsData.map(product => {
+            return product.dataValues
+            })
+        })
+        console.log("#################");
+        console.log("#################");
+        console.log(typeof(productsIds[1]));
+        console.log("#################");
+        console.log("#################");
+    },
+
+
     comingSoon: (req, res) => {
         const userData = getUserDataStringified(req);
 

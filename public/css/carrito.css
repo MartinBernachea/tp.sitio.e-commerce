@@ -177,6 +177,7 @@
     height: 320px;
     max-height: 200px;
     flex-direction: row;
+    overflow: hidden;
 }
 
 .opciones-pago img {
@@ -187,6 +188,66 @@
 .btn-secondary.hidden-btn {
     display: none;
 }
+
+#noProductsChartMessage {
+    display: none;
+}
+
+#loadingChart {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+@keyframes showProductos {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+
+#carritoTotal,
+#contenedor-tarjetas,
+#btnPayCarrito,
+#resumenSection,
+#loadingChart {
+    animation-name: showProductos;
+    animation-duration: 1.3s;
+}
+
+
+/* caso carrito sin productos */
+.noProductsChart #carritoTotal,
+.noProductsChart #contenedor-tarjetas,
+.noProductsChart #btnPayCarrito,
+.noProductsChart #resumenSection,
+.noProductsChart #loadingChart {
+    display: none;
+}
+
+.noProductsCart #noProductsChartMessage {
+    display: inline;
+}
+
+/* caso loading carrito */
+.loadingChart #carritoTotal,
+.loadingChart #contenedor-tarjetas,
+.loadingChart #btnPayCarrito,
+.loadingChart #resumenSection,
+.loadingChart #noProductsChartMessage {
+    display: none;
+}
+
+.loadingChart #loadingChart {
+    display: flex;
+}
+
 
 @media(min-width:720px) {
     .btn-secondary.hidden-btn {
