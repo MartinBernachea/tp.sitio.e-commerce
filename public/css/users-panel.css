@@ -304,3 +304,6 @@ tbody tr:nth-child(even) {
     cursor: pointer;
     opacity: 0.85;
 }
+.btnShow:hover {
+    color: #c42121;
+}

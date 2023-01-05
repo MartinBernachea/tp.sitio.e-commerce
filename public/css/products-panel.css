@@ -39,6 +39,12 @@
     padding: 10px 20px;
 }
 
+.admin-panel-aside li:hover {
+    background-color: rgba(247, 247, 247, 0.829);
+    cursor: pointer;
+    border-radius: 25px;
+}
+
 .admin-panel-aside li i {
     margin-right: 8px;
 }
@@ -48,11 +54,21 @@
     color: rgb(124, 124, 124);
 }
 
-.admin-panel-aside .selected{
+.admin-panel-aside .selected {
     background-color: rgba(255, 0, 0, .8);
+    border-radius: 25px;
 }
-.admin-panel-aside .selected a{
-    color: #fff;
+
+.admin-panel-aside .selected a {
+    color: #E5E5E5;
+}
+
+.admin-panel-aside .selected a i {
+    color: #E5E5E5;
+}
+
+.admin-panel-aside .selected:hover {
+    background-color: rgba(255, 0, 0, .7);
 }
 
 .admin-products-form {
@@ -87,7 +103,7 @@
     margin-right: 8px;
 }
 
-.admin-products-head{
+.admin-products-head {
     display: flex;
     justify-content: space-between;
 }
@@ -148,15 +164,16 @@
 }
 
 
-.btn-plus-icon{
+.btn-plus-icon {
     padding: 8px 22px 8px 20px !important;
 }
 
-.btn-plus-icon i{
-    color:white;
+.btn-plus-icon i {
+    color: white;
     margin-right: 8px;
 }
-.btn-plus-icon:hover{
-    background-color: rgba(22, 173, 22,.7);
+
+.btn-plus-icon:hover {
+    background-color: rgba(22, 173, 22, .7);
     color: #fff;
 }

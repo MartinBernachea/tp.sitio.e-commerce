@@ -26,18 +26,18 @@
                     <a href="/coming-soon"> MARCA </a>
                 </li>
                 <% if(locals?.userData?.admin){ %>
-                    <li class="li-item"> | </li>
-                    <li class="li-item">
-                        <a href="/admin/panel/products"> ADMIN PANEL </a>
-                    </li>
-                    <%}%>
+                <li class="li-item"> | </li>
+                <li class="li-item">
+                    <a href="/admin/panel/products"> ADMIN PANEL </a>
+                </li>
+                <%}%>
 
                         <% if(locals?.userData?.super){ %>
-                            <li class="li-item"> | </li>
-                            <li class="li-item">
-                                <a href="/user/panel"> SUPER PANEL </a>
-                            </li>
-                            <%}%>
+                <li class="li-item"> | </li>
+                <li class="li-item">
+                    <a href="/user/panel"> SUPER PANEL </a>
+                </li>
+                <%}%>
             </ul>
         </div>
 
@@ -124,10 +124,11 @@
             <!--  HEADER ICONOS -->
             <div class="header-icons">
                 <% if(locals?.userData){ %>
-                    <a href="/user/account"><i class="fa-regular fa-user icon-header">123</i></a>
-                    <%} else {%>
-                        <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
-                        <%}%>
+                <a href="/user/account"><i class="fa-regular fa-user icon-header"> <span class="user-name">
+                            <%= locals.userData.nombre %> </span></i></a>
+                <%} else {%>
+                <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
+                <%}%>
                             <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
                             <a href="/carrito"><i class="fa-solid fa-basket-shopping icon-header"></i></a>
             </div>
@@ -136,7 +137,7 @@
 
     <!-- ALERT -->
     <%- include('./notificationAlert') %>
-        <!-- /ALERT -->
+                <!-- /ALERT -->
 </header>
 
 <script src="/js/productSearchBar.js" type="module"></script>

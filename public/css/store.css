@@ -69,3 +69,8 @@ input[type="radio"] {
     left: 100%;
     transform: translateY(-50%);
 }
+.btn-container {
+    display:flex; 
+    justify-content: space-between; 
+    padding: 0 8px;
+}

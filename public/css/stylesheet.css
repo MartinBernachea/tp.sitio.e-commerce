@@ -35,7 +35,8 @@ a {
 }
 
 a:hover,
-a i:hover {
+a i:hover,
+a i:hover span {
   color: #c70039;
 }
 
@@ -317,13 +318,16 @@ button:disabled {
   align-items: flex-end;
   margin: 20px 0;
 }
-
+.user-name {
+  font-size: .9rem;
+}
 .icon-header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   height: 30px;
   width: 30px;
+  flex-direction: column;
 }
 
 @media (min-width: 860px) {
