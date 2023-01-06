@@ -1,4 +1,4 @@
-export const refreshCartNumber = (userId) => {
+const refreshCartNumber = (userId) => {
     const localData = localStorage.getItem("carrito");
     const localDataParsed = localData ? JSON.parse(localData) : {};
     const cartNumber = document.querySelector("#cartNumber")

@@ -1,10 +1,21 @@
-
-// import {refreshCartNumber} from "./refreshCartNumber.js";
+const btnAddProduct = document.querySelector("#btnAddProduct")
+const btnRemoveProduct = document.querySelector("#btnRemoveProduct")
 
 function agregarProducto(productId, userId) {
+    const notificationAlert = document.querySelector("#notificationAlert")
+    const notificationTexto = document.querySelector("#notificationAlert .alert-msg")
+
+    if (!userId) {
+        notificationTexto.innerHTML = "Para agregar un producto al <b>carrito</b> es necesario <a href='/user/login'><b>Iniciar sesion</b></a>";
+        notificationAlert.classList.add("info", "show", "active");
+        notificationAlert.classList.remove("success", "danger", "hidde-alert");
+        if (modalTimer) window.clearTimeout(modalTimer);
+        modalTimer = window.setTimeout(removeShowClass, 6000);
+        return
+    }
+
     const localData = localStorage.getItem("carrito");
     const localDataParsed = localData ? JSON.parse(localData) : {};
-    const notificationAlertRef = document.querySelector("#notificationAlert");
 
     let carrito = localDataParsed[userId] ?? [];
 
@@ -14,27 +25,59 @@ function agregarProducto(productId, userId) {
         carrito.push(productId);
         localDataParsed[userId] = carrito;
         localStorage.setItem("carrito", JSON.stringify(localDataParsed));
-        const notificationAlert = document.querySelector("#notificationAlert")
-        const notificationTexto = document.querySelector("#notificationAlert b")
-        notificationTexto.innerText = "El producto se añadio al carrito correctamente"
-        notificationAlert.classList.add("success", "show")
-        notificationAlertRef.classList.add("active");
+        notificationTexto.innerHTML = "<b>Bien!</b> El producto se añadio al carrito correctamente"
+        notificationAlert.classList.add("success", "show", "active")
+        notificationAlert.classList.remove("info", "danger", "hidde-alert")
+        if (modalTimer) window.clearTimeout(modalTimer);
         modalTimer = window.setTimeout(removeShowClass, 6000);
         refreshCartNumber(userId)
+        if (refreshDetailButtons) refreshDetailButtons(productId, userId)
     } else {
 
-        if (!notificationAlertRef.classList.contains("active")) {
-            const notificationAlert = document.querySelector("#notificationAlert")
-            const notificationTexto = document.querySelector("#notificationAlert b")
+        if (!notificationAlert.classList.contains("active")) {
             notificationTexto.innerText = "El producto ya se encuentra en el carrito"
-            notificationAlert.classList.add("info", "show")
-            notificationAlertRef.classList.add("active");
+            notificationAlert.classList.add("info", "show", "active")
+            notificationAlert.classList.remove("success", "danger", "hidde-alert")
+            if (modalTimer) window.clearTimeout(modalTimer);
             modalTimer = window.setTimeout(removeShowClass, 6000);
         }
         console.log("YA EXISTE EL PRODUCTO EN EL CARRITO")
     }
 }
 
+function removerProducto(productId, userId) {
+    const localData = localStorage.getItem("carrito");
+    const localDataParsed = localData ? JSON.parse(localData) : {};
 
+    let carrito = localDataParsed[userId] ?? [];
+    const notificationAlert = document.querySelector("#notificationAlert")
+    const notificationTexto = document.querySelector("#notificationAlert .alert-msg")
 
+    const productIndex = carrito.indexOf(productId)
+    const isProductInCart = productIndex >= 0;
 
+    if (isProductInCart) {
+        carrito.splice(productIndex, 1);
+        localDataParsed[userId] = carrito;
+        localStorage.setItem("carrito", JSON.stringify(localDataParsed));
+        notificationTexto.innerHTML = "El producto se removio del carrito <b>correctamente</b>"
+        notificationAlert.classList.add("info", "show", "active")
+        notificationAlert.classList.remove("success", "danger", "hidde-alert")
+        if (modalTimer) window.clearTimeout(modalTimer);
+        modalTimer = window.setTimeout(removeShowClass, 6000);
+        refreshCartNumber(userId)
+        if (refreshDetailButtons) refreshDetailButtons(productId, userId)
+    } else {
+
+        if (!notificationAlertRef.classList.contains("active")) {
+            const notificationAlert = document.querySelector("#notificationAlert")
+            const notificationTexto = document.querySelector("#notificationAlert b")
+            notificationTexto.innerText = "El producto no se encuentra en el carrito"
+            notificationAlert.classList.add("info", "show", "active")
+            notificationAlert.classList.remove("success", "danger", "hidde-alert")
+            if (modalTimer) window.clearTimeout(modalTimer);
+            modalTimer = window.setTimeout(removeShowClass, 6000);
+        }
+        console.log("NO EXISTIA EN EL CARRITO => NO SE HI>O NADA")
+    }
+}

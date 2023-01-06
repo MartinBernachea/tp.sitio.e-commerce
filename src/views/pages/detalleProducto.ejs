@@ -78,9 +78,14 @@
                     </select>
                 </div>
 
-                <button class="btn-secondary" onclick="agregarProducto(<%= producto.id %>, <%= locals.userData.id %>)">
+                <button id="btnAddProduct" class="btn-secondary" onclick="agregarProducto(<%= producto?.id %>, <%= locals?.userData?.id %>)">
                     Agregar al carrito <i class="fa-solid fa-arrow-right"></i>
                 </button>
+
+                <button id="btnRemoveProduct" style="display:none;" class="btn-primary" onclick="removerProducto(<%= producto?.id %>, <%= locals?.userData?.id %>)">
+                    Remover del carrito <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
 
                 <img src="/img/medio-de-pago.jpg" alt="formas de pago" class="pd-img" />
                 <% if(locals.userData?.admin) { %>
@@ -296,5 +301,11 @@
     <%- include('partials/footer') %>
     <!-- /footer -->
 </body>
+<script src="/js/detalleProducto.js"></script>
 <script src="/js/chart.js"></script>
+
+<script>
+    refreshDetailButtons(<%= producto.id %>, <%= locals?.userData?.id %>)
+</script>
+
 </html>
