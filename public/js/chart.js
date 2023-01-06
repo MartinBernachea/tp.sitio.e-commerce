@@ -1,9 +1,12 @@
+
+// import {refreshCartNumber} from "./refreshCartNumber.js";
+
 function agregarProducto(productId, userId) {
     const localData = localStorage.getItem("carrito");
     const localDataParsed = localData ? JSON.parse(localData) : {};
     const notificationAlertRef = document.querySelector("#notificationAlert");
 
-    let carrito = localDataParsed ? localDataParsed[userId] ?? [] : [];
+    let carrito = localDataParsed[userId] ?? [];
 
     const isProductInCart = carrito.indexOf(productId) >= 0;
 
@@ -17,7 +20,7 @@ function agregarProducto(productId, userId) {
         notificationAlert.classList.add("success", "show")
         notificationAlertRef.classList.add("active");
         modalTimer = window.setTimeout(removeShowClass, 6000);
-
+        refreshCartNumber(userId)
     } else {
 
         if (!notificationAlertRef.classList.contains("active")) {

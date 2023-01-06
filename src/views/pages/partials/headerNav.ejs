@@ -125,11 +125,16 @@
             <div class="header-icons">
                 <% if(locals?.userData){ %>
                     <a href="/user/account"><i class="fa-regular fa-user icon-header">123</i></a>
-                    <%} else {%>
-                        <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
-                        <%}%>
-                            <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
-                            <a href="/carrito"><i class="fa-solid fa-basket-shopping icon-header"></i></a>
+                <%} else {%>
+                    <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
+                <%}%>
+                    <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
+                    <div style="position:relative;">
+                        <a href="/carrito">
+                            <i class="fa-solid fa-basket-shopping icon-header"></i>
+                            <div id="cartNumber" class="cart-number">21</div>
+                        </a>
+                    </div>
             </div>
         </div>
     </nav>
@@ -140,3 +145,12 @@
 </header>
 
 <script src="/js/productSearchBar.js" type="module"></script>
+<script src="/js/refreshCartNumber.js"></script>
+
+<% if(locals?.userData?.id){ %>
+    <script>
+        window.addEventListener("load", () => {
+            refreshCartNumber(<%= locals.userData.id %>)
+        })
+    </script>
+<%}%>

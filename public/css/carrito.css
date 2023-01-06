@@ -201,6 +201,24 @@
     width: 100%;
 }
 
+.cart-number {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background-color: #cd0118;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+    width: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1rem;
+    color: white;
+    font-weight: 600;
+    display: none;
+}
+
 @keyframes showProductos {
     0% {
         opacity: 0;
