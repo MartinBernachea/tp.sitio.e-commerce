@@ -189,16 +189,57 @@
     display: none;
 }
 
-#noProductsChartMessage {
-    display: none;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes showProductos {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
 }
 
-#loadingChart {
-    display: none;
+.carrito-body .footer {
+    flex-grow: 0;
+}
+
+.carrito-body main {
+    flex-grow: 1;
+    display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.carrito-status-container {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    flex-grow: 1;
 }
 
 .cart-number {
@@ -219,52 +260,91 @@
     display: none;
 }
 
-@keyframes showProductos {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-
+#loadingCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
 }
 
-#carritoTotal,
-#contenedor-tarjetas,
-#btnPayCarrito,
-#resumenSection,
-#loadingChart {
+/* caso estado: LOADING */
+.loadingCartStatus #cardsContainerStatus,
+.loadingCartStatus #loadingCart,
+.loadingCartStatus .carrito-status-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.loadingCartStatus #cardsContainerResults,
+.loadingCartStatus #noProductsChartMessage,
+.loadingCartStatus #resumenContainerResults {
+    display: none;
+}
+
+/* caso estado: NO PRODUCTS */
+.noProductsCartStatus #cardsContainerStatus,
+.noProductsCartStatus .carrito-status-container,
+.noProductsCartStatus #noProductsChartMessage {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     animation-name: showProductos;
     animation-duration: 1.3s;
 }
 
-
-/* caso carrito sin productos */
-.noProductsChart #carritoTotal,
-.noProductsChart #contenedor-tarjetas,
-.noProductsChart #btnPayCarrito,
-.noProductsChart #resumenSection,
-.noProductsChart #loadingChart {
+.noProductsCartStatus #cardsContainerResults,
+.noProductsCartStatus #loadingCart,
+.noProductsCartStatus #resumenContainerResults {
     display: none;
 }
 
-.noProductsCart #noProductsChartMessage {
-    display: inline;
-}
+/* caso estado: MOSTRAR RESULTADOS */
 
-/* caso loading carrito */
-.loadingChart #carritoTotal,
-.loadingChart #contenedor-tarjetas,
-.loadingChart #btnPayCarrito,
-.loadingChart #resumenSection,
-.loadingChart #noProductsChartMessage {
-    display: none;
-}
-
-.loadingChart #loadingChart {
+.showResultsStatus #cardsContainerResults,
+.showResultsStatus #resumenContainerResults {
     display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    animation-name: showProductos;
+    animation-duration: 1.3s;
 }
+
+.showResultsStatus #cardsContainerStatus,
+.showResultsStatus #loadingCart,
+.showResultsStatus .carrito-status-container {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media(min-width:720px) {

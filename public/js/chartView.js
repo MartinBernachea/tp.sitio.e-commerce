@@ -1,10 +1,13 @@
+const mainTag = document.querySelector("main")
+
 function showProducts(data) {
-    const chartContainer = document.querySelector("#chartContainer")
-    chartContainer.classList.remove("loadingChart")
+    mainTag.classList.remove("loadingCartStatus")
+
     if (data.data.length == 0) {
-        chartContainer.classList.add("noProductsCart")
+        mainTag.classList.add("noProductsCartStatus")
     } else {
-        chartContainer.classList.remove("noProductsCart")
+        mainTag.classList.remove("noProductsCartStatus")
+        mainTag.classList.add("showResultsStatus")
     }
 
     let contenedorTarjeta = document.getElementById("contenedor-tarjetas")
@@ -85,23 +88,23 @@ function showProducts(data) {
 
 }
 
-function getProductChartData() {
-    let informacionLocalStorage = localStorage.getItem("carrito");
-    if (informacionLocalStorage) {
-        fetch(window.location.origin + "/carrito/getDataFromArray" + "?chart=" + informacionLocalStorage)
-            .then(respuesta => respuesta.json())
-            .then(data => showProducts(data))
-            .catch(e => console.log(e))
-    } else {
-        const chartContainer = document.querySelector("#chartContainer")
-        chartContainer.classList.add("noProductsCart")
-        chartContainer.classList.remove("loadingChart")
+function getProductChartData(userId) {
+    console.log("userId", userId)
+
+    const localData = localStorage.getItem("carrito");
+    const localDataParsed = localData ? JSON.parse(localData) : {};
+
+    let carrito = localDataParsed[userId] ?? [];
+
+    if (carrito.length == 0) {
+        mainTag.classList.remove("loadingCartStatus", "showResultsStatus")
+        mainTag.classList.add("noProductsCartStatus")
+        return
     }
+
+    fetch(window.location.origin + "/carrito/getDataFromArray" + "?cart=" + JSON.stringify(carrito))
+        .then(respuesta => respuesta.json())
+        .then(data => setTimeout(() => showProducts(data), 2000))
+        .catch(e => console.log(e))
+
 }
-
-
-
-window.addEventListener("load", function () {
-    getProductChartData()
-})
-

@@ -45,24 +45,20 @@ const controller = {
     },
 
     getDataFromArray: async (req, res) => {
-        let productsIds = JSON.parse(req.query.chart); 
-            const productsData = await db.producto.findAll({
+        let productsIds = JSON.parse(req.query.cart);
+        const productsData = await db.producto.findAll({
             where: {
-                id:{
-                    [sequelize.Op.in]:productsIds
+                id: {
+                    [sequelize.Op.in]: productsIds
                 }
             },
-            include:[{model:db.genero},{model: db.marca}, {model: db.categoria}, {model: db.imagen}]
+            include: [{ model: db.genero }, { model: db.marca }, { model: db.categoria }, { model: db.imagen }]
         })
-        res.status(200).json({ status: 200, data: productsData.map(product => {
-            return product.dataValues
+        res.status(200).json({
+            status: 200, data: productsData.map(product => {
+                return product.dataValues
             })
         })
-        console.log("#################");
-        console.log("#################");
-        console.log(typeof(productsIds[1]));
-        console.log("#################");
-        console.log("#################");
     },
 
 
@@ -226,15 +222,16 @@ const controller = {
         let idProducto = req.params.id;
 
         let nombreImagenAntigua = "";
-        
+
         db.producto.update({
-            nombre:req.body.name,
-            precio:req.body.price,
-            categoria_id:req.body.categoriaId,
+            nombre: req.body.name,
+            precio: req.body.price,
+            categoria_id: req.body.categoriaId,
             marca_id: req.body.marcaId,
             genero_id: req.body.generoId,
             // imagen:req.file.imagen
-        }, { where: {id:idProducto}
+        }, {
+            where: { id: idProducto }
 
         })
         res.redirect('/admin/panel/products');
