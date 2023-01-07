@@ -1,4 +1,11 @@
 <!-- HEADER -->
+<script> 
+    /* VARIABLES GLOBALES */
+    window.appConfig = <%- JSON.stringify(locals.appConfig) %> 
+</script>
+
+<div class="info-promo"> <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A $<%= appConfig?.SUMA_MINIMA_ENVIO_SIN_CARGO?.valor%> </div>
+
 <header class="header">
     <nav class="header-nav">
         <!-- LOGO -->
@@ -154,3 +161,4 @@
         })
     </script>
 <%}%>
+

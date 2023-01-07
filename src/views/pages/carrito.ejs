@@ -12,11 +12,6 @@
 <!-- /head -->
 
 <body class="carrito-body">
-    <div class="info-promo">
-        <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A
-        $20.000
-    </div>
-
     <!-- Header -->
     <%- include('partials/headerNav', locals) %>
         <!-- /Header -->
@@ -59,15 +54,22 @@
                             </div>
 
                             <div class="resumen-item">
-                                <p id="cantidad-productos"> </p>
-                                <p id="precio-producto"> $</p>
+                                <p id="resumenCantidad"></p>
+                                <p id="resumenPreciosProductos"></p>
+                            </div>
+
+                            <div class="resumen-item">
+                                <p>Envio</p>
+                                <p id="resumenPrecioEnvio">$1500</p>
                             </div>
 
                             <div class="resumen-item">
                                 <span class="resumen-total">
-                                    <p> TOTAL </p>
-                                    <p id="ivaTotal"> TOTAL </p>
-                                    <p id="precio-total"> $ </p>
+                                    <div class="resumen-precios">
+                                        <p> TOTAL </p>
+                                        <p id="resumenIva"> TOTAL </p>
+                                    </div>
+                                    <p id="resumenTotal"> $ </p>
                                 </span>
                             </div>
                         </section>
@@ -129,7 +131,10 @@
             <!-- /footer -->
 </body>
 
+<script src="/js/chart.js"></script>
 <script src="/js/chartView.js"></script>
-<script>getProductChartData(<%= locals?.userData?.id %>)</script>
+<script>
+        getProductChartData(<%= locals?.userData?.id %>)
+</script>
 
 </html>

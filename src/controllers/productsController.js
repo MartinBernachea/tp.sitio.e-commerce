@@ -7,39 +7,43 @@ const db = require("../database/models");
 const sequelize = require("sequelize");
 
 const { getUserDataStringified } = require('../utils/userData');
-const config = require('../../appConfig');
 const { generarOrderTablaProducto, generarOrderGenericoIdNombre } = require('../database/utils/orders');
 const { formatProductDate } = require('../database/utils/format');
 const { isParamNotEmpty, agregarCantidadesProductos } = require('../database/utils/generics');
 const { getNotificationAlert } = require('../utils/notificationAlert');
-const { errorMonitor } = require('events');
+const { getAppConfig } = require("../utils/appConfig")
 
 const controller = {
-    index: (req, res) => {
-        db.producto.findAll({
+    index: async (req, res) => {
+        const appConfig = await getAppConfig();
+        const userData = getUserDataStringified(req);
+        const productos = await db.producto.findAll({
             limit: 12,
             include: [{
                 model: db.imagen,
             }]
         })
-            .then(productos => {
-                const userData = getUserDataStringified(req);
-                let localsParams = { productos, userData }
 
-                getNotificationAlert(localsParams, req)
+        let localsParams = { productos, userData, appConfig }
 
-                res.render('index', localsParams)
-            })
+        getNotificationAlert(localsParams, req)
+
+        res.render('index', localsParams)
     },
 
     chart: async (req, res) => {
         const userData = getUserDataStringified(req);
+        const appConfig = await getAppConfig();
 
+        localsParams = {
+            userData,
+            appConfig,
+        }
         if (req.cookies.user != undefined) {
-            res.render('./pages/carrito', { userData });
+            res.render('./pages/carrito', localsParams);
         }
         else if (req.session.usuarioLogueado != undefined) {
-            res.render('./pages/carrito', { userData });
+            res.render('./pages/carrito', localsParams);
         }
         else res.redirect('user/login');
     },
@@ -61,19 +65,18 @@ const controller = {
         })
     },
 
-
-    comingSoon: (req, res) => {
+    comingSoon: async (req, res) => {
+        const appConfig = await getAppConfig();
         const userData = getUserDataStringified(req);
 
-        res.render('./pages/coming-soon', { userData })
+        res.render('./pages/coming-soon', { userData, appConfig })
     },
-
-
-
 
     adminPanel: async (req, res) => {
         const userData = getUserDataStringified(req);
-        res.render('./pages/adminPanel', { userData });
+        const appConfig = await getAppConfig();
+
+        res.render('./pages/adminPanel', { userData, appConfig });
     },
 
     getCreateProduct: async (req, res) => {
@@ -82,15 +85,18 @@ const controller = {
         const generos = db.genero.findAll();
         const marcas = db.marca.findAll();
         const categorias = db.categoria.findAll();
+        const appConfig = getAppConfig();
 
-        const response = await Promise.all([generos, marcas, categorias])
+        const response = await Promise.all([generos, marcas, categorias, appConfig])
 
         let localsParams = {
             userData,
+            appConfig,
             section: "createProduct",
             opcionesGeneros: response[0],
             opcionesMarcas: response[1],
             opcionesCategorias: response[2],
+            appConfig: response[3],
             action: "create",
             submitButtonLabel: "Crear producto",
         }
@@ -147,15 +153,18 @@ const controller = {
             const generos = db.genero.findAll();
             const marcas = db.marca.findAll();
             const categorias = db.categoria.findAll();
+            const appConfig = getAppConfig();
 
-            const response = await Promise.all([generos, marcas, categorias])
+            const response = await Promise.all([generos, marcas, categorias, appConfig])
             let localsParams = {
                 userData,
+                appConfig,
                 section: "createProduct",
                 formData: req.body,
                 opcionesGeneros: response[0],
                 opcionesMarcas: response[1],
                 opcionesCategorias: response[2],
+                appConfig: response[3],
                 errors: errors.array()
             }
 
@@ -165,6 +174,7 @@ const controller = {
 
     getEditProduct: async (req, res) => {
         const userData = getUserDataStringified(req);
+        const appConfig = await getAppConfig();
 
         try {
             if (!req.params.id) throw new Error("Producto solicitado invalido.")
@@ -196,6 +206,7 @@ const controller = {
 
             let localsParams = {
                 userData,
+                appConfig,
                 section: "createProduct",
                 opcionesGeneros: response[0],
                 opcionesMarcas: response[1],
@@ -380,14 +391,14 @@ const controller = {
                         model: db.imagen
                     }]
                 });
-
-            console.log("currentProduct", currentProduct.imagens[0].nombre)
-
+            const appConfig = await getAppConfig();
             const userData = getUserDataStringified(req);
+
             if (currentProduct) {
                 res.render('./pages/detalleProducto', {
                     producto: currentProduct,
-                    userData
+                    userData,
+                    appConfig,
                 });
             } else {
                 req.session.notificationAlert = {
@@ -428,7 +439,8 @@ const controller = {
     },
 
     store: async (req, res) => {
-        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_STORE;
+        const appConfig = await getAppConfig();
+        const resultsPerPage = Number(appConfig?.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_STORE?.valor);
         let formData = { ...req.query, Page: req.query.Page ?? 1 };
         const currentPage = formData.Page;
         const filtersTitle = ["Generos", "Marcas", "Categorias"];
@@ -486,7 +498,7 @@ const controller = {
             attributes: ["marca.nombre"]
         });
 
-        const categorias = await db.producto.findAll({
+        const categorias = db.producto.findAll({
             include: [db.categoria],
             group: "categoria_id",
             attributes: ["categorium.nombre"]
@@ -525,6 +537,7 @@ const controller = {
         let localsParams = {
             products,
             userData,
+            appConfig,
             filters,
             applicated: formData
         }
@@ -535,7 +548,8 @@ const controller = {
     },
 
     productsPanel: async (req, res) => {
-        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
+        const appConfig = await getAppConfig();
+        const resultsPerPage = Number(appConfig.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL.valor);
         let formData = { ...req.query, page: req.query.page ?? 1 };
         const currentPage = formData.page;
 
@@ -613,6 +627,7 @@ const controller = {
 
         let localsParams = {
             userData,
+            appConfig,
             section: "productsPanel",
             applicated: formData,
             products,
@@ -631,7 +646,9 @@ const controller = {
 
     categoriesPanel: async (req, res) => {
         const userData = getUserDataStringified(req);
-        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
+        const appConfig = await getAppConfig();
+
+        const resultsPerPage = Number(appConfig.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL.valor);
         let formData = { ...req.query, page: req.query.page ?? 1 };
         const currentPage = formData.page;
 
@@ -683,6 +700,7 @@ const controller = {
 
         let localsParams = {
             categorias,
+            appConfig,
             userData,
             section: "categoriesPanel",
             applicated: formData,
@@ -697,7 +715,8 @@ const controller = {
 
     genresPanel: async (req, res) => {
         const userData = getUserDataStringified(req);
-        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
+        const appConfig = await getAppConfig();
+        const resultsPerPage = Number(appConfig.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL.valor);
         let formData = { ...req.query, page: req.query.page ?? 1 };
         const currentPage = formData.page;
 
@@ -749,6 +768,7 @@ const controller = {
 
         let localsParams = {
             generos,
+            appConfig,
             userData,
             section: "genresPanel",
             applicated: formData,
@@ -761,7 +781,8 @@ const controller = {
 
     brandsPanel: async (req, res) => {
         const userData = getUserDataStringified(req);
-        const resultsPerPage = config.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL;
+        const appConfig = await getAppConfig();
+        const resultsPerPage = Number(appConfig.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_ADMIN_PANEL.valor);
         let formData = { ...req.query, page: req.query.page ?? 1 };
         const currentPage = formData.page;
 
@@ -814,6 +835,7 @@ const controller = {
         let localsParams = {
             marcas,
             userData,
+            appConfig,
             section: "brandsPanel",
             applicated: formData,
         }

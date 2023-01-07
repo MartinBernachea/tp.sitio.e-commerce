@@ -31,7 +31,11 @@ function agregarProducto(productId, userId) {
         if (modalTimer) window.clearTimeout(modalTimer);
         modalTimer = window.setTimeout(removeShowClass, 6000);
         refreshCartNumber(userId)
-        if (refreshDetailButtons) refreshDetailButtons(productId, userId)
+        try {
+            refreshDetailButtons(productId, userId);
+        } catch (err) {
+            console.log(err)
+        }
     } else {
 
         if (!notificationAlert.classList.contains("active")) {
@@ -43,6 +47,7 @@ function agregarProducto(productId, userId) {
         }
         console.log("YA EXISTE EL PRODUCTO EN EL CARRITO")
     }
+    return (carrito.length)
 }
 
 function removerProducto(productId, userId) {
@@ -66,7 +71,11 @@ function removerProducto(productId, userId) {
         if (modalTimer) window.clearTimeout(modalTimer);
         modalTimer = window.setTimeout(removeShowClass, 6000);
         refreshCartNumber(userId)
-        if (refreshDetailButtons) refreshDetailButtons(productId, userId)
+        try {
+            refreshDetailButtons(productId, userId);
+        } catch (err) {
+            console.log(err)
+        }
     } else {
 
         if (!notificationAlertRef.classList.contains("active")) {
@@ -80,4 +89,6 @@ function removerProducto(productId, userId) {
         }
         console.log("NO EXISTIA EN EL CARRITO => NO SE HI>O NADA")
     }
+    return (carrito.length)
+
 }

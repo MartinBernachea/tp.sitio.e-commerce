@@ -316,36 +316,18 @@
     display: none;
 }
 
+.product-item-total-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.product-item-total-container i {
+    line-height: normal;
+}
 
 @media(min-width:720px) {
     .btn-secondary.hidden-btn {
