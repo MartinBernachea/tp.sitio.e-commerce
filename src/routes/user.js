@@ -27,7 +27,6 @@ router.post('/register', noUserPermissions, userRegisterValidation, userControll
 
 router.get('/account', userPermissions, userController.account);
 
-router.get('/panel', superPermissions, userController.panel);
 router.post('/editUser/:id', superPermissionsJSON, userController.editUser);
 
 router.get('/login', noUserPermissions, userController.login);

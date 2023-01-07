@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- head -->
+
+<head>
+    <%- include('partials/head') %>
+        <link rel="stylesheet" href="/css/stylesheet.css">
+
+        <title> G&X - Cart </title>
+</head>
+<!-- /head -->
+
+<body>
+    <!-- Header -->
+    <%- include('partials/headerNav', locals) %>
+        <!-- /Header -->
+
+        <main>
+            <section class="caja-grande caja-grande2">
+                <div class="admin-panel-container">
+                    <div class="admin-panel-sections">
+                        <aside class="admin-panel-aside">
+                            <ul>
+                                <li <% if(locals.section == "usersPanel"){ %>class="selected" <%}%>>
+                                    <a href="/super/panel/users"><i class="fa-solid fa-tag"></i> Usuarios</a>
+                                </li>
+                                <li <% if(locals.section == "configPanel"){ %>class="selected" <%}%>>
+                                    <a href="/super/panel/config"><i class="fa-solid fa-tag"></i> Configuraciones</a>
+                                </li>
+                            </ul>
+                        </aside>
+                        <div class="admin-panel">
+                            <% if(locals.section == "usersPanel") {%>
+                                <%- include('partials/superPanelUsers') %>
+                            <% } %>
+
+                            <% if(locals.section == "configPanel") {%>
+                                <%- include('partials/superPanelConfig') %>
+                            <% } %>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- footer -->
+        <%- include('partials/footer') %>
+            <!-- /footer -->
+</body>
+
+</html>
