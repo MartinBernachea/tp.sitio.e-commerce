@@ -15,10 +15,12 @@ const { getAppConfig } = require("../utils/appConfig")
 
 const controller = {
     index: async (req, res) => {
-        const appConfig = await getAppConfig();
+        const appConfig = getAppConfig();
         const userData = getUserDataStringified(req);
-        const productos = await db.producto.findAll({
+        const nuevosLanzamientos = db.producto.findAll({
             limit: 12,
+            order: [ ["id", "DESC"]],
+            limit: 4,
             include: [
                 { model: db.imagen, },
                 { model: db.categoria, },
@@ -27,7 +29,25 @@ const controller = {
             ]
         })
 
-        let localsParams = { productos, userData, appConfig }
+        const productosDestacados = db.producto.findAll({
+            limit: 12,
+            limit: 4,
+            include: [
+                { model: db.imagen, },
+                { model: db.categoria, },
+                { model: db.genero, },
+                { model: db.marca, },
+            ]
+        })
+
+        const response = await Promise.all([appConfig, nuevosLanzamientos, productosDestacados,])
+
+        let localsParams = {
+            nuevosLanzamientos: response[1],
+            productosDestacados: response[2],
+            appConfig: response[0],
+            userData,
+        }
 
         getNotificationAlert(localsParams, req)
 

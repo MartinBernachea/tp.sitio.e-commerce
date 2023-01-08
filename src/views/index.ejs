@@ -54,12 +54,11 @@
                 </div>
                 
                 <div class="caja-chica-productos">
-                    <% if(productos.length > 0) {%>
-                        <% for(let producto of productos) { %>
+                    <% if(locals.nuevosLanzamientos.length > 0) {%>
+                        <% for(let producto of nuevosLanzamientos) { %>
                             <%- include('./pages/partials/components/productCard', {producto, userData:locals.userData}) %>
                         <% } %>
                     <% } %>
-                    
                 </div>
             </section>
 
@@ -91,24 +90,11 @@
                     <a href="/store" class="titular-secundario">Ver Todos</a>
                 </div>
                 <div class="caja-chica-productos">
-                    <% if(productos.length > 0) {%>
-                        <% for(let p of productos) { %>
-                        <div class="product-card">
-                            <a href="/detail/<%= p.id %>">
-                                <div>                          
-                                    <img class="product-image" src="./img/products/<%= p.imagens?.length > 0 ? p.imagens[0].nombre : "" %>""
-                                        alt="img-producto">
-                                    <p class="info-precio">$<%= p.precio %></p>
-                                </div>
-                                <div class="product-data-container">
-                                    <p class="descripcion-producto"><%= p.nombre %></p>
-                                    <p class="categoria-producto"><%= p.categoria %></p>
-                                </div>
-                            </a>
-                        </div>
+                    <% if(locals.productosDestacados.length > 0) {%>
+                        <% for(let producto of locals.productosDestacados) { %>
+                            <%- include('./pages/partials/components/productCard', {producto, userData:locals.userData}) %>
                         <% } %>
-                    <% } %>
-                    
+                    <% } %>                    
                 </div>
             </section>
 
