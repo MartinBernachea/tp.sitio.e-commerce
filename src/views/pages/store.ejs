@@ -65,21 +65,9 @@
                             </div>
                             <% if(locals.products?.elements?.length > 0) {%>
                                 <div class="caja-chica-productos">
-
-                                    
-                                        <% for(let product of locals.products.elements) { %>
-                                        <div class="product-card">
-                                            <a href="/detail/<%= product.id %>">
-                                                <div>
-                                                    <img class="product-image" src="./img/products/<%= product.imagens?.length > 0 ? product.imagens[0].nombre : "" %>"" />
-                                                    <p class="info-precio">$<%= product.precio %></p>
-                                                </div>
-                                                <div class="product-data-container">
-                                                    <p class="descripcion-producto"><%= product.nombre %></p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <% } %>
+                                    <% for(let producto of locals.products.elements) { %>
+                                        <%- include('./partials/components/productCard', {producto, userData:locals.userData}) %>
+                                    <% } %>
                                 </div>
                                 <div class="user-form-pagination-container">
                                     <%- include('partials/tablePagination', { 

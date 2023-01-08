@@ -19,9 +19,12 @@ const controller = {
         const userData = getUserDataStringified(req);
         const productos = await db.producto.findAll({
             limit: 12,
-            include: [{
-                model: db.imagen,
-            }]
+            include: [
+                { model: db.imagen, },
+                { model: db.categoria, },
+                { model: db.genero, },
+                { model: db.marca, },
+            ]
         })
 
         let localsParams = { productos, userData, appConfig }
