@@ -3,7 +3,7 @@
         <h1 class="admin-title-section"> Panel de configuraciones: </h1>
     </div>
 
-    <form id="userPanelForm" action="/super/panel/config" method="GET">
+    <form id="userPanelForm">
         <div class="form-header-container">
             <div class="form-inputs-container">
                 <label class="form-label-input">
@@ -13,8 +13,7 @@
                 </label>
                 <label class="form-label-input">
                     <span>Valor:</span>
-                    <input name="valor" type="text" placeholder="12"
-                        value="<%= (locals.formData?.valor) ?? '' %>" />
+                    <input name="valor" type="text" placeholder="12" value="<%= (locals.formData?.valor) ?? '' %>" />
                 </label>
                 <label class="form-label-input">
                     <span>Descripcion:</span>
@@ -27,45 +26,47 @@
             <button type="reset" class="btn-secondary"> Limpiar </button>
             <button type="submit" class="btn-primary"> Buscar </button>
         </div>
-        <% if(locals.configResults) {%>
-            <% if(locals.configResults.quantity> 0) {%>
-                <table id="user-edit-table">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Valor</th>
-                            <th>Descripcion</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-user-panel">
-                        <% for(currentConfig of locals.configResults.elements) { %>
-                            <tr>
-                                <td>
-                                    <%= currentConfig.nombre %>
-                                </td>
-                                <td>
-                                    <%= currentConfig.valor %>
-                                </td>
-                                <td>
-                                    <%= currentConfig.descripcion %>
-                                </td>
-                                <td style="padding:0 4px">
-                                    <%- include('modals/configEditModal', {configData: currentConfig}) %>
-                                </td>
-                            </tr>
-                            <% } %>
-                    </tbody>
-                </table>
-                <div class="user-form-pagination-container">
-                    <%- include('tablePagination', { quantity: locals.configResults.quantity, resultsPerPage:
-                        locals.configResults.resultsPerPage, page: locals.configResults.page, }) %>
-                </div>
-                <% } else { %>
-                    <p style="margin-bottom:20px;">No hay coincidencias con la busqueda</p>
-                    <% } %>
-                        <% } %>
     </form>
+    
+    <% if(locals.configResults) {%>
+        <% if(locals.configResults.quantity> 0) {%>
+            <table id="user-edit-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Valor</th>
+                        <th style="max-width: 400px;">Descripcion</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-user-panel">
+                    <% for(currentConfig of locals.configResults.elements) { %>
+                        <tr>
+                            <td>
+                                <%= currentConfig.nombre %>
+                            </td>
+                            <td>
+                                <%= currentConfig.valor %>
+                            </td>
+                            <td style="max-width: 400px;">
+                                <%= currentConfig.descripcion %>
+                            </td>
+                            <td style="padding:0 4px">
+                                <%- include('modals/configEditModal', {configData: currentConfig}) %>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+            <div class="user-form-pagination-container">
+                <%- include('tablePagination', { quantity: locals.configResults.quantity, resultsPerPage:
+                    locals.configResults.resultsPerPage, page: locals.configResults.page, }) %>
+            </div>
+            <% } else { %>
+                <p style="margin-bottom:20px;">No hay coincidencias con la busqueda</p>
+                <% } %>
+                    <% } %>
+
 
 </section>
 

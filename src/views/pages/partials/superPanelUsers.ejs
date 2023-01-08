@@ -55,56 +55,59 @@
             <button type="reset" class="btn-secondary"> Limpiar </button>
             <button type="submit" class="btn-primary"> Buscar </button>
         </div>
-        <% if(locals.usersResults) {%>
-            <% if(locals.usersResults.quantity> 0) {%>
-                <table id="user-edit-table">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Email</th>
-                            <th>Admin</th>
-                            <th>Super</th>
-                            <th>Restringido</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-user-panel">
-                        <% for(currentUser of locals.usersResults.elements) { %>
-                            <tr>
-                                <td>
-                                    <%= currentUser.nombre %>
-                                </td>
-                                <td>
-                                    <%= currentUser.apellido %>
-                                </td>
-                                <td>
-                                    <%= currentUser.email %>
-                                </td>
-                                <td>
-                                    <% if(currentUser.admin) {%> SI <%} else {%> NO <%}%>
-                                </td>
-                                <td>
-                                    <% if(currentUser.super) {%> SI <%} else {%> NO <%}%>
-                                </td>
-                                <td>
-                                    <% if(currentUser.restringido) {%> SI <%} else {%> NO <%}%>
-                                </td>
-                                <td style="padding:0 4px">
-                                    <%- include('modals/userEditModal', {userData: currentUser}) %>
-                                </td>
-                            </tr>
-                            <% } %>
-                    </tbody>
-                </table>
-                <div class="user-form-pagination-container">
-                    <%- include('tablePagination', { quantity: locals.usersResults.quantity, resultsPerPage:
-                        locals.usersResults.resultsPerPage, page: locals.usersResults.page, }) %>
-                </div>
-                <% } else { %>
-                    <p style="margin-bottom:20px;">No hay coincidencias con la busqueda</p>
-                    <% } %>
-                        <% } %>
     </form>
 
+    <% if(locals.usersResults) {%>
+        <% if(locals.usersResults.quantity> 0) {%>
+            <table id="user-edit-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Admin</th>
+                        <th>Super</th>
+                        <th>Restringido</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-user-panel">
+                    <% for(currentUser of locals.usersResults.elements) { %>
+                        <tr>
+                            <td>
+                                <%= currentUser.nombre %>
+                            </td>
+                            <td>
+                                <%= currentUser.apellido %>
+                            </td>
+                            <td>
+                                <%= currentUser.email %>
+                            </td>
+                            <td>
+                                <% if(currentUser.admin) {%> SI <%} else {%> NO <%}%>
+                            </td>
+                            <td>
+                                <% if(currentUser.super) {%> SI <%} else {%> NO <%}%>
+                            </td>
+                            <td>
+                                <% if(currentUser.restringido) {%> SI <%} else {%> NO <%}%>
+                            </td>
+                            <td style="padding:0 4px">
+                                <%- include('modals/userEditModal', {userData: currentUser}) %>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+            <div class="user-form-pagination-container">
+                <%- include('tablePagination', { quantity: locals.usersResults.quantity, resultsPerPage:
+                    locals.usersResults.resultsPerPage, page: locals.usersResults.page, }) %>
+            </div>
+            <% } else { %>
+                <p style="margin-bottom:20px;">No hay coincidencias con la busqueda</p>
+                <% } %>
+                    <% } %>
+
 </section>
+
+<script src="/js/userEditModal.js"></script>

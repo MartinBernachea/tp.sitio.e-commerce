@@ -1,15 +1,16 @@
 <div>
-    <div id="modalBackground" class="user-modal-background initial-position">
-        <div class="user-modal" id="modal<%= locals.configData.id %>">
+    <div id="modalBackground<%= locals.configData.id %>" class="user-modal-background initial-position">
+        <div class="user-modal" id="editConfigmodal<%= locals.configData.id %>">
             <div class="edit-user-form">
                 <div class="edit-user-modal-container">
-                    <h1>Modificar datos de usuario:</h1>
+                    <h1 class="title-edit-config">Modificar configuracion de la constante:</h1>
+                    <h4 class="subtitle-edit-config"><%= locals.configData.nombre%></h4>
                     <hr class="edit-user-form-separador"/>
                     <div class="form-inputs-container">
                         <label class="form-label-input">
                             <span>Valor:</span>
-                            <input name="cName" class="input-text-secondary" type="text" tabindex="1"
-                                placeholder="Nombres" value="<%= locals.configData.nombre %>" />
+                            <input name="valor" id="valor" class="input-text-secondary" type="text" tabindex="1"
+                                placeholder="12" value="<%= locals.configData.valor %>" />
                         </label>
                     </div>
                 </div>
@@ -25,5 +26,5 @@
             </div>
         </div>
     </div>
-    <i class="fa-solid fa-pen fa-sm btnShow" id="btnShow-modal<%= locals.configData.id %>"></i>
+    <i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEdit-modal<%= locals.configData.id %>"></i>
 </div>
