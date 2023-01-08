@@ -19,6 +19,7 @@ let modalData = {
 
     saveInitialValues: (modalId) => {
         modalData.stored = modalData.getModalData(modalId);
+        return modalData.stored
     },
 
     restoreInitialValues: (modalId) => {
@@ -42,6 +43,7 @@ const hiddeModal = (modalId) => {
 }
 
 const showModal = (modalId) => {
+    const data = modalData.saveInitialValues(modalId)
     const modalRef = document.querySelector("#" + modalId);
     /* SOLUCION BUG */
     /* 

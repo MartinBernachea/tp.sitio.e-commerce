@@ -1,0 +1,30 @@
+<div>
+    <div id="modalBackground<%= locals.configData.id %>" class="user-modal-background initial-position">
+        <div class="user-modal" id="editConfigmodal<%= locals.configData.id %>">
+            <div class="edit-user-form">
+                <div class="edit-user-modal-container">
+                    <h1 class="title-edit-config">Modificar configuracion de la constante:</h1>
+                    <h4 class="subtitle-edit-config"><%= locals.configData.nombre%></h4>
+                    <hr class="edit-user-form-separador"/>
+                    <div class="form-inputs-container">
+                        <label class="form-label-input">
+                            <span>Valor:</span>
+                            <input name="valor" id="valor" class="input-text-secondary" type="text" tabindex="1"
+                                placeholder="12" value="<%= locals.configData.valor %>" />
+                        </label>
+                    </div>
+                </div>
+                <div class="buttons-container">
+                    <button id="btnCancelar-modal<%= locals.configData.id %>"
+                        class="btn-secondary btn-small btnCancelar">Cancelar</button>
+                    <button id="btnAplicar-modal<%= locals.configData.id %>"
+                        class="btn-primary btn-small btnAplicar">Aplicar</button>
+                    <button id="loader" class="btn-primary btn-small" style="display:none">
+                        <%- include('../components/spinner') %>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <i class="fa-solid fa-pen fa-sm btnShow" id="btnShowEdit-modal<%= locals.configData.id %>"></i>
+</div>

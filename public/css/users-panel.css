@@ -304,6 +304,15 @@ tbody tr:nth-child(even) {
     cursor: pointer;
     opacity: 0.85;
 }
+
+h1.title-edit-config {
+    margin-bottom: 0;
+}
+
+.subtitle-edit-config {
+    margin-bottom: 20px;
+    color: #666666;
+}
 .btnShow:hover {
     color: #c42121;
 }

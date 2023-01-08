@@ -1,22 +1,19 @@
 const notificationAlertRef = document.querySelector("#notificationAlert");
 
+let modalTimer;
+
 notificationAlertRef?.addEventListener("click", (event) => {
     if (event.target.id == "btn-close-alert") {
+        window.clearTimeout(modalTimer);
         notificationAlertRef.classList.add("hidde-alert")
     }
 })
 
 const removeShowClass = () => {
     notificationAlertRef.classList.remove("show");
+    notificationAlertRef.classList.remove("active");
     window.clearTimeout(modalTimer);
 }
-
-let modalTimer;
-
-window.addEventListener("load", () => {
-    notificationAlertRef.classList.add("active");
-    modalTimer = window.setTimeout(removeShowClass, 6000);
-})
 
 notificationAlertRef?.addEventListener("mouseenter", (event) => {
     console.log("INGRESO")

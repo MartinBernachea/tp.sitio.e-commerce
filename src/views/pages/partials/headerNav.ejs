@@ -1,4 +1,11 @@
 <!-- HEADER -->
+<script> 
+    /* VARIABLES GLOBALES */
+    window.appConfig = <%- JSON.stringify(locals.appConfig) %> 
+</script>
+
+<div class="info-promo"> <i class="fa-solid fa-truck"></i> ENVIOS SIN COSTO EN COMPRAS SUPERIORES A $<%= appConfig?.SUMA_MINIMA_ENVIO_SIN_CARGO?.valor%> </div>
+
 <header class="header">
     <nav class="header-nav">
         <!-- LOGO -->
@@ -33,11 +40,11 @@
                 <%}%>
 
                         <% if(locals?.userData?.super){ %>
-                <li class="li-item"> | </li>
-                <li class="li-item">
-                    <a href="/user/panel"> SUPER PANEL </a>
-                </li>
-                <%}%>
+                            <li class="li-item"> | </li>
+                            <li class="li-item">
+                                <a href="/super/panel/users"> SUPER PANEL </a>
+                            </li>
+                            <%}%>
             </ul>
         </div>
 
@@ -124,13 +131,18 @@
             <!--  HEADER ICONOS -->
             <div class="header-icons">
                 <% if(locals?.userData){ %>
-                <a href="/user/account"><i class="fa-regular fa-user icon-header"> <span class="user-name">
-                            <%= locals.userData.nombre %> </span></i></a>
+                    <a href="/user/account"><i class="fa-regular fa-user icon-header"> <span class="user-name">
+                        <%= locals.userData.nombre %> </span></i></a>
                 <%} else {%>
-                <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
+                    <a href="/user/login"><i class="fa-regular fa-user icon-header"></i></a>
                 <%}%>
-                            <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
-                            <a href="/carrito"><i class="fa-solid fa-basket-shopping icon-header"></i></a>
+                    <a href=""><i class="fa-regular fa-heart icon-header"></i></a>
+                    <div style="position:relative;">
+                        <a href="/carrito">
+                            <i class="fa-solid fa-basket-shopping icon-header"></i>
+                            <div id="cartNumber" class="cart-number">21</div>
+                        </a>
+                    </div>
             </div>
         </div>
     </nav>
@@ -141,3 +153,13 @@
 </header>
 
 <script src="/js/productSearchBar.js" type="module"></script>
+<script src="/js/refreshCartNumber.js"></script>
+
+<% if(locals?.userData?.id){ %>
+    <script>
+        window.addEventListener("load", () => {
+            refreshCartNumber(<%= locals.userData.id %>)
+        })
+    </script>
+<%}%>
+
