@@ -65,6 +65,12 @@ const controller = {
                 res.cookie('user', JSON.stringify(frontUserData), { maxAge: 60000 });
                 req.session.usuarioLogueado = JSON.stringify(frontUserData);
 
+                req.session.notificationAlert = {
+                    type: "success",
+                    boldTitle: "Hola! " + frontUserData.nombre,
+                    description: "Tu cuenta se creo correctamente",
+                }
+
                 res.redirect('/')
             } catch (err) {
                 console.log("err")

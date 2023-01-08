@@ -101,14 +101,14 @@
               <h3> <%= locals.errors[0].msg %> </h3>
               <% } %>
               <% } %>
-
-              <% if (locals && locals.arrCustomErrors) { %>
-              <% for (ctError of locals.arrCustomErrors) { %>
-              <h3>-<%= ctError %></h3>
-              <% } %>
-              <% } %>
             </div>
             <p class="input-text-error grupo__password2"> Ambas contraseñas deben coincidir.</p>
+
+          <% if (locals && locals.arrCustomErrors) { %>
+          <% for (ctError of locals.arrCustomErrors) { %> 
+          <h3>-<%= ctError %></h3>
+          <% } %>
+          <% } %>
           </div>
 
           <div class="formulario__mensaje" id="formulario__mensaje">
