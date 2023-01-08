@@ -185,7 +185,7 @@
 }
 
 
-.btn-secondary.hidden-btn {
+.btn-pay.hidden-btn {
     display: none;
 }
 
@@ -250,7 +250,7 @@
 
 
 @media(min-width:720px) {
-    .btn-secondary.hidden-btn {
+    .btn-pay.hidden-btn {
         display: flex;
     }
 
