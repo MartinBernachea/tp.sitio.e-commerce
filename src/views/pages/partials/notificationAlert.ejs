@@ -19,7 +19,11 @@
             locals?.notificationAlert?.type=='danger' ? 'danger' : '' 
     %>">
         <div class="alert-container">
-            <i class="fa-solid fa-check fa-2xl"></i>
+            <i id="notificationIcon" class="fa-solid fa-2xl <%= 
+            locals?.notificationAlert?.type=='success' ? 'fa-check' :
+                locals?.notificationAlert?.type=='info' ? 'fa-circle-info' :
+                    locals?.notificationAlert?.type=='danger' ? 'fa-circle-exclamation' : "fa-check" 
+            %>"></i>
             <p class="alert-msg">
                 <b><%=locals?.notificationAlert?.boldTitle%></b><%=locals?.notificationAlert?.title%><br>
                 <span><%-locals?.notificationAlert?.tag%></span>

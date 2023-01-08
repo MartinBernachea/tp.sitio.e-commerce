@@ -16,13 +16,11 @@ const removeShowClass = () => {
 }
 
 notificationAlertRef?.addEventListener("mouseenter", (event) => {
-    console.log("INGRESO")
     window.clearTimeout(modalTimer);
     notificationAlertRef.classList.toggle("active");
 })
 
 notificationAlertRef?.addEventListener("mouseleave", (event) => {
-    console.log("SALIO")
     modalTimer = window.setTimeout(removeShowClass, 6000);
     notificationAlertRef.classList.toggle("active");
 })

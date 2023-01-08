@@ -4,11 +4,15 @@ const btnRemoveProduct = document.querySelector("#btnRemoveProduct")
 function agregarProducto(productId, userId) {
     const notificationAlert = document.querySelector("#notificationAlert")
     const notificationTexto = document.querySelector("#notificationAlert .alert-msg")
+    const notificationIcono = document.querySelector("#notificationAlert #notificationIcon")
 
     if (!userId) {
         notificationTexto.innerHTML = "Para agregar un producto al <b>carrito</b> es necesario <a href='/user/login'><b>Iniciar sesion</b></a>";
         notificationAlert.classList.add("info", "show", "active");
         notificationAlert.classList.remove("success", "danger", "hidde-alert");
+        notificationIcono.classList.add("fa-circle-info")
+        notificationIcono.classList.remove("fa-check", "fa-circle-exclamation")
+
         if (modalTimer) window.clearTimeout(modalTimer);
         modalTimer = window.setTimeout(removeShowClass, 6000);
         return
@@ -28,6 +32,8 @@ function agregarProducto(productId, userId) {
         notificationTexto.innerHTML = "<b>Bien!</b> El producto se añadio al carrito correctamente"
         notificationAlert.classList.add("success", "show", "active")
         notificationAlert.classList.remove("info", "danger", "hidde-alert")
+        notificationIcono.classList.add("fa-check")
+        notificationIcono.classList.remove("fa-circle-info", "fa-circle-exclamation")
         if (modalTimer) window.clearTimeout(modalTimer);
         modalTimer = window.setTimeout(removeShowClass, 6000);
         refreshCartNumber(userId)
@@ -42,6 +48,8 @@ function agregarProducto(productId, userId) {
             notificationTexto.innerText = "El producto ya se encuentra en el carrito"
             notificationAlert.classList.add("info", "show", "active")
             notificationAlert.classList.remove("success", "danger", "hidde-alert")
+            notificationIcono.classList.add("fa-circle-info")
+            notificationIcono.classList.remove("fa-check", "fa-circle-exclamation")
             if (modalTimer) window.clearTimeout(modalTimer);
             modalTimer = window.setTimeout(removeShowClass, 6000);
         }
@@ -57,6 +65,7 @@ function removerProducto(productId, userId) {
     let carrito = localDataParsed[userId] ?? [];
     const notificationAlert = document.querySelector("#notificationAlert")
     const notificationTexto = document.querySelector("#notificationAlert .alert-msg")
+    const notificationIcono = document.querySelector("#notificationAlert #notificationIcon")
 
     const productIndex = carrito.indexOf(productId)
     const isProductInCart = productIndex >= 0;
@@ -68,6 +77,8 @@ function removerProducto(productId, userId) {
         notificationTexto.innerHTML = "El producto se removio del carrito <b>correctamente</b>"
         notificationAlert.classList.add("info", "show", "active")
         notificationAlert.classList.remove("success", "danger", "hidde-alert")
+        notificationIcono.classList.add("fa-circle-info")
+        notificationIcono.classList.remove("fa-check", "fa-circle-exclamation")
         if (modalTimer) window.clearTimeout(modalTimer);
         modalTimer = window.setTimeout(removeShowClass, 6000);
         refreshCartNumber(userId)
@@ -82,8 +93,10 @@ function removerProducto(productId, userId) {
             const notificationAlert = document.querySelector("#notificationAlert")
             const notificationTexto = document.querySelector("#notificationAlert b")
             notificationTexto.innerText = "El producto no se encuentra en el carrito"
-            notificationAlert.classList.add("info", "show", "active")
-            notificationAlert.classList.remove("success", "danger", "hidde-alert")
+            notificationAlert.classList.add("danger", "show", "active")
+            notificationAlert.classList.remove("success", "info", "hidde-alert")
+            notificationIcono.classList.add("fa-circle-exclamation")
+            notificationIcono.classList.remove("fa-check", "fa-circle-info")
             if (modalTimer) window.clearTimeout(modalTimer);
             modalTimer = window.setTimeout(removeShowClass, 6000);
         }
