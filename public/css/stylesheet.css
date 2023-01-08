@@ -81,17 +81,16 @@ button:disabled {
   height: min-content;
   width: auto;
   max-width: 15rem;
+  margin: auto;
   background-color: #000;
   color: #fff;
   font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 0;
   border-radius: 10px;
   cursor: pointer;
   padding: 9px 26px;
   position: relative;
+  overflow: hidden;
 }
 .btn-secondary i,
 .btn-pay i {
@@ -101,9 +100,6 @@ button:disabled {
 }
 .btn-secondary:hover {
   background-color: #323232; 
-}
-.btn-secondary:hover i {
-  color: #000;
 }
 
 .btn-terceary {

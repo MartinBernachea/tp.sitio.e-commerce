@@ -75,23 +75,12 @@ function showProducts(data, userId) {
                 <div class="product-info">
                     <div>
                         <h4 class="searchProducts_data">${productoActual.marca.nombre}</h4>
-                        <h4>${productoActual.nombre}</h4>
+                        <h4 style="text-transform: uppercase;">${productoActual.nombre}</h4>
                         <div class="cantidad-container" id="precio${productoActual.id}">
                             $${productoActual.precio}
                         </div>
                     </div>
-                    <select id="cantidades${productoActual.id}" class="cantidades" >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
+                    <input type="number" value="1" min="1" max="99" id="cantidades${productoActual.id}" class="cantidades" />
                 </div>
                 <div class="product-item-total-container">
                     <i class="fa-solid fa-trash fa-sm btnShow" onclick="eliminarProductoCart(${productoActual.id},${userId})"></i>

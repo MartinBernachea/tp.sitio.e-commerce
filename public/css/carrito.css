@@ -154,11 +154,15 @@ font-size: 1.3rem;
 }
 
 .cantidades {
-    width: 70px;
+    width: auto;
     height: 50px;
     font-weight: bold;
+    width: 50px;
+    height: 40px;
+    font-weight: 600;
     font-size: 16px;
     padding: 5px;
+    text-align: center;
 }
 
 .boton1 {

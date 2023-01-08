@@ -110,7 +110,9 @@
   margin: 0 20px 0 0;
 }
 .login-button-div {
-  margin: 20px 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .iniciar-con {

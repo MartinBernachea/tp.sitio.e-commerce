@@ -5,139 +5,137 @@
 
 <head>
     <%- include('partials/head') %>
-        <link rel="stylesheet" href="/css/stylesheet.css">
+    <link rel="stylesheet" href="/css/stylesheet.css">
 
-        <title> G&X - Cart </title>
+    <title> G&X - Cart </title>
 </head>
 <!-- /head -->
 
 <body class="carrito-body">
     <!-- Header -->
     <%- include('partials/headerNav', locals) %>
-        <!-- /Header -->
+    <!-- /Header -->
 
-        <main class="loadingCartStatus"> <!-- noProductsCartStatus  loadingCartStatus showResultsStatus-->
-            <!--SECTIONS-->
-            <section id="chartContainer" class="caja-grande caja-grande2">
-                <!--TU CARRITO-->
-                <div id="cardsContainerStatus">
-                    <div class="subcaja-1-titulo">
-                        <h2 style="width:max-content">TU CARRITO</h2>
-                    </div>
-                </div>
-
-                <div id="cardsContainerResults" class="cards-container">
-                    <section>
-                        <div class="subcaja-1-titulo">
-                            <h2>TU CARRITO</h2>
-                            <p class="total" id="carritoTotal">"PRECIO"</p>
-                            <div id="noProductsChartMessage">
-                                No hay productos dentro de tu carrito. <a href="/store" style="font-weight: bold;">Ir a la Tienda</a>
-                            </div>
-                        </div>
-                    </section>
-                    <div id="contenedor-tarjetas">
-
-                    </div>
-
-                    <button id="btnPayCarrito" class="btn-pay hidden-btn">
-                        IR A PAGAR <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <div id="resumenSection" class="resumen-section">
-                    <div id="resumenContainerResults">
-                        <button class="btn-pay">
-                            IR A PAGAR <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-
-                        <section class="resumen-container">
-                            <div class="resumen-titulo">
-                                <h3>RESUMEN DEL PEDIDO</h3>
-                            </div>
-
-                            <div class="resumen-item">
-                                <p id="resumenCantidad"></p>
-                                <p id="resumenPreciosProductos"></p>
-                            </div>
-
-                            <div class="resumen-item">
-                                <p>Envio</p>
-                                <p id="resumenPrecioEnvio">$1500</p>
-                            </div>
-
-                            <div class="resumen-item">
-                                <span class="resumen-total">
-                                    <div class="resumen-precios">
-                                        <p> TOTAL </p>
-                                        <p id="resumenIva"> TOTAL </p>
-                                    </div>
-                                    <p id="resumenTotal"> $ </p>
-                                </span>
-                            </div>
-                        </section>
-
-                        <div class="container-cupon-pago">
-                            <section class="cupon-container">
-                                <label for="cupon-promocional"></label>
-                                <input type="text" name="cupon-promocional" id="cupon-promocional" class="cupon-input"
-                                    placeholder="INTRODUCE TU CODIGO PROMOCIONAL">
-                            </section>
-
-                            <section class="opciones-pago-container">
-                                <div class="titulo-opciones-pago">
-                                    <h4> OPCIONES DE PAGO </h4>
-                                </div>
-                                <div class="imagenes-opciones-pago">
-                                    <img src="/img/medio-de-pago.jpg" alt="opciones-pago" class="opciones-pago-img">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="carrito-status-container">
-                <div id="loadingCart">
-                    <div id="searchBarSpinner" class="spinner dark">
-                        <div class="bounce1"></div>
-                        <div class="bounce2"></div>
-                        <div class="bounce3"></div>
-                    </div>
-
-                    Cargando carrito
-                </div>
-
-                <div id="noProductsChartMessage">
-                    <div>
-                        No hay productos dentro de tu carrito. <b><a href="/store">Ir a la Store</a></b>
-                    </div>
+    <main class="loadingCartStatus">
+        <!-- noProductsCartStatus  loadingCartStatus showResultsStatus-->
+        <!--SECTIONS-->
+        <section id="chartContainer" class="caja-grande caja-grande2">
+            <!--TU CARRITO-->
+            <div id="cardsContainerStatus">
+                <div class="subcaja-1-titulo">
+                    <h2 style="width:max-content">TU CARRITO</h2>
                 </div>
             </div>
 
-            <section class="caja-grande">
-                <!--PRODUCTOS DESTACADOS-->
-                <section class="caja-chica">
-                    <div class="caja-chica-titulo">
-                        <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
-                        <a href="" class="titular-secundario">Ver Todos</a>
-                    </div>
-                    <div class="caja-chica-destacados">
+            <div id="cardsContainerResults" class="cards-container">
+                <section>
+                    <div class="subcaja-1-titulo">
+                        <h2>TU CARRITO</h2>
+                        <p class="total" id="carritoTotal">"PRECIO"</p>
                     </div>
                 </section>
+                <div id="contenedor-tarjetas">
+
+                </div>
+
+                <button id="btnPayCarrito" class="btn-pay hidden-btn">
+                    IR A PAGAR <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div id="resumenSection" class="resumen-section">
+                <div id="resumenContainerResults">
+                    <button class="btn-pay">
+                        IR A PAGAR <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                    <section class="resumen-container">
+                        <div class="resumen-titulo">
+                            <h3>RESUMEN DEL PEDIDO</h3>
+                        </div>
+
+                        <div class="resumen-item">
+                            <p id="resumenCantidad"></p>
+                            <p id="resumenPreciosProductos"></p>
+                        </div>
+
+                        <div class="resumen-item">
+                            <p>Envio</p>
+                            <p id="resumenPrecioEnvio">$1500</p>
+                        </div>
+
+                        <div class="resumen-item">
+                            <span class="resumen-total">
+                                <div class="resumen-precios">
+                                    <p> TOTAL </p>
+                                    <p id="resumenIva"> TOTAL </p>
+                                </div>
+                                <p id="resumenTotal"> $ </p>
+                            </span>
+                        </div>
+                    </section>
+
+                    <div class="container-cupon-pago">
+                        <section class="cupon-container">
+                            <label for="cupon-promocional"></label>
+                            <input type="text" name="cupon-promocional" id="cupon-promocional" class="cupon-input"
+                                placeholder="INTRODUCE TU CODIGO PROMOCIONAL">
+                        </section>
+
+                        <section class="opciones-pago-container">
+                            <div class="titulo-opciones-pago">
+                                <h4> OPCIONES DE PAGO </h4>
+                            </div>
+                            <div class="imagenes-opciones-pago">
+                                <img src="/img/medio-de-pago.jpg" alt="opciones-pago" class="opciones-pago-img">
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="carrito-status-container">
+            <div id="loadingCart">
+                <div id="searchBarSpinner" class="spinner dark">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+
+                Cargando carrito
+            </div>
+
+            <div id="noProductsChartMessage">
+                <div>
+                    No hay productos dentro de tu carrito. <b><a href="/store">Ir a la Store</a></b>
+                </div>
+            </div>
+        </div>
+
+        <section class="caja-grande">
+            <!--PRODUCTOS DESTACADOS-->
+            <section class="caja-chica">
+                <div class="caja-chica-titulo">
+                    <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
+                    <a href="" class="titular-secundario">Ver Todos</a>
+                </div>
+                <div class="caja-chica-destacados">
+                </div>
             </section>
+        </section>
 
-        </main>
+    </main>
 
-        <!-- footer -->
-        <%- include('partials/footer') %>
-            <!-- /footer -->
+    <!-- footer -->
+    <%- include('partials/footer') %>
+    <!-- /footer -->
 </body>
 
 <script src="/js/chart.js"></script>
 <script src="/js/chartView.js"></script>
 <script>
-        getProductChartData(<%= locals?.userData?.id %>)
+    getProductChartData(<%= locals?.userData?.id %>)
 </script>
 
 </html>
