@@ -79,7 +79,8 @@ button:disabled {
 .btn-secondary, 
 .btn-pay {
   height: min-content;
-  max-width: 12rem;
+  width: auto;
+  max-width: 15rem;
   background-color: #000;
   color: #fff;
   font-size: 16px;
@@ -942,7 +943,7 @@ body::-webkit-scrollbar {
   border: 2px solid #666;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(102, 102, 102, .8);
+  background-color: #e0e0e0cc;
 }
 ::-webkit-scrollbar-track {
   background-color: #666;
