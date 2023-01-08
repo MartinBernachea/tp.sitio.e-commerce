@@ -906,3 +906,35 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0) inset !important;
 }
+
+body::-webkit-scrollbar {
+  width: .8rem;
+  overflow-y: auto;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 2px solid #666;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(102, 102, 102, .8);
+}
+::-webkit-scrollbar-track {
+  background-color: #666;
+}
+
+.fa-facebook:hover {
+  color: #4267B2;
+}
+.fa-square-twitter:hover {
+  color: #1DA1F2;
+}
+.fa-google:hover {
+  color: #fff;
+}
+.fa-instagram:hover {
+  color: #E1306C;
+}
+.fa-tiktok:hover {
+  color: rgba(0, 0, 0, .4);
+}
