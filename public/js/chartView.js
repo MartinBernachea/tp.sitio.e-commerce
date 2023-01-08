@@ -28,10 +28,16 @@ function refreshCarritoInfo() {
     const resumenPreciosProductos = document.querySelector("#resumenPreciosProductos")
     resumenPreciosProductos.innerText = "$" + sumatoriaPrecios
 
-
     const resumenPrecioEnvio = document.querySelector("#resumenPrecioEnvio")
-    console.log("sumatoriaPrecios", sumatoriaPrecios)
-    resumenPrecioEnvio.innerText = sumatoriaPrecios >= Number(window.appConfig.SUMA_MINIMA_ENVIO_SIN_CARGO.valor) ? "GRATIS" : "$" + Number(window.appConfig.COSTO_ENVIO_GENERAL.valor)
+    const costoEnvio = sumatoriaPrecios >= Number(window.appConfig.SUMA_MINIMA_ENVIO_SIN_CARGO.valor) ? 0 : Number(window.appConfig.COSTO_ENVIO_GENERAL.valor)
+    resumenPrecioEnvio.innerText = costoEnvio == 0 ? "GRATIS" : "$" + costoEnvio
+
+    const resumenTotal = document.querySelector("#resumenTotal")
+    const precioTotalConEnvio = sumatoriaPrecios + costoEnvio
+    resumenTotal.innerText = `$${precioTotalConEnvio}`
+
+    const resumenIva = document.querySelector("#resumenIva")
+    resumenIva.innerText = `(IVA incluido $${Number(window.appConfig.PORCENTAJE_IVA.valor) * precioTotalConEnvio / 100})`
 }
 
 function eliminarProductoCart(productId, userId) {
@@ -59,8 +65,8 @@ function showProducts(data, userId) {
 
     let contenedorTarjeta = document.getElementById("contenedor-tarjetas")
     let tarjetasPreIntroduccion = " ";
-    data.data.forEach((productoActual, index) => {
-        tarjetasPreIntroduccion = tarjetasPreIntroduccion + `<section id="productCart${productoActual.id}" class="product-detail-container">
+    data.data.forEach(productoActual => {
+        tarjetasPreIntroduccion = tarjetasPreIntroduccion + `<section id = "productCart${productoActual.id}" class="product-detail-container" >
         <div style="height:100%; aspect-ratio: 1/1; max-height: 200px;">
             <img src="/img/products/${productoActual.imagens[0].nombre}" alt="${productoActual.nombre}" class="img-producto-carrito">
         </div>
@@ -70,11 +76,11 @@ function showProducts(data, userId) {
                     <div>
                         <h4 class="searchProducts_data">${productoActual.marca.nombre}</h4>
                         <h4>${productoActual.nombre}</h4>
-                        <div class="cantidad-container" id="precio${index}">
+                        <div class="cantidad-container" id="precio${productoActual.id}">
                             $${productoActual.precio}
                         </div>
                     </div>
-                    <select id="cantidad${index}" class="cantidades" >
+                    <select id="cantidades${productoActual.id}" class="cantidades" >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -90,13 +96,13 @@ function showProducts(data, userId) {
                 <div class="product-item-total-container">
                     <i class="fa-solid fa-trash fa-sm btnShow" onclick="eliminarProductoCart(${productoActual.id},${userId})"></i>
 
-                    <div class="precio-por-cantidad" id="precio-por-cantidad${index}">
+                    <div class="precio-por-cantidad" id="precio-por-cantidad${productoActual.id}">
                         $${productoActual.precio}
                     </div>
                 </div>
             </div>
         </div>
-        </section> 
+        </section>
         `
     })
 
@@ -104,8 +110,8 @@ function showProducts(data, userId) {
 
     contenedorTarjeta.addEventListener("change", function (e) {
         const tagId = e.target.id
-        if (tagId.includes("cantidad")) {
-            const productoId = tagId.slice("cantidad".length, tagId.length)
+        if (tagId.includes("cantidades")) {
+            const productoId = tagId.slice("cantidades".length, tagId.length)
             const precioUnitarioTag = document.getElementById(`precio${productoId}`)
             const precioCantidadTag = document.getElementById(`precio-por-cantidad${productoId}`)
             const precioUnitario = (precioUnitarioTag.innerText).slice(1, (precioUnitarioTag.innerText).length)

@@ -24,8 +24,14 @@
     margin: 25px 0;
 }
 
+.resumen-container .resumen-item:not(:last-child) p {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
 .resumen-titulo {
     font-size: 20px;
+    margin: 14px 0;
 }
 
 .resumen-titulo h3 {
@@ -49,9 +55,13 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 10px;
+    align-items: center;
+    margin-bottom: 4px;
     font-weight: bold;
+}
+
+#resumenTotal{
+font-size: 1.3rem;
 }
 
 .container-cupon-pago {
@@ -325,8 +335,18 @@
     font-weight: bold;
 }
 
+.resumen-precios p {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1rem;
+}
+
 .product-item-total-container i {
     line-height: normal;
+}
+
+#resumenIva {
+    font-weight: 400;
 }
 
 @media(min-width:720px) {
