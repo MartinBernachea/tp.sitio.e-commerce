@@ -686,21 +686,19 @@ button:disabled {
   align-items: center;
   justify-content: center;
   margin: 20px auto;
-  width: 100%;
+  width: 70%;
 }
 
 .foot-banner-ul {
   height: 4.5rem;
   width: 100%;
-  max-width: 1000px;
   overflow: hidden;
   white-space: nowrap;
   scroll-behavior: smooth;
 }
 
 .foot-banner-ul img {
-  /* width: calc(100% / 4); */
-  min-width: 220px;
+  width: calc(100% / 4);
   object-fit: scale-down;
   margin: 0 10px;
 }
@@ -968,6 +966,9 @@ body::-webkit-scrollbar {
   .grid-store .product-card {
     width: 45vw;
   }
+  .foot-banner-ul img {
+    width: calc(100% / 2);
+  }
 }
 @media (min-width: 820px) {
   .caja-chica-productos {
@@ -982,6 +983,9 @@ body::-webkit-scrollbar {
 
   .grid-store .product-card {
     width: 25vw;
+  }
+  .foot-banner-ul img {
+    width: calc(100% / 3);
   }
 }
 
@@ -1026,6 +1030,9 @@ body::-webkit-scrollbar {
   .grid-store .product-card {
     width: 20vw;
   }
+  .foot-banner-ul img {
+    width: calc(100% / 3);
+  }
 }
 
 @media (max-width: 960px) {
@@ -1049,5 +1056,8 @@ body::-webkit-scrollbar {
   }
   .grid-store .product-card {
     width: 18vw;
+  }
+  .foot-banner-ul img {
+    width: calc(100% / 4);
   }
 }

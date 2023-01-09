@@ -45,12 +45,11 @@ const firstImg = document.querySelectorAll('.foot-banner-ul img')[0];
 arrowIcons.forEach(icon => {
     icon.addEventListener('click', () => {
         if(icon.id == "left") {
-            carrousel.scrollLeft -= firstImg.width;
+            carrousel.scrollLeft -= firstImg.width + 22;
             console.log('left');
         } else {
-            carrousel.scrollLeft += firstImg.width;
+            carrousel.scrollLeft += firstImg.width + 22;
             console.log('right');
         }
-        console.log(icon);
     })
 })
