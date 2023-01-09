@@ -87,7 +87,6 @@
 
 					<div class="data-container">
 						<div class="product-container">
-
 							<div class="admin-product-panel-inputs-container">
 									<label class="form-label-input label-lg">
 										<span class="font-size-lg">Nombre del producto:</span>
@@ -113,52 +112,57 @@
 						</div>
 					</div>
 
-					<div class="admin-product-panel-inputs-container">
-						<label class="form-label-input label-md">
-							<span class="font-size-lg">Categoria:</span>
-							<select name="categoriaId" id="categoriaId">
-								<option value=""> Elegí </option>
-								<% for(categoria of locals.opcionesCategorias) { %>
-									<option value="<%= categoria.id %>" <% if(locals.formData?.categoriaId==categoria.id) { %> selected<%}%>> <%=categoria.nombre%> </option>
-								<% } %>
-							</select>
-							<% if (locals && locals.errors) { %>
-								<% if (locals.errors[0].param=="categoriaId") { %>
-									<h3> <%= locals.errors[0].msg %> </h3>
-								<% } %>
-							<% } %>
-						</label>
+					<div class="data-container">
+						<div class="product-container">
+							<div class="admin-product-panel-inputs-container">
+								<label class="form-label-input label-md">
+									<span class="font-size-lg">Categoria:</span>
+									<select name="categoriaId" id="categoriaId">
+										<option value=""> Elegí </option>
+										<% for(categoria of locals.opcionesCategorias) { %>
+											<option value="<%= categoria.id %>" <% if(locals.formData?.categoriaId==categoria.id) { %> selected<%}%>> <%=categoria.nombre%> </option>
+										<% } %>
+									</select>
+									<% if (locals && locals.errors) { %>
+										<% if (locals.errors[0].param=="categoriaId") { %>
+											<h3> <%= locals.errors[0].msg %> </h3>
+										<% } %>
+									<% } %>
+								</label>
 
-						<label class="form-label-input label-md">
-							<span class="font-size-lg">Genero:</span>
-							<select name="generoId" id="generoId">
-								<option value=""> Elegí </option>
-								<% for(genero of locals.opcionesGeneros) { %>
-									<option value="<%= genero.id %>" <% if(locals.formData?.generoId==genero.id) { %> selected<%}%>> <%=genero.nombre%> </option>
-								<% } %>
-							</select>
-							<% if (locals && locals.errors) { %>
-								<% if (locals.errors[0].param=="generoId") { %>
-									<h3> <%= locals.errors[0].msg %> </h3>
-								<% } %>
-							<% } %>
-						</label>
+								<label class="form-label-input label-md">
+									<span class="font-size-lg">Genero:</span>
+									<select name="generoId" id="generoId">
+										<option value=""> Elegí </option>
+										<% for(genero of locals.opcionesGeneros) { %>
+											<option value="<%= genero.id %>" <% if(locals.formData?.generoId==genero.id) { %> selected<%}%>> <%=genero.nombre%> </option>
+										<% } %>
+									</select>
+									<% if (locals && locals.errors) { %>
+										<% if (locals.errors[0].param=="generoId") { %>
+											<h3> <%= locals.errors[0].msg %> </h3>
+										<% } %>
+									<% } %>
+								</label>
 
-						<label class="form-label-input label-md">
-							<span class="font-size-lg">Marca:</span>
-							<select name="marcaId" id="marcaId">
-								<option value=""> Elegí </option>
-								<% for(marca of locals.opcionesMarcas) { %>   
-									<option value="<%= marca.id %>" <% if(locals.formData?.marcaId==marca.id) { %> selected<%}%>> <%=marca.nombre%> </option>
-								<% } %>
-							</select>
-							<% if (locals && locals.errors) { %>
-								<% if (locals.errors[0].param=="marcaId") { %>
-									<h3> <%= locals.errors[0].msg %> </h3>
-								<% } %>
-							<% } %>
-						</label>
+								<label class="form-label-input label-md">
+									<span class="font-size-lg">Marca:</span>
+									<select name="marcaId" id="marcaId">
+										<option value=""> Elegí </option>
+										<% for(marca of locals.opcionesMarcas) { %>   
+											<option value="<%= marca.id %>" <% if(locals.formData?.marcaId==marca.id) { %> selected<%}%>> <%=marca.nombre%> </option>
+										<% } %>
+									</select>
+									<% if (locals && locals.errors) { %>
+										<% if (locals.errors[0].param=="marcaId") { %>
+											<h3> <%= locals.errors[0].msg %> </h3>
+										<% } %>
+									<% } %>
+								</label>
+							</div>
+						</div>	
 					</div>
+
 
 					<div class="save-product">
 						<a class="btn-secondary" href='/admin/panel/products' type="button"> Volver </a>
