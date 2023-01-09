@@ -108,136 +108,30 @@
             <!-- PRODUCTOS DESTACADOS -->
             <section class="caja-chica">
                 <div class="caja-chica-titulo">
-                    <h2 class="titulares">PRODUCTOS QUE PODRIAN INTERESARTE</h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
+                    <h2 class="titulares">COMPLETA TU LOOK</h2>
                 </div>
-                <div class="caja-chica-destacados">
-                    <div class="product-card">
-                        <a href="/producto/:id">
-                            <div>
-                                <img class="product-image" src="/img/Boca-titular.png" alt="producto-1-seccion-3"
-                                    class="img-producto" />
-                                <p class="info-precio">$16.999</p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto">
-                                    Camiseta titular oficial Boca Juniors
-                                </p>
-                                <p class="categoria-producto">Hombre Futbol</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="product-card">
-                        <a href="/producto/:id">
-                            <div>
-                                <img class="product-image" src="/img/River-titular.png" alt="producto-2-seccion-3"
-                                    class="img-producto" />
-                                <p class="info-precio">$16.999</p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto">
-                                    Camiseta titular oficial River Plate
-                                </p>
-                                <p class="categoria-producto">Hombre Futbol</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="product-card">
-                        <a href="/producto/:id">
-                            <div>
-                                <img class="product-image" src="/img/buzo-nike.jpg" alt="producto-3-seccion-3"
-                                    class="img-producto" />
-                                <p class="info-precio">$14.999</p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto">
-                                    Buzo Nike
-                                </p>
-                                <p class="categoria-producto">Niño Originals</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="product-card">
-                        <a href="/producto/:id">
-                            <div>
-                                <img class="product-image" src="/img/buzo-ninos.png" alt="producto-4-seccion-3"
-                                    class="img-producto">
-                                <p class="info-precio">$14.999</p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto"> Buzo Niño </p>
-                                <p class="categoria-producto"> Ropa Urbano </p>
-                            </div>
-                        </a>
-                    </div>
+                <div class="caja-chica-productos">
+                    <% if(locals.productosDestacados.length > 0) {%>
+                        <% for(let producto of locals.productosDestacados) { %>
+                            <%- include('./partials/components/productCard', {producto, userData:locals.userData}) %>
+                        <% } %>
+                    <% } %>                    
                 </div>
             </section>
+
+
 
             <!-- PRODUCTOS QUE PODRIAN INTERESARTE -->
             <section class="caja-chica">
                 <div class="caja-chica-titulo">
                     <h2 class="titulares">PRODUCTOS QUE PODRIAN INTERESARTE</h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
                 </div>
-                <div class="caja-chica-destacados">
-                    <div class="product-card">
-                        <a href="/producto/:id">
-                            <div>
-                                <img class="product-image" src="/img/Boca-titular.png" alt="producto-1-seccion-3"
-                                    class="img-producto" />
-                                <p class="info-precio">$16.999</p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto">
-                                    Camiseta titular oficial Boca Juniors
-                                </p>
-                                <p class="categoria-producto">Hombre Futbol</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="product-card">
-                        <a href="/producto/:id">
-                            <div>
-                                <img class="product-image" src="/img/River-titular.png" alt="producto-2-seccion-3"
-                                    class="img-producto" />
-                                <p class="info-precio">$16.999</p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto">
-                                    Camiseta titular oficial River Plate
-                                </p>
-                                <p class="categoria-producto">Hombre Futbol</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="product-card">
-                        <a href="/producto/:id">
-                            <div>
-                                <img class="product-image" src="/img/buzo-nike.jpg" alt="producto-3-seccion-3"
-                                    class="img-producto" />
-                                <p class="info-precio">$14.999</p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto">
-                                    Buzo Nike
-                                </p>
-                                <p class="categoria-producto">Niño Originals</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="product-card">
-                        <a href="/producto/:id">
-                            <div>
-                                <img class="product-image" src="/img/buzo-ninos.png" alt="producto-4-seccion-3"
-                                    class="img-producto">
-                                <p class="info-precio">$14.999</p>
-                            </div>
-                            <div class="product-data-container">
-                                <p class="descripcion-producto"> Buzo Niño </p>
-                                <p class="categoria-producto"> Ropa Urbano </p>
-                            </div>
-                        </a>
-                    </div>
+                <div class="caja-chica-productos">
+                    <% if(locals.productosDestacados.length > 0) {%>
+                        <% for(let producto of locals.productosDestacados) { %>
+                            <%- include('./partials/components/productCard', {producto, userData:locals.userData}) %>
+                        <% } %>
+                    <% } %>                    
                 </div>
             </section>
         </section>

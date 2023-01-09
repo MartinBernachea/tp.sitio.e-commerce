@@ -10,7 +10,7 @@
 
     <a href="/detail/<%= locals.producto.id %>">
         <div>                          
-            <img class="product-image" src="./img/products/<%= locals.producto.imagens?.length > 0 ? locals.producto.imagens[0].nombre : "" %>""
+            <img class="product-image" src="/img/products/<%= locals.producto.imagens?.length > 0 ? locals.producto.imagens[0].nombre : "" %>""
                 alt="img-producto">
             <p class="info-precio">$<%= locals.producto.precio %></p>
         </div>
