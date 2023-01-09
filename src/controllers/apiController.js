@@ -1,5 +1,6 @@
 const db = require("../database/models");
 const sequelize = require("sequelize");
+const { where } = require("sequelize");
 
 
 const controller = {
@@ -58,6 +59,26 @@ const controller = {
                     })
                 }
             })
+    },
+    lastProduct: (req, res) => {
+        db.producto.findAll({include: [{ model: db.genero }, { model: db.marca }, { model: db.categoria }, { model: db.imagen }],   
+                            limit: 1,
+                            order: [["created_at", "DESC"], ["id", "DESC"]]
+        })
+        .then(ultimoProducto => {
+            if (ultimoProducto !== null) {
+                return res.json({
+                    data: ultimoProducto,
+                    status: 200
+
+                })
+            } else {
+                return res.status(404).json({
+                    error: "no se encontro el producto",
+                    status: 404
+                })
+            }
+        })
     },
     categories: (req, res) => {
         db.categoria.findAll()

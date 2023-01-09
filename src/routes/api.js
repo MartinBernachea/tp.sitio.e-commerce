@@ -7,6 +7,7 @@ router.get("/users", apiController.usersList);
 router.get("/users/:id", apiController.user);
 router.get("/products", apiController.productsList);
 router.get("/products/:id", apiController.product);
+router.get("/lastProduct", apiController.lastProduct);
 router.get("/categories", apiController.categories);
 
 
