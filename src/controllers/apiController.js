@@ -68,7 +68,7 @@ const controller = {
         .then(ultimoProducto => {
             if (ultimoProducto !== null) {
                 return res.json({
-                    data: ultimoProducto,
+                    data: ultimoProducto[0],
                     status: 200
 
                 })
