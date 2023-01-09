@@ -38,5 +38,19 @@ function showImg(e){
 
 // BRAND SLIDER
 
-const buttonPrev = document.getElementById('button-prev');
-const buttonNext = document.getElementById('button-next');
+const carrousel = document.querySelector('.foot-carrousel');
+const arrowIcons = document.querySelectorAll('.foot-carrousel i');
+const firstImg = document.querySelectorAll('.foot-banner-ul img')[0];
+
+arrowIcons.forEach(icon => {
+    icon.addEventListener('click', () => {
+        if(icon.id == "left") {
+            carrousel.scrollLeft -= 241;
+            console.log('left');
+        } else {
+            carrousel.scrollLeft += 241;
+            console.log('right');
+        }
+        console.log(icon);
+    })
+})

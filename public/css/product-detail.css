@@ -182,12 +182,10 @@
 
 .btn-edit:hover {
   background-color: #57AAFF;
-  transition: .7s;
 }
 
 .btn-delete:hover {
   background-color: #760000;
-  transition: .7s;
 }
 
 @media (min-width: 860px) {

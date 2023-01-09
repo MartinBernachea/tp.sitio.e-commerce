@@ -54,6 +54,7 @@ button:disabled {
 .titular-secundario {
   display: flex;
   justify-content: flex-end;
+  text-transform: uppercase;
 }
 
 /* BUTTONS */
@@ -82,7 +83,6 @@ button:disabled {
   height: min-content;
   width: auto;
   max-width: 15rem;
-  margin: auto;
   background-color: #000;
   color: #fff;
   font-size: 16px;
@@ -129,8 +129,8 @@ button:disabled {
 }
 
 .btn-block {
-  display: block;
-  width: 100%;
+  width: 15rem;
+  margin: auto;
 }
 
 .btn-pay::before {
@@ -785,25 +785,27 @@ button:disabled {
 
 .foot-carrousel {
   display: flex;
+  align-items: center;
   margin: 20px auto;
   width: 80%;
-  max-width: 1200px;
-  align-items: center;
+  max-width: 1000px;
 }
-
-.foot-banner-ul {
-  height: 68px;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  align-items: center;
-  flex-grow: 1;
+/* div */
+.foot-banner-ul { 
+  height: 4.5rem;
+  width: 100%;
   overflow: hidden;
+  white-space: nowrap;
+  /* scroll-behavior: smooth; */
 }
-
+/* div img */
+.foot-banner-ul img {
+  width: calc(100% / 4);
+  object-fit: scale-down;
+}
 .foot-banner-li {
-  list-style: none;
   cursor: pointer;
+  height: 4.5rem;
 }
 
 .foot-banner-li:hover {
@@ -812,6 +814,8 @@ button:disabled {
 
 .foot-banner-arrow {
   font-size: 30px;
+  display: flex;
+  align-items: center;
 }
 
 /* NOTIFICATION ALERT */
