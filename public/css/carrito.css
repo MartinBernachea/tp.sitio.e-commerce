@@ -21,6 +21,7 @@
     background-color: #ebebeb;
     text-align: center;
     width: 100%;
+    min-width: 350px;
     margin: 25px 0;
 }
 
@@ -124,7 +125,6 @@ font-size: 1.3rem;
 
 .cards-container {
     width: 100%;
-    max-width: 700px;
     margin: 0 15px;
 }
 
@@ -201,31 +201,9 @@ font-size: 1.3rem;
 
 .btn-pay.hidden-btn {
     display: none;
+    justify-content: center;
+    align-items: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @keyframes showProductos {
     0% {
@@ -353,13 +331,13 @@ font-size: 1.3rem;
     font-weight: 400;
 }
 
-@media(min-width:720px) {
+@media(min-width:860px) {
     .btn-pay.hidden-btn {
         display: flex;
     }
 
     .cards-container {
-        width: 60%;
+        width: 100%;
         max-width: 700px;
         margin: 0 15px;
     }
@@ -383,10 +361,6 @@ font-size: 1.3rem;
         max-width: 500px;
     }
 
-}
-
-
-@media (min-width:870px) {
     .product-detail-container {
         height: 100%;
         max-height: 200px;

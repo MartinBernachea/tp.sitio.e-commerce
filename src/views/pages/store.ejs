@@ -64,7 +64,7 @@
                                 <a href="" class="titular-secundario">Ver Todos</a>
                             </div>
                             <% if(locals.products?.elements?.length > 0) {%>
-                                <div class="caja-chica-productos">
+                                <div class="caja-chica-productos grid-store">
                                     <% for(let producto of locals.products.elements) { %>
                                         <%- include('./partials/components/productCard', {producto, userData:locals.userData}) %>
                                     <% } %>

@@ -38,17 +38,17 @@ function showImg(e){
 
 // BRAND SLIDER
 
-const carrousel = document.querySelector('.foot-carrousel');
+const carrousel = document.querySelector('.foot-banner-ul');
 const arrowIcons = document.querySelectorAll('.foot-carrousel i');
 const firstImg = document.querySelectorAll('.foot-banner-ul img')[0];
 
 arrowIcons.forEach(icon => {
     icon.addEventListener('click', () => {
         if(icon.id == "left") {
-            carrousel.scrollLeft -= 241;
+            carrousel.scrollLeft -= firstImg.width;
             console.log('left');
         } else {
-            carrousel.scrollLeft += 241;
+            carrousel.scrollLeft += firstImg.width;
             console.log('right');
         }
         console.log(icon);

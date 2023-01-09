@@ -11,9 +11,12 @@
 }
 
 .store-results-container {
-    width: 70%;
+    width: 100%;
     flex-grow: 1;
-
+}
+.store-results-container section {
+    width: 70%;
+    max-width: 1500px;
 }
 
 .filter-container {
