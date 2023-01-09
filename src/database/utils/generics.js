@@ -12,8 +12,6 @@ const agregarCantidadesProductos = (arrElementosSinCantidadProductos, arrCantida
 
     */
 
-    console.log("arrElementosSinCantidadProductos", arrElementosSinCantidadProductos)
-    console.log("arrCantidadesProductos", arrCantidadesProductos)
 
     return arrElementosSinCantidadProductos.map(ctElement => {
         const formatedElement = {

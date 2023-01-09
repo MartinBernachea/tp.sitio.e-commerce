@@ -19,7 +19,7 @@ const controller = {
         const userData = getUserDataStringified(req);
         const nuevosLanzamientos = db.producto.findAll({
             limit: 12,
-            order: [ ["id", "DESC"]],
+            order: [["id", "DESC"]],
             limit: 4,
             include: [
                 { model: db.imagen, },
@@ -210,13 +210,6 @@ const controller = {
             const response = await Promise.all([generos, marcas, categorias, producto])
 
             if (response[3] == null) throw new Error("No se encontro el producto solicitado.")
-
-
-            console.log("##############")
-            console.log("##############")
-            console.log("PRODUCTO", response[3].imagens)
-            console.log("##############")
-            console.log("##############")
 
             const formData = {
                 name: response[3].nombre,
@@ -444,28 +437,42 @@ const controller = {
 
     },
 
-    deleteProduct: (req, res) => {
-        console.log("ENTRAMOS DELTEPRODUCTO")
-        
+    deleteProduct: async (req, res) => {
+        const producto_id = req.body.id;
+        try {
+            const resp = await db.producto.destroy({ where: { id: producto_id } });
+            req.session.notificationAlert = {
+                type: "success",
+                boldTitle: "Bien! ",
+                tag: `Se elimino correctamente el producto`
+            }
+            res.status(200).json({ status: 200, message: "OK" })
+        } catch (err) {
+            req.session.notificationAlert = {
+                type: "danger",
+                boldTitle: "Ups! ",
+                title: err.message,
+            }
+            res.status(500).json({ status: 500, message: err.message, error: true })
+        }
+    },
+
+    destroyProduct: async (req, res) => {
         let pDeletedId = req.params.id;
 
-        db.producto.destroy({
-            where: { id: pDeletedId }
-        }).then(resp => {
-
-            db.imagen.destroy(
-                {
-                    where: { producto_id: pDeletedId },
-                }
-            );
-
+        try {
+            await db.producto.destroy({ where: { id: pDeletedId } });
+            await db.imagen.destroy({ where: { producto_id: pDeletedId } });
             req.session.notificationAlert = {
                 type: "success",
                 boldTitle: "Bien! ",
                 title: "Producto eliminado exitosamente",
             }
             res.redirect('/');
-        })
+
+        } catch (err) {
+            console.log("err", err)
+        }
     },
 
     store: async (req, res) => {

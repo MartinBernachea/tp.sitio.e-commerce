@@ -91,7 +91,6 @@ const controller = {
 
         if (errors.isEmpty()) {
             const userData = await db.usuario.findOne({ where: { email: req.body.email } })
-            console.log("userData", userData)
 
             if (!userData) {
                 return res.render('./pages/formLogin', {

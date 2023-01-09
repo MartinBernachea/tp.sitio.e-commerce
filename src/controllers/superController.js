@@ -83,7 +83,6 @@ const controller = {
         const userData = getUserDataStringified(req);
         const appConfig = await getAppConfig();
         const resultsPerPage = Number(appConfig?.CANT_RESULTADOS_POR_PAGINA_BUSQUEDA_SUPER_PANEL?.valor);
-        console.log("req.query", req.query)
         const formData = { ...req.query };
 
         let localsParams = {
@@ -93,16 +92,12 @@ const controller = {
             section: "configPanel",
         }
 
-        console.log("formData", formData)
-
         getNotificationAlert(localsParams, req)
 
         // const wasFormSent = Object.values(formData).length > 0;
         const isFormEmpty = Object.values(formData).every(ctValue => {
             return ctValue.trim() ? ctValue.trim() : ctValue
         });
-
-        console.log("formData", formData)
 
         // if (wasFormSent) {
         const currentPage = formData.page ?? 1;
@@ -113,7 +108,6 @@ const controller = {
         }
 
         let formFilters;
-        console.log("formData", formData)
 
         if (!isFormEmpty) {
             let filters = {}
@@ -124,13 +118,9 @@ const controller = {
             formFilters = { where: filters };
             queryFilters["where"] = filters;
         }
-        console.log("formData", formData)
-
 
         const allElements = await db.config.findAll(formFilters)
         const elements = await db.config.findAll(queryFilters)
-
-        console.log("formData", formData)
 
         localsParams = {
             ...localsParams,
@@ -141,8 +131,6 @@ const controller = {
                 resultsPerPage,
             }
         }
-
-        console.log("formData", formData)
 
         res.render('./pages/superPanel', localsParams);
     },

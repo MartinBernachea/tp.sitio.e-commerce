@@ -184,14 +184,14 @@
                             <div class="btn-container">
 
                                 <a href="/admin/panel/products/edit/<%=product.id%>"><i
-                                        class="fa-solid fa-pen fa-sm btnShow" id="btnShowEditar${genero.id}"></i></a>
+                                        class="fa-solid fa-pen fa-sm btnShow"></i></a>
 
                                 <%- include('components/confirmMsg', { 
-                                            modalTitle: "Eliminar genero:",
-                                            button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminarConfirm${genero.id}"></i>`,
+                                            modalTitle: "Eliminar producto:",
+                                            button: `<i class="fa-solid fa-trash fa-sm btnShow" id="modalEliminarConfirm${product.id}"></i>`,
                                             btnSuccessLabel: "Eliminar",
-                                            tagConfirmMsg: `Estas seguro de eliminar el genero <b>&nbsp;${genero.nombre}</b>&nbsp;con id <b>&nbsp;${genero.id}</b>?`,
-                                            modalId: `${genero.id}`,
+                                            tagConfirmMsg: `Estas seguro de eliminar el producto <b>&nbsp;${product.nombre}</b>&nbsp;con id <b>&nbsp;${product.id}</b>?`,
+                                            modalId: `${product.id}`,
                                         }) %>
                             </div>
                         </td>
@@ -212,3 +212,5 @@
         <% } %>
     <% } %>
 </section>
+
+<script src="/js/handleClickAdminPanelTableActions.js" type="module"></script>

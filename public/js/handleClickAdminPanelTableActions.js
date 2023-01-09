@@ -1,6 +1,7 @@
 import { deleteCategory } from "./service/deleteCategory.js";
 import { deleteBrand } from "./service/deleteBrand.js";
 import { deleteGenre } from "./service/deleteGenre.js";
+import { deleteProduct } from "./service/deleteProduct.js";
 
 const resultsTable = document.querySelector("table")
 
@@ -31,18 +32,17 @@ const extraerNumeroId = (prefijo, nombreEntero) => {
 
 if (resultsTable) {
     resultsTable.addEventListener("click", async (event) => {
-        event.preventDefault();
-
         if (event.target.id.includes("modalEliminarConfirm")) {
+            event.preventDefault();
             showCurrentModal(extraerNumeroId("modalEliminarConfirm", event.target.id))
             return
         }
 
         if (event.target.id.includes("btnSuccessConfirm")) {
             event.preventDefault();
-
             let deleteFunction;
             if (location.href.includes("categories")) deleteFunction = deleteCategory;
+            if (location.href.includes("products")) deleteFunction = deleteProduct;
             if (location.href.includes("genres")) deleteFunction = deleteGenre;
             if (location.href.includes("brands")) deleteFunction = deleteBrand;
 
@@ -65,6 +65,7 @@ if (resultsTable) {
         }
 
         if (event.target.id.includes("modalBackgroundConfirm")) {
+            event.preventDefault();
             hiddeCurrentModal(extraerNumeroId("modalBackgroundConfirm", event.target.id))
             return
         }

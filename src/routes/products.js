@@ -72,6 +72,7 @@ router.post("/admin/panel/createNewGenre", adminPermissionsJSON, productsControl
 router.post("/admin/panel/createNewBrand", adminPermissionsJSON, productsController.createNewBrand);
 router.post("/admin/panel/createNewCategory", adminPermissionsJSON, productsController.createNewCategory);
 
+router.post('/admin/panel/deleteProduct', adminPermissionsJSON, productsController.deleteProduct);
 router.post("/admin/panel/deleteCategory", adminPermissionsJSON, productsController.deleteCategory);
 router.post("/admin/panel/deleteGenre", adminPermissionsJSON, productsController.deleteGenre);
 router.post("/admin/panel/deleteBrand", adminPermissionsJSON, productsController.deleteBrand);
@@ -79,6 +80,9 @@ router.post("/admin/panel/deleteBrand", adminPermissionsJSON, productsController
 router.post("/admin/panel/editCategory", adminPermissionsJSON, productsController.editCategory);
 router.post("/admin/panel/editGenre", adminPermissionsJSON, productsController.editGenre);
 router.post("/admin/panel/editBrand", adminPermissionsJSON, productsController.editBrand);
+
+
+
 
 /*** GET ONE PRODUCT (DETAIL OF ONE PRODUCT) ***/
 router.get('/detail/:id', productsController.detail);
@@ -96,6 +100,6 @@ router.get('/admin/panel/products/edit/:id', adminPermissions, productsControlle
 router.post('/admin/panel/products/edit/:id', adminPermissions, multipleImages, productCreateValidation, productsController.postEditProduct);
 
 /*** DELETE ONE PRODUCT ***/
-router.delete('/:id', adminPermissions, productsController.deleteProduct);
+router.delete('/:id', adminPermissions, productsController.destroyProduct);
 
 module.exports = router;

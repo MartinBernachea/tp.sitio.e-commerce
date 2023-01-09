@@ -17,15 +17,10 @@ let modalData = {
     },
 
     saveInitialValues: (modalId) => {
-        console.log("modalId", modalId)
-        console.log("modalData.stored", modalData.stored)
         modalData.stored = modalData.getModalData(modalId);
-        console.log("modalData.stored", modalData.stored)
-
     },
 
     restoreInitialValues: (modalId) => {
-        console.log("modalId", modalId)
         const formInputs = document.querySelectorAll(`#${modalId} input`)
         const formSelects = document.querySelectorAll(`#${modalId} select`)
         const formElements = [...formInputs, ...formSelects]

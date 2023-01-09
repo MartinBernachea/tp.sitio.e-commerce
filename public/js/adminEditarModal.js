@@ -23,7 +23,6 @@ let modalData = {
 
     saveInitialValues: (modalId) => {
         modalData.stored = modalData.getModalData(modalId);
-        console.log("data", modalData.stored)
     },
 
     restoreInitialValues: (modalId) => {
@@ -64,8 +63,6 @@ const showModal = (id) => {
 }
 
 adminTable.addEventListener("click", async (event) => {
-    console.log(event.target.id)
-
     if (!formLoading) {
         const extraerNumeroId = (prefijo, nombreEntero) => {
             return nombreEntero.slice(prefijo.length, nombreEntero.length)
