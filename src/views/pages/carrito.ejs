@@ -113,16 +113,17 @@
             </div>
         </div>
 
-        <section class="caja-grande">
-            <!--PRODUCTOS DESTACADOS-->
-            <section class="caja-chica">
-                <div class="caja-chica-titulo">
-                    <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
-                    <a href="" class="titular-secundario">Ver Todos</a>
-                </div>
-                <div class="caja-chica-destacados">
-                </div>
-            </section>
+        <section class="caja-chica">
+            <div class="caja-chica-titulo">
+                <h2 class="titulares">PRODUCTOS DESTACADOS</h2>
+            </div>
+            <div class="caja-chica-productos">
+                <% if(locals.productosDestacados.length > 0) {%>
+                    <% for(let producto of locals.productosDestacados) { %>
+                        <%- include('./partials/components/productCard', {producto, userData:locals.userData}) %>
+                    <% } %>
+                <% } %>                    
+            </div>
         </section>
 
     </main>

@@ -56,9 +56,20 @@ const controller = {
         const userData = getUserDataStringified(req);
         const appConfig = await getAppConfig();
 
+        const productosDestacados = await db.producto.findAll({
+            limit: 4,
+            include: [
+                { model: db.imagen, },
+                { model: db.categoria, },
+                { model: db.genero, },
+                { model: db.marca, },
+            ]
+        })
+
         localsParams = {
             userData,
             appConfig,
+            productosDestacados,
         }
         if (req.cookies.user != undefined) {
             res.render('./pages/carrito', localsParams);
