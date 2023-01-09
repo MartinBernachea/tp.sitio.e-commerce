@@ -18,7 +18,6 @@ const controller = {
         const appConfig = getAppConfig();
         const userData = getUserDataStringified(req);
         const nuevosLanzamientos = db.producto.findAll({
-            limit: 12,
             order: [["id", "DESC"]],
             limit: 4,
             include: [
@@ -30,7 +29,6 @@ const controller = {
         })
 
         const productosDestacados = db.producto.findAll({
-            limit: 12,
             limit: 4,
             include: [
                 { model: db.imagen, },
