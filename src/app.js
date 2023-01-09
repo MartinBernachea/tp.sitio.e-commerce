@@ -18,6 +18,8 @@ const { cookie } = require('express-validator');
 // ************ express() - (don't touch) ************
 var app = express();
 
+// ************ Cors ************
+app.use(cors())
 
 // ************ Middlewares - (don't touch) ************
 app.use(express.static('public'));   // Para que los archivos estaticos queden disponibles.
@@ -43,5 +45,3 @@ app.use('/user', userRouter);
 app.use('/', productsRouter);
 app.use("/api", apiRouter);
 
-// ************ Cors ************
-app.use(cors())
