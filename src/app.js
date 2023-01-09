@@ -5,16 +5,22 @@ const methodOverride =  require('method-override'); // Pasar poder usar los mét
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
+const cors = require('cors');
+
+
 
 // ************ Route System require and use() ************
 const userRouter = require('./routes/user'); // Rutas /user
 const superRouter = require('./routes/super'); // Rutas /user
 const productsRouter = require('./routes/products'); // Rutas /products
+const apiRouter = require("./routes/api"); // Rutas /api
 const { cookie } = require('express-validator');
 
 // ************ express() - (don't touch) ************
 var app = express();
 
+// ************ Cors ************
+app.use(cors())
 
 // ************ Middlewares - (don't touch) ************
 app.use(express.static('public'));   // Para que los archivos estaticos queden disponibles.
@@ -36,4 +42,5 @@ app.set('views', path.join(__dirname, '/views'));
 app.use('/user', userRouter);
 app.use('/super', superRouter);
 app.use('/', productsRouter);
+app.use("/api", apiRouter);
 
