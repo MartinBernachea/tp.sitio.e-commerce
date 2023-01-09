@@ -404,6 +404,27 @@ const controller = {
         let idProducto = req.params.id;
 
         try {
+            const nuevosLanzamientos = await db.producto.findAll({
+                order: [["id", "DESC"]],
+                limit: 4,
+                include: [
+                    { model: db.imagen, },
+                    { model: db.categoria, },
+                    { model: db.genero, },
+                    { model: db.marca, },
+                ]
+            })
+
+            const productosDestacados = await db.producto.findAll({
+                limit: 4,
+                include: [
+                    { model: db.imagen, },
+                    { model: db.categoria, },
+                    { model: db.genero, },
+                    { model: db.marca, },
+                ]
+            })
+
             const currentProduct = await db.producto.findByPk(idProducto,
                 {
                     include: [{
@@ -418,6 +439,8 @@ const controller = {
                     producto: currentProduct,
                     userData,
                     appConfig,
+                    nuevosLanzamientos,
+                    productosDestacados,
                 });
             } else {
                 req.session.notificationAlert = {
