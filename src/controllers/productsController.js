@@ -521,6 +521,7 @@ const controller = {
                     where: formData[filtersTitle[2]]?.length > 0 ? { id: { [sequelize.Op.in]: formData[filtersTitle[2]] } } : {}
                 },
             ],
+            distinct: true,
         }
 
         const generos = db.producto.findAll({
@@ -561,6 +562,13 @@ const controller = {
                 type: "check",
             },
         ];
+
+        console.log("%%%%%%%%%%%%%%%%%")
+        console.log("%%%%%%%%%%%%%%%%%")
+        console.log("quantity", response[3].count)
+        console.log("elements", response[3].rows)
+        console.log("%%%%%%%%%%%%%%%%%")
+        console.log("%%%%%%%%%%%%%%%%%")
 
         const products = {
             elements: response[3].rows,
