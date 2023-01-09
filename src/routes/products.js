@@ -96,6 +96,6 @@ router.get('/admin/panel/products/edit/:id', adminPermissions, productsControlle
 router.post('/admin/panel/products/edit/:id', adminPermissions, multipleImages, productCreateValidation, productsController.postEditProduct);
 
 /*** DELETE ONE PRODUCT ***/
-router.delete('/:id', adminPermissions, productsController.destroy);
+router.delete('/:id', adminPermissions, productsController.deleteProduct);
 
 module.exports = router;

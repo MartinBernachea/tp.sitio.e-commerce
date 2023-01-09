@@ -268,6 +268,11 @@ const controller = {
             where: { id: idProducto }
 
         })
+        req.session.notificationAlert = {
+            type: "success",
+            boldTitle: "Bien! ",
+            tag: `Se edito correctamente el producto`
+        }
         res.redirect('/admin/panel/products');
     },
 
@@ -439,7 +444,9 @@ const controller = {
 
     },
 
-    destroy: (req, res) => {
+    deleteProduct: (req, res) => {
+        console.log("ENTRAMOS DELTEPRODUCTO")
+        
         let pDeletedId = req.params.id;
 
         db.producto.destroy({

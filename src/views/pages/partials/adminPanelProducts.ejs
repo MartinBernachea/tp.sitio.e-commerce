@@ -199,17 +199,16 @@
                     <% } %>
                 </tbody>
             </table>
-
-            <div class="user-form-pagination-container">
-                <%- include('tablePagination', { 
-                            quantity: locals.products.quantity,
-                            resultsPerPage: locals.products.resultsPerPage, 
-                            page: locals.products.page,
-                        }) %>
-            </div>
-            <% } else { %>
+        </form>
+        <div class="user-form-pagination-container">
+            <%- include('tablePagination', { 
+                        quantity: locals.products.quantity,
+                        resultsPerPage: locals.products.resultsPerPage, 
+                        page: locals.products.page,
+                    }) %>
+        </div>
+        <% } else { %>
             <p class="no-coincidencia-error">No hay coincidencias con la busqueda</p>
-            <% } %>
-            <% } %>
-    </form>
+        <% } %>
+    <% } %>
 </section>

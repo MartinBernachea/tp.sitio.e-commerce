@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
 
         if (pageNumber) {
             const url = new URL(location);
-            url.searchParams.set('Page', pageNumber);
+            url.searchParams.set('page', pageNumber);
             location.href = url.href;
         }
     })

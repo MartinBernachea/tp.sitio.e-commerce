@@ -29,7 +29,7 @@
             <button type="reset" class="btn-secondary"> Limpiar </button>
             <button type="submit" class="btn-primary"> Buscar </button>
         </div>
-
+    </form>
         <% if(locals.categorias) {%>
             <% if(locals.categorias.quantity > 0) {%>
                 <table>
@@ -101,7 +101,7 @@
                 <p class="no-coincidencia-error">No hay coincidencias con la busqueda</p>
             <% } %>
         <% } %>
-    </form>
+    
 </section>
 
 <script src="/js/handleClickAdminPanelTableActions.js" type="module"></script>
