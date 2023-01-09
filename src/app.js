@@ -5,6 +5,9 @@ const methodOverride =  require('method-override'); // Pasar poder usar los mét
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
+const cors = require('cors');
+
+
 
 // ************ Route System require and use() ************
 const userRouter = require('./routes/user'); // Rutas /user
@@ -40,3 +43,5 @@ app.use('/user', userRouter);
 app.use('/', productsRouter);
 app.use("/api", apiRouter);
 
+// ************ Cors ************
+app.use(cors())
