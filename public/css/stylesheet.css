@@ -163,6 +163,8 @@ button:disabled {
 .info-promo {
   background-color: #666;
   text-align: center;
+  padding: 8px 0;
+  letter-spacing: 0.4px;
 }
 
 .caja-chica-titulo {
