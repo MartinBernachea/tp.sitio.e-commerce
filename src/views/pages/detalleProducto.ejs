@@ -23,9 +23,9 @@
                     <ul class="pd-path">
                         <li><a href=""> Inicio </a></li>
                         <li>/</li>
-                        <li><a href=""> Nike </a></li>
+                        <li><a href=""> <%= locals.producto.marca.nombre %> </a></li>
                         <li>/</li>
-                        <li><a href=""> Calzado </a></li>
+                        <li><a href=""> <%= locals.producto.categorium.nombre %>  </a></li>
                     </ul>
                 </h4>
                 <img src="/img/products/<%=producto.imagens[0].nombre%>" alt="Imagen principal de <%=producto.nombre%>"
@@ -55,7 +55,7 @@
 
             <div class="pd-items">
                 <h1> <%= producto.nombre %> </h1>
-                <p> <%= producto.categoria %> </p>
+                <div class="searchProducts_data pd-detail"><%= locals.producto.categorium.nombre %> | <%= locals.producto.marca.nombre %> | <%= locals.producto.genero.nombre %></div>
                 <span class="pd-price"> $<%= producto.precio %> </span>
 
                 <div class="pd-color">

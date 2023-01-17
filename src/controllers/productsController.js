@@ -445,9 +445,12 @@ const controller = {
 
             const currentProduct = await db.producto.findByPk(idProducto,
                 {
-                    include: [{
-                        model: db.imagen
-                    }]
+                    include: [
+                        { model: db.imagen },
+                        { model: db.categoria },
+                        { model: db.genero },
+                        { model: db.marca },
+                    ]
                 });
             const appConfig = await getAppConfig();
             const userData = getUserDataStringified(req);

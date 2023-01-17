@@ -217,6 +217,11 @@
     margin-top: 30px;
   }
 
+  .pd-detail {
+    font-size: 1rem;
+    margin-top: 4px;
+  }
+
   .edit-delete-container {
     display: flex;
     width: 90%;
