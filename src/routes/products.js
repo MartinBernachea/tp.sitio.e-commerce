@@ -56,7 +56,7 @@ const multipleImages = uploadFile.fields([{
 router.get('/', productsController.index)
 
 /*** CARRITO ***/
-router.get('/carrito', userPermissions, productsController.chart);
+router.get('/carrito', productsController.chart);
 router.get("/carrito/getDataFromArray", productsController.getDataFromArray)
 
 /*** COMING SOON ***/

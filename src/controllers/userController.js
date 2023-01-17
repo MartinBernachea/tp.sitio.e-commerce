@@ -16,6 +16,7 @@ const controller = {
     login: async (req, res) => {
         const appConfig = await getAppConfig();
         localsParams = { appConfig }
+        getNotificationAlert(localsParams, req)
 
         res.render('./pages/formLogin', localsParams)
     },
@@ -94,7 +95,7 @@ const controller = {
 
             if (!userData) {
                 return res.render('./pages/formLogin', {
-                    error: "Email invalido",
+                    error: "El correo o contraseña es incorrecto",
                     old: req.body,
                     appConfig,
                 });
@@ -102,7 +103,7 @@ const controller = {
 
             if (!bcrypt.compareSync(req.body.password, userData.password)) {
                 return res.render('./pages/formLogin', {
-                    error: "Password incorrecto",
+                    error: "El correo o contraseña es incorrecto",
                     old: req.body,
                     appConfig,
                 });
@@ -110,7 +111,7 @@ const controller = {
 
             if (userData.restringido) {
                 return res.render('./pages/formLogin', {
-                    error: "Acceso restringido: Comunicarse con el administrador del sitio",
+                    error: "Acceso restringido. Comunicarse con el administrador del sitio",
                     old: req.body,
                     appConfig,
                 });

@@ -72,12 +72,19 @@ const controller = {
             productosDestacados,
         }
         if (req.cookies.user != undefined) {
-            res.render('./pages/carrito', localsParams);
+            return res.render('./pages/carrito', localsParams);
         }
-        else if (req.session.usuarioLogueado != undefined) {
-            res.render('./pages/carrito', localsParams);
+
+        if (req.session.usuarioLogueado != undefined) {
+            return res.render('./pages/carrito', localsParams);
         }
-        else res.redirect('user/login');
+
+        req.session.notificationAlert = {
+            type: "info",
+            tag: `Para ver tu carrito es necesario <b>iniciar sesion</b>`,
+        }
+
+        res.redirect('user/login');
     },
 
     getDataFromArray: async (req, res) => {

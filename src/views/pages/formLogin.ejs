@@ -33,12 +33,6 @@
               <label for="email" class="label">
                 <span class="text-span">Correo</span>
               </label>
-
-              <% if (locals && locals.errors) { %>
-              <% if (locals.errors[0].param=="email") { %>
-              <h3 style="color: red;"> <%= locals.errors[0].msg %> </h3>
-              <% } %>
-              <% } %>
             </div>
             <div class="field-item">
               <input type="password" name="password" class="input-text" tabindex="1" required 
@@ -46,13 +40,6 @@
               <label for="password" class="label">
                 <span class="text-span">Contraseña</span>
               </label>
-
-
-              <% if (locals && locals.errors) { %>
-              <% if (locals.errors[0].param=="password") { %>
-              <h3 style="color: red;"> <%= locals.errors[0].msg %> </h3>
-              <% } %>
-              <% } %>
             </div>
           </div>
           <div class="config-field">
@@ -62,6 +49,13 @@
             </label>
             <a href=""> Se te olvido la contraseña? </a>
           </div>
+
+          <% if (locals.error) { %>
+              <div class="formulario__mensaje formulario__mensaje-activo" style="background-color:#efa4a4; margin-top:10px;" id="formulario__mensaje">
+                <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> <%= locals.error %></p>
+              </div>
+          <% } %>
+
           <div class="login-button-div">
             <button class="btn-secondary btn-block">INICIAR SESION</button>
           </div>
