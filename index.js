@@ -10,10 +10,10 @@ const cors = require('cors');
 
 
 // ************ Route System require and use() ************
-const userRouter = require('./routes/user'); // Rutas /user
-const superRouter = require('./routes/super'); // Rutas /user
-const productsRouter = require('./routes/products'); // Rutas /products
-const apiRouter = require("./routes/api"); // Rutas /api
+const userRouter = require('./src/routes/user'); // Rutas /user
+const superRouter = require('./src/routes/super'); // Rutas /user
+const productsRouter = require('./src/routes/products'); // Rutas /products
+const apiRouter = require("./src/routes/api"); // Rutas /api
 const { cookie } = require('express-validator');
 
 // ************ express() - (don't touch) ************
